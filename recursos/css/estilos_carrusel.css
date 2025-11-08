@@ -1,0 +1,422 @@
+/* Estilo global para el body - mantener coherencia con el encabezado */
+body {
+    margin: 0; /* Elimina márgenes por defecto */
+    padding: 0; /* Elimina padding por defecto */
+    /*background: #111;*/ /* Fondo oscuro coherente con el menú lateral */
+    font-family: Arial, sans-serif; /* Fuente consistente */
+}
+
+/* Contenedor principal del carrusel con borde doble y posicionamiento */
+#carrusel {
+    position: relative; /* Posicionamiento relativo para elementos internos absolutos */
+    box-sizing: border-box; /* Incluye bordes y padding en el tamaño total */
+    max-width: calc(100% - 80px); /* Ancho máximo dejando espacio en los lados */
+    margin: 40px 40px 40px 40px; /* Margen superior igual al lateral (80px) y laterales (40px) */
+    border: 4px double #21b7c2; /* Borde doble turquesa coherente con el encabezado */
+    border-radius: 12px; /* Esquinas redondeadas suaves */
+    overflow: hidden; /* Evita que el contenido se salga del contenedor */
+    background: #000000; /* Fondo gris oscuro coherente con el encabezado */
+    box-shadow: 0 8px 24px rgba(33, 183, 194, 0.2); /* Sombra turquesa sutil */
+}
+
+/* Contenedor del contenido del carrusel - donde se muestra cada diapositiva */
+#carrusel-contenido {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    position: relative; /* Posicionamiento relativo para elementos internos */
+    min-height: 400px; /* Altura mínima para evitar saltos de contenido */
+}
+
+/* Artículo que contiene cada diapositiva individual */
+#carrusel-contenido article {
+    position: relative; /* Permite posicionamiento absoluto de elementos internos */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    display: block; /* Mostrar como bloque */
+}
+
+/* Imágenes dentro del carrusel - ajustadas para mostrar completas sin recorte */
+#carrusel-contenido img {
+    width: 100%; /* Imagen ocupa todo el ancho del contenedor */
+    height: 500px; /* Altura fija para consistencia visual */
+    display: block; /* Elimina espacios debajo de la imagen */
+    object-fit: contain; /* Muestra la imagen completa sin recortes */
+    object-position: center; /* Centra la imagen si hay espacios */
+    background: #000000; /* Fondo oscuro para espacios vacíos si los hay */
+}
+
+/* Estilo para los títulos principales de cada diapositiva */
+#carrusel-contenido h2 {
+    position: absolute; /* Posicionamiento absoluto sobre la imagen */
+    top: 68%; /* Ubicación vertical al 68% del contenedor */
+    left: 0; /* Pegado al borde izquierdo */
+    width: auto; /* Ocupa el 45% del ancho */
+    background: rgba(34, 34, 34, 0.9); /* Fondo oscuro semitransparente */
+    color: #fff; /* Texto blanco */
+    margin: 0; /* Sin márgenes */
+    padding: 15px 20px; /* Espaciado interno generoso */
+    border-radius: 0 12px 12px 0; /* Bordes redondeados solo en el lado derecho */
+    font-size: 1.8em; /* Tamaño de fuente grande */
+    font-weight: bold; /* Texto en negrita */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); /* Sombra pronunciada */
+    transform: translateY(-50%); /* Centra verticalmente */
+}
+
+/* Estilo para los subtítulos/descripciones */
+#carrusel-contenido p {
+    position: absolute; /* Posicionamiento absoluto sobre la imagen */
+    top: 82%; /* Ubicación vertical al 82% del contenedor */
+    left: 0; /* Pegado al borde izquierdo */
+    width: auto; /* Ocupa el 35% del ancho */
+    background: rgba(34, 34, 34, 0.9); /* Fondo oscuro semitransparente */
+    color: #fff; /* Texto blanco */
+    margin: 0; /* Sin márgenes */
+    padding: 12px 20px; /* Espaciado interno */
+    border-radius: 0 12px 12px 0; /* Bordes redondeados solo en el lado derecho */
+    font-size: 1em; /* Tamaño de fuente normal */
+    line-height: 1.4; /* Espaciado entre líneas cómodo */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); /* Sombra pronunciada */
+    transform: translateY(-50%); /* Centra verticalmente */
+}
+
+/* Contenedor para los botones de acción */
+.botones-accion {
+    position: absolute; /* Posicionamiento absoluto sobre la imagen */
+    top: 95%; /* Ubicación cerca de la parte inferior */
+    right: 20px; /* Separado del borde derecho */
+    transform: translateY(-100%); /* Posiciona correctamente desde la parte inferior */
+    display: flex; /* Contenedor flexible para botones lado a lado */
+    gap: 12px; /* Espaciado entre botones */
+    align-items: center; /* Centra verticalmente */
+}
+
+/* Estilo para los enlaces/botones de acción en cada diapositiva */
+#carrusel-contenido a {
+    background: #21b7c2; /* Fondo turquesa coherente con el encabezado */
+    color: #fff; /* Texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    padding: 12px 24px; /* Espaciado interno generoso */
+    border-radius: 25px; /* Bordes muy redondeados */
+    font-weight: bold; /* Texto en negrita */
+    font-size: 1.1em; /* Tamaño ligeramente mayor */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+    box-shadow: 0 4px 12px rgba(33, 183, 194, 0.4); /* Sombra turquesa */
+    white-space: nowrap; /* Evita que el texto se divida en líneas */
+    display: inline-block; /* Para que se comporte como bloque inline */
+}
+
+/* Botón secundario - estilo diferenciado */
+#carrusel-contenido a.boton-secundario {
+    background: transparent; /* Fondo transparente */
+    border: 2px solid #21b7c2; /* Borde turquesa */
+    color: #21b7c2; /* Texto turquesa */
+}
+
+/* Hover para botón secundario */
+#carrusel-contenido a.boton-secundario:hover {
+    background: #21b7c2; /* Fondo turquesa */
+    color: #fff; /* Texto blanco */
+    transform: scale(1.05); /* Se agranda ligeramente */
+    box-shadow: 0 6px 16px rgba(33, 183, 194, 0.6); /* Sombra más intensa */
+}
+
+/* Efecto hover en los enlaces de acción */
+#carrusel-contenido a:hover {
+    background: #1a9bb8; /* Turquesa más oscuro */
+    transform: translateY(-10%) scale(1.05); /* Se agranda ligeramente */
+    box-shadow: 0 6px 16px rgba(33, 183, 194, 0.6); /* Sombra más intensa */
+}
+
+/* Contenedor para los controles de navegación (botones y círculos) */
+.circulos {
+    position: absolute; /* Posicionamiento absoluto dentro del carrusel */
+    bottom: 15px; /* Separado del borde inferior */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translateX(-50%); /* Ajuste para centrar perfectamente */
+    display: flex; /* Contenedor flexible */
+    gap: 12px; /* Espaciado entre elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    background: rgba(17, 17, 17, 0.8); /* Fondo oscuro semitransparente */
+    padding: 8px 16px; /* Espaciado interno */
+    border-radius: 25px; /* Bordes muy redondeados */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque del fondo */
+}
+
+/* Estilo de los botones de navegación (anterior/siguiente) */
+.boton {
+    font-size: 18px; /* Tamaño del símbolo de navegación */
+    color: #fff; /* Texto blanco */
+    cursor: pointer; /* Cursor tipo manita */
+    background: #21b7c2; /* Fondo turquesa coherente */
+    padding: 8px 12px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 50%; /* Forma circular */
+    width: 36px; /* Ancho fijo */
+    height: 36px; /* Altura fija */
+    display: flex; /* Contenedor flexible */
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+    box-shadow: 0 2px 8px rgba(33, 183, 194, 0.3); /* Sombra turquesa sutil */
+}
+
+/* Efecto hover en los botones de navegación */
+.boton:hover {
+    background: #1a9bb8; /* Turquesa más oscuro */
+    transform: scale(1.1); /* Se agranda ligeramente */
+    box-shadow: 0 4px 12px rgba(33, 183, 194, 0.5); /* Sombra más intensa */
+}
+
+/* Estilo de los círculos indicadores */
+.circulo {
+    width: 12px; /* Ancho del círculo */
+    height: 12px; /* Altura del círculo */
+    background: rgba(255, 255, 255, 0.4); /* Fondo blanco transparente */
+    border: 2px solid rgba(255, 255, 255, 0.6); /* Borde blanco semitransparente */
+    border-radius: 50%; /* Forma circular */
+    cursor: pointer; /* Cursor tipo manita */
+    transition: all 0.3s ease; /* Transición suave para cambios de estado */
+    padding: 0; /* Sin espaciado interno */
+}
+
+/* Estados hover y activo para los círculos indicadores */
+.circulo:hover, .circulo.activo {
+    background: #21b7c2; /* Fondo turquesa coherente */
+    border-color: #fff; /* Borde blanco sólido */
+    transform: scale(1.2); /* Se agranda ligeramente */
+    box-shadow: 0 0 8px rgba(33, 183, 194, 0.6); /* Brillo turquesa */
+}
+
+/* Estado activo específico para el círculo actual */
+.circulo.activo {
+    background: #21b7c2; /* Fondo turquesa sólido */
+    box-shadow: 0 0 12px rgba(33, 183, 194, 0.8); /* Brillo más intenso */
+}
+
+/* CONSULTAS DE MEDIOS PARA RESPONSIVIDAD */
+
+/* Tablets grandes */
+@media (max-width: 1024px) {
+    #carrusel {
+        margin: 60px 30px 30px 30px; /* Reducir márgenes */
+        max-width: calc(100% - 60px); /* Ajustar ancho */
+    }
+
+    #carrusel-contenido h2 {
+        width: 50%; /* Aumentar ancho del título */
+        font-size: 1.5em; /* Reducir tamaño de fuente */
+        padding: 12px 16px; /* Reducir espaciado */
+    }
+
+    #carrusel-contenido p {
+        width: 40%; /* Aumentar ancho de la descripción */
+        font-size: 0.9em; /* Reducir tamaño de fuente */
+        padding: 10px 16px; /* Reducir espaciado */
+    }
+
+    #carrusel-contenido img {
+        max-height: 400px; /* Reducir altura máxima */
+    }
+    
+    .botones-accion {
+        gap: 10px; /* Menos espacio entre botones */
+    }
+    
+    #carrusel-contenido a {
+        padding: 10px 20px; /* Reducir padding de botones */
+        font-size: 1em; /* Tamaño de fuente ligeramente reducido */
+    }
+
+    .circulos {
+        gap: 10px; /* Reducir espaciado entre controles */
+    }
+
+    .boton {
+        width: 32px; /* Reducir tamaño de botones */
+        height: 32px;
+        font-size: 16px;
+    }
+}
+
+/* Pantallas medianas (tablets) */
+@media (max-width: 768px) {
+    #carrusel {
+        margin: 40px 20px 20px 20px; /* Márgenes mínimos */
+        max-width: calc(100% - 40px); /* Ancho casi completo */
+        border-width: 2px; /* Borde más delgado */
+    }
+
+    #carrusel-contenido {
+        min-height: 350px; /* Altura reducida para móvil */
+    }
+
+    #carrusel-contenido h2 {
+        width: 70%; /* Mayor ancho para móvil */
+        font-size: 1.3em; /* Tamaño apropiado para móvil */
+        padding: 10px 12px; /* Espaciado reducido */
+        top: 60%; /* Reposicionar más arriba */
+    }
+
+    #carrusel-contenido p {
+        width: 65%; /* Mayor ancho para móvil */
+        font-size: 0.85em; /* Tamaño más pequeño */
+        padding: 8px 12px; /* Espaciado mínimo */
+        top: 78%; /* Reposicionar */
+    }
+    
+    .botones-accion {
+        gap: 8px; /* Espaciado reducido entre botones */
+        right: 15px; /* Más cerca del borde */
+    }
+
+    #carrusel-contenido a {
+        font-size: 0.9em; /* Texto más pequeño */
+        padding: 8px 16px; /* Espaciado reducido */
+    }
+
+    #carrusel-contenido img {
+        height: 350px; /* Altura fija reducida para tablets */
+    }
+
+    .circulos {
+        gap: 8px; /* Espaciado mínimo */
+        padding: 6px 12px; /* Espaciado interno reducido */
+        bottom: 10px; /* Más cerca del borde inferior */
+    }
+
+    .boton {
+        width: 28px; /* Botones más pequeños */
+        height: 28px;
+        font-size: 14px;
+    }
+
+    .circulo {
+        width: 10px; /* Círculos más pequeños */
+        height: 10px;
+    }
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+    #carrusel {
+        margin: 20px 10px 10px 10px; /* Márgenes mínimos */
+        max-width: calc(100% - 20px); /* Ancho casi completo */
+    }
+
+    #carrusel-contenido {
+        min-height: 300px; /* Altura muy reducida para móviles pequeños */
+    }
+
+    #carrusel-contenido h2 {
+        width: 80%; /* Ancho máximo */
+        font-size: 1.1em; /* Tamaño pequeño */
+        top: 55%; /* Reposicionar */
+        padding: 8px 10px; /* Padding muy reducido */
+    }
+
+    #carrusel-contenido p {
+        width: 75%; /* Ancho máximo */
+        font-size: 0.8em; /* Tamaño mínimo legible */
+        top: 75%; /* Reposicionar */
+        padding: 6px 10px; /* Padding muy reducido */
+    }
+    
+    .botones-accion {
+        gap: 6px; /* Espaciado muy reducido */
+        right: 10px; /* Muy cerca del borde */
+        flex-direction: column; /* Botones apilados verticalmente en móviles muy pequeños */
+    }
+    
+    #carrusel-contenido a {
+        font-size: 0.8em; /* Texto muy pequeño */
+        padding: 6px 12px; /* Padding muy reducido */
+        border-radius: 15px; /* Bordes menos redondeados */
+    }
+
+    #carrusel-contenido img {
+        height: 300px; /* Altura muy reducida para móviles */
+    }
+
+    .circulos {
+        gap: 6px; /* Espaciado mínimo */
+        padding: 4px 8px; /* Padding muy reducido */
+        bottom: 8px; /* Muy cerca del borde */
+    }
+    
+    .boton {
+        width: 24px; /* Botones muy pequeños */
+        height: 24px;
+        font-size: 12px; /* Texto muy pequeño */
+    }
+    
+    .circulo {
+        width: 8px; /* Círculos muy pequeños */
+        height: 8px;
+        border-width: 1px; /* Borde más delgado */
+    }
+}
+
+/* Móviles muy pequeños (menos de 360px) */
+@media (max-width: 360px) {
+    #carrusel {
+        margin: 15px 5px 5px 5px; /* Márgenes extremadamente reducidos */
+        max-width: calc(100% - 10px); /* Ancho casi completo */
+        border-width: 1px; /* Borde muy delgado */
+        border-radius: 8px; /* Bordes menos redondeados */
+    }
+    
+    #carrusel-contenido {
+        min-height: 250px; /* Altura mínima muy reducida */
+    }
+    
+    #carrusel-contenido h2 {
+        width: 85%; /* Ancho casi completo */
+        font-size: 1em; /* Tamaño muy pequeño */
+        top: 50%; /* Reposicionar más arriba */
+        padding: 6px 8px; /* Padding mínimo */
+        border-radius: 0 8px 8px 0; /* Bordes menos redondeados */
+    }
+    
+    #carrusel-contenido p {
+        width: 80%; /* Ancho casi completo */
+        font-size: 0.75em; /* Tamaño muy pequeño pero legible */
+        top: 70%; /* Reposicionar */
+        padding: 4px 8px; /* Padding mínimo */
+        border-radius: 0 8px 8px 0; /* Bordes menos redondeados */
+    }
+    
+    .botones-accion {
+        gap: 4px; /* Espaciado mínimo */
+        right: 8px; /* Muy cerca del borde */
+        flex-direction: column; /* Botones siempre apilados */
+    }
+    
+    #carrusel-contenido a {
+        font-size: 0.75em; /* Texto mínimo */
+        padding: 4px 8px; /* Padding mínimo */
+        border-radius: 12px; /* Bordes moderadamente redondeados */
+        white-space: nowrap; /* Evitar división de texto */
+    }
+    
+    #carrusel-contenido img {
+        height: 250px; /* Altura mínima para móviles muy pequeños */
+    }
+    
+    .circulos {
+        gap: 4px; /* Espaciado extremadamente reducido */
+        padding: 3px 6px; /* Padding mínimo */
+        bottom: 5px; /* Muy cerca del borde */
+        border-radius: 12px; /* Bordes menos redondeados */
+    }
+    
+    .boton {
+        width: 20px; /* Botones extremadamente pequeños */
+        height: 20px;
+        font-size: 10px; /* Texto mínimo */
+    }
+    
+    .circulo {
+        width: 6px; /* Círculos extremadamente pequeños */
+        height: 6px;
+        border-width: 1px; /* Borde mínimo */
+    }
+}

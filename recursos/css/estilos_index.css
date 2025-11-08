@@ -1,0 +1,661 @@
+/* Estilos para el index */
+* {
+    box-sizing: border-box; /* Incluyo padding y border en el tamaño total para evitar sorpresas */
+}
+
+/* ESTILOS PRINCIPALES DEL INDEX */
+
+/* Cuerpo principal de la página */
+body {
+    margin: 0px; /* Elimino márgenes del navegador */
+    padding: 0; /* Sin padding por defecto */
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #111 100%); /* Gradiente oscuro que me gusta */
+    font-family: Arial, sans-serif; /* Fuente consistente en todo el sitio */
+    color: #fff; /* Texto blanco por defecto */
+    line-height: 1.6; /* Altura de línea cómoda para leer */
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados verticalmente */
+}
+
+/* Contenedor principal del contenido */
+main {
+    padding-top: 80px; /* Espacio para el encabezado fijo que no tape nada */
+    min-height: 100vh; /* Altura mínima de toda la ventana */
+}
+
+/* ESTILOS DEL CONTENEDOR DE JUEGOS */
+
+/* Contenedor principal que envuelve todas las tarjetas */
+.contenedor-juegos {
+    max-width: 1200px; /* Ancho máximo para pantallas grandes */
+    margin: 40px auto; /* Centrado con margen generoso */
+    padding: 0 20px; /* Espaciado lateral para que no toque los bordes */
+}
+
+/* Grid de tarjetas de juegos */
+.juegos {
+    display: grid; /* Uso rejilla para organización automática */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Columnas que se adaptan automáticamente */
+    gap: 30px; /* Espacio generoso entre tarjetas */
+    padding: 20px 0; /* Espaciado arriba y abajo */
+    align-items: stretch; /* Todas las tarjetas misma altura */
+    justify-content: center; /* Centrar las tarjetas cuando hay pocas */
+}
+
+/* TARJETAS INDIVIDUALES DE JUEGOS */
+
+/* Tarjeta principal de cada juego */
+.juego {
+    background: linear-gradient(145deg, #222, #1a1a1a); /* Gradiente sutil para profundidad */
+    border: 4px double #21b7c2; /* Borde doble turquesa como el carrusel */
+    border-radius: 16px; /* Esquinas bien redondeadas */
+    padding: 20px; /* Espaciado interno generoso */
+    transition: all 0.4s ease; /* Transición suave para efectos hover */
+    position: relative; /* Para elementos absolutos internos */
+    overflow: hidden; /* Evita desbordamientos */
+    box-shadow: 0 8px 25px rgba(33, 183, 194, 0.2); /* Sombra turquesa */
+    display: flex; /* Estructura flexible interna */
+    flex-direction: column; /* Elementos apilados verticalmente */
+    height: 100%; /* Altura completa del contenedor rejilla */
+    max-width: 450px; /* Ancho máximo para evitar tarjetas demasiado anchas */
+    width: 100%; /* Ancho completo disponible */
+    margin: 0 auto; /* Centrar la tarjeta si es más pequeña que el contenedor */
+}
+
+/* Efecto hover en las tarjetas */
+.juego:hover {
+    transform: translateY(-8px) scale(1.02); /* Se eleva y agranda ligeramente */
+    border-color: #26d1de; /* Color más claro al hacer hover */
+    box-shadow: 0 15px 40px rgba(33, 183, 194, 0.4),
+                0 0 30px rgba(38, 209, 222, 0.3); /* Sombra más intensa y resplandor */
+    background: linear-gradient(145deg, #2a2a2a, #222); /* Gradiente más marcado */
+}
+
+/* Efecto de brillo sutil al pasar el cursor */
+.juego::before {
+    content: ''; /* Contenido vacío para el pseudo-elemento */
+    position: absolute; /* Posicionamiento absoluto */
+    top: -50%; /* Posición fuera del contenedor */
+    left: -50%; /* Posición fuera del contenedor */
+    width: 200%; /* Ancho doble para cubrir bien */
+    height: 200%; /* Altura doble para cubrir bien */
+    background: linear-gradient(45deg, transparent, rgba(33, 183, 194, 0.05), transparent); /* Gradiente sutil */
+    transform: rotate(45deg); /* Rotación diagonal */
+    transition: all 0.6s ease; /* Transición más lenta para el brillo */
+    opacity: 0; /* Invisible por defecto */
+    pointer-events: none; /* No interfiere con los clicks */
+}
+
+/* Título del juego */
+.juego h2 {
+    color: #21b7c2; /* Color turquesa del sitio */
+    font-size: 1.4em; /* Tamaño grande pero no exagerado */
+    font-weight: bold; /* Negrita para que destaque */
+    margin: 0 0 15px 0; /* Solo margen inferior */
+    text-align: center; /* Centrado horizontalmente */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra turquesa sutil */
+    transition: all 0.3s ease; /* Transición suave para hover */
+    min-height: 4em; /* Altura mínima para 2-3 líneas */
+    display: flex; /* Estructura flexible */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    line-height: 1.2; /* Altura de línea compacta */
+    flex-shrink: 0; /* No se reduce nunca */
+    hyphens: auto; /* Permite división de palabras */
+    word-wrap: break-word; /* División de palabras largas */
+}
+
+.juego:hover h2 {
+    color: #26d1de; /* Color más brillante al hover */
+    text-shadow: 0 0 15px rgba(38, 209, 222, 0.5); /* Resplandor al hover */
+}
+
+/* Imagen de portada del juego */
+#imagen-juego {
+    width: 100%; /* Ancho completo del contenedor */
+    height: 200px; /* Altura fija para consistencia */
+    object-fit: cover; /* Recorta la imagen para ajustar */
+    border-radius: 12px; /* Esquinas redondeadas */
+    margin-bottom: 15px; /* Espacio inferior */
+    transition: all 0.3s ease; /* Transición suave */
+    border: 2px solid #333; /* Borde gris oscuro */
+    flex-shrink: 0; /* No se reduce nunca */
+}
+
+#imagen-juego:hover {
+    border-color: #21b7c2; /* Borde turquesa al hover */
+    box-shadow: 0 4px 20px rgba(33, 183, 194, 0.3); /* Sombra turquesa */
+    transform: scale(1.02); /* Se agranda ligeramente */
+}
+
+/* Contenedor para la información del juego */
+.juego-info {
+    flex: 1; /* Ocupa el espacio restante */
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados */
+    justify-content: space-between; /* Distribuye el espacio */
+}
+
+/* Contenedor para los datos del juego */
+.juego-datos {
+    flex: 1; /* Ocupa el espacio disponible */
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados */
+    gap: 8px; /* Espacio entre elementos */
+}
+
+/* Información del juego */
+.juego p {
+    margin: 4px 0; /* Margen más pequeño para compactar */
+    color: #ccc; /* Gris claro para texto secundario */
+    font-size: 0.9em; /* Tamaño equilibrado y legible */
+    line-height: 1.3; /* Línea más compacta */
+}
+
+/* Párrafo del resumen (descripción) */
+#descripcion-juego {
+    font-style: italic; /* Cursiva para diferenciarlo */
+    color: #bbb; /* Gris más claro */
+    margin: 12px 0 16px 0; /* Márgenes específicos */
+    padding: 10px 12px; /* Espaciado interno */
+    background: linear-gradient(135deg, rgba(33, 183, 194, 0.08), rgba(33, 183, 194, 0.03)); /* Fondo turquesa muy sutil */
+    border-left: 3px solid #21b7c2; /* Línea izquierda turquesa */
+    border-radius: 0 10px 10px 0; /* Redondeado solo en la derecha */
+    flex: 0 0 auto; /* No crece con el contenedor */
+    line-height: 1.5; /* Altura de línea cómoda */
+    font-size: 0.92em; /* Tamaño ligeramente más pequeño */
+    text-align: justify; /* Texto justificado */
+    box-shadow: 0 1px 3px rgba(33, 183, 194, 0.1); /* Sombra muy sutil */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover para la descripción */
+.juego:hover #descripcion-juego {
+    background: linear-gradient(135deg, rgba(33, 183, 194, 0.12), rgba(33, 183, 194, 0.06)); /* Fondo más marcado */
+    color: #ccc; /* Color más claro */
+    box-shadow: 0 2px 6px rgba(33, 183, 194, 0.15); /* Sombra más marcada */
+    border-left-color: #26d1de; /* Línea más brillante */
+}
+
+/* Precio del juego */
+#precio-juego {
+    font-size: 0.9em; /* Tamaño apropiado */
+    font-weight: 600; /* Semi-negrita */
+    color: #fff; /* Texto blanco */
+    text-align: center; /* Centrado */
+    background: linear-gradient(135deg, #21b7c2, #1a9bb8); /* Gradiente turquesa */
+    border: 1px solid #21b7c2; /* Borde turquesa */
+    padding: 6px 10px; /* Espaciado interno compacto */
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin: 8px 0 6px 0; /* Márgenes específicos */
+    flex-shrink: 0; /* No se reduce nunca */
+    min-height: 28px; /* Altura mínima */
+    display: flex; /* Estructura flexible */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    box-shadow: 0 2px 6px rgba(33, 183, 194, 0.2); /* Sombra turquesa */
+    transition: all 0.3s ease; /* Transición suave */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); /* Sombra en el texto */
+    position: relative; /* Para el pseudo-elemento */
+    overflow: hidden; /* Evita desbordamientos del efecto */
+}
+
+/* Efecto hover para el precio */
+.juego:hover #precio-juego {
+    background: linear-gradient(135deg, #26d1de, #21b7c2); /* Gradiente más brillante */
+    border-color: #26d1de; /* Borde más brillante */
+    box-shadow: 0 3px 8px rgba(38, 209, 222, 0.25); /* Sombra más intensa */
+    transform: scale(1.01); /* Se agranda muy ligeramente */
+}
+
+/* Efecto de brillo sutil en el precio */
+#precio-juego::before {
+    content: ''; /* Contenido vacío */
+    position: absolute; /* Posicionamiento absoluto */
+    top: -50%; /* Posición fuera del contenedor */
+    left: -100%; /* Comienza fuera a la izquierda */
+    width: 100%; /* Ancho del contenedor */
+    height: 200%; /* Altura doble */
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent); /* Brillo sutil */
+    transition: all 0.6s ease; /* Transición del brillo */
+    transform: rotate(45deg); /* Rotación diagonal */
+}
+
+.juego:hover #precio-juego::before {
+    left: 100%; /* Se mueve hacia la derecha al hover */
+}
+
+/* Mensaje de juego descatalogado */
+.juego-descatalogado {
+    font-size: 0.85em; /* Tamaño reducido */
+    font-weight: 700; /* Negrita */
+    color: #ff6b6b; /* Rojo claro para advertencia */
+    text-align: center; /* Centrado */
+    background: rgba(184, 24, 0, 0.15); /* Fondo rojo semitransparente */
+    border: 2px solid #ff6b6b; /* Borde rojo */
+    padding: 6px 12px; /* Espaciado interno */
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin: 8px 0 6px 0; /* Márgenes verticales */
+    box-shadow: 0 2px 6px rgba(255, 107, 107, 0.3); /* Sombra roja */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover en mensaje de descatalogado */
+.juego:hover .juego-descatalogado {
+    background: rgba(184, 24, 0, 0.25); /* Fondo más intenso */
+    border-color: #ff8a8a; /* Borde más claro */
+    box-shadow: 0 3px 8px rgba(255, 107, 107, 0.4); /* Sombra más intensa */
+}
+
+/* INFORMACIÓN ADICIONAL DEL JUEGO */
+
+/* Contenedor específico para la información de filtros */
+.info-filtros {
+    flex: 1; /* Ocupa el espacio disponible */
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados */
+    gap: 8px; /* Espacio entre elementos */
+    margin-bottom: 15px; /* Espacio inferior */
+}
+
+/* Contenedor para elementos que siempre están al final */
+.info-final {
+    flex-shrink: 0; /* Nunca se reduce */
+    margin-top: auto; /* Se empuja hacia abajo automáticamente */
+}
+
+/* ORGANIZACIÓN DE BOTONES EN TARJETAS */
+
+/* Contenedor para botones de carrito y detalles en la misma línea */
+.botones-carrito-detalles {
+    display: flex; /* Estructura flexible horizontal */
+    gap: 12px; /* Espacio entre los botones */
+    margin-top: 8px; /* Espacio superior */
+    justify-content: space-between; /* Distribuye el espacio */
+}
+
+/* Centrado cuando solo hay un botón */
+.botones-carrito-detalles:has(> :only-child) {
+    justify-content: center; /* Centrado si solo hay un botón */
+}
+
+/* Botones de carrito y detalles - mismo ancho */
+.boton-carrito,
+.boton-jugar,
+.boton-detalles,
+.boton-editar-juego,
+.boton-reactivar,
+.boton-eliminar {
+    flex: 1; /* Mismo ancho para ambos botones */
+    max-width: calc(50% - 6px); /* Máximo ancho considerando el gap */
+    line-height: 1.2; /* Reduce el espacio entre las líneas del texto */
+    height: auto; /* Permite que el botón crezca según el contenido */
+    min-height: 40px; /* Altura mínima para mantener consistencia */
+    padding: 6px 8px; /* Reduce el padding vertical para aprovechar mejor el espacio */
+    justify-content: center; /* Centrado del contenido */
+}
+
+/* Texto específico de botones de carrito y favoritos */
+.boton-carrito span,
+.boton-jugar span,
+.boton-detalles span,
+.boton-editar-juego span,
+.boton-reactivar span,
+.boton-eliminar span {
+    line-height: 1.1; /* Líneas muy juntas para compactar */
+    font-size: 0.85em; /* Texto ligeramente más pequeño */
+    text-align: center; /* Centrado del texto */
+}
+
+/* Etiquetas de información */
+.juego p:first-of-type,
+.juego p:nth-of-type(2),
+.juego p:nth-of-type(3),
+.juego p:nth-of-type(4),
+.juego p:nth-of-type(5) {
+    background: rgba(51, 51, 51, 0.5); /* Fondo gris semitransparente */
+    padding: 3px 6px; /* Padding aún más compacto */
+    border-radius: 4px; /* Bordes más pequeños */
+    border-left: 3px solid #21b7c2; /* Línea izquierda turquesa */
+    margin: 2px 0; /* Margen muy pequeño */
+    font-size: 0.9em; /* Aumentar el tamaño de las categorías */
+    flex-shrink: 0; /* No se reducen nunca */
+    line-height: 1.2; /* Altura de línea muy compacta */
+    min-height: auto; /* Sin altura mínima fija */
+    display: inline-block; /* Cambio a inline-block para ajuste automático */
+    width: 100%; /* Mantiene el ancho completo */
+    box-sizing: border-box; /* Incluye padding en el ancho */
+}
+
+/* Estilo específico para párrafos con poco contenido */
+.juego p:empty,
+.juego p:nth-of-type(2):empty,
+.juego p:nth-of-type(3):empty,
+.juego p:nth-of-type(4):empty,
+.juego p:nth-of-type(5):empty {
+    display: none; /* Oculta párrafos completamente vacíos */
+}
+
+/* Contenedor de información más compacto */
+.info-juego {
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados */
+    gap: 2px; /* Espacio muy pequeño entre elementos */
+}
+
+/* Ajuste automático de altura según contenido */
+.juego p:first-of-type,
+.juego p:nth-of-type(2),
+.juego p:nth-of-type(3),
+.juego p:nth-of-type(4),
+.juego p:nth-of-type(5) {
+    height: fit-content; /* Altura ajustada al contenido */
+    overflow: hidden; /* Evita desbordamientos */
+}
+
+/* Reducir espaciado cuando el contenido es muy corto */
+.juego p[style*="display: none"] + p {
+    margin-top: 2px; /* Menos margen cuando el anterior está oculto */
+}
+
+/* Colores específicos para diferentes tipos de información */
+.juego p:first-of-type { /* Tipo de juego */
+    border-left-color: #21b7c2; /* Turquesa estándar */
+    background: rgba(33, 183, 194, 0.1); /* Fondo turquesa muy claro */
+}
+
+.juego p:nth-of-type(2) { /* Géneros */
+    border-left-color: #26d1de; /* Turquesa más claro */
+    background: rgba(38, 209, 222, 0.1); /* Fondo turquesa claro */
+}
+
+.juego p:nth-of-type(3) { /* Categorías */
+    border-left-color: #1a9bb8; /* Turquesa más oscuro */
+    background: rgba(26, 155, 184, 0.1); /* Fondo turquesa oscuro */
+}
+
+.juego p:nth-of-type(4) { /* Modos */
+    border-left-color: #21b7c2; /* Vuelvo al turquesa estándar */
+    background: rgba(33, 183, 194, 0.08); /* Fondo aún más sutil */
+}
+
+.juego p:nth-of-type(5) { /* PEGI */
+    border-left-color: #ff6b6b; /* Rojo para indicar restricción de edad */
+    background: rgba(255, 107, 107, 0.1); /* Fondo rojizo muy claro */
+}
+
+/* Estilos para cuando no hay juegos */
+.sin-juegos {
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados */
+    align-items: center; /* Centrado horizontal */
+    justify-content: center; /* Centrado vertical */
+    padding: 60px 20px; /* Espaciado interno generoso */
+    text-align: center; /* Texto centrado */
+    background: linear-gradient(135deg, rgba(33, 183, 194, 0.1), rgba(33, 183, 194, 0.05)); /* Fondo turquesa muy sutil */
+    border: 2px dashed #21b7c2; /* Borde punteado turquesa */
+    border-radius: 20px; /* Esquinas muy redondeadas */
+    margin: 40px auto; /* Centrado con margen */
+    max-width: 600px; /* Ancho máximo */
+    min-height: 200px; /* Altura mínima */
+    position: relative; /* Para efectos adicionales */
+    overflow: hidden; /* Evita desbordamientos */
+}
+
+.sin-juegos h2 {
+    color: #21b7c2; /* Color turquesa */
+    font-size: 1.5em; /* Tamaño destacado */
+    font-weight: 600; /* Semi-negrita */
+    margin: 0; /* Sin márgenes */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra en el texto */
+    line-height: 1.4; /* Altura de línea cómoda */
+}
+
+/* Efecto hover para sin-juegos */
+.sin-juegos:hover {
+    background: linear-gradient(135deg, rgba(33, 183, 194, 0.15), rgba(33, 183, 194, 0.08)); /* Fondo más marcado */
+    border-color: #26d1de; /* Borde más brillante */
+    transform: scale(1.02); /* Se agranda ligeramente */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+.boton-eliminar {
+    background: linear-gradient(135deg, #ff6b6b, #e05555); /* Gradiente rojizo */
+    border-color: #ff6b6b; /* Borde rojo */
+    box-shadow: 0 3px 10px rgba(255, 107, 107, 0.2); /* Sombra rojiza */
+}
+
+.boton-eliminar:hover {
+    background: linear-gradient(135deg, #ff8080, #ff6b6b); /* Gradiente más brillante */
+    border-color: #ff8080; /* Borde más brillante */
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3); /* Sombra más intensa */
+}
+
+/* RESPONSIVIDAD */
+
+/* Tablets grandes */
+@media (max-width: 1024px) {
+    .contenedor-juegos {
+        max-width: 1000px; /* Ancho ligeramente reducido para tablets grandes */
+        padding: 0 18px; /* Padding intermedio */
+    }
+    
+    .juegos {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Columnas intermedias */
+        gap: 28px; /* Espacio intermedio */
+    }
+    
+    .juego {
+        padding: 19px; /* Espaciado intermedio */
+        max-width: 425px; /* Ancho máximo intermedio */
+    }
+    
+    .juego h2 {
+        font-size: 1.35em; /* Título ligeramente más pequeño */
+    }
+    
+    #imagen-juego {
+        height: 190px; /* Imagen ligeramente más pequeña */
+    }
+    
+    .sin-juegos {
+        padding: 55px 18px; /* Padding intermedio */
+        margin: 35px auto; /* Margen intermedio */
+        max-width: 550px; /* Ancho intermedio */
+        min-height: 190px; /* Altura intermedia */
+    }
+    
+    .sin-juegos h2 {
+        font-size: 1.45em; /* Título intermedio */
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    main {
+        padding-top: 70px; /* Menos espacio superior */
+    }
+    
+    .contenedor-juegos {
+        margin: 20px auto; /* Menos margen */
+        padding: 0 10px; /* Padding mínimo */
+    }
+    
+    .juegos {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Columnas aún más pequeñas */
+        gap: 20px; /* Espacio reducido */
+    }
+    
+    .juego {
+        padding: 15px; /* Padding reducido */
+        max-width: 350px; /* Ancho máximo reducido en móviles grandes */
+    }
+
+    #imagen-juego {
+        height: 180px; /* Imagen más pequeña */
+    }
+    
+    /* Botones más pequeños en móviles grandes */
+    .boton-detalles,
+    .boton-jugar,
+    .boton-editar-juego,
+    .boton-reactivar,
+    .boton-eliminar {
+        width: 70%; /* Un poco más ancho en móviles */
+    }
+    
+    .botones-carrito-favoritos {
+        gap: 8px; /* Menos espacio entre botones */
+    }
+    
+    .sin-juegos {
+        padding: 40px 15px; /* Padding reducido */
+        margin: 25px auto; /* Margen reducido */
+        max-width: 400px; /* Ancho reducido */
+        min-height: 160px; /* Altura reducida */
+        border-radius: 15px; /* Bordes menos redondeados */
+    }
+    
+    .sin-juegos h2 {
+        font-size: 1.3em; /* Título más pequeño */
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    .contenedor-juegos {
+        margin: 15px auto; /* Margen mínimo */
+        padding: 0 5px; /* Padding mínimo */
+    }
+    
+    .juegos {
+        grid-template-columns: 1fr; /* Una sola columna */
+        gap: 15px; /* Espacio mínimo */
+    }
+    
+    .juego {
+        padding: 12px; /* Padding mínimo */
+        max-width: 100%; /* En móviles pequeños ocupa todo el ancho disponible */
+    }
+    
+    .juego h2 {
+        font-size: 1.2em; /* Título más pequeño */
+        min-height: 3.5em; /* Reducir altura mínima en móvil */
+    }
+    
+    #imagen-juego {
+        height: 160px; /* Imagen más pequeña */
+    }
+    
+    .juego p {
+        font-size: 0.85em; /* Texto más pequeño */
+    }
+    
+    /* Botones apilados verticalmente en móviles pequeños */
+    .boton-detalles,
+    .boton-jugar,
+    .boton-editar-juego,
+    .boton-reactivar,
+    .boton-eliminar {
+        width: 90%; /* Más ancho en móviles pequeños */
+    }
+    
+    .botones-carrito-favoritos {
+        flex-direction: column; /* Los botones se apilan verticalmente */
+        gap: 6px; /* Menos espacio vertical */
+    }
+    
+    .boton-carrito,
+    .boton-jugar,
+    .boton-favorito {
+        max-width: 100%; /* Ancho completo cuando están apilados */
+        padding: 8px 12px; /* Más espacio horizontal en móviles pequeños */
+    }
+    
+    .boton-carrito span,
+    .boton-jugar span,
+    .boton-favorito span {
+        font-size: 0.9em; /* Texto un poco más grande en móviles pequeños */
+    }
+    
+    .sin-juegos {
+        padding: 30px 12px; /* Padding mínimo */
+        margin: 20px 10px; /* Margen mínimo */
+        max-width: 100%; /* Ancho completo */
+        min-height: 140px; /* Altura mínima */
+        border-radius: 12px; /* Bordes menos redondeados */
+    }
+    
+    .sin-juegos h2 {
+        font-size: 1.2em; /* Título compacto */
+        line-height: 1.3; /* Altura de línea compacta */
+    }
+}
+
+/* Móviles muy pequeños (menos de 360px) */
+@media (max-width: 360px) {
+    .contenedor-juegos {
+        margin: 10px auto; /* Margen extremadamente reducido */
+        padding: 0 3px; /* Padding extremadamente reducido */
+    }
+    
+    .juegos {
+        gap: 12px; /* Espacio extremadamente reducido */
+    }
+    
+    .juego {
+        padding: 10px; /* Padding extremadamente reducido */
+        border-radius: 12px; /* Bordes menos redondeados */
+    }
+    
+    .juego h2 {
+        font-size: 1.1em; /* Título muy compacto */
+        min-height: 3em; /* Altura mínima muy reducida */
+    }
+    
+    #imagen-juego {
+        height: 140px; /* Imagen muy pequeña */
+    }
+    
+    .juego p {
+        font-size: 0.8em; /* Texto muy pequeño */
+        padding: 2px 4px; /* Padding muy reducido en etiquetas */
+    }
+    
+    #descripcion-juego {
+        font-size: 0.85em; /* Descripción más pequeña */
+        padding: 8px 10px; /* Padding reducido */
+    }
+    
+    #precio-juego {
+        font-size: 0.85em; /* Precio más pequeño */
+        padding: 5px 8px; /* Padding reducido */
+    }
+    
+    .boton-detalles,
+    .boton-jugar,
+    .boton-editar-juego,
+    .boton-reactivar,
+    .boton-eliminar {
+        width: 95%; /* Casi todo el ancho */
+    }
+    
+    .sin-juegos {
+        padding: 25px 8px; /* Padding extremadamente reducido */
+        margin: 15px 5px; /* Margen extremadamente reducido */
+        min-height: 120px; /* Altura extremadamente reducida */
+        border-radius: 10px; /* Bordes muy poco redondeados */
+    }
+    
+    .sin-juegos h2 {
+        font-size: 1.1em; /* Título extremadamente compacto */
+        line-height: 1.2; /* Altura de línea muy compacta */
+    }
+}
+
+
+
+
+
+
+

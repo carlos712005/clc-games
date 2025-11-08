@@ -1,0 +1,356 @@
+/* Estilos para la página de pago */
+
+/* Reset básico para que todo empiece sin márgenes ni padding */
+* {
+    margin: 0; /* Sin márgenes por defecto */
+    padding: 0; /* Sin padding por defecto */
+    box-sizing: border-box; /* El padding y border se incluyen en el ancho total */
+}
+
+/* Cuerpo de la página */
+body {
+    background: #111; /* Fondo negro oscuro */
+    color: #fff; /* Texto blanco */
+    font-family: Arial, sans-serif; /* Fuente simple */
+    min-height: 100vh; /* Mínimo altura completa de la pantalla */
+    display: flex; /* Flexbox para centrar */
+    flex-direction: column; /* Dirección vertical */
+    align-items: center; /* Centrado horizontal */
+    justify-content: center; /* Centrado vertical */
+    padding: 20px; /* Espacio alrededor */
+}
+
+/* Contenedor de la barra superior */
+.barra-superior {
+    padding: 24px 16px 8px; /* Espaciado interno */
+    text-align: center; /* Todo centrado */
+}
+
+/* Título principal */
+.barra-superior h1 {
+    font-size: 2.5em; /* Tamaño grande */
+    font-weight: bold; /* Negrita */
+    color: #21b7c2; /* Color turquesa del sitio */
+    margin-bottom: 30px; /* Espacio abajo */
+    text-align: center; /* Centrado */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra turquesa suave */
+}
+
+/* Contenedor central del formulario */
+.zona-pago {
+    min-height: calc(100% - 70px); /* Altura calculada */
+    display: flex; /* Flexbox */
+    flex-direction: column; /* Dirección vertical */
+    align-items: center; /* Centrado horizontal */
+    justify-content: center; /* Centrado vertical */
+    gap: 20px; /* Espacio entre elementos */
+    padding: 24px 12px 40px; /* Espaciado interno */
+}
+
+/* Tarjeta del formulario */
+.tarjeta-pago {
+    background: #222; /* Fondo gris oscuro */
+    padding: 40px; /* Espaciado interno generoso */
+    border-radius: 12px; /* Esquinas redondeadas */
+    box-shadow: 0 8px 24px rgba(33, 183, 194, 0.2); /* Sombra turquesa */
+    width: 100%; /* Ancho completo */
+    max-width: 600px; /* Ancho máximo */
+    border: 2px solid #333; /* Borde gris */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Efecto al pasar el ratón por la tarjeta */
+.tarjeta-pago:hover {
+    box-shadow: 0 12px 32px rgba(33, 183, 194, 0.3); /* Sombra más intensa */
+    border-color: #21b7c2; /* Borde turquesa */
+}
+
+/* Subtítulos dentro del formulario */
+h2 {
+    font-size: 1.4em; /* Tamaño mediano */
+    color: #21b7c2; /* Color turquesa */
+    margin: 30px 0 20px 0; /* Espacios arriba y abajo */
+    text-align: left; /* Alineado a la izquierda */
+    border-bottom: 2px solid #21b7c2; /* Línea debajo */
+    padding-bottom: 8px; /* Espacio entre texto y línea */
+    font-weight: bold; /* Negrita */
+}
+
+/* Contenedor del formulario */
+.formulario-pago {
+    display: flex; /* Flexbox */
+    flex-direction: column; /* Columna vertical */
+    width: 100%; /* Ancho completo */
+}
+
+/* Labels de los campos */
+.campo-pago {
+    display: block; /* Bloque completo */
+    margin-bottom: 8px; /* Espacio debajo */
+    font-weight: bold; /* Negrita */
+    color: #fff; /* Color blanco */
+    font-size: 1em; /* Tamaño normal */
+}
+
+/* Inputs del formulario */
+.input-pago {
+    width: 100%; /* Ancho completo */
+    padding: 12px 16px; /* Espaciado interno */
+    margin-bottom: 20px; /* Espacio debajo */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 25px; /* Bordes muy redondeados */
+    background: #333; /* Fondo gris oscuro */
+    color: #fff; /* Texto blanco */
+    font-size: 1em; /* Tamaño normal */
+    transition: all 0.3s ease; /* Transición suave */
+    outline: none; /* Sin outline por defecto */
+}
+
+/* Texto placeholder de los inputs */
+.input-pago::placeholder {
+    color: #ccc; /* Gris claro */
+}
+
+/* Cuando el input está enfocado */
+.input-pago:focus {
+    border-color: #21b7c2; /* Borde turquesa */
+    box-shadow: 0 0 10px rgba(33, 183, 194, 0.3), 0 0 0 2px rgba(33, 183, 194, 0.2); /* Sombra turquesa */
+    background: #3a3a3a; /* Fondo un poco más claro */
+    transform: scale(1.02); /* Agranda un poco */
+}
+
+/* Cuando paso el ratón por el input */
+.input-pago:hover {
+    background: #3a3a3a; /* Fondo más claro */
+    border-color: rgba(33, 183, 194, 0.5); /* Borde turquesa suave */
+}
+
+/* Outline para navegación con teclado */
+input:focus-visible {
+    outline: 2px solid #21b7c2; /* Borde turquesa */
+    outline-offset: 2px; /* Separación del borde */
+}
+
+/* Fila para poner dos campos juntos */
+.fila-pago {
+    display: flex; /* Flexbox para poner lado a lado */
+    justify-content: space-around; /* Espacio distribuido */
+    gap: 12px; /* Espacio entre campos */
+    margin-bottom: 8px; /* Espacio debajo */
+}
+
+/* Campos dentro de la fila */
+.fila-pago .campo-pago {
+    flex: 1; /* Ocupan el mismo espacio */
+    display: flex; /* Flexbox */
+}
+
+/* Labels dentro de la fila */
+.fila-pago label {
+    margin-top: 12px; /* Espacio arriba */
+}
+
+/* Botón de pagar */
+.boton-pagar {
+    width: fit-content; /* Ancho ajustado al texto */
+    background: #21b7c2; /* Fondo turquesa */
+    color: #fff; /* Texto blanco */
+    margin: auto; /* Centrado */
+    padding: 12px 70px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 25px; /* Bordes redondeados */
+    font-size: 1.1em; /* Tamaño un poco más grande */
+    font-weight: bold; /* Negrita */
+    cursor: pointer; /* Cursor de mano */
+    transition: all 0.3s ease; /* Transición suave */
+    margin-top: 10px; /* Espacio arriba */
+    margin-bottom: 15px; /* Espacio abajo */
+    min-height: 48px; /* Altura mínima para que sea fácil de pulsar */
+}
+
+/* Cuando paso el ratón por el botón */
+.boton-pagar:hover {
+    background: #1a9bb8; /* Turquesa más oscuro */
+    transform: translateY(-2px); /* Se eleva un poco */
+    box-shadow: 0 4px 12px rgba(33, 183, 194, 0.4); /* Sombra turquesa */
+}
+
+/* Cuando hago clic en el botón */
+.boton-pagar:active {
+    transform: translateY(0); /* Vuelve a su posición */
+    box-shadow: 0 2px 6px rgba(33, 183, 194, 0.3); /* Sombra más pequeña */
+}
+
+/* Cuando el botón está enfocado */
+.boton-pagar:focus {
+    box-shadow: 0 0 0 3px rgba(33, 183, 194, 0.3); /* Anillo turquesa */
+}
+
+/* Outline para navegación con teclado */
+.boton-pagar:focus-visible {
+    outline: 2px solid #21b7c2; /* Borde turquesa */
+    outline-offset: 2px; /* Separación del borde */
+}
+
+/* Contenedor de logos de pago */
+.logos-pago {
+    margin: 18px auto 6px; /* Espaciado y centrado */
+    display: flex; /* Flexbox */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+}
+
+/* Imagen de los logos */
+.logos-pago img {
+    max-width: 92%; /* Ancho máximo */
+    height: auto; /* Altura automática */
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35)); /* Sombra para profundidad */
+    opacity: 0.95; /* Un poco transparente */
+}
+
+
+/* Media queries para responsive */
+
+/* Tablets grandes */
+@media (max-width: 1024px) {
+    body {
+        padding: 18px; /* Menos padding */
+    }
+
+    .barra-superior h1 {
+        font-size: 2.3em; /* Título más pequeño */
+        margin-bottom: 28px; /* Menos espacio */
+    }
+
+    .tarjeta-pago {
+        padding: 35px 30px; /* Menos padding */
+        max-width: 500px; /* Ancho máximo ajustado */
+    }
+
+    .tarjeta-pago h2 {
+        font-size: 1.25em; /* Subtítulos más pequeños */
+    }
+
+    .input-pago {
+        padding: 11px 15px; /* Menos padding */
+        font-size: 0.98em; /* Texto un poco más pequeño */
+    }
+
+    .boton-pagar {
+        padding: 11px 60px; /* Menos padding */
+        font-size: 1.05em; /* Texto un poco más pequeño */
+        min-height: 46px; /* Altura ajustada */
+    }
+}
+
+/* Tablets medianas */
+@media (max-width: 768px) {
+    body {
+        padding: 15px; /* Menos padding */
+    }
+
+    .barra-superior h1 {
+        font-size: 2em; /* Título más pequeño */
+        margin-bottom: 25px; /* Menos espacio */
+    }
+
+    .tarjeta-pago {
+        padding: 30px 25px; /* Menos padding */
+        max-width: 450px; /* Ancho ajustado */
+    }
+
+    .boton-pagar {
+        padding: 11px 50px; /* Menos padding horizontal */
+        min-height: 44px; /* Altura ajustada */
+    }
+
+    .input-pago {
+        padding: 10px 14px; /* Menos padding */
+        font-size: 0.95em; /* Texto más pequeño */
+        margin-bottom: 18px; /* Menos espacio */
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    body {
+        padding: 10px; /* Padding mínimo */
+    }
+
+    .barra-superior h1 {
+        font-size: 1.8em; /* Título pequeño */
+        margin-bottom: 20px; /* Menos espacio */
+    }
+
+    .tarjeta-pago {
+        padding: 25px 20px; /* Padding reducido */
+        max-width: 380px; /* Ancho para móviles */
+        border-radius: 10px; /* Bordes menos redondeados */
+    }
+
+    .tarjeta-pago h2 {
+        font-size: 1.1em; /* Subtítulos pequeños */
+        margin: 25px 0 15px 0; /* Menos espacio */
+    }
+
+    .input-pago {
+        padding: 10px 14px; /* Padding reducido */
+        font-size: 0.95em; /* Texto pequeño */
+        margin-bottom: 16px; /* Menos espacio */
+        border-radius: 20px; /* Bordes menos redondeados */
+    }
+
+    .boton-pagar {
+        padding: 10px 40px; /* Padding ajustado */
+        font-size: 1em; /* Tamaño normal */
+        min-height: 42px; /* Altura reducida */
+        margin-bottom: 12px; /* Menos espacio */
+        border-radius: 20px; /* Bordes menos redondeados */
+    }
+
+    .logos-pago img {
+        max-width: 98%; /* Ancho casi completo */
+    }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 360px) {
+    body {
+        padding: 8px; /* Padding muy reducido */
+    }
+
+    .barra-superior h1 {
+        font-size: 1.6em; /* Título muy pequeño */
+        margin-bottom: 18px; /* Menos espacio */
+    }
+
+    .tarjeta-pago {
+        padding: 20px 15px; /* Padding mínimo */
+        max-width: 340px; /* Ancho para móviles pequeños */
+        border-radius: 8px; /* Bordes poco redondeados */
+    }
+
+    .tarjeta-pago h2 {
+        font-size: 1em; /* Subtítulos pequeños */
+        margin: 15px 0 12px 0; /* Poco espacio */
+    }
+
+    .input-pago {
+        padding: 8px 12px; /* Padding mínimo */
+        font-size: 0.9em; /* Texto muy pequeño */
+        margin-bottom: 12px; /* Poco espacio */
+        border-radius: 18px; /* Bordes poco redondeados */
+    }
+
+    .boton-pagar {
+        padding: 8px 30px; /* Padding mínimo */
+        font-size: 0.95em; /* Texto pequeño */
+        min-height: 38px; /* Altura mínima */
+        margin-bottom: 10px; /* Poco espacio */
+        border-radius: 18px; /* Bordes poco redondeados */
+    }
+
+    .logos-pago img {
+        max-width: 100%; /* Ancho completo */
+    }
+}

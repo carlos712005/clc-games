@@ -1,0 +1,674 @@
+/* Estilos para formulario de autenticación*/
+
+/* Estilos globales */
+* {
+    margin: 0; /* Elimino márgenes por defecto del navegador */
+    padding: 0; /* Elimino padding por defecto del navegador */
+    box-sizing: border-box; /* Incluyo padding y border en el tamaño total */
+}
+
+/* Configuración del cuerpo de la página */
+body {
+    background: #111; /* Fondo muy oscuro que combina con el sitio */
+    color: #fff; /* Texto blanco por defecto */
+    font-family: Arial, sans-serif; /* Fuente consistente con todo el sitio */
+    min-height: 100vh; /* Altura mínima completa de la ventana */
+    display: flex; /* Estructura flexible para centrar todo */
+    flex-direction: column; /* Organización vertical de elementos */
+    align-items: center; /* Centrado horizontal perfecto */
+    justify-content: center; /* Centrado vertical perfecto */
+    padding: 20px; /* Espaciado interno para que no toque los bordes */
+}
+
+/* Título principal de la página */
+h1 {
+    font-size: 2.5em; /* Tamaño grande y llamativo */
+    font-weight: bold; /* Texto en negrita para que destaque */
+    color: #21b7c2; /* Color turquesa que uso en todo el sitio */
+    margin-bottom: 30px; /* Espacio inferior generoso */
+    text-align: center; /* Centrado del texto */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra turquesa sutil */
+}
+
+/* Subtítulos secundarios */
+h2 {
+    font-size: 1.3em; /* Tamaño mediano apropiado */
+    color: #fff; /* Texto blanco estándar */
+    margin: 20px 0 15px 0; /* Espaciado superior e inferior */
+    text-align: center; /* Centrado del texto */
+}
+
+/* Contenedor principal del formulario */
+form {
+    background: #222; /* Fondo gris oscuro que combina con el encabezado */
+    padding: 40px; /* Espaciado interno generoso para comodidad */
+    border-radius: 12px; /* Esquinas redondeadas suaves */
+    box-shadow: 0 8px 24px rgba(33, 183, 194, 0.2); /* Sombra turquesa sutil */
+    width: 100%; /* Ancho completo disponible */
+    max-width: 400px; /* Ancho máximo para mantener proporciones */
+    border: 2px solid #333; /* Borde gris oscuro */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+    animation: slideInUp 0.6s ease-out; /* Animación de entrada suave */
+}
+
+/* Efecto hover en el formulario - sombra más intensa */
+form:hover {
+    box-shadow: 0 12px 32px rgba(33, 183, 194, 0.3); /* Sombra más intensa al hover */
+    border-color: #21b7c2; /* Borde turquesa al hacer hover */
+}
+
+/* Etiquetas de los campos del formulario */
+label {
+    display: block; /* Cada etiqueta ocupa toda la línea */
+    margin-bottom: 8px; /* Espacio inferior para separar del campo */
+    font-weight: bold; /* Texto en negrita para que destaque */
+    color: #fff; /* Texto blanco estándar */
+    font-size: 1em; /* Tamaño de fuente estándar */
+}
+
+/* Campos de entrada de texto y contraseña */
+input[type="text"], 
+input[type="password"] {
+    width: 100%; /* Ancho completo del contenedor */
+    padding: 12px 16px; /* Espaciado interno generoso para comodidad */
+    margin-bottom: 20px; /* Espacio inferior entre campos */
+    border: 2px solid transparent; /* Borde transparente inicial */
+    border-radius: 25px; /* Bordes muy redondeados como el buscador */
+    background: #333; /* Fondo gris que uso en el buscador */
+    color: #fff; /* Texto blanco */
+    font-size: 1em; /* Tamaño de fuente normal */
+    transition: all 0.3s ease; /* Transición suave para efectos */
+    outline: none; /* Sin borde predeterminado del navegador */
+}
+
+/* Texto de ayuda en los campos vacíos */
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+    color: #ccc; /* Color gris claro como el buscador */
+}
+
+/* Efectos cuando el usuario hace clic en los campos */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #21b7c2; /* Borde turquesa activo */
+    box-shadow: 0 0 10px rgba(33, 183, 194, 0.3), 
+                0 0 0 2px rgba(33, 183, 194, 0.2); /* Sombra y ring de enfoque */
+    background: #3a3a3a; /* Fondo ligeramente más claro */
+    transform: scale(1.02); /* Ligero aumento de tamaño */
+}
+
+/* Efectos hover en los campos de entrada */
+input[type="text"]:hover,
+input[type="password"]:hover {
+    background: #3a3a3a; /* Fondo más claro al pasar el cursor */
+    border-color: rgba(33, 183, 194, 0.5); /* Borde turquesa semitransparente */
+}
+
+/* Botones principales del formulario */
+button {
+    width: 100%; /* Ancho completo del contenedor */
+    background: #21b7c2; /* Fondo turquesa que uso en todo el sitio */
+    color: #fff; /* Texto blanco */
+    padding: 12px 20px; /* Espaciado interno cómodo */
+    border: none; /* Sin borde por defecto */
+    border-radius: 25px; /* Bordes muy redondeados */
+    font-size: 1.1em; /* Tamaño de fuente ligeramente mayor */
+    font-weight: bold; /* Texto en negrita */
+    cursor: pointer; /* Cursor de manita */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+    margin-bottom: 15px; /* Espacio inferior entre botones */
+    min-height: 48px; /* Altura mínima para mejor usabilidad */
+}
+
+/* Efectos hover en los botones */
+button:hover {
+    background: #1a9bb8; /* Turquesa más oscuro como en otros botones */
+    transform: translateY(-2px); /* Elevación ligera */
+    box-shadow: 0 4px 12px rgba(33, 183, 194, 0.4); /* Sombra turquesa */
+}
+
+/* Efecto activo al hacer clic en los botones */
+button:active {
+    transform: translateY(0); /* Vuelve a la posición original */
+    box-shadow: 0 2px 6px rgba(33, 183, 194, 0.3); /* Sombra reducida */
+}
+
+/* Efectos de enfoque para mejor accesibilidad */
+button:focus {
+    box-shadow: 0 0 0 3px rgba(33, 183, 194, 0.3); /* Ring de enfoque */
+}
+
+button:focus-visible {
+    outline: 2px solid #21b7c2; /* Outline visible para navegación por teclado */
+    outline-offset: 2px; /* Separación del outline */
+}
+
+input:focus-visible {
+    outline: 2px solid #21b7c2; /* Outline visible para campos */
+    outline-offset: 2px; /* Separación del outline */
+}
+
+/* Botón secundario para crear cuenta - estilo diferenciado */
+button[onclick*="registro"] {
+    background: transparent; /* Fondo transparente */
+    border: 2px solid #21b7c2; /* Borde turquesa */
+    color: #21b7c2; /* Texto turquesa */
+}
+
+/* Efecto hover en el botón secundario */
+button[onclick*="registro"]:hover {
+    background: #21b7c2; /* Fondo turquesa al hacer hover */
+    color: #fff; /* Texto blanco */
+    transform: translateY(-2px); /* Elevación igual que el principal */
+}
+
+/* Enlaces de navegación */
+a {
+    color: #21b7c2; /* Color turquesa consistente */
+    text-decoration: none; /* Sin subrayado inicial */
+    font-weight: bold; /* Texto en negrita */
+    transition: all 0.3s ease; /* Transición suave */
+    display: inline-block; /* Para permitir transformaciones */
+    margin-top: 20px; /* Espacio superior */
+}
+
+/* Efectos hover en los enlaces */
+a:hover {
+    color: #1a9bb8; /* Turquesa más oscuro */
+    text-decoration: underline; /* Subrayado al hacer hover */
+    transform: translateY(-1px); /* Ligera elevación */
+}
+
+/* Mensajes de error */
+.mensaje-error {
+    background: rgba(184, 24, 0, 0.1); /* Fondo rojo semitransparente */
+    color: #ff6b6b; /* Texto rojo claro */
+    padding: 15px 20px; /* Espaciado interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    border-left: 4px solid #b81800; /* Borde izquierdo rojo */
+    margin-bottom: 25px; /* Espacio inferior */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrado del texto */
+    max-width: 600px; /* Ancho máximo */
+    width: 100%; /* Ancho completo disponible */
+    box-sizing: border-box; /* Incluir padding en el ancho */
+}
+
+.mensaje-exito {
+    background: rgba(40, 167, 69, 0.1); /* Fondo verde semitransparente */
+    color: #28a745; /* Texto verde */
+    padding: 15px 20px; /* Espaciado interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    border-left: 4px solid #28a745; /* Borde izquierdo verde */
+    margin-bottom: 25px; /* Espacio inferior */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrado del texto */
+    max-width: 600px; /* Ancho máximo */
+    width: 100%; /* Ancho completo disponible */
+    box-sizing: border-box; /* Incluir padding en el ancho */
+}
+
+/* CONTENEDORES DE CONTRASEÑA CON BOTÓN MOSTRAR/OCULTAR */
+.contenedor-contrasena {
+    position: relative; /* Posicionamiento relativo para colocar el botón */
+    margin-bottom: 20px; /* Espacio inferior para separar del siguiente elemento */
+    width: 100%; /* Ocupa todo el ancho disponible del contenedor padre */
+}
+
+/* Campos de entrada de contraseña con espacio reservado para el botón */
+.contenedor-contrasena input[type="password"],
+.contenedor-contrasena input[type="text"] {
+    width: 100%; /* Ancho completo disponible del contenedor */
+    padding-right: 60px; /* Espacio extra a la derecha para el botón */
+    margin-bottom: 0; /* Sin margen inferior para evitar espaciado doble */
+    padding-left: 16px; /* Espaciado izquierdo consistente con otros inputs del login */
+    padding-top: 12px; /* Espaciado superior consistente con el diseño del login */
+    padding-bottom: 12px; /* Espaciado inferior consistente con el diseño del login */
+}
+
+/* Botón principal de mostrar/ocultar contraseña */
+.mostrar-ocultar-contrasena {
+    position: absolute !important; /* Posicionamiento absoluto dentro del contenedor relativo */
+    right: 16px !important; /* Separación fija desde el borde derecho, ajustada para login */
+    top: 50% !important; /* Centrado vertical calculado respecto al contenedor */
+    transform: translateY(-50%) !important; /* Ajuste fino para centrado perfecto */
+    background: transparent !important; /* Fondo completamente transparente */
+    color: #21b7c2 !important; /* Color turquesa consistente con la paleta del login */
+    border: none !important; /* Sin bordes visibles */
+    padding: 2px 6px !important; /* Espaciado interno compacto pero cómodo */
+    border-radius: 8px !important; /* Esquinas suavemente redondeadas */
+    cursor: pointer !important; /* Cursor de mano para indicar interactividad */
+    font-size: 0.8em !important; /* Tamaño de fuente reducido pero legible */
+    font-weight: normal !important; /* Peso de fuente normal sin énfasis */
+    user-select: none !important; /* Evitar selección accidental del texto */
+    z-index: 10 !important; /* Capa superior para estar encima del input */
+    height: auto !important; /* Altura automática basada en contenido */
+    width: 48px !important; /* Ancho fijo optimizado para el botón del login */
+    display: flex !important; /* Flexbox para alineación perfecta del contenido */
+    align-items: center !important; /* Centrado vertical del contenido interno */
+    justify-content: center !important; /* Centrado horizontal del contenido interno */
+    margin-top: 0px !important; /* Sin ajuste vertical para mantener alineación del login */
+    transition: none !important; /* Sin transiciones para evitar parpadeos */
+    box-shadow: none !important; /* Sin sombras para mantener limpieza visual */
+    outline: none !important; /* Sin contorno de enfoque visible */
+}
+
+/* Estados de interacción del botón - mantener consistencia visual */
+.mostrar-ocultar-contrasena:hover,
+.mostrar-ocultar-contrasena:active,
+.mostrar-ocultar-contrasena:focus {
+    background-color: transparent !important; /* Mantener fondo transparente en interacciones */
+    background-image: url('../imagenes/ojo_mostrar.png') !important; /* Asegurar imagen visible en todos los estados */
+    background-size: 16px 16px !important; /* Tamaño fijo de imagen para consistencia */
+    background-repeat: no-repeat !important; /* Evitar repetición de la imagen */
+    background-position: center !important; /* Centrado perfecto de la imagen */
+    filter: brightness(0) invert(1) !important; /* Filtro para convertir imagen a blanco */
+    color: #21b7c2 !important; /* Mantener color turquesa del tema */
+    border: none !important; /* Sin bordes en estados de interacción */
+    transform: translateY(-50%) !important; /* Mantener centrado vertical */
+    box-shadow: none !important; /* Sin sombras para mantener limpieza */
+    outline: none !important; /* Sin contorno visible */
+    transition: none !important; /* Sin transiciones para evitar efectos no deseados */
+}
+
+/* Estados de interacción cuando el botón está en modo oculto */
+.mostrar-ocultar-contrasena.hidden:hover,
+.mostrar-ocultar-contrasena.hidden:active,
+.mostrar-ocultar-contrasena.hidden:focus {
+    background-image: url('../imagenes/ojo_ocultar.png') !important; /* Mantener imagen de ocultar en interacciones */
+    background-size: 16px 16px !important; /* Tamaño consistente con estado normal */
+    background-repeat: no-repeat !important; /* Sin repetición de imagen */
+    background-position: center !important; /* Centrado perfecto de la imagen */
+    filter: brightness(0) invert(1) !important; /* Mantener filtro blanco en modo oculto */
+}
+
+/* Efecto hover del contenedor cuando se pasa sobre el botón */
+.contenedor-contrasena:hover input[type="password"],
+.contenedor-contrasena:hover input[type="text"] {
+    background: #3a3a3a; /* Fondo más claro consistente con el hover del login */
+    border-color: rgba(33, 183, 194, 0.5); /* Borde turquesa semitransparente */
+}
+
+/* Icono del ojo usando imagen personalizada */
+.mostrar-ocultar-contrasena {
+    background-image: url('../imagenes/ojo_mostrar.png') !important; /* Imagen para mostrar contraseña */
+    background-size: 16px 16px !important; /* Tamaño fijo pequeño para la imagen */
+    background-repeat: no-repeat !important; /* Sin repetición */
+    background-position: center !important; /* Centrar la imagen */
+    filter: brightness(0) invert(1) !important; /* Convertir imagen a blanco */
+}
+
+.mostrar-ocultar-contrasena.hidden {
+    background-image: url('../imagenes/ojo_ocultar.png') !important; /* Imagen para ocultar contraseña */
+    background-size: 16px 16px !important; /* Tamaño fijo pequeño para la imagen */
+    background-repeat: no-repeat !important; /* Sin repetición */
+    background-position: center !important; /* Centrar la imagen */
+    filter: brightness(0) invert(1) !important; /* Convertir imagen a blanco */
+}
+
+/* Asegurar que las imágenes se mantengan cuando el input está en focus */
+.contenedor-contrasena input:focus + .mostrar-ocultar-contrasena {
+    background-image: url('../imagenes/ojo_mostrar.png') !important;
+    background-size: 16px 16px !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-color: transparent !important;
+    filter: brightness(0) invert(1) !important; /* Mantener imagen blanca cuando input está en focus */
+}
+
+.contenedor-contrasena input:focus + .mostrar-ocultar-contrasena.hidden {
+    background-image: url('../imagenes/ojo_ocultar.png') !important;
+    background-size: 16px 16px !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-color: transparent !important;
+    filter: brightness(0) invert(1) !important; /* Mantener imagen blanca cuando input está en focus */
+}
+
+/* Eliminar el contenido de texto */
+.mostrar-ocultar-contrasena::before,
+.mostrar-ocultar-contrasena.hidden::before {
+    content: '' !important; /* Sin contenido de texto */
+}
+
+/* RESPONSIVIDAD PARA DISPOSITIVOS MÓVILES */
+
+/* Tablets grandes */
+@media (max-width: 1024px) {
+    body {
+        padding: 18px; /* Espaciado intermedio para tablets grandes */
+    }
+    
+    h1 {
+        font-size: 2.3em; /* Título ligeramente más pequeño */
+        margin-bottom: 28px; /* Espacio intermedio */
+    }
+    
+    h2 {
+        font-size: 1.25em; /* Subtítulo intermedio */
+    }
+    
+    form {
+        padding: 35px 30px; /* Espaciado intermedio */
+        max-width: 380px; /* Ancho intermedio */
+    }
+    
+    input[type="text"], 
+    input[type="password"] {
+        padding: 11px 15px; /* Espaciado intermedio */
+        font-size: 0.98em; /* Fuente ligeramente reducida */
+    }
+    
+    button {
+        padding: 11px 18px; /* Espaciado intermedio */
+        font-size: 1.05em; /* Fuente intermedia */
+        min-height: 46px; /* Altura intermedia */
+    }
+    
+    /* Contenedores de contraseña adaptados para tablets grandes */
+    .contenedor-contrasena {
+        margin-bottom: 18px; /* Margen intermedio para tablets grandes */
+    }
+    
+    .contenedor-contrasena input[type="password"],
+    .contenedor-contrasena input[type="text"] {
+        padding: 11px 50px 11px 15px; /* Padding intermedio con espacio para botón */
+    }
+    
+    /* Botón mostrar/ocultar contraseña en tablets grandes */
+    .mostrar-ocultar-contrasena {
+        height: 22px; /* Altura intermedia para tablets grandes */
+        width: 42px; /* Ancho intermedio para tablets grandes */
+        right: 13px; /* Separación intermedia del borde */
+        font-size: 0.75em; /* Tamaño de fuente intermedio */
+        border-radius: 7px; /* Bordes moderadamente redondeados */
+        padding: 2px 5px; /* Padding intermedio */
+        background-size: 15px 15px !important; /* Imagen intermedia para tablets grandes */
+    }
+    
+    .mostrar-ocultar-contrasena.hidden {
+        background-size: 15px 15px !important; /* Imagen intermedia para estado oculto en tablets grandes */
+    }
+    
+    /* Mantener imágenes en todos los estados en tablets grandes */
+    .mostrar-ocultar-contrasena:hover,
+    .mostrar-ocultar-contrasena:active,
+    .mostrar-ocultar-contrasena:focus {
+        background-size: 15px 15px !important; /* Mantener tamaño intermedio en tablets grandes */
+    }
+    
+    .mostrar-ocultar-contrasena.hidden:hover,
+    .mostrar-ocultar-contrasena.hidden:active,
+    .mostrar-ocultar-contrasena.hidden:focus {
+        background-size: 15px 15px !important; /* Mantener tamaño intermedio para estado oculto en tablets grandes */
+    }
+    
+    /* Mantener imágenes cuando input está en focus en tablets grandes */
+    .contenedor-contrasena input:focus + .mostrar-ocultar-contrasena {
+        background-size: 15px 15px !important; /* Mantener tamaño cuando input está en focus en tablets grandes */
+    }
+    
+    .contenedor-contrasena input:focus + .mostrar-ocultar-contrasena.hidden {
+        background-size: 15px 15px !important; /* Mantener tamaño cuando input está en focus para estado oculto en tablets grandes */
+    }
+}
+
+/* Pantallas medianas (tablets) */
+@media (max-width: 768px) {
+    body {
+        padding: 15px; /* Reducir espaciado en pantallas pequeñas */
+    }
+    
+    h1 {
+        font-size: 2em; /* Título más pequeño para tablets */
+        margin-bottom: 25px; /* Menos espacio inferior */
+    }
+    
+    form {
+        padding: 30px 25px; /* Reducir espaciado interno */
+        max-width: 350px; /* Ancho máximo reducido */
+    }
+    
+    button {
+        min-height: 44px; /* Altura mínima reducida */
+    }
+    
+    /* Contenedores de contraseña adaptados para tablets medianas */
+    .contenedor-contrasena {
+        margin-bottom: 17px; /* Margen reducido para tablets medianas */
+    }
+    
+    .contenedor-contrasena input[type="password"],
+    .contenedor-contrasena input[type="text"] {
+        padding: 10px 48px 10px 14px; /* Padding reducido con espacio para botón */
+    }
+    
+    /* Botón mostrar/ocultar contraseña en tablets medianas */
+    .mostrar-ocultar-contrasena {
+        height: 21px; /* Altura reducida para tablets medianas */
+        width: 40px; /* Ancho reducido para tablets medianas */
+        right: 12px; /* Separación reducida del borde */
+        font-size: 0.73em; /* Tamaño de fuente reducido */
+        border-radius: 7px; /* Bordes moderadamente redondeados */
+        padding: 2px 5px; /* Padding reducido */
+        background-size: 14px 14px !important; /* Imagen reducida para tablets medianas */
+    }
+    
+    .mostrar-ocultar-contrasena.hidden {
+        background-size: 14px 14px !important; /* Imagen reducida para estado oculto en tablets medianas */
+    }
+    
+    /* Mantener imágenes en todos los estados en tablets medianas */
+    .mostrar-ocultar-contrasena:hover,
+    .mostrar-ocultar-contrasena:active,
+    .mostrar-ocultar-contrasena:focus {
+        background-size: 14px 14px !important; /* Mantener tamaño reducido en tablets medianas */
+    }
+    
+    .mostrar-ocultar-contrasena.hidden:hover,
+    .mostrar-ocultar-contrasena.hidden:active,
+    .mostrar-ocultar-contrasena.hidden:focus {
+        background-size: 14px 14px !important; /* Mantener tamaño reducido para estado oculto en tablets medianas */
+    }
+    
+    /* Mantener imágenes cuando input está en focus en tablets medianas */
+    .contenedor-contrasena input:focus + .mostrar-ocultar-contrasena {
+        background-size: 14px 14px !important; /* Mantener tamaño cuando input está en focus en tablets medianas */
+    }
+    
+    .contenedor-contrasena input:focus + .mostrar-ocultar-contrasena.hidden {
+        background-size: 14px 14px !important; /* Mantener tamaño cuando input está en focus para estado oculto en tablets medianas */
+    }
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+    body {
+        padding: 10px; /* Espaciado mínimo para móviles */
+    }
+    
+    h1 {
+        font-size: 1.8em; /* Título aún más pequeño */
+        margin-bottom: 20px; /* Menos espacio */
+    }
+    
+    h2 {
+        font-size: 1.1em; /* Subtítulo más pequeño */
+    }
+    
+    form {
+        padding: 25px 20px; /* Espaciado interno mínimo */
+        max-width: 300px; /* Ancho máximo muy reducido */
+    }
+    
+    input[type="text"], 
+    input[type="password"] {
+        padding: 10px 14px; /* Espaciado interno reducido */
+        font-size: 0.95em; /* Fuente ligeramente más pequeña */
+        margin-bottom: 18px; /* Menos espacio entre campos */
+    }
+    
+    button {
+        padding: 10px 16px; /* Espaciado interno reducido */
+        font-size: 1em; /* Fuente normal */
+        min-height: 42px; /* Altura mínima aún más reducida */
+        margin-bottom: 12px; /* Menos espacio entre botones */
+    }
+    
+    a {
+        margin-top: 15px; /* Menos espacio superior en enlaces */
+    }
+    
+    /* Contenedores de contraseña adaptados para móviles */
+    .contenedor-contrasena {
+        margin-bottom: 16px; /* Margen reducido para móviles */
+    }
+    
+    .contenedor-contrasena input[type="password"],
+    .contenedor-contrasena input[type="text"] {
+        padding: 10px 45px 10px 14px; /* Padding reducido con espacio optimizado para botón */
+    }
+    
+    /* Botón mostrar/ocultar contraseña en móviles */
+    .mostrar-ocultar-contrasena {
+        height: 20px; /* Altura reducida para móviles */
+        width: 35px; /* Ancho reducido para móviles */
+        right: 10px; /* Separación reducida del borde */
+        font-size: 0.72em; /* Tamaño de fuente pequeño */
+        border-radius: 6px; /* Bordes menos redondeados */
+        padding: 1px 4px; /* Padding pequeño */
+        background-size: 13px 13px !important; /* Imagen pequeña para móviles */
+    }
+    
+    .mostrar-ocultar-contrasena.hidden {
+        background-size: 13px 13px !important; /* Imagen pequeña para estado oculto en móviles */
+    }
+    
+    /* Mantener imágenes en todos los estados en móviles */
+    .mostrar-ocultar-contrasena:hover,
+    .mostrar-ocultar-contrasena:active,
+    .mostrar-ocultar-contrasena:focus {
+        background-size: 13px 13px !important; /* Mantener tamaño pequeño en móviles */
+    }
+    
+    .mostrar-ocultar-contrasena.hidden:hover,
+    .mostrar-ocultar-contrasena.hidden:active,
+    .mostrar-ocultar-contrasena.hidden:focus {
+        background-size: 13px 13px !important; /* Mantener tamaño pequeño para estado oculto en móviles */
+    }
+    
+    /* Mantener imágenes cuando input está en focus en móviles */
+    .contenedor-contrasena input:focus + .mostrar-ocultar-contrasena {
+        background-size: 13px 13px !important; /* Mantener tamaño cuando input está en focus en móviles */
+    }
+    
+    .contenedor-contrasena input:focus + .mostrar-ocultar-contrasena.hidden {
+        background-size: 13px 13px !important; /* Mantener tamaño cuando input está en focus para estado oculto en móviles */
+    }
+}
+
+/* Móviles muy pequeños (menos de 360px) */
+@media (max-width: 360px) {
+    body {
+        padding: 8px; /* Espaciado extremadamente reducido */
+    }
+    
+    h1 {
+        font-size: 1.6em; /* Título muy compacto */
+        margin-bottom: 18px; /* Espacio muy reducido */
+    }
+    
+    h2 {
+        font-size: 1em; /* Subtítulo muy pequeño */
+        margin: 15px 0 12px 0; /* Márgenes muy reducidos */
+    }
+    
+    form {
+        padding: 20px 15px; /* Espaciado extremadamente reducido */
+        max-width: 280px; /* Ancho muy reducido */
+        border-radius: 10px; /* Bordes menos redondeados */
+    }
+    
+    input[type="text"], 
+    input[type="password"] {
+        padding: 8px 12px; /* Espaciado muy reducido */
+        font-size: 0.9em; /* Fuente pequeña */
+        margin-bottom: 15px; /* Espacio muy reducido entre campos */
+        border-radius: 20px; /* Bordes menos redondeados */
+    }
+    
+    button {
+        padding: 8px 14px; /* Espaciado muy reducido */
+        font-size: 0.95em; /* Fuente reducida */
+        min-height: 38px; /* Altura muy reducida */
+        margin-bottom: 10px; /* Espacio muy reducido */
+        border-radius: 20px; /* Bordes menos redondeados */
+    }
+    
+    a {
+        margin-top: 12px; /* Espacio muy reducido */
+        font-size: 0.9em; /* Fuente más pequeña */
+    }
+    
+    p[style*="color: red"] {
+        padding: 10px 12px; /* Padding reducido en mensajes de error */
+        font-size: 0.9em; /* Texto más pequeño */
+        margin-bottom: 15px; /* Menos espacio */
+    }
+
+    .mensaje-error,
+    .mensaje-exito {
+        padding: 10px 12px; /* Padding reducido en mensajes */
+        font-size: 0.9em; /* Texto más pequeño */
+        margin-bottom: 15px; /* Menos espacio */
+        border-radius: 8px; /* Bordes menos redondeados */
+    }
+    
+    /* Contenedores de contraseña adaptados para móviles muy pequeños */
+    .contenedor-contrasena {
+        margin-bottom: 15px; /* Margen muy reducido para móviles muy pequeños */
+    }
+    
+    .contenedor-contrasena input[type="password"],
+    .contenedor-contrasena input[type="text"] {
+        padding: 8px 42px 8px 12px; /* Padding muy reducido con espacio optimizado */
+    }
+    
+    /* Botón mostrar/ocultar contraseña en móviles muy pequeños */
+    .mostrar-ocultar-contrasena {
+        height: 18px; /* Altura muy pequeña para móviles muy pequeños */
+        width: 30px; /* Ancho muy pequeño para móviles muy pequeños */
+        right: 8px; /* Separación muy reducida del borde */
+        font-size: 0.7em; /* Tamaño de fuente muy pequeño */
+        border-radius: 6px; /* Bordes menos redondeados */
+        padding: 1px 3px; /* Padding muy pequeño */
+        background-size: 12px 12px !important; /* Imagen muy pequeña para móviles muy pequeños */
+    }
+    
+    .mostrar-ocultar-contrasena.hidden {
+        background-size: 12px 12px !important; /* Imagen muy pequeña para estado oculto en móviles muy pequeños */
+    }
+    
+    /* Mantener imágenes en todos los estados en móviles muy pequeños */
+    .mostrar-ocultar-contrasena:hover,
+    .mostrar-ocultar-contrasena:active,
+    .mostrar-ocultar-contrasena:focus {
+        background-size: 12px 12px !important; /* Mantener tamaño muy pequeño en móviles muy pequeños */
+    }
+    
+    .mostrar-ocultar-contrasena.hidden:hover,
+    .mostrar-ocultar-contrasena.hidden:active,
+    .mostrar-ocultar-contrasena.hidden:focus {
+        background-size: 12px 12px !important; /* Mantener tamaño muy pequeño para estado oculto en móviles muy pequeños */
+    }
+    
+    /* Mantener imágenes cuando input está en focus en móviles muy pequeños */
+    .contenedor-contrasena input:focus + .mostrar-ocultar-contrasena {
+        background-size: 12px 12px !important; /* Mantener tamaño cuando input está en focus en móviles muy pequeños */
+    }
+    
+    .contenedor-contrasena input:focus + .mostrar-ocultar-contrasena.hidden {
+        background-size: 12px 12px !important; /* Mantener tamaño cuando input está en focus para estado oculto en móviles muy pequeños */
+    }
+}
+

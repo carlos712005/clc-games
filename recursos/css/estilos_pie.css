@@ -1,0 +1,334 @@
+/* Estilo principal del footer */
+footer {
+    max-width: 50%; /* El footer ocupa la mitad del ancho para no extenderse demasiado */
+    border-radius: 12px; /* Esquinas redondeadas para un look moderno */
+    display: flex; /* Contenedor flexible para organizar elementos */
+    flex-direction: row; /* Por defecto, los elementos se colocan en fila horizontal */
+    align-items: center; /* Centrar verticalmente los elementos */
+    justify-content: space-between; /* Espaciar elementos hacia los extremos */
+    margin: auto; /* Centrar horizontalmente en la página */
+    padding: 10px; /* Espaciado interno para que no toque los bordes */
+    font-size: 17px !important; /* Tamaño del texto legible */
+    color: #FFF; /* Color blanco del texto para buen contraste */
+    gap: 20px; /* Espaciado entre elementos para evitar que se peguen */
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan en pantallas pequeñas */
+    transition: all 0.3s ease; /* Transición suave para cambios de hover */
+}
+
+/* Estilo de los encabezados en el footer - para mejor visibilidad */
+h3 {
+    color: #21b7c2; /* Color turquesa principal que uso en todo el sitio */
+    margin: 0%; /* Elimina márgenes para mejor control del espaciado */
+    font-weight: bold; /* Texto en negrita para que destaque */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra turquesa sutil */
+    font-size: 1.2em; /* Tamaño ligeramente mayor para mejor legibilidad */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+}
+
+/* Estilo de la sección de redes sociales */
+.redes-sociales {
+    flex: 1 1 15%; /* Ocupa hasta el 15% del ancho del contenedor, flexible */
+    display: flex; /* Contenedor flexible */
+    flex-direction: column; /* Elementos apilados en columna */
+    align-items: center; /* Centrar elementos horizontalmente */
+    text-align: left; /* Texto alineado a la izquierda */
+    gap: 10px; /* Espaciado entre los elementos */
+}
+
+/* Navegación de las redes sociales */
+.redes-sociales nav {
+    display: flex; /* Contenedor flexible para los iconos */
+    flex-wrap: wrap; /* Permitir que los iconos se ajusten en filas */
+    gap: 15px; /* Espaciado entre iconos para que no se peguen */
+}
+
+/* Iconos de redes sociales */
+.redes-sociales nav a {
+    text-decoration: none; /* Sin subrayado en los enlaces */
+    border-radius: 6px; /* Esquinas redondeadas sutiles */
+    padding: 4px; /* Espaciado interno mínimo */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+}
+
+.redes-sociales nav a:hover {
+    background: rgba(33, 183, 194, 0.1); /* Fondo turquesa muy sutil al hover */
+    box-shadow: 0 4px 15px rgba(33, 183, 194, 0.2); /* Sombra turquesa al hover */
+}
+
+.redes-sociales img {
+    max-width: 30px; /* Tamaño máximo de los iconos apropiado */
+    height: auto; /* Mantener proporciones de las imágenes */
+    transition: transform 0.3s ease; /* Transición suave para efectos hover */
+}
+
+/* Efecto hover en iconos */
+.redes-sociales img:hover, .contacto img:hover {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño al hover */
+    filter: drop-shadow(0 0 8px rgba(33, 183, 194, 0.5)); /* Resplandor turquesa */
+}
+
+/* Estilo de la sección de contacto */
+.contacto {
+    flex: 1 1 15%; /* Ocupa hasta el 15% del ancho del contenedor, flexible */
+    display: flex; /* Contenedor flexible */
+    flex-direction: column; /* Elementos apilados en columna */
+    align-items: center; /* Centrar horizontalmente */
+    text-align: center; /* Texto centrado */
+    gap: 10px; /* Espaciado entre elementos */
+    margin: auto; /* Centrar en el eje principal */
+}
+
+/* Texto dentro de la sección de contacto */
+.contacto p {
+    font-size: 16px; /* Tamaño de fuente legible */
+    color: #DDD; /* Color gris claro para buen contraste */
+    padding: 0; /* Sin padding interno */
+    margin: 0; /* Sin márgenes */
+}
+
+.contacto p strong,
+.contacto p .etiqueta {
+    color: #21b7c2; /* Color turquesa para las etiquetas importantes */
+    font-weight: bold; /* Texto en negrita */
+    text-shadow: 0 1px 2px rgba(33, 183, 194, 0.2); /* Sombra sutil */
+}
+
+.whatsapp-contacto {
+    display: flex; /* Contenedor flexible para icono y texto */
+    align-items: center; /* Centrar verticalmente */
+    gap: 8px; /* Espacio entre icono y texto */
+}
+
+.whatsapp-contacto a {
+    border-radius: 6px; /* Esquinas redondeadas */
+    padding: 2px; /* Padding mínimo */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+.whatsapp-contacto a:hover {
+    background: rgba(33, 183, 194, 0.1); /* Fondo turquesa sutil al hover */
+    box-shadow: 0 4px 15px rgba(33, 183, 194, 0.2); /* Sombra turquesa */
+}
+
+.whatsapp-contacto img{
+    max-width: 30px; /* Tamaño del icono de WhatsApp */
+    height: auto; /* Mantener proporciones */
+    transition: transform 0.3s ease; /* Transición suave para hover */
+}
+
+/* Separador horizontal */
+hr {
+    width: 80%; /* No muy ancha para que se vea bien */
+    height: 2px; /* Finita pero visible */
+    border: none; /* Quito el borde feo por defecto */
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(33, 183, 194, 0.3) 20%, 
+        rgba(33, 183, 194, 0.6) 50%, 
+        rgba(33, 183, 194, 0.3) 80%, 
+        transparent 100%); /* Me gusta este gradiente turquesa que se desvanece */
+    margin: 10px auto 15px auto; /* Centrada y con espacios cómodos */
+    border-radius: 2px; /* Bordes ligeramente suaves */
+    opacity: 0.8; /* Un poquito transparente para que no destaque demasiado */
+}
+
+.licencia {
+    color: #ddd; /* Color del texto gris claro */
+    text-align: center; /* Centrado del texto */
+    padding: 10px; /* Espaciado interno */
+    font-family: Arial, sans-serif; /* Fuente consistente */
+    font-size: 12px; /* Tamaño pequeño para licencia */
+    margin: auto; /* Centrado automático */
+}
+
+.licencia a {
+    color: #21b7c2; /* Color turquesa para los enlaces */
+    text-decoration: none; /* Sin subrayado inicial */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+.licencia a:hover {
+    color: #26d1de; /* Color turquesa más claro al hacer hover */
+    text-decoration: underline; /* Subrayado al pasar el ratón */
+    text-shadow: 0 0 8px rgba(38, 209, 222, 0.4); /* Resplandor al hover */
+}
+
+.licencia img {
+    max-width: 5000px; /* Tamaño del icono de la licencia muy amplio */
+    margin-left: 5px; /* Espacio entre iconos */
+    vertical-align: middle; /* Alineación con el texto */
+}
+
+/* RESPONSIVIDAD PARA DISPOSITIVOS MÓVILES */
+
+/* Tablets grandes */
+@media (max-width: 1024px) {
+    footer {
+        max-width: 60%; /* Ancho un poco mayor en tablets grandes */
+        flex-direction: row; /* Mantener fila en tablets grandes */
+        gap: 25px; /* Espacio intermedio entre secciones */
+        padding: 12px; /* Padding ligeramente aumentado */
+    }
+
+    .redes-sociales, .contacto {
+        flex: 1 1 20%; /* Ocupan un poco más de ancho */
+    }
+
+    .redes-sociales img {
+        max-width: 28px; /* Iconos ligeramente más pequeños */
+    }
+
+    .contacto p {
+        font-size: 15.5px; /* Texto ligeramente más pequeño */
+    }
+
+    h3 {
+        font-size: 1.15em; /* Títulos ligeramente más pequeños */
+    }
+
+    hr {
+        width: 85%; /* Separador un poco más ancho en tablets grandes */
+        height: 2px; /* Mantener altura consistente */
+        margin: 8px auto 12px auto; /* Márgenes ligeramente reducidos */
+        opacity: 0.85; /* Ligeramente más visible en tablets */
+    }
+}
+
+/* Pantallas medianas (tablets) */
+@media (max-width: 768px) {
+    footer {
+        max-width: 70%; /* Ancho mayor en tablets */
+        flex-direction: column; /* Apila elementos en columna */
+        align-items: center; /* Centrar horizontalmente */
+        gap: 20px; /* Reducir espacio entre elementos */
+        padding: 15px; /* Más padding interno */
+    }
+
+    .redes-sociales, .contacto {
+        flex: 1 1 100%; /* Usar todo el ancho disponible */
+        align-items: center; /* Centrar elementos */
+        text-align: center; /* Centrar texto */
+    }
+
+    .redes-sociales nav {
+        justify-content: center; /* Centrar iconos de redes sociales */
+    }
+
+    .redes-sociales img {
+        max-width: 35px; /* Aumentar ligeramente el tamaño de iconos */
+    }
+
+    .contacto p {
+        font-size: 14px; /* Reducir tamaño del texto */
+    }
+
+    h3 {
+        font-size: 1.1em; /* Títulos más pequeños */
+    }
+
+    hr {
+        width: 90%; /* Ampliar el ancho del separador en tablets */
+        height: 1.5px; /* Ligeramente más fina en pantallas medianas */
+        margin: 6px auto 10px auto; /* Márgenes más compactos */
+        opacity: 0.9; /* Más visible en pantallas medianas */
+        border-radius: 1px; /* Bordes menos redondeados */
+    }
+
+    .licencia {
+        font-size: 11px; /* Texto de licencia más pequeño */
+    }
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+    footer {
+        max-width: 90%; /* Ancho casi completo en móviles */
+        gap: 15px; /* Espacio más reducido */
+        padding: 12px; /* Padding reducido */
+    }
+
+    .redes-sociales img {
+        max-width: 32px; /* Iconos apropiados para móviles */
+    }
+
+    .contacto p {
+        font-size: 13px; /* Texto más pequeño pero legible */
+    }
+
+    h3 {
+        font-size: 1.05em; /* Títulos compactos */
+    }
+
+    hr {
+        width: 95%; /* Separador casi completo en móviles */
+        height: 1px; /* Más fina en móviles para mejor proporción */
+        margin: 5px auto 8px auto; /* Márgenes muy compactos */
+        opacity: 1; /* Completamente visible en móviles */
+        border-radius: 1px; /* Bordes mínimamente redondeados */
+    }
+
+    .licencia {
+        font-size: 10px; /* Texto de licencia muy pequeño */
+        padding: 8px; /* Menos padding */
+    }
+
+    .whatsapp-contacto img {
+        max-width: 28px; /* Icono WhatsApp más pequeño */
+    }
+}
+
+/* Móviles muy pequeños (menos de 360px) */
+@media (max-width: 360px) {
+    footer {
+        max-width: 95%; /* Ancho casi completo */
+        gap: 12px; /* Espacio muy reducido */
+        padding: 10px; /* Padding mínimo */
+    }
+
+    .redes-sociales, .contacto {
+        gap: 8px; /* Menos espacio interno en secciones */
+    }
+
+    .redes-sociales nav {
+        gap: 12px; /* Menos espacio entre iconos */
+    }
+
+    .redes-sociales img {
+        max-width: 28px; /* Iconos más pequeños */
+    }
+
+    .contacto p {
+        font-size: 12px; /* Texto muy pequeño pero legible */
+    }
+
+    h3 {
+        font-size: 1em; /* Títulos muy compactos */
+    }
+
+    hr {
+        width: 98%; /* Separador casi completo en móviles muy pequeños */
+        height: 1px; /* Muy fina para pantallas extremadamente pequeñas */
+        margin: 4px auto 6px auto; /* Márgenes extremadamente compactos */
+        opacity: 1; /* Completamente visible */
+        border-radius: 0.5px; /* Bordes prácticamente rectos */
+        background: linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(33, 183, 194, 0.4) 15%, 
+            rgba(33, 183, 194, 0.7) 50%, 
+            rgba(33, 183, 194, 0.4) 85%, 
+            transparent 100%); /* Gradiente ligeramente más intenso para móviles muy pequeños */
+    }
+
+    .licencia {
+        font-size: 9px; /* Texto de licencia extremadamente pequeño */
+        padding: 6px; /* Padding mínimo */
+    }
+
+    .whatsapp-contacto {
+        gap: 6px; /* Menos espacio entre icono y texto */
+    }
+
+    .whatsapp-contacto img {
+        max-width: 25px; /* Icono WhatsApp muy pequeño */
+    }
+}

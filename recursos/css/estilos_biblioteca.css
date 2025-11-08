@@ -1,0 +1,152 @@
+/* Estilos para la página de biblioteca */
+
+/* Cuerpo principal de la página */
+main {
+    margin-top: 30px; /* Espacio arriba para que no quede pegado al encabezado */
+}
+
+/* Título principal de la biblioteca */
+h1 {
+    text-align: center; /* Centrado porque se ve mejor */
+    margin-top: 20px; /* Espacio arriba para que respire */
+    margin-bottom: 20px; /* Espacio abajo también */
+    color: #21b7c2; /* Color turquesa que me gusta y uso en todo el sitio */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra sutil para que destaque */
+    font-weight: 600; /* Un poco más gruesa que la normal */
+}
+
+/* Línea horizontal decorativa debajo del título */
+main hr {
+    width: 80%; /* No muy ancha para que se vea bien */
+    height: 2px; /* Finita pero visible */
+    border: none; /* Quito el borde feo por defecto */
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(33, 183, 194, 0.3) 20%, 
+        rgba(33, 183, 194, 0.6) 50%, 
+        rgba(33, 183, 194, 0.3) 80%, 
+        transparent 100%); /* Gradiente turquesa que se desvanece a los lados */
+    margin: 10px auto 15px auto; /* Centrada y con espacios cómodos */
+    border-radius: 2px; /* Bordes ligeramente suaves */
+    opacity: 0.8; /* Un poquito transparente para que no destaque demasiado */
+}
+
+/* Cuadro de advertencia para avisar de que hay filtros aplicados */
+#advertencia-biblioteca {
+    background: rgba(255, 193, 7, 0.1); /* Fondo amarillito muy suave */
+    color: #856404; /* Texto marrón oscuro que contrasta bien */
+    padding: 15px 20px; /* Espaciado cómodo para leer */
+    border-radius: 10px; /* Esquinas redondeadas como me gustan */
+    border-left: 4px solid #ffc107; /* Raya izquierda amarilla para que llame la atención */
+    margin: 0 auto 25px auto; /* Centrada y con espacio abajo */
+    font-weight: bold; /* En negrita para que se note bien */
+    text-align: center; /* Centrado porque es una advertencia importante */
+    max-width: 600px; /* No muy ancha en pantallas grandes */
+    width: fit-content; /* Se ajusta al contenido */
+    box-sizing: border-box; /* Incluyo el padding en el cálculo del ancho */
+    display: block; /* Bloque completo para que no se pongan elementos al lado */
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.2); /* Sombra amarillita sutil */
+}
+
+/* Texto dentro de la advertencia */
+#advertencia-biblioteca p {
+    margin: 0; /* Sin márgenes para que quede compacto */
+    font-size: 1em; /* Tamaño estándar, se lee bien */
+}
+
+/* RESPONSIVIDAD - Adaptación a diferentes tamaños de pantalla */
+
+/* Tablets grandes (1024px o menos) */
+@media (max-width: 1024px) {
+    /* Título un poco más pequeño en tablets grandes */
+    h1 {
+        font-size: 1.8em; /* Título reducido */
+        margin: 18px 0; /* Menos margen para ahorrar espacio */
+    }
+    
+    /* Línea horizontal más ancha */
+    main hr {
+        width: 85%; /* Un poco más ancha en tablets */
+        margin: 8px auto 12px auto; /* Menos espacio vertical */
+    }
+
+    /* Advertencia adaptada para tablets grandes */
+    #advertencia-biblioteca {
+        max-width: 550px; /* Ancho intermedio */
+        padding: 14px 18px; /* Padding ligeramente menor */
+        margin-bottom: 22px; /* Menos espacio inferior */
+    }
+}
+
+/* Tablets (768px o menos) */
+@media (max-width: 768px) {
+    /* Título más pequeño en tablets */
+    h1 {
+        font-size: 1.6em; /* Tamaño reducido */
+        margin: 15px 0; /* Márgenes compactos */
+    }
+    
+    /* Línea horizontal más ancha */
+    main hr {
+        width: 90%; /* Más ancha en pantallas pequeñas */
+        margin: 6px auto 10px auto; /* Espacios más apretados */
+    }
+
+    /* Advertencia más compacta */
+    #advertencia-biblioteca {
+        max-width: 450px; /* Ancho reducido */
+        padding: 12px 15px; /* Menos padding */
+        margin: 0 15px 20px 15px; /* Márgenes laterales para que no toque los bordes */
+        font-size: 0.95em; /* Texto ligeramente más pequeño */
+    }
+}
+
+/* Móviles pequeños (480px o menos) */
+@media (max-width: 480px) {
+    /* Título pequeño para móviles */
+    h1 {
+        font-size: 1.4em; /* Tamaño móvil */
+        margin: 12px 0; /* Márgenes mínimos */
+    }
+    
+    /* Línea horizontal casi completa */
+    main hr {
+        width: 95%; /* Casi todo el ancho en móviles */
+        height: 1px; /* Más finita en pantallas pequeñas */
+        margin: 5px auto 8px auto; /* Espacios muy compactos */
+    }
+
+    /* Advertencia adaptada para móviles */
+    #advertencia-biblioteca {
+        max-width: 100%; /* Ancho completo menos márgenes */
+        padding: 10px 12px; /* Padding mínimo */
+        margin: 0 10px 18px 10px; /* Márgenes laterales pequeños */
+        font-size: 0.9em; /* Texto más pequeño para que quepa */
+        border-radius: 8px; /* Bordes menos redondeados */
+    }
+}
+
+/* Móviles muy pequeños (360px o menos) */
+@media (max-width: 360px) {
+    /* Título muy compacto */
+    h1 {
+        font-size: 1.2em; /* Muy pequeño */
+        margin: 10px 0; /* Márgenes extremadamente reducidos */
+    }
+    
+    /* Línea casi a todo el ancho */
+    main hr {
+        width: 98%; /* Casi todo el ancho disponible */
+        margin: 4px auto 6px auto; /* Espacios mínimos */
+    }
+
+    /* Advertencia muy compacta */
+    #advertencia-biblioteca {
+        padding: 8px 10px; /* Padding extremadamente compacto */
+        margin: 0 8px 15px 8px; /* Márgenes mínimos */
+        font-size: 0.85em; /* Texto pequeño pero legible */
+        border-radius: 6px; /* Bordes poco redondeados */
+    }
+}
+
+

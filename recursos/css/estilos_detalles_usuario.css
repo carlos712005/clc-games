@@ -1,0 +1,546 @@
+/* Estilos para la página de detalles del usuario */
+
+/* Espaciado para el encabezado fijo */
+body {
+    padding-top: 120px; /* Dejo espacio arriba para que no se tape con el encabezado fijo */
+    margin: 0; /* Sin márgenes por defecto */
+}
+
+/* Contenedor principal de los detalles */
+main {
+    max-width: 900px; /* Ancho máximo para que no se vea muy ancho en pantallas grandes */
+    margin: auto; /* Centro el contenedor horizontalmente */
+    padding: 30px; /* Espaciado interno cómodo */
+    background: #222; /* Fondo gris oscuro que combina con el tema */
+    border-radius: 12px; /* Esquinas redondeadas para look moderno */
+    color: #fff; /* Texto blanco para buen contraste */
+    border: 4px double #21b7c2; /* Borde doble turquesa como el carrusel */
+    box-shadow: 0 8px 25px rgba(33, 183, 194, 0.2); /* Sombra turquesa */
+    transition: all 0.4s ease; /* Transición suave para todos los efectos hover */
+}
+
+/* Efecto cuando paso el ratón por el contenedor principal */
+main:hover {
+    transform: translateY(-8px) scale(1.02); /* Se eleva y agranda ligeramente */
+    border-color: #26d1de; /* Color más claro al hacer hover */
+    box-shadow: 0 15px 40px rgba(33, 183, 194, 0.4),
+                0 0 30px rgba(38, 209, 222, 0.3); /* Sombra más intensa y resplandor */
+    background: linear-gradient(145deg, #2a2a2a, #222); /* Gradiente sutil en el fondo */
+}
+
+/* Título principal - Nombre completo del usuario */
+h1 {
+    font-size: 2.2em; /* Tamaño grande para que destaque */
+    color: #21b7c2; /* Color turquesa del tema */
+    margin: 0 0 10px 0; /* Margen inferior pequeño para separarlo del acrónimo */
+    font-weight: 600; /* Peso semi-negrita */
+    text-align: center; /* Centrado */
+}
+
+/* Subtítulo - Acrónimo del usuario */
+.acronimo-usuario {
+    font-size: 1.4em; /* Tamaño mediano */
+    color: #999; /* Gris claro */
+    margin: 0 0 40px 0; /* Margen inferior para separarlo del contenido */
+    font-weight: 400; /* Peso normal */
+    text-align: center; /* Centrado */
+    font-style: italic; /* Cursiva para diferenciarlo */
+}
+
+/* Layout principal con dos columnas */
+.detalles-contenido {
+    display: grid; /* Uso grid para layout flexible */
+    grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+    gap: 40px; /* Espacio entre columnas */
+    margin-bottom: 40px; /* Espacio inferior */
+}
+
+/* Contenedor de información general y estadísticas */
+.info-general,
+.estadisticas-usuario {
+    background: #333; /* Fondo gris oscuro */
+    padding: 25px; /* Espaciado interno generoso */
+    border-radius: 8px; /* Esquinas redondeadas */
+}
+
+/* Títulos de las secciones */
+.info-general h3,
+.estadisticas-usuario h3 {
+    color: #21b7c2; /* Color turquesa para los títulos */
+    margin: 0 0 20px 0; /* Solo margen inferior */
+    font-size: 1.3em; /* Tamaño medio para subtítulos */
+    font-weight: 600; /* Semi-negrita */
+    border-bottom: 2px solid #21b7c2; /* Línea inferior turquesa */
+    padding-bottom: 10px; /* Espacio entre título y línea */
+}
+
+/* Párrafos de información */
+.info-general p,
+.estadisticas-usuario p {
+    color: #ddd; /* Gris claro para el texto */
+    margin: 0 0 12px 0; /* Margen inferior entre párrafos */
+    line-height: 1.6; /* Altura de línea cómoda */
+}
+
+/* Último párrafo sin margen inferior */
+.info-general p:last-child,
+.estadisticas-usuario p:last-child {
+    margin-bottom: 0; /* Sin margen en el último párrafo */
+}
+
+/* Etiquetas destacadas en la información */
+.info-general p strong,
+.estadisticas-usuario p strong {
+    color: #21b7c2; /* Color turquesa para destacar las etiquetas */
+    margin-right: 8px; /* Espacio a la derecha */
+}
+
+/* Sección de preferencias del usuario */
+.preferencias-usuario {
+    background: #333; /* Fondo gris oscuro */
+    padding: 25px; /* Espaciado interno generoso */
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin-bottom: 25px; /* Espacio inferior */
+}
+
+/* Título de preferencias */
+.preferencias-usuario h2 {
+    color: #21b7c2; /* Color turquesa para el título */
+    margin: 0 0 20px 0; /* Solo margen inferior */
+    font-size: 1.4em; /* Tamaño medio para subtítulos */
+    font-weight: 600; /* Semi-negrita */
+    border-bottom: 2px solid #21b7c2; /* Línea inferior turquesa */
+    padding-bottom: 10px; /* Espacio entre título y línea */
+}
+
+/* Lista de preferencias */
+.lista-preferencias {
+    display: grid; /* Grid para organizar las preferencias */
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    gap: 15px; /* Espacio entre elementos */
+}
+
+/* Párrafos de preferencias */
+.lista-preferencias p {
+    color: #ddd; /* Gris claro para el texto */
+    margin: 0; /* Sin márgenes */
+    line-height: 1.6; /* Altura de línea cómoda */
+    background: #2a2a2a; /* Fondo ligeramente más oscuro */
+    padding: 12px; /* Espaciado interno */
+    border-radius: 6px; /* Esquinas redondeadas */
+}
+
+/* Etiquetas en preferencias */
+.lista-preferencias p strong {
+    color: #21b7c2; /* Color turquesa para destacar */
+    display: block; /* En su propia línea */
+    margin-bottom: 5px; /* Espacio inferior */
+}
+
+/* Sección de opciones y botones */
+.opciones {
+    background: #333; /* Fondo gris oscuro igual que otras secciones */
+    padding: 25px; /* Espaciado interno generoso */
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin-bottom: 25px; /* Espacio inferior */
+    display: flex; /* Estructura flexible para organizar botones */
+    flex-wrap: wrap; /* Permite que los botones se envuelvan */
+    gap: 15px; /* Espacio entre botones */
+    align-items: center; /* Alinea contenido al centro verticalmente */
+    justify-content: center; /* Centra los botones horizontalmente */
+}
+
+/* Título de la sección de opciones */
+.opciones h2 {
+    color: #21b7c2; /* Color turquesa para el título */
+    margin: 0 0 15px 0; /* Solo margen inferior */
+    font-size: 1.4em; /* Tamaño medio para subtítulos */
+    font-weight: 600; /* Semi-negrita */
+    width: 100%; /* El título ocupa toda la línea */
+    border-bottom: 2px solid #21b7c2; /* Línea inferior turquesa */
+    padding-bottom: 10px; /* Espacio entre título y línea */
+}
+
+/* Estilos para todos los botones de opciones */
+.boton-volver,
+.boton-ver-biblioteca,
+.boton-ver-favoritos,
+.boton-ver-historial,
+.boton-editar-usuario,
+.boton-eliminar-usuario {
+    display: flex; /* Disposición flexible */
+    align-items: center; /* Alinea contenido al centro verticalmente */
+    gap: 8px; /* Espacio entre icono y texto */
+    background: #21b7c2; /* Fondo turquesa */
+    padding: 10px 16px; /* Espacio interno */
+    border-radius: 6px; /* Esquinas redondeadas */
+    color: #fff; /* Texto en blanco */
+    font-weight: bold; /* Texto en negrita */
+    height: 50px; /* Altura fija para uniformidad */
+    transition: all 0.3s ease; /* Transición suave para todos los efectos hover */
+    text-decoration: none; /* Sin subrayado en los enlaces */
+    max-width: fit-content; /* Ancho máximo ajustado al contenido */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+/* Botón de eliminar con color diferente */
+.boton-eliminar-usuario {
+    background: #c22121; /* Fondo rojo para eliminar */
+}
+
+/* Iconos dentro de los botones de opciones */
+#icono-volver,
+#icono-biblioteca,
+#icono-favoritos,
+#icono-historial,
+#icono-editar,
+#icono-eliminar {
+    width: 30px; /* Ancho estándar de iconos */
+    height: 30px; /* Alto estándar de iconos */
+    flex-shrink: 0; /* No se reducen los iconos */
+}
+
+/* Efectos hover para los botones */
+.boton-volver:hover,
+.boton-ver-biblioteca:hover,
+.boton-ver-favoritos:hover,
+.boton-ver-historial:hover,
+.boton-editar-usuario:hover {
+    background: #1a9bb8; /* Color más oscuro al hover */
+    transform: translateY(-2px); /* Se eleva ligeramente */
+    box-shadow: 0 4px 12px rgba(33, 183, 194, 0.4); /* Sombra turquesa */
+}
+
+/* Hover para el botón de eliminar */
+.boton-eliminar-usuario:hover {
+    background: #a01818; /* Color rojo más oscuro al hover */
+    transform: translateY(-2px); /* Se eleva ligeramente */
+    box-shadow: 0 4px 12px rgba(194, 33, 33, 0.4); /* Sombra rojiza */
+}
+
+/* RESPONSIVIDAD - Adaptación a diferentes tamaños de pantalla */
+
+/* Tablets grandes (1024px o menos) */
+@media (max-width: 1024px) {
+    /* Contenedor principal más estrecho */
+    main {
+        max-width: 800px; /* Ancho reducido en tablets grandes */
+        margin: 30px auto; /* Margen ajustado */
+        padding: 28px; /* Padding ligeramente reducido */
+    }
+    
+    /* Título más pequeño */
+    h1 {
+        font-size: 2em; /* Título un poco más pequeño */
+        margin-bottom: 8px; /* Menos margen inferior */
+    }
+    
+    /* Acrónimo más pequeño */
+    .acronimo-usuario {
+        font-size: 1.3em; /* Subtítulo más pequeño */
+        margin-bottom: 35px; /* Menos margen inferior */
+    }
+    
+    /* Layout con menos espacio */
+    .detalles-contenido {
+        gap: 35px; /* Menos espacio entre columnas */
+        margin-bottom: 35px; /* Menos margen inferior */
+    }
+    
+    /* Secciones más compactas */
+    .info-general,
+    .estadisticas-usuario,
+    .preferencias-usuario {
+        padding: 22px; /* Padding reducido */
+    }
+    
+    /* Títulos más pequeños */
+    .info-general h3,
+    .estadisticas-usuario h3,
+    .preferencias-usuario h2 {
+        font-size: 1.25em; /* Títulos ligeramente más pequeños */
+        margin-bottom: 18px; /* Menos margen inferior */
+    }
+    
+    /* Sección de opciones más compacta */
+    .opciones {
+        padding: 22px; /* Padding reducido */
+        gap: 12px; /* Menos espacio entre botones */
+    }
+    
+    /* Botones más pequeños */
+    .boton-volver,
+    .boton-ver-biblioteca,
+    .boton-ver-favoritos,
+    .boton-ver-historial,
+    .boton-editar-usuario,
+    .boton-eliminar-usuario {
+        padding: 8px 14px; /* Padding reducido */
+        font-size: 0.95em; /* Texto ligeramente más pequeño */
+        height: 45px; /* Altura reducida */
+    }
+    
+    /* Iconos más pequeños */
+    #icono-volver,
+    #icono-biblioteca,
+    #icono-favoritos,
+    #icono-historial,
+    #icono-editar,
+    #icono-eliminar {
+        width: 26px; /* Iconos más pequeños */
+        height: 26px; /* Mantengo proporción */
+    }
+}
+
+/* Tablets (768px o menos) */
+@media (max-width: 768px) {
+    /* Contenedor con menos margen */
+    main {
+        margin: 20px; /* Menos margen en tablets */
+        padding: 25px; /* Menos padding interno */
+    }
+    
+    /* Layout a una sola columna */
+    .detalles-contenido {
+        grid-template-columns: 1fr; /* Una sola columna en tablets */
+        gap: 30px; /* Menos espacio entre elementos */
+    }
+    
+    /* Título más pequeño */
+    h1 {
+        font-size: 1.8em; /* Título más pequeño */
+        margin-bottom: 8px; /* Margen ajustado */
+    }
+    
+    /* Acrónimo más pequeño */
+    .acronimo-usuario {
+        font-size: 1.2em; /* Subtítulo más pequeño */
+        margin-bottom: 30px; /* Margen ajustado */
+    }
+    
+    /* Secciones más compactas */
+    .info-general,
+    .estadisticas-usuario,
+    .preferencias-usuario {
+        padding: 20px; /* Padding reducido */
+    }
+    
+    /* Títulos más pequeños */
+    .info-general h3,
+    .estadisticas-usuario h3,
+    .preferencias-usuario h2 {
+        font-size: 1.2em; /* Títulos más pequeños */
+        margin-bottom: 15px; /* Margen reducido */
+    }
+    
+    /* Lista de preferencias a una columna */
+    .lista-preferencias {
+        grid-template-columns: 1fr; /* Una sola columna */
+        gap: 12px; /* Menos espacio */
+    }
+    
+    /* Sección de opciones más compacta */
+    .opciones {
+        padding: 20px; /* Padding reducido */
+        gap: 10px; /* Menos espacio entre botones */
+    }
+    
+    /* Botones más pequeños */
+    .boton-volver,
+    .boton-ver-biblioteca,
+    .boton-ver-favoritos,
+    .boton-ver-historial,
+    .boton-editar-usuario,
+    .boton-eliminar-usuario {
+        padding: 8px 12px; /* Padding más reducido */
+        font-size: 0.9em; /* Texto más pequeño */
+        height: 42px; /* Altura reducida */
+        min-width: 140px; /* Ancho mínimo */
+    }
+    
+    /* Iconos más pequeños */
+    #icono-volver,
+    #icono-biblioteca,
+    #icono-favoritos,
+    #icono-historial,
+    #icono-editar,
+    #icono-eliminar {
+        width: 24px; /* Iconos más pequeños */
+        height: 24px; /* Mantengo proporción */
+    }
+}
+
+/* Móviles pequeños (480px o menos) */
+@media (max-width: 480px) {
+    /* Contenedor muy compacto */
+    main {
+        margin: 15px; /* Margen mínimo en móviles */
+        padding: 20px; /* Padding reducido */
+    }
+    
+    /* Título más pequeño */
+    h1 {
+        font-size: 1.6em; /* Título aún más pequeño */
+        margin-bottom: 6px; /* Margen reducido */
+    }
+    
+    /* Acrónimo más pequeño */
+    .acronimo-usuario {
+        font-size: 1.1em; /* Subtítulo más pequeño */
+        margin-bottom: 25px; /* Margen reducido */
+    }
+    
+    /* Layout muy compacto */
+    .detalles-contenido {
+        gap: 25px; /* Espacio muy reducido */
+        margin-bottom: 25px; /* Margen reducido */
+    }
+    
+    /* Secciones muy compactas */
+    .info-general,
+    .estadisticas-usuario,
+    .preferencias-usuario {
+        padding: 18px; /* Padding muy reducido */
+    }
+    
+    /* Títulos muy pequeños */
+    .info-general h3,
+    .estadisticas-usuario h3,
+    .preferencias-usuario h2 {
+        font-size: 1.15em; /* Títulos muy pequeños */
+        margin-bottom: 12px; /* Margen mínimo */
+    }
+    
+    /* Párrafos más pequeños */
+    .info-general p,
+    .estadisticas-usuario p,
+    .lista-preferencias p {
+        font-size: 0.9em; /* Texto más pequeño */
+        line-height: 1.5; /* Altura de línea ajustada */
+    }
+    
+    /* Sección de opciones muy compacta */
+    .opciones {
+        padding: 18px; /* Padding muy reducido */
+        gap: 8px; /* Espacio mínimo entre botones */
+        flex-direction: column; /* Botones apilados verticalmente */
+    }
+    
+    /* Botones a ancho completo */
+    .boton-volver,
+    .boton-ver-biblioteca,
+    .boton-ver-favoritos,
+    .boton-ver-historial,
+    .boton-editar-usuario,
+    .boton-eliminar-usuario {
+        padding: 10px 14px; /* Padding compacto */
+        font-size: 0.9em; /* Texto pequeño */
+        width: 100%; /* Ancho completo en móviles */
+        height: 44px; /* Altura usable */
+        justify-content: center; /* Centra el contenido */
+        min-width: auto; /* Sin ancho mínimo */
+    }
+    
+    /* Iconos pequeños */
+    #icono-volver,
+    #icono-biblioteca,
+    #icono-favoritos,
+    #icono-historial,
+    #icono-editar,
+    #icono-eliminar {
+        width: 22px; /* Iconos pequeños */
+        height: 22px; /* Mantengo proporción */
+    }
+}
+
+/* Móviles muy pequeños (360px o menos) */
+@media (max-width: 360px) {
+    /* Contenedor mínimo */
+    main {
+        margin: 10px; /* Margen mínimo absoluto */
+        padding: 15px; /* Padding mínimo */
+    }
+    
+    /* Título muy compacto */
+    h1 {
+        font-size: 1.4em; /* Título muy compacto */
+        margin-bottom: 5px; /* Margen mínimo */
+        line-height: 1.2; /* Altura de línea compacta */
+    }
+    
+    /* Acrónimo muy pequeño */
+    .acronimo-usuario {
+        font-size: 1em; /* Subtítulo muy pequeño */
+        margin-bottom: 20px; /* Margen mínimo */
+    }
+    
+    /* Layout mínimo */
+    .detalles-contenido {
+        gap: 20px; /* Espacio mínimo */
+        margin-bottom: 20px; /* Margen mínimo */
+    }
+    
+    /* Secciones mínimas */
+    .info-general,
+    .estadisticas-usuario,
+    .preferencias-usuario {
+        padding: 15px; /* Padding mínimo */
+    }
+    
+    /* Títulos mínimos */
+    .info-general h3,
+    .estadisticas-usuario h3,
+    .preferencias-usuario h2 {
+        font-size: 1.1em; /* Títulos mínimos */
+        margin-bottom: 10px; /* Margen muy pequeño */
+    }
+    
+    /* Texto muy pequeño */
+    .info-general p,
+    .estadisticas-usuario p,
+    .lista-preferencias p {
+        font-size: 0.85em; /* Texto muy pequeño */
+        line-height: 1.4; /* Altura de línea compacta */
+    }
+    
+    /* Preferencias con padding reducido */
+    .lista-preferencias p {
+        padding: 10px; /* Padding reducido */
+    }
+    
+    /* Sección de opciones mínima */
+    .opciones {
+        padding: 15px; /* Padding mínimo */
+        gap: 6px; /* Espacio muy reducido */
+    }
+    
+    /* Título de opciones más pequeño */
+    .opciones h2 {
+        font-size: 1.1em; /* Título más pequeño */
+        margin-bottom: 12px; /* Menos margen */
+    }
+    
+    /* Botones muy pequeños */
+    .boton-volver,
+    .boton-ver-biblioteca,
+    .boton-ver-favoritos,
+    .boton-ver-historial,
+    .boton-editar-usuario,
+    .boton-eliminar-usuario {
+        padding: 8px 12px; /* Padding mínimo */
+        font-size: 0.85em; /* Texto muy pequeño */
+        height: 40px; /* Altura mínima pero usable */
+        gap: 6px; /* Menos espacio entre icono y texto */
+    }
+    
+    /* Iconos muy pequeños */
+    #icono-volver,
+    #icono-biblioteca,
+    #icono-favoritos,
+    #icono-historial,
+    #icono-editar,
+    #icono-eliminar {
+        width: 20px; /* Iconos muy pequeños */
+        height: 20px; /* Mantengo proporción */
+    }
+}

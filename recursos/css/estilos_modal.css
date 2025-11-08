@@ -1,0 +1,274 @@
+/* Estilos para modales del sitio */
+* {
+    box-sizing: border-box; /* Incluyo padding y border en el tamaño total para evitar sorpresas */
+}
+
+/* MODAL PRINCIPAL - Fondo oscuro que cubre toda la pantalla */
+.modal {
+    z-index: 2000; /* Z-index alto para estar por encima del encabezado (1000) y todo lo demás */
+    position: fixed; /* Posición fija para que no se mueva al hacer scroll */
+    top: 0; /* Pegado al borde superior de la ventana */
+    left: 0; /* Pegado al borde izquierdo de la ventana */
+    width: 100vw; /* Ancho completo de la ventana del navegador */
+    height: 100vh; /* Altura completa de la ventana del navegador */
+    display: flex; /* Estructura flexible para centrar el contenido */
+    justify-content: center; /* Centrado horizontal del modal */
+    align-items: center; /* Centrado vertical del modal */
+    color: #fff; /* Texto blanco por defecto */
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.85) 0%, rgba(26, 26, 26, 0.9) 50%, rgba(17, 17, 17, 0.88) 100%); /* Gradiente oscuro elegante que oscurece el fondo */
+    backdrop-filter: blur(3px); /* Efecto de desenfoque para darle más elegancia */
+    overflow-y: auto; /* Scroll vertical si el contenido es muy largo */
+    padding: 20px; /* Espaciado para evitar que el modal toque los bordes */
+}
+
+/* VENTANA DEL MODAL - Caja principal del contenido */
+#ventana {
+    background: linear-gradient(145deg, #222, #1a1a1a); /* Gradiente similar al de las tarjetas del sitio */
+    border: 4px double #21b7c2; /* Borde doble turquesa como las tarjetas de juegos */
+    border-radius: 16px; /* Esquinas bien redondeadas para verse moderno */
+    padding: 25px; /* Espaciado interno generoso */
+    max-width: 95vw; /* Máximo 95% del ancho de pantalla para no tapar todo */
+    width: fit-content; /* Ancho que se ajusta exactamente al contenido */
+    min-width: 300px; /* Ancho mínimo para que no quede muy estrecho */
+    max-height: none; /* Sin altura máxima forzada para que se ajuste al contenido */
+    box-shadow: 0 15px 40px rgba(33, 183, 194, 0.3), 
+                0 0 30px rgba(38, 209, 222, 0.2); /* Sombra turquesa intensa similar al hover de tarjetas */
+    position: relative; /* Para elementos absolutos internos como el brillo */
+    box-sizing: border-box; /* Incluir padding en el ancho total */
+}
+
+/* Efecto de brillo sutil en la ventana para darle más elegancia */
+#ventana::before {
+    position: absolute; /* Posicionamiento absoluto dentro del contenedor */
+    top: -50%; /* Posición fuera del contenedor para cubrir más */
+    left: -50%; /* Posición fuera del contenedor para cubrir más */
+    width: 200%; /* Ancho doble para cubrir bien toda el área */
+    height: 200%; /* Altura doble para cubrir bien toda el área */
+    background: linear-gradient(45deg, transparent, rgba(33, 183, 194, 0.05), transparent); /* Gradiente sutil que añade brillo */
+    transform: rotate(45deg); /* Rotación diagonal para que el brillo sea dinámico */
+    pointer-events: none; /* No interfiere con los clicks del usuario */
+    opacity: 0.7; /* Semi-transparente para ser sutil */
+}
+
+/* MENSAJE DEL MODAL - Contenido de texto principal */
+#mensaje {
+    margin-bottom: 15px; /* Espacio inferior para separar de los botones */
+    line-height: 1.6; /* Altura de línea cómoda para leer bien */
+    position: relative; /* Para estar por encima del pseudo-elemento de brillo */
+    z-index: 1; /* Por encima del brillo pero debajo de los botones */
+    word-wrap: break-word; /* Romper palabras largas que no caben */
+    overflow-wrap: break-word; /* Compatibilidad adicional para romper palabras */
+}
+
+/* Título del mensaje del modal */
+#mensaje h1 {
+    color: #21b7c2; /* Color turquesa consistente del sitio */
+    font-size: 1.4em; /* Tamaño destacado para que se note */
+    font-weight: bold; /* Negrita para más énfasis */
+    margin: 0 0 20px 0; /* Solo margen inferior para separar del contenido */
+    text-align: center; /* Centrado para que se vea profesional */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra turquesa sutil para darle profundidad */
+    line-height: 1.2; /* Altura de línea compacta para títulos */
+}
+
+/* Párrafos del mensaje del modal */
+#mensaje p {
+    color: #ccc; /* Gris claro para texto secundario que no compite con el título */
+    font-size: 1em; /* Tamaño normal de lectura */
+    margin: 10px 0; /* Márgenes verticales para separar párrafos */
+    text-align: justify; /* Texto justificado para que se vea ordenado */
+}
+
+
+
+/* BOTONES DEL MODAL - Contenedor de acciones */
+#botones {
+    display: flex; /* Estructura flexible para organizar botones */
+    gap: 15px; /* Espacio entre botones para que no estén pegados */
+    justify-content: center; /* Centrado horizontal de todos los botones */
+    flex-wrap: wrap; /* Permite salto de línea si no caben en una fila */
+    margin-top: 10px; /* Espacio superior para separar del mensaje */
+    position: relative; /* Para estar por encima del pseudo-elemento */
+    z-index: 10; /* Z-index alto para asegurar que los botones sean clickeables */
+}
+
+/* SEPARADOR HR EN BOTONES - Línea decorativa */
+#botones hr {
+    width: 100%; /* Ancho completo del contenedor */
+    height: 2px; /* Altura definida para la línea */
+    border: none; /* Sin borde por defecto del navegador */
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(33, 183, 194, 0.3) 20%, 
+        rgba(33, 183, 194, 0.6) 50%, 
+        rgba(33, 183, 194, 0.3) 80%, 
+        transparent 100%); /* Gradiente turquesa que se desvanece en los bordes */
+    margin: 10px 0 15px 0; /* Espaciado vertical para separar secciones */
+    border-radius: 2px; /* Esquinas ligeramente redondeadas */
+    opacity: 0.8; /* Ligeramente transparente para no destacar demasiado */
+}
+
+/* ESTILOS BASE PARA TODOS LOS BOTONES DEL MODAL */
+.aceptar, .cancelar, .cerrar {
+    padding: 12px 24px; /* Espaciado interno generoso para botones cómodos */
+    border: none; /* Sin borde por defecto, lo pondremos personalizado */
+    border-radius: 8px; /* Esquinas redondeadas para verse moderno */
+    font-size: 1em; /* Tamaño normal de texto */
+    font-weight: bold; /* Negrita para destacar el texto */
+    cursor: pointer; /* Cursor de manita para indicar que es clickeable */
+    transition: all 0.3s ease; /* Transición suave para todos los cambios */
+    min-width: 120px; /* Ancho mínimo para que todos tengan buen tamaño */
+    height: 45px; /* Altura fija para que todos sean iguales */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Sombra en el texto para darle profundidad */
+    position: relative; /* Para poder usar pseudo-elementos si se necesita */
+    overflow: hidden; /* Para efectos de brillo que no se salgan */
+    z-index: 10; /* Z-index alto para que estén sobre otros elementos */
+}
+
+/* BOTÓN ACEPTAR - Acción principal positiva en turquesa */
+.aceptar {
+    background: linear-gradient(135deg, #21b7c2, #1a9bb8); /* Gradiente turquesa de claro a oscuro */
+    color: #fff; /* Texto blanco para buen contraste */
+    border: 2px solid #21b7c2; /* Borde turquesa para reforzar el color */
+}
+
+/* Efecto hover del botón aceptar - Cuando paso el ratón */
+.aceptar:hover {
+    background: linear-gradient(135deg, #26d1de, #21b7c2); /* Gradiente más brillante para efecto hover */
+    border-color: #26d1de; /* Borde también más brillante */
+    transform: translateY(-2px); /* Se eleva ligeramente para efecto de elevación */
+    box-shadow: 0 6px 20px rgba(33, 183, 194, 0.4); /* Sombra turquesa amplia para efecto flotante */
+}
+
+/* BOTÓN CANCELAR - Acción negativa en rojo */
+.cancelar {
+    background: linear-gradient(135deg, #dc3545, #c82333); /* Gradiente rojo de claro a oscuro */
+    color: #fff; /* Texto blanco para buen contraste */
+    border: 2px solid #dc3545; /* Borde rojo para reforzar el color */
+}
+
+/* Efecto hover del botón cancelar - Cuando paso el ratón */
+.cancelar:hover {
+    background: linear-gradient(135deg, #e74c3c, #dc3545); /* Gradiente más brillante para efecto hover */
+    border-color: #e74c3c; /* Borde también más brillante */
+    transform: translateY(-2px); /* Se eleva ligeramente para efecto de elevación */
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4); /* Sombra roja amplia para efecto flotante */
+}
+
+/* BOTÓN CERRAR - Acción neutral en gris */
+.cerrar {
+    background: linear-gradient(135deg, #6c757d, #5a6268); /* Gradiente gris de claro a oscuro */
+    color: #fff; /* Texto blanco para buen contraste */
+    border: 2px solid #6c757d; /* Borde gris para reforzar el color */
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3); /* Sombra por defecto para que tenga visibilidad */
+}
+
+/* Efecto hover del botón cerrar - Cuando paso el ratón */
+.cerrar:hover {
+    background: linear-gradient(135deg, #7c8287, #6c757d); /* Gradiente más claro para efecto hover */
+    border-color: #7c8287; /* Borde también más claro */
+    transform: translateY(-2px); /* Se eleva ligeramente para efecto de elevación */
+    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4); /* Sombra gris amplia para efecto flotante */
+}
+
+/* EFECTO ACTIVE EN TODOS LOS BOTONES - Al hacer clic */
+.aceptar:active, .cancelar:active, .cerrar:active {
+    transform: translateY(0) scale(0.98); /* Se hunde ligeramente y reduce tamaño para efecto de presión */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Sombra reducida para simular presión */
+}
+
+
+/* RESPONSIVIDAD - ADAPTACIÓN A DIFERENTES TAMAÑOS DE PANTALLA */
+
+/* TABLETS GRANDES - Hasta 1024px */
+@media (max-width: 1024px) {
+    /* Modal ventana adaptado para tablets */
+    #ventana {
+        max-width: 95vw; /* Ancho mayor para aprovechar pantalla de tablet */
+        min-width: 350px; /* Ancho mínimo menor para tablets */
+        padding: 25px; /* Padding igual que en desktop porque hay espacio */
+    }
+}
+
+/* TABLETS - Hasta 768px */
+@media (max-width: 768px) {
+    /* Overlay del modal con padding reducido */
+    .modal {
+        padding: 15px; /* Padding reducido para aprovechar espacio en tablets */
+    }
+    
+    /* Modal ventana más compacto */
+    #ventana {
+        max-width: 98vw; /* Ancho casi completo para usar todo el espacio */
+        min-width: 300px; /* Ancho mínimo menor para tablets pequeños */
+        padding: 20px; /* Padding más reducido para tablets */
+    }
+    
+    /* Título más pequeño */
+    #mensaje h1 {
+        font-size: 1.2em; /* Tamaño menor para que no ocupe tanto espacio */
+    }
+    
+    /* Botones apilados verticalmente - Óptimo para pantallas táctiles */
+    #botones {
+        flex-direction: column; /* Botones uno debajo del otro para facilitar el tap */
+        gap: 10px; /* Espacio reducido entre botones apilados */
+    }
+    
+    /* Botones a ancho completo */
+    .aceptar, .cancelar, .cerrar {
+        width: 100%; /* Ancho completo para botones más fáciles de pulsar */
+        min-width: auto; /* Sin ancho mínimo porque ya ocupan todo */
+    }
+}
+
+/* MÓVILES PEQUEÑOS - Hasta 480px */
+@media (max-width: 480px) {
+    /* Overlay con padding mínimo */
+    .modal {
+        padding: 10px; /* Padding mínimo para móviles pequeños */
+    }
+    
+    /* Modal ventana muy compacto */
+    #ventana {
+        min-width: 280px; /* Ancho mínimo muy pequeño para móviles pequeños */
+        padding: 15px; /* Padding mínimo para aprovechar espacio */
+        border-width: 2px; /* Borde más fino para no quitar espacio */
+        border-radius: 12px; /* Esquinas menos redondeadas para aprovechar mejor el espacio */
+    }
+    
+    /* Título pequeño */
+    #mensaje h1 {
+        font-size: 1.1em; /* Tamaño pequeño para móviles */
+        margin-bottom: 15px; /* Margen reducido para no desperdiciar espacio */
+    }
+    
+    /* Botones compactos */
+    .aceptar, .cancelar, .cerrar {
+        padding: 10px 16px; /* Padding reducido pero cómodo para pulsar */
+        font-size: 0.9em; /* Tamaño menor de texto para móviles */
+        height: 40px; /* Altura reducida pero suficiente para pulsar bien */
+    }
+}
+
+/* MÓVILES MUY PEQUEÑOS - Hasta 360px */
+@media (max-width: 360px) {
+    /* Modal ventana extremadamente compacto */
+    #ventana {
+        min-width: 260px; /* Ancho mínimo extremo para móviles muy pequeños */
+        padding: 12px; /* Padding extremo para aprovechar cada píxel */
+    }
+    
+    /* Título muy pequeño */
+    #mensaje h1 {
+        font-size: 1em; /* Tamaño base sin agrandar */
+        margin-bottom: 12px; /* Margen muy reducido para aprovechar espacio */
+    }
+    
+    /* Botones extremadamente compactos */
+    .aceptar, .cancelar, .cerrar {
+        padding: 8px 12px; /* Padding extremo pero aún pulsable */
+        font-size: 0.8em; /* Tamaño muy pequeño para que entre todo */
+        height: 36px; /* Altura extrema pero funcional */
+    }
+}

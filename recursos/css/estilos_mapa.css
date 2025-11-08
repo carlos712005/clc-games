@@ -1,0 +1,398 @@
+/* Reseteo básico para que todos los elementos tengan box-sizing uniforme */
+* {
+    box-sizing: border-box; /* Para que padding y border no aumenten el tamaño total */
+}
+
+/* Configuración del body principal */
+body {
+    margin: 0px; /* Elimino márgenes por defecto del navegador */
+    /*background-color: #111;*/ /* Comentado porque uso el del encabezado */
+    color: #fff; /* Texto blanco por defecto */
+    display: flex; /* Para estructura flexible */
+    flex-direction: column; /* Elementos apilados verticalmente */
+    font-family: Arial, sans-serif; /* Fuente consistente en todo el sitio */
+}
+
+/* Contenedor principal del mapa */
+/* Este es el div que contiene todo el mapa interactivo */
+#mapa-principal {
+    position: relative; /* Necesario para posicionar elementos internos */
+    width: 95%; /* Casi todo el ancho pero con margen */
+    height: 100vh; /* Altura completa de la ventana para aprovechar espacio */
+    border: 4px double #21b7c2; /* Borde doble turquesa como el carrusel */
+    box-shadow: 0 8px 25px rgba(33, 183, 194, 0.2); /* Sombra turquesa */
+    transition: all 0.4s ease; /* Transición suave para todos los efectos hover */
+    border-radius: 15px; /* Esquinas redondeadas para look moderno */
+    background: #1a1a1a; /* Fondo gris oscuro pero no negro total */
+    color: #fff; /* Texto blanco */
+    margin: 120px auto 20px auto; /* Separación del encabezado y centrado */
+    padding: 20px; /* Espaciado interno para que no toquen los bordes */
+}
+
+/* Efecto hover en el mapa */
+#mapa-principal:hover {
+    transform: translateY(-8px) scale(1.02); /* Se eleva y agranda ligeramente */
+    border-color: #26d1de; /* Color más claro al hacer hover */
+    box-shadow: 0 15px 40px rgba(33, 183, 194, 0.4),
+                0 0 30px rgba(38, 209, 222, 0.3); /* Sombra más intensa y resplandor */
+    background: linear-gradient(145deg, #2a2a2a, #222); /* Gradiente más marcado */
+}
+
+/* Título del mapa */
+/* El h2 que dice "Mapa Interactivo - CLC GAMES" */
+#mapa-principal h2 {
+    font-size: 2.4rem; /* Tamaño grande pero no exagerado */
+    font-weight: bold; /* Negrita para que destaque */
+    text-align: center; /* Centrado horizontalmente */
+    color: #1da6b3; /* Turquesa apagado que combina con el sitio */
+    text-shadow: 0 2px 4px rgba(29, 166, 179, 0.25); /* Sombra muy sutil para profundidad */
+    margin: 0 0 20px 0; /* Solo margen inferior */
+    position: relative; /* Para controlar z-index */
+    z-index: 1; /* Por encima de otros elementos */
+}
+
+/* Contenedor interno de puntos */
+/* Div donde van todos los puntos de interés y líneas */
+.mapa-contenedor {
+    position: relative; /* Necesario para que los absolute funcionen bien */
+    width: 100%; /* Todo el ancho del contenedor padre */
+    height: calc(100% - 80px); /* Resto el espacio del título */
+}
+
+/* Líneas SVG que conectan los puntos */
+/* El SVG que dibuja todas las líneas de conexión */
+.lineas {
+    position: absolute; /* Para que flote sobre todo */
+    width: 100%; /* Ocupa todo el contenedor */
+    height: 100%; /* Ocupa toda la altura */
+    pointer-events: none; /* Para que no interfiera con los clicks */
+    top: 0; /* Esquina superior izquierda */
+    left: 0; /* Esquina superior izquierda */
+    z-index: 1; /* Debajo de los puntos pero encima del fondo */
+}
+
+/* Estilo de cada línea individual */
+.lineas line {
+    stroke: #1da6b3; /* Color turquesa apagado para las líneas */
+    stroke-width: 2.5; /* Grosor medio, no muy gruesas */
+    stroke-dasharray: 5,4; /* Líneas punteadas para que no sean muy sólidas */
+    opacity: 0.6; /* Semi-transparentes para que no molesten */
+}
+
+/* Puntos de interés (botones) */
+/* Cada punto individual en el mapa */
+.punto-interes {
+    position: absolute; /* Para posicionarlos con top/left exactos */
+    z-index: 10; /* Por encima de las líneas */
+    transform: translate(-50%, -50%); /* Para centrarlos en las coordenadas exactas */
+}
+
+/* Estilo base de todos los enlaces/botones */
+.punto-interes a {
+    display: block; /* Para que el padding funcione bien */
+    background: #1a8a94; /* Turquesa apagado como color base */
+    color: #fff; /* Texto blanco */
+    font-size: 15px; /* Tamaño legible pero no muy grande */
+    font-weight: bold; /* Negrita para que se lea bien */
+    padding: 10px 15px; /* Espaciado interno cómodo */
+    border-radius: 22px; /* Bordes muy redondeados, estilo moderno */
+    text-decoration: none; /* Sin subrayado de enlace */
+    box-shadow: 0 3px 8px rgba(26, 138, 148, 0.25); /* Sombra suave para elevación */
+    transition: all 0.3s ease; /* Transición suave en todos los cambios */
+    border: 2px solid transparent; /* Borde transparente inicialmente */
+    white-space: nowrap; /* Para que el texto no se parta en líneas */
+    text-align: center; /* Texto centrado */
+    letter-spacing: 0.3px; /* Espaciado entre letras para mejor lectura */
+}
+
+/* Efecto cuando pasas el mouse por encima */
+.punto-interes a:hover {
+    background: #15757f; /* Color más oscuro al hover */
+    box-shadow: 0 4px 12px rgba(26, 138, 148, 0.35); /* Sombra un poco más intensa */
+    border-color: #e0e0e0; /* Borde gris claro, no blanco puro */
+}
+
+/* Nodo principal (Inicio) */
+/* El botón de "Inicio" que es el más importante */
+.nodo-principal a {
+    background: #1da6b3; /* Turquesa un poco más brillante que los demás */
+    font-size: 17px; /* Un poquito más grande que los normales */
+    padding: 12px 20px; /* Más espaciado para darle importancia */
+    border: 2px solid #e0e0e0; /* Borde gris claro para diferenciarlo */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Sombra muy sutil en el texto */
+    box-shadow: 0 4px 12px rgba(29, 166, 179, 0.3); /* Sombra un poco más fuerte */
+    letter-spacing: 0.5px; /* Más espaciado en las letras */
+    font-weight: bold; /* Negrita */
+}
+
+/* Hover del nodo principal */
+.nodo-principal a:hover {
+    background: #1c95a2; /* Un poco más claro al hover */
+    box-shadow: 0 6px 16px rgba(29, 166, 179, 0.4); /* Sombra más intensa */
+    border-color: #d0d0d0; /* Borde un poco más claro */
+    transform: translateY(-1px); /* Se eleva ligeramente */
+}
+
+/* Nodos primarios (primera fila) */
+/* Botones como Carrito, Biblioteca, Favoritos, etc. */
+.nodo-primario a {
+    background: #1a8a94; /* Color base turquesa apagado */
+    font-size: 15px; /* Tamaño estándar */
+    padding: 10px 15px; /* Espaciado estándar */
+    box-shadow: 0 3px 8px rgba(26, 138, 148, 0.25); /* Sombra básica */
+}
+
+/* Nodos secundarios (segunda fila) */
+/* Botones como Juegos externos, Juegos internos, Crear cuenta */
+.nodo-secundario a {
+    background: #1a3c40; /* Fondo turquesa muy oscuro para diferenciarlo */
+    border: 2px solid #1da6b3; /* Borde turquesa para que se note */
+    color: #f0f0f0; /* Texto gris claro, no blanco puro */
+    font-size: 14px; /* Un poco más pequeño que los primarios */
+    padding: 9px 14px; /* Menos espaciado */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Sombra en texto para legibilidad */
+    box-shadow: 0 2px 6px rgba(26, 60, 64, 0.2); /* Sombra más sutil */
+}
+
+/* Hover de los secundarios */
+.nodo-secundario a:hover {
+    background: #1a8a94; /* Se vuelve como los primarios al hover */
+    color: #fff; /* Texto blanco al hover */
+    border-color: #e0e0e0; /* Borde gris claro */
+}
+
+/* Nodos terciarios (tercera fila - juegos) */
+/* Los botones de los juegos específicos: Pong, Tres en Raya, etc. */
+.nodo-terciario a {
+    background: #2a2a2a; /* Fondo gris oscuro para que se distingan */
+    border: 2px solid #1da6b3; /* Borde turquesa como los secundarios */
+    color: #e0e0e0; /* Texto gris claro para buen contraste */
+    font-size: 14px; /* Mismo tamaño que secundarios pero aún legible */
+    padding: 8px 14px; /* Espaciado más compacto */
+    font-weight: 600; /* Un poco más de peso para que se lean bien */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); /* Sombra en texto */
+    letter-spacing: 0.4px; /* Espaciado en letras para legibilidad */
+    box-shadow: 0 2px 6px rgba(42, 42, 42, 0.2); /* Sombra muy suave */
+}
+
+/* Hover de los terciarios */
+.nodo-terciario a:hover {
+    background: #1da6b3; /* Color turquesa al hover */
+    color: #fff; /* Texto blanco para máximo contraste */
+    border-color: #e0e0e0; /* Borde gris claro */
+    text-shadow: none; /* Quito la sombra porque ya hay buen contraste */
+}
+
+/* RESPONSIVIDAD PARA DISPOSITIVOS MÓVILES */
+
+/* Tablets grandes */
+@media (max-width: 1024px) {
+    /* Contenedor principal ligeramente más compacto */
+    #mapa-principal {
+        width: 97%; /* Casi todo el ancho */
+        height: 95vh; /* Un poco menos de altura */
+        margin: 100px auto 18px auto; /* Menos margen superior */
+        padding: 18px; /* Menos padding interno */
+        box-shadow: 0 6px 18px rgba(26, 138, 148, 0.15); /* Sombra intermedia */
+    }
+    
+    /* Título ligeramente más pequeño */
+    #mapa-principal h2 {
+        font-size: 2.2rem; /* Reducido pero aún visible */
+        margin-bottom: 18px; /* Menos espacio inferior */
+    }
+    
+    /* Botones ligeramente más pequeños en general */
+    .punto-interes a {
+        font-size: 14.5px; /* Texto ligeramente más pequeño */
+        padding: 9px 13px; /* Menos padding */
+        letter-spacing: 0.25px; /* Menos espaciado */
+    }
+    
+    /* Nodo principal ligeramente ajustado */
+    .nodo-principal a {
+        font-size: 16.5px; /* Sigue siendo un poco más grande */
+        padding: 11px 18px; /* Espaciado proporcionalmente menor */
+        border-width: 2px; /* Mantengo el borde */
+        letter-spacing: 0.4px; /* Menos espaciado pero aún presente */
+    }
+    
+    /* Secundarios ligeramente ajustados */
+    .nodo-secundario a {
+        font-size: 13.5px; /* Más pequeño pero legible */
+        padding: 8.5px 13px; /* Compacto */
+    }
+    
+    /* Terciarios ligeramente ajustados */
+    .nodo-terciario a {
+        font-size: 13.5px; /* Mantengo legibilidad */
+        padding: 7.5px 13px; /* Compacto */
+        font-weight: 600; /* Mantengo el peso fuerte */
+    }
+    
+    /* Líneas ligeramente más finas en tablet grande */
+    .lineas line {
+        stroke-width: 2.2; /* Más finas para no molestar */
+        opacity: 0.55; /* Menos visibles */
+    }
+}
+
+/* Responsive para tablets */
+/* Ajustes para pantallas medianas (tablets) */
+@media (max-width: 768px) {
+    /* Contenedor principal más compacto */
+    #mapa-principal {
+        width: 98%; /* Casi todo el ancho */
+        height: 90vh; /* Un poco menos de altura */
+        margin: 60px auto 15px auto; /* Menos margen superior */
+        padding: 15px; /* Menos padding interno */
+        box-shadow: 0 4px 12px rgba(26, 138, 148, 0.1); /* Sombra más sutil */
+    }
+    
+    /* Título más pequeño */
+    #mapa-principal h2 {
+        font-size: 2rem; /* Reducido pero aún visible */
+        margin-bottom: 15px; /* Menos espacio inferior */
+    }
+    
+    /* Botones más pequeños en general */
+    .punto-interes a {
+        font-size: 14px; /* Texto más pequeño */
+        padding: 8px 12px; /* Menos padding */
+        letter-spacing: 0.2px; /* Menos espaciado */
+    }
+    
+    /* Nodo principal ajustado */
+    .nodo-principal a {
+        font-size: 16px; /* Sigue siendo un poco más grande */
+        padding: 10px 16px; /* Espaciado proporcionalmente menor */
+        border-width: 2px; /* Mantengo el borde */
+        letter-spacing: 0.3px; /* Menos espaciado pero aún presente */
+    }
+    
+    /* Secundarios ajustados */
+    .nodo-secundario a {
+        font-size: 13px; /* Más pequeño pero legible */
+        padding: 8px 12px; /* Compacto */
+    }
+    
+    /* Terciarios ajustados */
+    .nodo-terciario a {
+        font-size: 13px; /* Mantengo legibilidad */
+        padding: 7px 12px; /* Compacto */
+        font-weight: 600; /* Mantengo el peso fuerte */
+    }
+    
+    /* Líneas más finas en tablet */
+    .lineas line {
+        stroke-width: 2; /* Más finas para no molestar */
+        opacity: 0.5; /* Menos visibles */
+    }
+}
+
+/* Responsive para móviles */
+/* Ajustes para pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+    /* Contenedor muy compacto */
+    #mapa-principal {
+        width: 99%; /* Casi toda la pantalla */
+        margin: 40px auto 10px auto; /* Margen mínimo */
+        padding: 10px; /* Padding mínimo */
+    }
+    
+    /* Título compacto */
+    #mapa-principal h2 {
+        font-size: 1.7rem; /* Pequeño pero aún impactante */
+        margin-bottom: 10px; /* Margen mínimo */
+    }
+    
+    /* Botones muy compactos */
+    .punto-interes a {
+        font-size: 13px; /* Pequeño pero legible */
+        padding: 6px 10px; /* Muy compacto */
+        letter-spacing: 0.1px; /* Espaciado mínimo */
+    }
+    
+    /* Principal compacto pero destacado */
+    .nodo-principal a {
+        font-size: 15px; /* Sigue siendo el más grande */
+        padding: 8px 14px; /* Compacto pero con más espacio que otros */
+        border-width: 2px; /* Mantengo diferenciación */
+        letter-spacing: 0.2px; /* Espaciado mínimo */
+    }
+    
+    /* Secundarios muy compactos */
+    .nodo-secundario a {
+        font-size: 12px; /* Pequeño */
+        padding: 6px 10px; /* Muy compacto */
+    }
+    
+    /* Terciarios compactos pero legibles */
+    .nodo-terciario a {
+        font-size: 12px; /* Pequeño pero legible */
+        padding: 6px 10px; /* Compacto */
+        font-weight: 600; /* Mantengo peso para legibilidad */
+        min-width: 85px; /* Ancho mínimo para que no se vean raros */
+    }
+    
+    /* Líneas muy sutiles en móvil */
+    .lineas line {
+        stroke-width: 1.5; /* Muy finas */
+        opacity: 0.4; /* Casi imperceptibles */
+    }
+}
+
+/* Móviles muy pequeños (menos de 360px) */
+@media (max-width: 360px) {
+    /* Contenedor extremadamente compacto */
+    #mapa-principal {
+        width: 100%; /* Toda la pantalla */
+        margin: 30px auto 8px auto; /* Margen extremadamente reducido */
+        padding: 8px; /* Padding extremadamente reducido */
+        border-width: 2px; /* Borde más delgado */
+        border-radius: 12px; /* Bordes menos redondeados */
+    }
+    
+    /* Título extremadamente compacto */
+    #mapa-principal h2 {
+        font-size: 1.5rem; /* Muy pequeño pero aún legible */
+        margin-bottom: 8px; /* Margen extremadamente reducido */
+    }
+    
+    /* Botones extremadamente compactos */
+    .punto-interes a {
+        font-size: 11px; /* Muy pequeño pero legible */
+        padding: 5px 8px; /* Extremadamente compacto */
+        letter-spacing: 0.05px; /* Espaciado extremadamente reducido */
+        border-radius: 18px; /* Bordes menos redondeados */
+    }
+    
+    /* Principal extremadamente compacto pero destacado */
+    .nodo-principal a {
+        font-size: 13px; /* Sigue siendo el más grande */
+        padding: 6px 12px; /* Compacto pero con más espacio que otros */
+        border-width: 2px; /* Mantengo diferenciación */
+        letter-spacing: 0.1px; /* Espaciado extremadamente reducido */
+    }
+    
+    /* Secundarios extremadamente compactos */
+    .nodo-secundario a {
+        font-size: 10px; /* Muy pequeño */
+        padding: 5px 8px; /* Extremadamente compacto */
+    }
+    
+    /* Terciarios extremadamente compactos pero legibles */
+    .nodo-terciario a {
+        font-size: 10px; /* Muy pequeño pero legible */
+        padding: 4px 8px; /* Extremadamente compacto */
+        font-weight: 600; /* Mantengo peso para legibilidad */
+        min-width: 70px; /* Ancho mínimo muy reducido */
+    }
+    
+    /* Líneas extremadamente sutiles en móvil muy pequeño */
+    .lineas line {
+        stroke-width: 1; /* Extremadamente finas */
+        opacity: 0.3; /* Casi invisibles */
+    }
+}
+

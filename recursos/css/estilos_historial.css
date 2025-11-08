@@ -1,0 +1,731 @@
+/* Estilos para el historial de compras */
+
+/* Cuerpo principal de la página con espaciado */
+main {
+    margin-top: 30px; /* Espacio arriba para que no quede pegado al encabezado */
+    padding-top: 80px; /* Espacio para el encabezado fijo que no tape nada */
+    min-height: 100vh; /* Altura mínima de toda la ventana para ocupar toda la pantalla */
+}
+
+/* Título principal centrado con efecto turquesa */
+h1 {
+    text-align: center; /* Centrado porque se ve más profesional */
+    margin-top: 20px; /* Espacio arriba para que respire */
+    margin-bottom: 20px; /* Espacio abajo también para separar */
+    color: #21b7c2; /* Color turquesa consistente del sitio */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra sutil para que destaque */
+    font-weight: 600; /* Un poco más gruesa que la normal */
+}
+
+/* Línea horizontal decorativa con gradiente */
+main hr {
+    width: 80%; /* No muy ancha para que se vea elegante */
+    height: 2px; /* Finita pero visible */
+    border: none; /* Quito el borde feo por defecto */
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(33, 183, 194, 0.3) 20%, 
+        rgba(33, 183, 194, 0.6) 50%, 
+        rgba(33, 183, 194, 0.3) 80%, 
+        transparent 100%); /* Gradiente turquesa que se desvanece en los bordes */
+    margin: 20px auto 20px auto; /* Centrada y con espacios cómodos */
+    border-radius: 2px; /* Bordes ligeramente suaves */
+    opacity: 0.8; /* Un poquito transparente para no destacar demasiado */
+}
+
+/* Contenedor principal que envuelve todas las tarjetas de historial */
+.contenedor-historial {
+    max-width: 900px; /* Ancho máximo para no verse muy ancho en pantallas grandes */
+    margin: 40px auto; /* Centrado con margen generoso arriba y abajo */
+    padding: 0 20px; /* Espaciado lateral para que no toque los bordes */
+    display: flex; /* Estructura flexible para organizar las tarjetas */
+    flex-direction: column; /* Tarjetas apiladas verticalmente */
+    gap: 28px; /* Espacio generoso entre tarjetas */
+}
+
+/* Tarjeta individual de cada transacción del historial */
+.historial-tarjeta {
+    background: linear-gradient(135deg, #222 0%, #1a1a1a 100%); /* Gradiente oscuro para darle profundidad */
+    border: 3px double #21b7c2; /* Borde doble turquesa como las tarjetas de juegos */
+    border-radius: 16px; /* Esquinas bien redondeadas para verse moderno */
+    transition: all 0.4s ease; /* Transición suave para efectos hover */
+    box-shadow: 0 8px 25px rgba(33, 183, 194, 0.18); /* Sombra turquesa sutil */
+    overflow: hidden; /* Evita desbordamientos de contenido */
+    padding: 22px 18px 16px 18px; /* Espaciado interno generoso */
+    color: #fff; /* Texto blanco */
+    position: relative; /* Para efectos con pseudo-elementos */
+    font-family: Arial, sans-serif; /* Fuente consistente */
+}
+
+/* Efecto hover cuando paso el ratón por encima de la tarjeta */
+.historial-tarjeta:hover {
+    transform: translateY(-8px) scale(1.02); /* Se eleva y agranda ligeramente */
+    border-color: #26d1de; /* Color más claro y brillante al hacer hover */
+    box-shadow: 0 15px 40px rgba(33, 183, 194, 0.4),
+                0 0 30px rgba(38, 209, 222, 0.3); /* Sombra más intensa y resplandor */
+    background: linear-gradient(145deg, #2a2a2a, #222); /* Gradiente más marcado */
+}
+
+/* Número de identificación de la transacción */
+.historial-id {
+    font-weight: bold; /* Negrita para que destaque */
+    color: #21b7c2; /* Color turquesa del sitio */
+    font-size: 1.1em; /* Tamaño grande */
+    margin-bottom: 8px; /* Espacio abajo */
+    letter-spacing: 1px; /* Espaciado entre letras para que se vea profesional */
+    border-bottom: 2px solid #21b7c2; /* Línea inferior turquesa */
+    padding-bottom: 8px; /* Espacio entre texto y línea */
+    max-width: 20%; /* No ocupa todo el ancho */
+}
+
+/* Campos de información de la transacción (tipo, estado, fecha, total) */
+.historial-tipo,
+.historial-estado,
+.historial-fecha,
+.historial-total {
+    font-size: 1em; /* Tamaño normal de texto */
+    color: #ccc; /* Gris claro para que no destaque demasiado */
+    margin-bottom: 5px; /* Espacio abajo */
+    background: rgba(33,183,194,0.08); /* Fondo turquesa muy sutil */
+    border-left: 3px solid #21b7c2; /* Línea izquierda turquesa */
+    border-radius: 0 8px 8px 0; /* Redondeado solo en la derecha */
+    padding: 4px 10px; /* Espaciado interno */
+    box-sizing: border-box; /* Incluye padding en el ancho total */
+}
+
+/* Colores diferentes para cada campo según importancia */
+.historial-tipo { border-left-color: #21b7c2; } /* Turquesa estándar */
+.historial-estado { border-left-color: #26d1de; } /* Turquesa más claro */
+.historial-fecha { border-left-color: #1a9bb8; } /* Turquesa más oscuro */
+.historial-total { 
+    border-left-color: #ff6b6b; /* Rojo para llamar la atención */
+    color: #fff; /* Texto blanco para que se lea bien */
+    background: linear-gradient(90deg, #21b7c2 0%, #1a9bb8 100%); /* Gradiente turquesa */
+}
+
+/* Contenedor de acciones al final de la tarjeta */
+.historial-acciones {
+    margin-top: 12px; /* Espacio arriba */
+    display: flex; /* Estructura flexible */
+    justify-content: flex-end; /* Alineado a la derecha */
+}
+
+/* Botón para ver detalles de la transacción */
+.historial-boton-detalles {
+    background: linear-gradient(90deg, #21b7c2 0%, #26d1de 100%); /* Gradiente turquesa */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin borde por defecto */
+    border-radius: 7px; /* Esquinas redondeadas */
+    padding: 7px 18px; /* Espaciado interno */
+    cursor: pointer; /* Cursor de manita para indicar que es clickeable */
+    font-size: 1em; /* Tamaño normal */
+    font-weight: 600; /* Semi-negrita */
+    box-shadow: 0 2px 8px rgba(33,183,194,0.15); /* Sombra sutil */
+    display: flex; /* Estructura flexible */
+    align-items: center; /* Centrado vertical */
+    gap: 8px; /* Espacio entre icono y texto */
+}
+
+/* Efecto hover del botón de detalles */
+.historial-boton-detalles:hover {
+    background: linear-gradient(90deg, #26d1de 0%, #21b7c2 100%); /* Gradiente invertido */
+    box-shadow: 0 4px 16px rgba(33,183,194,0.25); /* Sombra más intensa */
+}
+
+/* Texto dentro del botón de detalles */
+.historial-boton-detalles span {
+    line-height: 1.1; /* Líneas muy juntas para compactar */
+    font-size: 0.85em; /* Texto ligeramente más pequeño */
+    text-align: center; /* Centrado del texto */
+}
+
+/* Estilos para el modal de detalles del historial de compras */
+
+/* Configuración del modal cuando contiene detalles de historial */
+#ventana:has(.contenido-historial-detalles) {
+    width: 800px; /* Ancho óptimo para visualizar bien los detalles */
+    min-width: 600px; /* Mínimo para mantener buena legibilidad */
+    max-width: 95vw; /* Se adapta en pantallas pequeñas */
+    max-height: 80vh; /* Altura máxima del 80% para que no tape toda la pantalla */
+    overflow-y: auto; /* Scroll vertical si hace falta */
+    overflow-x: hidden; /* Nada de scroll horizontal */
+    display: flex; /* Flexbox para organizarlo */
+    flex-direction: column; /* Todo apilado vertical */
+    height: fit-content; /* Altura que se ajusta al contenido */
+}
+
+/* Mensaje dentro del modal sin movimiento */
+#ventana:has(.contenido-historial-detalles) #mensaje {
+    flex: 0 0 auto; /* No crece ni se encoge */
+    margin-bottom: 5px; /* Poco espacio abajo */
+}
+
+/* Barra de scroll personalizada para el modal */
+#ventana::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barrita */
+}
+
+/* Fondo de la barra de scroll */
+#ventana::-webkit-scrollbar-track {
+    background: #333; /* Fondo gris oscuro */
+    border-radius: 4px; /* Esquinas redondeadas */
+}
+
+/* La parte que se mueve de la barra de scroll */
+#ventana::-webkit-scrollbar-thumb {
+    background: #21b7c2; /* Color turquesa del sitio */
+    border-radius: 4px; /* Esquinas redondeadas */
+}
+
+/* Cuando paso el ratón por la barra de scroll */
+#ventana::-webkit-scrollbar-thumb:hover {
+    background: #26d1de; /* Un poco más claro al hacer hover */
+}
+
+/* Contenedor principal del contenido del modal de detalles */
+.contenido-historial-detalles {
+    /* El scroll y el max-height lo gestiona el modal principal (#ventana) */
+    /* No pongo max-height ni overflow-y aquí para integrarse bien */
+    color: #fff; /* Texto blanco */
+}
+
+/* Línea horizontal dentro del modal de detalles */
+.contenido-historial-detalles hr {
+    margin: 10px auto 15px auto; /* Centrada y con espacios cómodos */
+}
+
+/* Título principal del modal de detalles */
+.contenido-historial-detalles h1 {
+    color: #21b7c2; /* Turquesa consistente del sitio */
+    font-size: 4.2em; /* Más grande que el h2 para que destaque */
+    text-align: center; /* Centrado */
+    text-shadow: 0 3px 6px rgba(33, 183, 194, 0.5); /* Sombra más fuerte */
+    font-weight: bold; /* Negrita */
+    text-transform: uppercase; /* Mayúsculas para destacar */
+    letter-spacing: 2px; /* Espaciado entre letras */
+    padding: 20px 0 10px 0; /* Padding arriba y abajo */
+}
+
+/* Bloques de información de la transacción */
+.info-transaccion {
+    background: rgba(33, 183, 194, 0.1) !important; /* Fondo turquesa sutil */
+    border-left: 3px solid #26d1de; /* Borde izquierdo turquesa */
+    padding: 8px 16px; /* Padding generoso */
+    border-radius: 4px; /* Esquinas redondeadas */
+    margin: 20px 0; /* Margen vertical */
+    line-height: 1.3; /* Altura de línea cómoda */
+    text-align: center; /* Centrado */
+    transition: all 0.3s ease; /* Transición suave para efectos */
+}
+
+/* Efecto hover en los bloques de información */
+.info-transaccion:hover {
+    background: rgba(33, 183, 194, 0.2) !important; /* Fondo más intenso al hover */
+    border-left-color: #21b7c2; /* Borde más brillante */
+    color: #fff; /* Texto más claro */
+    transform: translateX(5px); /* Se mueve ligeramente a la derecha */
+    box-shadow: 0 2px 8px rgba(33, 183, 194, 0.3); /* Sombra turquesa */
+}
+
+/* Contenedor de todos los productos del modal */
+#productos-historial {
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Productos apilados verticalmente */
+    margin-top: 15px; /* Espacio arriba */
+}
+
+/* Título de la sección de productos */
+#productos-historial h2 {
+    color: #21b7c2; /* Turquesa del sitio */
+    font-size: 1.4em; /* Más pequeño que h1 */
+    margin: 15px 0 10px 0; /* Margen vertical */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+    font-weight: normal; /* Sin negrita */
+}
+
+/* Tarjeta de cada producto individual en el modal */
+.producto-historial {
+    background: linear-gradient(135deg, rgba(51, 51, 51, 0.8), rgba(42, 42, 42, 0.6)); /* Gradiente gris para darle profundidad */
+    border: 2px solid #333; /* Borde gris oscuro */
+    border-radius: 12px; /* Esquinas redondeadas */
+    padding: 15px; /* Espacio interno */
+    margin-bottom: 15px; /* Espacio abajo */
+    transition: all 0.3s ease; /* Transición suave */
+    position: relative; /* Para efectos hover */
+    overflow: hidden; /* Evita que se desborde */
+    display: flex; /* Flexbox para imagen y datos */
+    gap: 15px; /* Espacio entre imagen y texto */
+    align-items: flex-start; /* Alineado arriba */
+    width: 100%; /* Ancho completo */
+    box-sizing: border-box; /* Incluye padding y borders */
+    max-width: 100%; /* No se desborda */
+    margin-top: 10px; /* Espacio arriba */
+}
+
+/* Efecto hover en las tarjetas de productos */
+.producto-historial:hover {
+    border-color: #21b7c2; /* Borde turquesa al hover */
+    background: linear-gradient(135deg, rgba(51, 51, 51, 0.9), rgba(42, 42, 42, 0.8)); /* Gradiente más marcado */
+    box-shadow: 0 6px 20px rgba(33, 183, 194, 0.2); /* Sombra turquesa */
+    transform: translateY(-2px); /* Se eleva ligeramente */
+}
+
+/* Contenedor de la imagen del producto */
+.producto-historial .producto-imagen {
+    flex-shrink: 0; /* No se reduce nunca */
+    width: 200px; /* Ancho fijo para consistencia */
+}
+
+/* Imagen del producto */
+.producto-historial .producto-imagen img {
+    width: 100%; /* Ancho completo del contenedor */
+    height: 100%; /* Altura completa del contenedor */
+    object-fit: cover; /* Recorta la imagen para ajustar */
+    border-radius: 8px; /* Esquinas redondeadas */
+    border: 2px solid #333; /* Borde gris oscuro */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover en la imagen del producto */
+.producto-historial .producto-imagen img:hover {
+    border-color: #21b7c2; /* Borde turquesa al hover */
+    box-shadow: 0 4px 15px rgba(33, 183, 194, 0.3); /* Sombra turquesa */
+    transform: scale(1.05); /* Se agranda ligeramente */
+}
+
+/* Contenedor de la información del producto */
+.producto-historial .producto-info {
+    flex: 1; /* Ocupa el espacio restante */
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados */
+    gap: 6px; /* Espacio entre elementos */
+}
+
+/* Título del producto */
+.producto-historial .producto-info h3 {
+    color: #21b7c2; /* Color turquesa */
+    margin: 0 0 8px 0; /* Solo margen inferior */
+    font-size: 1.1em; /* Tamaño destacado */
+}
+
+/* Párrafos de información del producto */
+.producto-historial .producto-info p {
+    margin: 3px 0; /* Margen vertical pequeño */
+    color: #ccc; /* Gris claro */
+    font-size: 0.95em; /* Tamaño equilibrado */
+}
+
+/* Texto en negrita dentro de los párrafos */
+.producto-historial .producto-info p strong {
+    color: #fff; /* Blanco para que destaque */
+}
+
+/* Texto en cursiva dentro de los párrafos (motivos de devolución) */
+.producto-historial .producto-info p em {
+    color: #ff6b6b; /* Rojo para llamar la atención */
+    font-style: italic; /* Cursiva */
+}
+
+/* Resumen del producto */
+.producto-historial .producto-resumen {
+    font-style: italic; /* Cursiva para diferenciarlo */
+    color: #bbb; /* Gris más claro */
+    margin: 8px 0 10px 0; /* Márgenes verticales */
+    padding: 8px 10px; /* Espaciado interno */
+    background: linear-gradient(135deg, rgba(33, 183, 194, 0.08), rgba(33, 183, 194, 0.03)); /* Fondo turquesa muy sutil */
+    border-left: 3px solid #21b7c2; /* Línea izquierda turquesa */
+    border-radius: 0 8px 8px 0; /* Redondeado solo en la derecha */
+    font-size: 0.9em; /* Tamaño más pequeño */
+}
+
+/* Botón para ver la ficha completa del juego */
+.boton-ver-ficha {
+    background: linear-gradient(90deg, #21b7c2 0%, #26d1de 100%); /* Gradiente turquesa */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 6px; /* Esquinas redondeadas */
+    padding: 8px 14px; /* Espaciado interno */
+    cursor: pointer; /* Cursor de manita */
+    font-size: 0.95em; /* Tamaño equilibrado */
+    font-weight: 600; /* Semi-negrita */
+    transition: background 0.2s, box-shadow 0.2s; /* Transición suave */
+    margin-top: auto; /* Se empuja hacia abajo automáticamente */
+    align-self: flex-start; /* Alineado al inicio */
+}
+
+/* Efecto hover del botón ver ficha */
+.boton-ver-ficha:hover {
+    background: linear-gradient(90deg, #26d1de 0%, #21b7c2 100%); /* Gradiente invertido */
+    box-shadow: 0 4px 12px rgba(33,183,194,0.3); /* Sombra turquesa */
+}
+
+/* Estilos para cuando no hay historial de compras */
+
+/* Contenedor del mensaje de historial vacío */
+.sin-historial {
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados */
+    align-items: center; /* Centrado horizontal */
+    justify-content: center; /* Centrado vertical */
+    padding: 60px 20px; /* Espaciado interno generoso */
+    text-align: center; /* Texto centrado */
+    background: linear-gradient(135deg, rgba(33, 183, 194, 0.1), rgba(33, 183, 194, 0.05)); /* Fondo turquesa muy sutil */
+    border: 2px dashed #21b7c2; /* Borde punteado turquesa */
+    border-radius: 20px; /* Esquinas muy redondeadas */
+    margin: 40px auto; /* Centrado con margen */
+    max-width: 600px; /* Ancho máximo */
+    min-height: 200px; /* Altura mínima */
+    position: relative; /* Para efectos adicionales */
+    overflow: hidden; /* Evita desbordamientos */
+}
+
+/* Título del mensaje de historial vacío */
+.sin-historial h2 {
+    color: #21b7c2; /* Color turquesa */
+    font-size: 1.5em; /* Tamaño destacado */
+    font-weight: 600; /* Semi-negrita */
+    margin: 0; /* Sin márgenes */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra en el texto */
+    line-height: 1.4; /* Altura de línea cómoda */
+}
+
+/* Efecto hover para sin-historial */
+.sin-historial:hover {
+    background: linear-gradient(135deg, rgba(33, 183, 194, 0.15), rgba(33, 183, 194, 0.08)); /* Fondo más marcado */
+    border-color: #26d1de; /* Borde más brillante */
+    transform: scale(1.02); /* Se agranda ligeramente */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+
+/* Responsividad para dispositivos móviles y tablets */
+
+/* Tablets grandes (1024px) - Valores intermedios para pantallas medianas */
+@media (max-width: 1024px) {
+    
+    /* Contenedor de historial ligeramente reducido */
+    .contenedor-historial {
+        max-width: 850px; /* Ancho ligeramente reducido para tablets grandes */
+        padding: 0 15px; /* Padding intermedio */
+        gap: 25px; /* Espacio intermedio entre tarjetas */
+    }
+    
+    /* Tarjetas con espaciado ajustado */
+    .historial-tarjeta {
+        padding: 20px 15px 14px 15px; /* Espaciado intermedio */
+        border-radius: 14px; /* Bordes ligeramente menos redondeados */
+    }
+    
+    /* ID de transacción un poco más pequeño */
+    .historial-id { 
+        font-size: 1.05em; /* Tamaño ligeramente más pequeño */
+    }
+    
+    /* Campos de información reducidos */
+    .historial-tipo,
+    .historial-estado,
+    .historial-fecha,
+    .historial-total {
+        font-size: 0.97em; /* Tamaño ligeramente más pequeño */
+        padding: 3.5px 8px; /* Padding intermedio */
+        border-radius: 0 7px 7px 0; /* Bordes ligeramente menos redondeados */
+    }
+    
+    /* Botón de detalles ajustado */
+    .historial-boton-detalles {
+        font-size: 0.97em; /* Tamaño ligeramente más pequeño */
+        padding: 6.5px 15px; /* Padding intermedio */
+    }
+    
+    /* Modal de detalles en tablets grandes */
+    #ventana:has(.contenido-historial-detalles) {
+        width: 750px; /* Ancho ligeramente reducido */
+        min-width: 550px; /* Mínimo ligeramente reducido */
+    }
+    
+    /* Título del modal más pequeño */
+    .contenido-historial-detalles h1 {
+        font-size: 3.8em; /* Título ligeramente más pequeño */
+    }
+    
+    /* Imagen de producto ajustada */
+    .producto-historial .producto-imagen {
+        width: 180px; /* Imagen ligeramente más pequeña */
+    }
+    
+    /* Mensaje de sin historial ajustado */
+    .sin-historial {
+        padding: 55px 18px; /* Padding intermedio */
+        margin: 35px auto; /* Margen intermedio */
+        max-width: 550px; /* Ancho intermedio */
+        min-height: 190px; /* Altura intermedia */
+    }
+    
+    /* Título de sin historial reducido */
+    .sin-historial h2 {
+        font-size: 1.45em; /* Título intermedio */
+    }
+}
+
+
+/* Tablets (768px) - Diseño más compacto para pantallas medianas */
+@media (max-width: 768px) {
+    
+    /* Contenedor casi todo el ancho en tablets */
+    .contenedor-historial {
+        max-width: 98vw; /* Casi todo el ancho de pantalla */
+        padding: 0 8px; /* Padding más pequeño */
+        gap: 18px; /* Espacio reducido entre tarjetas */
+    }
+    
+    /* Tarjetas más compactas */
+    .historial-tarjeta {
+        padding: 15px 8px 12px 8px; /* Espaciado más compacto */
+        border-radius: 12px; /* Bordes menos redondeados */
+    }
+    
+    /* ID de transacción tamaño normal */
+    .historial-id { 
+        font-size: 1em; /* Tamaño normal */
+    }
+    
+    /* Campos de información compactos */
+    .historial-tipo,
+    .historial-estado,
+    .historial-fecha,
+    .historial-total {
+        font-size: 0.95em; /* Tamaño más pequeño */
+        padding: 3px 7px; /* Padding reducido */
+        border-radius: 0 6px 6px 0; /* Bordes menos redondeados */
+    }
+    
+    /* Botón de detalles compacto */
+    .historial-boton-detalles {
+        font-size: 0.95em; /* Tamaño más pequeño */
+        padding: 6px 12px; /* Padding reducido */
+    }
+
+    /* Modal de detalles casi todo el ancho */
+    #ventana:has(.contenido-historial-detalles) {
+        width: 95vw; /* Casi todo el ancho de pantalla */
+        min-width: 300px; /* Mínimo reducido */
+    }
+    
+    /* Contenido del modal adaptado */
+    .contenido-historial-detalles {
+        max-width: 95vw; /* Casi todo el ancho */
+    }
+    
+    /* Título del modal más pequeño */
+    .contenido-historial-detalles h1 {
+        font-size: 2.5em; /* Título más pequeño para tablets */
+    }
+    
+    /* Productos en columna en tablets */
+    .producto-historial {
+        flex-direction: column; /* Imagen arriba, info abajo */
+        gap: 10px; /* Menos espacio entre elementos */
+    }
+    
+    /* Imagen de producto todo el ancho */
+    .producto-historial .producto-imagen {
+        width: 100%; /* Imagen ocupa todo el ancho */
+        height: 150px; /* Altura fija para que se vea bien */
+    }
+    
+    /* Bloques de información compactos */
+    .info-transaccion {
+        padding: 8px 10px; /* Padding reducido */
+    }
+    
+    /* Texto de información más pequeño */
+    .info-transaccion p {
+        font-size: 0.95em; /* Texto más pequeño */
+    }
+    
+    /* Mensaje de sin historial compacto */
+    .sin-historial {
+        padding: 40px 15px; /* Padding reducido */
+        margin: 25px auto; /* Margen reducido */
+        max-width: 400px; /* Ancho reducido */
+        min-height: 160px; /* Altura reducida */
+        border-radius: 15px; /* Bordes menos redondeados */
+    }
+    
+    /* Título de sin historial reducido */
+    .sin-historial h2 {
+        font-size: 1.3em; /* Título más pequeño */
+    }
+}
+
+
+/* Móviles pequeños (480px) - Muy compacto para teléfonos */
+@media (max-width: 480px) {
+    
+    /* Contenedor con espacio muy reducido */
+    .contenedor-historial {
+        gap: 12px; /* Espacio muy reducido entre tarjetas */
+    }
+    
+    /* Tarjetas muy compactas */
+    .historial-tarjeta {
+        padding: 10px 4px 8px 4px; /* Espaciado muy compacto */
+        border-radius: 8px; /* Bordes poco redondeados */
+    }
+    
+    /* ID de transacción pequeño */
+    .historial-id { 
+        font-size: 0.95em; /* Tamaño pequeño */
+    }
+    
+    /* Campos de información muy pequeños */
+    .historial-tipo,
+    .historial-estado,
+    .historial-fecha,
+    .historial-total {
+        font-size: 0.9em; /* Tamaño pequeño */
+        padding: 2px 5px; /* Padding muy reducido */
+        border-radius: 0 4px 4px 0; /* Bordes muy poco redondeados */
+    }
+    
+    /* Botón de detalles muy pequeño */
+    .historial-boton-detalles {
+        font-size: 0.9em; /* Tamaño pequeño */
+        padding: 5px 8px; /* Padding muy reducido */
+    }
+
+    /* Título del modal muy pequeño */
+    .contenido-historial-detalles h1 {
+        font-size: 1.2em; /* Título muy pequeño */
+    }
+    
+    /* Productos muy compactos */
+    .producto-historial {
+        padding: 8px; /* Padding muy reducido */
+    }
+    
+    /* Imagen de producto pequeña */
+    .producto-historial .producto-imagen {
+        height: 130px; /* Imagen más pequeña */
+    }
+    
+    /* Título de producto tamaño normal */
+    .producto-historial .producto-info h3 {
+        font-size: 1em; /* Título normal */
+    }
+    
+    /* Texto de información pequeño */
+    .producto-historial .producto-info p {
+        font-size: 0.9em; /* Texto más pequeño */
+    }
+    
+    /* Botón ocupa todo el ancho en móviles pequeños */
+    .boton-ver-ficha {
+        width: 100%; /* Ancho completo para facilitar el clic */
+        padding: 10px; /* Padding generoso para tocar fácil */
+    }
+    
+    /* Mensaje de sin historial muy compacto */
+    .sin-historial {
+        padding: 30px 12px; /* Padding mínimo */
+        margin: 20px 10px; /* Margen mínimo */
+        max-width: 100%; /* Ancho completo disponible */
+        min-height: 140px; /* Altura mínima */
+        border-radius: 12px; /* Bordes menos redondeados */
+    }
+    
+    /* Título de sin historial compacto */
+    .sin-historial h2 {
+        font-size: 1.2em; /* Título compacto */
+        line-height: 1.3; /* Altura de línea compacta */
+    }
+}
+
+
+/* Móviles muy pequeños (360px) - Valores mínimos para pantallas pequeñas */
+@media (max-width: 360px) {
+    
+    /* Contenedor con espaciado extremadamente reducido */
+    .contenedor-historial {
+        gap: 10px; /* Espacio extremadamente reducido */
+        padding: 0 3px; /* Padding extremadamente reducido */
+    }
+    
+    /* Tarjetas extremadamente compactas */
+    .historial-tarjeta {
+        padding: 8px 3px 6px 3px; /* Espaciado extremadamente compacto */
+        border-radius: 6px; /* Bordes muy poco redondeados */
+    }
+    
+    /* ID de transacción muy pequeño */
+    .historial-id { 
+        font-size: 0.9em; /* Tamaño muy pequeño */
+    }
+    
+    /* Campos de información extremadamente pequeños */
+    .historial-tipo,
+    .historial-estado,
+    .historial-fecha,
+    .historial-total {
+        font-size: 0.85em; /* Tamaño muy pequeño */
+        padding: 1px 4px; /* Padding extremadamente reducido */
+        border-radius: 0 3px 3px 0; /* Bordes muy poco redondeados */
+    }
+    
+    /* Botón de detalles extremadamente pequeño */
+    .historial-boton-detalles {
+        font-size: 0.85em; /* Tamaño muy pequeño */
+        padding: 4px 6px; /* Padding extremadamente reducido */
+    }
+
+    /* Modal de detalles con ancho mínimo muy reducido */
+    #ventana:has(.contenido-historial-detalles) {
+        min-width: 280px; /* Mínimo muy reducido para móviles pequeños */
+    }
+    
+    /* Título del modal extremadamente pequeño */
+    .contenido-historial-detalles h1 {
+        font-size: 1.1em; /* Título extremadamente pequeño */
+    }
+    
+    /* Productos extremadamente compactos */
+    .producto-historial {
+        padding: 6px; /* Padding extremadamente reducido */
+    }
+    
+    /* Imagen de producto muy pequeña */
+    .producto-historial .producto-imagen {
+        height: 120px; /* Imagen muy pequeña */
+    }
+    
+    /* Título de producto más pequeño */
+    .producto-historial .producto-info h3 {
+        font-size: 0.95em; /* Título más pequeño */
+    }
+    
+    /* Texto de información muy pequeño */
+    .producto-historial .producto-info p {
+        font-size: 0.85em; /* Texto muy pequeño pero legible */
+    }
+    
+    /* Botón ocupa todo el ancho */
+    .boton-ver-ficha {
+        width: 100%; /* Ancho completo para facilitar el toque */
+        padding: 8px; /* Padding reducido pero cómodo */
+        font-size: 0.9em; /* Tamaño muy pequeño */
+    }
+    
+    /* Mensaje de sin historial extremadamente compacto */
+    .sin-historial {
+        padding: 25px 8px; /* Padding extremadamente reducido */
+        margin: 15px 5px; /* Margen extremadamente reducido */
+        min-height: 120px; /* Altura extremadamente reducida */
+        border-radius: 10px; /* Bordes muy poco redondeados */
+    }
+    
+    /* Título de sin historial extremadamente compacto */
+    .sin-historial h2 {
+        font-size: 1.1em; /* Título extremadamente compacto */
+        line-height: 1.2; /* Altura de línea muy compacta */
+    }
+}

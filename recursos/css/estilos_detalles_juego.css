@@ -1,0 +1,627 @@
+/* Estilos para la página de detalles del juego */
+
+/* Espaciado para el encabezado fijo */
+body {
+    padding-top: 120px; /* Dejo espacio arriba para que no se tape con el encabezado fijo */
+    margin: 0; /* Sin márgenes por defecto */
+}
+
+/* Contenedor principal de los detalles */
+main {
+    max-width: 900px; /* Ancho máximo para que no se vea muy ancho en pantallas grandes */
+    margin: auto; /* Centro el contenedor horizontalmente */
+    padding: 30px; /* Espaciado interno cómodo */
+    background: #222; /* Fondo gris oscuro que combina con el tema */
+    border-radius: 12px; /* Esquinas redondeadas para look moderno */
+    color: #fff; /* Texto blanco para buen contraste */
+    border: 4px double #21b7c2; /* Borde doble turquesa como el carrusel */
+    box-shadow: 0 8px 25px rgba(33, 183, 194, 0.2); /* Sombra turquesa */
+    transition: all 0.4s ease; /* Transición suave para todos los efectos hover */
+}
+
+/* Efecto cuando paso el ratón por el contenedor principal */
+main:hover {
+    transform: translateY(-8px) scale(1.02); /* Se eleva y agranda ligeramente */
+    border-color: #26d1de; /* Color más claro al hacer hover */
+    box-shadow: 0 15px 40px rgba(33, 183, 194, 0.4),
+                0 0 30px rgba(38, 209, 222, 0.3); /* Sombra más intensa y resplandor */
+    background: linear-gradient(145deg, #2a2a2a, #222); /* Gradiente sutil en el fondo */
+}
+
+/* Título del juego */
+h1 {
+    font-size: 2.2em; /* Tamaño grande para que destaque */
+    color: #21b7c2; /* Color turquesa del tema */
+    margin: 0 0 40px 0; /* Solo margen inferior */
+    font-weight: 600; /* Peso semi-negrita */
+}
+
+/* Mensaje de juego descatalogado */
+.juego-descatalogado {
+    font-size: 0.9em; /* Texto ligeramente más pequeño que normal */
+    font-weight: 700; /* Negrita */
+    color: #ff6b6b; /* Color rojo para advertencia */
+    background: rgba(184, 24, 0, 0.15); /* Fondo rojo semi-transparente */
+    border: 2px solid #ff6b6b; /* Borde rojo sólido */
+    padding: 10px 16px; /* Espaciado interno */
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin: 0 0 30px 0; /* Solo margen inferior */
+    text-align: center; /* Texto centrado */
+    box-shadow: 0 2px 6px rgba(255, 107, 107, 0.3); /* Sombra roja suave */
+}
+
+/* Efecto hover en mensaje de descatalogado */
+.juego-descatalogado:hover {
+    background: rgba(184, 24, 0, 0.25); /* Fondo más intenso */
+    border-color: #ff8a8a; /* Borde más claro */
+    box-shadow: 0 3px 8px rgba(255, 107, 107, 0.4); /* Sombra más intensa */
+}
+
+/* Layout principal con dos columnas */
+.detalles-contenido {
+    display: grid; /* Uso grid para layout flexible */
+    grid-template-columns: 1fr 2fr; /* Primera columna más pequeña que la segunda */
+    gap: 40px; /* Espacio entre columnas */
+    margin-bottom: 40px; /* Espacio inferior */
+}
+
+/* Imagen del juego */
+#imagen-juego {
+    width: 100%; /* Ocupa todo el ancho de su contenedor */
+    max-width: 300px; /* Pero no más de 300px */
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra para profundidad */
+}
+
+/* Precio destacado del juego */
+.precio-destacado {
+    background: #21b7c2; /* Fondo turquesa para que destaque */
+    color: #fff; /* Texto blanco */
+    padding: 12px 20px; /* Espaciado interno */
+    border-radius: 6px; /* Esquinas redondeadas */
+    font-size: 1.2em; /* Un poco más grande que el texto normal */
+    font-weight: 600; /* Semi-negrita */
+    text-align: center; /* Centrado */
+    margin-top: 20px; /* Espacio superior */
+}
+
+/* Contenedor de información general */
+.info-general {
+    display: flex; /* Layout flexible */
+    flex-direction: column; /* Elementos uno debajo del otro */
+    gap: 12px; /* Espacio entre elementos */
+}
+
+/* Párrafos de información general */
+.info-general p {
+    background: #333; /* Fondo gris oscuro */
+    padding: 15px; /* Espaciado interno */
+    border-radius: 6px; /* Esquinas redondeadas */
+    margin: 0; /* Sin márgenes */
+    line-height: 1.5; /* Altura de línea cómoda para leer */
+}
+
+/* Etiquetas destacadas en la información */
+.info-general p strong {
+    color: #21b7c2; /* Color turquesa para destacar las etiquetas */
+    margin-right: 8px; /* Espacio a la derecha */
+}
+
+/* Secciones de descripción y requisitos */
+.descripcion-completa,
+.requisitos-sistema {
+    background: #333; /* Fondo gris oscuro */
+    padding: 25px; /* Espaciado interno generoso */
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin-bottom: 25px; /* Espacio inferior */
+}
+
+/* Títulos de las secciones */
+.descripcion-completa h2,
+.requisitos-sistema h2 {
+    color: #21b7c2; /* Color turquesa para los títulos */
+    margin: 0 0 15px 0; /* Solo margen inferior */
+    font-size: 1.4em; /* Tamaño medio para subtítulos */
+    font-weight: 600; /* Semi-negrita */
+}
+
+/* Párrafos de descripción y requisitos */
+.descripcion-completa p,
+.requisitos-sistema p {
+    color: #ddd; /* Gris claro para el texto */
+    line-height: 1.6; /* Altura de línea cómoda */
+    margin: 0; /* Sin márgenes */
+}
+
+/* Sección de opciones y botones */
+.opciones {
+    background: #333; /* Fondo gris oscuro igual que otras secciones */
+    padding: 25px; /* Espaciado interno generoso */
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin-bottom: 25px; /* Espacio inferior */
+    display: flex; /* Estructura flexible para organizar botones */
+    flex-wrap: wrap; /* Permite que los botones se envuelvan */
+    gap: 15px; /* Espacio entre botones */
+    align-items: center; /* Alinea contenido al centro verticalmente */
+    justify-content: center; /* Centra los botones horizontalmente */
+}
+
+/* Título de la sección de opciones */
+.opciones h2 {
+    color: #21b7c2; /* Color turquesa para el título */
+    margin: 0 0 15px 0; /* Solo margen inferior */
+    font-size: 1.4em; /* Tamaño medio para subtítulos */
+    font-weight: 600; /* Semi-negrita */
+    width: 100%; /* El título ocupa toda la línea */
+}
+
+/* Estilos para todos los botones de opciones */
+.boton-volver,
+.boton-favorito,
+.detalles-boton-carrito,
+.boton-comprar,
+.boton-descambiar,
+.boton-jugar,
+.boton-editar-juego,
+.boton-reactivar,
+.boton-eliminar {
+    display: flex; /* Disposición flexible */
+    align-items: center; /* Alinea contenido al centro verticalmente */
+    gap: 6px; /* Espacio entre icono y texto */
+    background: #21b7c2; /* Fondo turquesa */
+    padding: 8px 14px; /* Espacio interno */
+    border-radius: 6px; /* Esquinas redondeadas */
+    color: #fff; /* Texto en blanco */
+    font-weight: bold; /* Texto en negrita */
+    height: 50px; /* Altura fija para uniformidad */
+    transition: all 0.3s ease; /* Transición suave para todos los efectos hover */
+    text-decoration: none; /* Sin subrayado en los enlaces */
+    max-width: fit-content; /* Ancho máximo ajustado al contenido */
+}
+
+/* Iconos dentro de los botones de opciones */
+#icono-volver,
+#detalles-icono-favoritos,
+#detalles-icono-carrito,
+#icono-comprar,
+#icono-descambiar,
+#icono-jugar,
+#icono-editar,
+#icono-eliminar {
+    width: 30px; /* Ancho estándar de iconos */
+    height: 30px; /* Alto estándar de iconos */
+    flex-shrink: 0; /* No se reducen los iconos */
+}
+
+/* Efectos hover para todos los botones de opciones */
+.boton-volver:hover,
+.boton-favorito:hover,
+.detalles-boton-carrito:hover,
+.boton-comprar:hover,
+.boton-descambiar:hover,
+.boton-jugar:hover,
+.boton-editar-juego:hover,
+.boton-reactivar:hover,
+.boton-eliminar:hover {
+    background: #1a9bb8; /* Color más oscuro al hover */
+    transform: translateY(-2px); /* Se eleva ligeramente */
+    box-shadow: 0 4px 12px rgba(33, 183, 194, 0.4); /* Sombra turquesa */
+}
+
+/* RESPONSIVIDAD - Adaptación a diferentes tamaños de pantalla */
+
+/* Tablets grandes (1024px o menos) */
+@media (max-width: 1024px) {
+    /* Contenedor principal más estrecho */
+    main {
+        max-width: 800px; /* Ancho reducido en tablets grandes */
+        margin: 30px auto; /* Margen ajustado */
+        padding: 28px; /* Padding ligeramente reducido */
+    }
+    
+    /* Título más pequeño */
+    h1 {
+        font-size: 2em; /* Título un poco más pequeño */
+        margin-bottom: 35px; /* Menos margen inferior */
+    }
+    
+    /* Layout con menos espacio */
+    .detalles-contenido {
+        gap: 35px; /* Menos espacio entre columnas */
+        margin-bottom: 35px; /* Menos margen inferior */
+    }
+    
+    /* Imagen más pequeña */
+    #imagen-juego {
+        max-width: 280px; /* Imagen un poco más pequeña */
+    }
+    
+    /* Precio más compacto */
+    .precio-destacado {
+        font-size: 1.15em; /* Precio ligeramente más pequeño */
+        padding: 11px 18px; /* Padding reducido */
+    }
+    
+    /* Info general más compacta */
+    .info-general p {
+        padding: 14px; /* Padding ligeramente reducido */
+    }
+    
+    /* Secciones más compactas */
+    .descripcion-completa,
+    .requisitos-sistema {
+        padding: 22px; /* Padding reducido */
+        margin-bottom: 22px; /* Margen reducido */
+    }
+    
+    /* Sección de opciones más compacta */
+    .opciones {
+        padding: 22px; /* Padding reducido igual que otras secciones */
+        gap: 12px; /* Menos espacio entre botones */
+    }
+    
+    /* Botones más pequeños */
+    .boton-volver,
+    .boton-favorito,
+    .detalles-boton-carrito,
+    .boton-comprar,
+    .boton-descambiar,
+    .boton-jugar,
+    .boton-editar-juego,
+    .boton-reactivar,
+    .boton-eliminar {
+        padding: 7px 12px; /* Padding reducido */
+        font-size: 0.95em; /* Texto ligeramente más pequeño */
+        height: 36px; /* Altura reducida */
+    }
+    
+    /* Iconos más pequeños */
+    #icono-volver,
+    #detalles-icono-favoritos,
+    #detalles-icono-carrito,
+    #icono-comprar,
+    #icono-descambiar,
+    #icono-jugar,
+    #icono-editar,
+    #icono-eliminar {
+        width: 18px; /* Iconos más pequeños */
+        height: 18px; /* Mantengo proporción */
+    }
+    
+    /* Icono de comprar un poco más grande que los demás */
+    #icono-comprar {
+        width: 24px; /* Icono de comprar proporcionalmente más pequeño */
+        height: 24px; /* Mantengo proporción */
+    }
+}
+
+
+/* Tablets (768px o menos) */
+@media (max-width: 768px) {
+    /* Contenedor con menos margen */
+    main {
+        margin: 20px; /* Menos margen en tablets */
+        padding: 25px; /* Menos padding interno */
+    }
+    
+    /* Layout a una sola columna */
+    .detalles-contenido {
+        grid-template-columns: 1fr; /* Una sola columna en tablets */
+        gap: 30px; /* Menos espacio entre elementos */
+    }
+    
+    /* Título centrado y más pequeño */
+    h1 {
+        font-size: 1.8em; /* Título más pequeño */
+        text-align: center; /* Centrado en tablets */
+        margin-bottom: 30px; /* Margen ajustado */
+    }
+    
+    /* Imagen centrada */
+    #imagen-juego {
+        max-width: 250px; /* Imagen más pequeña */
+        margin: 0 auto; /* Centrada horizontalmente */
+        display: block; /* Para que funcione el margin auto */
+    }
+    
+    /* Precio más compacto */
+    .precio-destacado {
+        font-size: 1.1em; /* Precio más pequeño */
+        padding: 10px 16px; /* Padding reducido */
+        margin-top: 18px; /* Margen superior reducido */
+    }
+    
+    /* Info general más compacta */
+    .info-general {
+        gap: 10px; /* Menos espacio entre elementos */
+    }
+    
+    .info-general p {
+        padding: 13px; /* Padding reducido */
+        font-size: 0.95em; /* Texto ligeramente más pequeño */
+    }
+    
+    /* Secciones más compactas */
+    .descripcion-completa,
+    .requisitos-sistema {
+        padding: 20px; /* Padding reducido */
+        margin-bottom: 20px; /* Margen reducido */
+    }
+    
+    /* Títulos más pequeños */
+    .descripcion-completa h2,
+    .requisitos-sistema h2 {
+        font-size: 1.3em; /* Títulos más pequeños */
+        margin-bottom: 12px; /* Margen reducido */
+    }
+    
+    /* Sección de opciones más compacta */
+    .opciones {
+        padding: 20px; /* Padding reducido */
+        gap: 10px; /* Menos espacio entre botones */
+    }
+    
+    /* Botones más pequeños */
+    .boton-volver,
+    .boton-favorito,
+    .detalles-boton-carrito,
+    .boton-comprar,
+    .boton-descambiar,
+    .boton-jugar,
+    .boton-editar-juego,
+    .boton-reactivar,
+    .boton-eliminar {
+        padding: 6px 10px; /* Padding más reducido */
+        font-size: 0.9em; /* Texto más pequeño */
+        height: 32px; /* Altura reducida */
+        min-width: 100px; /* Ancho mínimo para que no se vean muy pequeños */
+    }
+    
+    /* Iconos más pequeños */
+    #icono-volver,
+    #detalles-icono-favoritos,
+    #detalles-icono-carrito,
+    #icono-comprar,
+    #icono-descambiar,
+    #icono-jugar,
+    #icono-editar,
+    #icono-eliminar {
+        width: 16px; /* Iconos más pequeños */
+        height: 16px; /* Mantengo proporción */
+    }
+    
+    /* Icono de comprar un poco más grande */
+    #icono-comprar {
+        width: 21px; /* Icono de comprar proporcionalmente más pequeño */
+        height: 21px; /* Mantengo proporción */
+    }
+}
+
+/* Móviles pequeños (480px o menos) */
+@media (max-width: 480px) {
+    /* Contenedor muy compacto */
+    main {
+        margin: 15px; /* Margen mínimo en móviles */
+        padding: 20px; /* Padding reducido */
+    }
+    
+    /* Título aún más pequeño */
+    h1 {
+        font-size: 1.6em; /* Título aún más pequeño */
+        margin-bottom: 25px; /* Margen reducido */
+    }
+    
+    /* Layout muy compacto */
+    .detalles-contenido {
+        gap: 25px; /* Espacio muy reducido */
+        margin-bottom: 25px; /* Margen reducido */
+    }
+    
+    /* Imagen pequeña */
+    #imagen-juego {
+        max-width: 200px; /* Imagen muy pequeña */
+    }
+    
+    /* Precio compacto */
+    .precio-destacado {
+        font-size: 1em; /* Precio compacto */
+        padding: 8px 14px; /* Padding muy reducido */
+        margin-top: 15px; /* Margen superior reducido */
+    }
+    
+    /* Info general muy compacta */
+    .info-general {
+        gap: 8px; /* Espacio mínimo entre elementos */
+    }
+    
+    .info-general p {
+        padding: 12px; /* Menos padding en párrafos */
+        font-size: 0.95em; /* Texto ligeramente más pequeño */
+    }
+    
+    .info-general p strong {
+        margin-right: 6px; /* Menos espacio después de etiquetas */
+    }
+    
+    /* Secciones muy compactas */
+    .descripcion-completa,
+    .requisitos-sistema {
+        padding: 18px; /* Padding muy reducido */
+        margin-bottom: 18px; /* Margen muy reducido */
+    }
+    
+    /* Títulos muy pequeños */
+    .descripcion-completa h2,
+    .requisitos-sistema h2 {
+        font-size: 1.2em; /* Títulos muy pequeños */
+        margin-bottom: 10px; /* Margen mínimo */
+    }
+    
+    /* Texto más pequeño */
+    .descripcion-completa p,
+    .requisitos-sistema p {
+        font-size: 0.9em; /* Texto más pequeño */
+        line-height: 1.5; /* Altura de línea ajustada */
+    }
+    
+    /* Sección de opciones muy compacta */
+    .opciones {
+        padding: 18px; /* Padding muy reducido */
+        gap: 8px; /* Espacio mínimo entre botones */
+        flex-direction: column; /* Botones apilados verticalmente */
+    }
+    
+    /* Botones a ancho completo */
+    .boton-volver,
+    .boton-favorito,
+    .detalles-boton-carrito,
+    .boton-comprar,
+    .boton-descambiar,
+    .boton-jugar,
+    .boton-editar-juego,
+    .boton-reactivar,
+    .boton-eliminar {
+        padding: 10px 14px; /* Padding compacto */
+        font-size: 0.85em; /* Texto pequeño */
+        width: 100%; /* Ancho completo en móviles */
+        height: 38px; /* Altura reducida pero usable */
+        justify-content: center; /* Centra el contenido */
+    }
+    
+    /* Botón de comprar primero en móviles */
+    .boton-comprar {
+        order: -1; /* Aparece primero en móviles */
+    }
+    
+    /* Iconos pequeños */
+    #icono-volver,
+    #detalles-icono-favoritos,
+    #detalles-icono-carrito,
+    #icono-comprar,
+    #icono-descambiar,
+    #icono-jugar,
+    #icono-editar,
+    #icono-eliminar {
+        width: 16px; /* Iconos pequeños */
+        height: 16px; /* Mantengo proporción */
+    }
+    
+    /* Icono de comprar un poco más grande */
+    #icono-comprar {
+        width: 20px; /* Icono de comprar un poco más grande */
+        height: 20px; /* Mantengo proporción */
+    }
+}
+
+/* Móviles muy pequeños (360px o menos) */
+@media (max-width: 360px) {
+    /* Contenedor mínimo */
+    main {
+        margin: 10px; /* Margen mínimo absoluto */
+        padding: 15px; /* Padding mínimo */
+    }
+    
+    /* Título muy compacto */
+    h1 {
+        font-size: 1.4em; /* Título muy compacto */
+        margin-bottom: 20px; /* Margen mínimo */
+        line-height: 1.2; /* Altura de línea compacta */
+    }
+    
+    /* Layout mínimo */
+    .detalles-contenido {
+        gap: 20px; /* Espacio mínimo */
+        margin-bottom: 20px; /* Margen mínimo */
+    }
+    
+    /* Imagen muy pequeña */
+    #imagen-juego {
+        max-width: 180px; /* Imagen muy pequeña */
+    }
+    
+    /* Precio muy pequeño */
+    .precio-destacado {
+        font-size: 0.95em; /* Precio muy pequeño */
+        padding: 6px 12px; /* Padding mínimo */
+        margin-top: 12px; /* Margen mínimo */
+    }
+    
+    /* Info general mínima */
+    .info-general {
+        gap: 6px; /* Espacio muy pequeño */
+    }
+    
+    .info-general p {
+        padding: 10px; /* Padding mínimo */
+        font-size: 0.9em; /* Texto pequeño */
+    }
+    
+    /* Secciones mínimas */
+    .descripcion-completa,
+    .requisitos-sistema {
+        padding: 15px; /* Padding mínimo */
+        margin-bottom: 15px; /* Margen mínimo */
+    }
+    
+    /* Títulos mínimos */
+    .descripcion-completa h2,
+    .requisitos-sistema h2 {
+        font-size: 1.1em; /* Títulos mínimos */
+        margin-bottom: 8px; /* Margen muy pequeño */
+    }
+    
+    /* Texto muy pequeño */
+    .descripcion-completa p,
+    .requisitos-sistema p {
+        font-size: 0.85em; /* Texto muy pequeño */
+        line-height: 1.4; /* Altura de línea compacta */
+    }
+    
+    /* Sección de opciones mínima */
+    .opciones {
+        padding: 15px; /* Padding mínimo */
+        gap: 6px; /* Espacio muy reducido */
+    }
+    
+    /* Título de opciones más pequeño */
+    .opciones h2 {
+        font-size: 1.1em; /* Título más pequeño */
+        margin-bottom: 12px; /* Menos margen */
+    }
+    
+    /* Botones muy pequeños */
+    .boton-volver,
+    .boton-favorito,
+    .detalles-boton-carrito,
+    .boton-comprar,
+    .boton-descambiar,
+    .boton-jugar,
+    .boton-editar-juego,
+    .boton-reactivar,
+    .boton-eliminar {
+        padding: 8px 12px; /* Padding mínimo */
+        font-size: 0.8em; /* Texto muy pequeño */
+        height: 34px; /* Altura mínima pero usable */
+        gap: 4px; /* Menos espacio entre icono y texto */
+    }
+    
+    /* Iconos muy pequeños */
+    #icono-volver,
+    #detalles-icono-favoritos,
+    #detalles-icono-carrito,
+    #icono-comprar,
+    #icono-descambiar,
+    #icono-jugar,
+    #icono-editar,
+    #icono-eliminar {
+        width: 14px; /* Iconos muy pequeños */
+        height: 14px; /* Mantengo proporción */
+    }
+    
+    /* Icono de comprar un poco más grande */
+    #icono-comprar {
+        width: 18px; /* Icono de comprar proporcionalmente más pequeño */
+        height: 18px; /* Mantengo proporción */
+    }
+}
+

@@ -1,0 +1,154 @@
+/* Cuerpo principal de la página de favoritos */
+main {
+    margin-top: 30px; /* Espacio arriba para que no quede pegado al encabezado */
+}
+
+/* Título principal centrado como me gusta */
+h1 {
+    text-align: center; /* Centrado porque es lo que mejor se ve */
+    margin-top: 20px; /* Espacio arriba para que respire un poco */
+    margin-bottom: 20px; /* Espacio abajo también para separar del contenido */
+    color: #21b7c2; /* Color turquesa que uso en todo el sitio */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra sutil para que destaque un poco */
+    font-weight: 600; /* Un poco más gruesa que la normal para que se note */
+}
+
+/* Línea horizontal decorativa debajo del título */
+main hr {
+    width: 80%; /* No muy ancha para que se vea elegante */
+    height: 2px; /* Finita pero visible */
+    border: none; /* Quito el borde feo que viene por defecto */
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(33, 183, 194, 0.3) 20%, 
+        rgba(33, 183, 194, 0.6) 50%, 
+        rgba(33, 183, 194, 0.3) 80%, 
+        transparent 100%); /* Me gusta este gradiente turquesa que se desvanece en los bordes */
+    margin: 10px auto 15px auto; /* Centrada y con espacios cómodos arriba y abajo */
+    border-radius: 2px; /* Bordes ligeramente suaves para que no sea tan cuadrada */
+    opacity: 0.8; /* Un poquito transparente para que no destaque demasiado */
+}
+
+/* Cuadro de advertencia cuando no hay juegos favoritos */
+#advertencia-favoritos {
+    background: rgba(255, 193, 7, 0.1); /* Fondo amarillito muy suave para que llame la atención */
+    color: #856404; /* Texto marrón que contrasta bien con el fondo */
+    padding: 15px 20px; /* Espaciado cómodo para que se lea bien */
+    border-radius: 10px; /* Esquinas redondeadas como me gustan */
+    border-left: 4px solid #ffc107; /* Raya izquierda amarilla para que destaque */
+    margin: 0 auto 25px auto; /* Centrada y con espacio abajo */
+    font-weight: bold; /* En negrita para que se note la advertencia */
+    text-align: center; /* Centrado porque es un mensaje importante */
+    max-width: 600px; /* No muy ancha en pantallas grandes */
+    width: fit-content; /* Se ajusta al contenido que tiene */
+    box-sizing: border-box; /* Incluyo el padding en el cálculo del ancho total */
+    display: block; /* Bloque completo para que no se pongan elementos al lado */
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.2); /* Sombra amarillita sutil para darle profundidad */
+}
+
+/* Texto dentro del cuadro de advertencia */
+#advertencia-favoritos p {
+    margin: 0; /* Sin márgenes para que quede compacto */
+    font-size: 1em; /* Tamaño estándar que se lee bien */
+}
+
+
+/* RESPONSIVIDAD - Adapto todo para diferentes tamaños de pantalla */
+
+/* Tablets grandes (1024px) - Valores intermedios para pantallas medianas */
+@media (max-width: 1024px) {
+    
+    /* Título un poco más pequeño en tablets */
+    h1 {
+        font-size: 1.8em; /* Reducir un poco para que se vea bien */
+        margin: 18px 0; /* Menos margen para ahorrar espacio vertical */
+    }
+    
+    /* Línea horizontal más ancha */
+    main hr {
+        width: 85%; /* Un poco más ancha porque hay menos espacio lateral */
+        margin: 8px auto 12px auto; /* Menos espacio vertical para compactar */
+    }
+    
+    /* Advertencia con ancho ajustado */
+    #advertencia-favoritos {
+        max-width: 550px; /* Ancho intermedio para tablets */
+        padding: 14px 18px; /* Padding ligeramente menor */
+        margin-bottom: 22px; /* Menos espacio inferior */
+    }
+}
+
+/* Tablets (768px) - Diseño más compacto */
+@media (max-width: 768px) {
+    
+    /* Título más pequeño para tablets */
+    h1 {
+        font-size: 1.6em; /* Más pequeño para aprovechar el espacio */
+        margin: 15px 0; /* Márgenes compactos */
+    }
+    
+    /* Línea horizontal más ancha */
+    main hr {
+        width: 90%; /* Más ancha en pantallas pequeñas */
+        margin: 6px auto 10px auto; /* Espacios más apretados */
+    }
+    
+    /* Advertencia adaptada a tablets */
+    #advertencia-favoritos {
+        max-width: 450px; /* Ancho reducido */
+        padding: 12px 15px; /* Menos padding interno */
+        margin: 0 15px 20px 15px; /* Márgenes laterales para que no toque los bordes */
+        font-size: 0.95em; /* Texto ligeramente más pequeño */
+    }
+}
+
+/* Móviles pequeños (480px) - Muy compacto */
+@media (max-width: 480px) {
+    
+    /* Título compacto para móviles */
+    h1 {
+        font-size: 1.4em; /* Tamaño cómodo para móviles */
+        margin: 12px 0; /* Márgenes mínimos */
+    }
+    
+    /* Línea casi todo el ancho */
+    main hr {
+        width: 95%; /* Casi todo el ancho disponible en móviles */
+        height: 1px; /* Más finita en pantallas pequeñas */
+        margin: 5px auto 8px auto; /* Espacios muy compactos */
+    }
+    
+    /* Advertencia ocupando casi todo el ancho */
+    #advertencia-favoritos {
+        max-width: 100%; /* Ancho completo menos márgenes */
+        padding: 10px 12px; /* Padding mínimo pero cómodo */
+        margin: 0 10px 18px 10px; /* Márgenes laterales pequeños */
+        font-size: 0.9em; /* Texto más pequeño para que quepa bien */
+        border-radius: 8px; /* Bordes menos redondeados */
+    }
+}
+
+/* Móviles muy pequeños (360px) - Valores mínimos */
+@media (max-width: 360px) {
+    
+    /* Título muy compacto */
+    h1 {
+        font-size: 1.2em; /* Muy compacto para móviles pequeños */
+        margin: 10px 0; /* Márgenes extremadamente reducidos */
+    }
+    
+    /* Línea casi completa */
+    main hr {
+        width: 98%; /* Casi todo el ancho disponible */
+        margin: 4px auto 6px auto; /* Espacios mínimos */
+    }
+    
+    /* Advertencia muy compacta */
+    #advertencia-favoritos {
+        padding: 8px 10px; /* Padding extremadamente compacto */
+        margin: 0 8px 15px 8px; /* Márgenes mínimos laterales */
+        font-size: 0.85em; /* Texto pequeño pero legible */
+        border-radius: 6px; /* Bordes poco redondeados */
+    }
+}
+

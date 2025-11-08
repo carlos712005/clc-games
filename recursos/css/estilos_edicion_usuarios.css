@@ -1,0 +1,491 @@
+/* ESTILOS DEL CONTENEDOR DE USUARIOS */
+
+/* Contenedor principal que envuelve todas las tarjetas */
+#contenedor-panel-administrador {
+    max-width: 1200px; /* Ancho máximo para pantallas grandes */
+    margin: 40px auto; /* Centrado con margen generoso */
+    padding: 0 20px; /* Espaciado lateral para que no toque los bordes */
+    display: grid; /* Uso rejilla para organización automática */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Columnas que se adaptan automáticamente */
+    gap: 30px; /* Espacio generoso entre tarjetas */
+    align-items: stretch; /* Todas las tarjetas misma altura */
+    justify-content: center; /* Centrar las tarjetas cuando hay pocas */
+}
+
+/* TARJETAS INDIVIDUALES DE USUARIOS */
+
+/* Tarjeta principal de cada usuario */
+.usuario {
+    background: linear-gradient(145deg, #222, #1a1a1a); /* Gradiente sutil para profundidad */
+    border: 4px double #21b7c2; /* Borde doble turquesa como el carrusel */
+    border-radius: 16px; /* Esquinas bien redondeadas */
+    padding: 20px; /* Espaciado interno generoso */
+    transition: all 0.4s ease; /* Transición suave para efectos hover */
+    position: relative; /* Para elementos absolutos internos */
+    overflow: hidden; /* Evita desbordamientos */
+    box-shadow: 0 8px 25px rgba(33, 183, 194, 0.2); /* Sombra turquesa */
+    display: flex; /* Estructura flexible interna */
+    flex-direction: column; /* Elementos apilados verticalmente */
+    height: 100%; /* Altura completa del contenedor rejilla */
+    max-width: 450px; /* Ancho máximo para evitar tarjetas demasiado anchas */
+    width: 100%; /* Ancho completo disponible */
+    margin: 0 auto; /* Centrar la tarjeta si es más pequeña que el contenedor */
+}
+
+/* Efecto hover en las tarjetas */
+.usuario:hover {
+    transform: translateY(-8px) scale(1.02); /* Se eleva y agranda ligeramente */
+    border-color: #26d1de; /* Color más claro al hacer hover */
+    box-shadow: 0 15px 40px rgba(33, 183, 194, 0.4),
+                0 0 30px rgba(38, 209, 222, 0.3); /* Sombra más intensa y resplandor */
+    background: linear-gradient(145deg, #2a2a2a, #222); /* Gradiente más marcado */
+}
+
+/* Efecto de brillo sutil al pasar el cursor */
+.usuario::before {
+    content: ''; /* Contenido vacío para el pseudo-elemento */
+    position: absolute; /* Posicionamiento absoluto */
+    top: -50%; /* Posición fuera del contenedor */
+    left: -50%; /* Posición fuera del contenedor */
+    width: 200%; /* Ancho doble para cubrir bien */
+    height: 200%; /* Altura doble para cubrir bien */
+    background: linear-gradient(45deg, transparent, rgba(33, 183, 194, 0.05), transparent); /* Gradiente sutil */
+    transform: rotate(45deg); /* Rotación diagonal */
+    transition: all 0.6s ease; /* Transición más lenta para el brillo */
+    opacity: 0; /* Invisible por defecto */
+    pointer-events: none; /* No interfiere con los clicks */
+}
+
+/* Título del usuario (nombre y acrónimo) */
+.usuario h2 {
+    color: #21b7c2; /* Color turquesa del sitio */
+    font-size: 1.3em; /* Tamaño grande pero no exagerado */
+    font-weight: bold; /* Negrita para que destaque */
+    margin: 0; /* Sin márgenes */
+    text-align: center; /* Centrado horizontalmente */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra turquesa sutil */
+    transition: all 0.3s ease; /* Transición suave para hover */
+    min-height: 2.5em; /* Altura mínima para 1-2 líneas */
+    display: flex; /* Estructura flexible */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    line-height: 1.2; /* Altura de línea compacta */
+    flex-shrink: 0; /* No se reduce nunca */
+    hyphens: auto; /* Permite división de palabras */
+    word-wrap: break-word; /* División de palabras largas */
+}
+
+.usuario:hover h2 {
+    color: #26d1de; /* Color más brillante al hover */
+    text-shadow: 0 0 15px rgba(38, 209, 222, 0.5); /* Resplandor al hover */
+    border-bottom-color: rgba(38, 209, 222, 0.5); /* Línea más brillante */
+}
+
+/* INFORMACIÓN DEL USUARIO */
+
+/* Contenedor para la información básica del usuario */
+.info-usuario {
+    flex: 1; /* Ocupa el espacio disponible */
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados */
+    gap: 8px; /* Espacio entre elementos */
+    margin-bottom: 15px; /* Espacio inferior */
+}
+
+/* Párrafos dentro de info-usuario */
+.info-usuario p {
+    margin: 4px 0; /* Margen más pequeño para compactar */
+    color: #ccc; /* Gris claro para texto secundario */
+    font-size: 0.9em; /* Tamaño equilibrado y legible */
+    line-height: 1.3; /* Línea más compacta */
+    background: rgba(51, 51, 51, 0.5); /* Fondo gris semitransparente */
+    padding: 6px 10px; /* Padding para que respire */
+    border-radius: 6px; /* Bordes redondeados */
+    border-left: 3px solid #21b7c2; /* Línea izquierda turquesa */
+    flex-shrink: 0; /* No se reducen nunca */
+}
+
+/* Efecto hover en los párrafos de información */
+.info-usuario p:hover {
+    background: rgba(33, 183, 194, 0.1); /* Fondo más marcado */
+    border-left-color: #26d1de; /* Línea más brillante */
+    color: #fff; /* Texto más brillante */
+}
+
+/* Estilo específico para el strong (etiquetas) */
+.info-usuario p strong {
+    color: #21b7c2; /* Color turquesa para las etiquetas */
+    font-weight: 600; /* Semi-negrita */
+    margin-right: 5px; /* Espacio después de la etiqueta */
+}
+
+/* ESTADÍSTICAS DEL USUARIO */
+
+/* Contenedor para las estadísticas del usuario */
+.estadisticas-usuario {
+    flex-shrink: 0; /* No se reduce nunca */
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados */
+    gap: 8px; /* Espacio entre elementos */
+    margin-bottom: 15px; /* Espacio inferior */
+}
+
+/* Párrafos dentro de estadísticas-usuario */
+.estadisticas-usuario p {
+    margin: 4px 0; /* Margen más pequeño para compactar */
+    color: #fff; /* Texto blanco para destacar */
+    font-size: 0.9em; /* Tamaño equilibrado */
+    line-height: 1.3; /* Línea más compacta */
+    background: linear-gradient(135deg, rgba(33, 183, 194, 0.2), rgba(33, 183, 194, 0.1)); /* Gradiente turquesa */
+    padding: 8px 12px; /* Padding generoso */
+    border-radius: 8px; /* Bordes más redondeados */
+    border: 1px solid #21b7c2; /* Borde turquesa */
+    text-align: center; /* Texto centrado */
+    flex-shrink: 0; /* No se reduce nunca */
+    box-shadow: 0 2px 6px rgba(33, 183, 194, 0.15); /* Sombra turquesa sutil */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover en estadísticas */
+.estadisticas-usuario p:hover {
+    background: linear-gradient(135deg, rgba(33, 183, 194, 0.3), rgba(33, 183, 194, 0.15)); /* Gradiente más marcado */
+    border-color: #26d1de; /* Borde más brillante */
+    box-shadow: 0 3px 8px rgba(38, 209, 222, 0.25); /* Sombra más intensa */
+    transform: scale(1.02); /* Se agranda muy ligeramente */
+}
+
+/* Estilo específico para el strong en estadísticas */
+.estadisticas-usuario p strong {
+    color: #26d1de; /* Color turquesa brillante */
+    font-weight: 600; /* Semi-negrita */
+    display: block; /* En su propia línea */
+    margin-bottom: 3px; /* Espacio inferior */
+}
+
+/* BOTONES DE ACCIÓN */
+
+/* Contenedor para los botones de acción */
+.botones-usuario {
+    display: flex; /* Estructura flexible horizontal */
+    gap: 12px; /* Espacio entre los botones */
+    margin-top: 8px; /* Espacio superior */
+    justify-content: space-between; /* Distribuye el espacio */
+}
+
+/* Centrado cuando solo hay un botón */
+.botones-usuario:has(> :only-child) {
+    justify-content: center; /* Centrado si solo hay un botón */
+}
+
+/* Estilo base para todos los botones de usuario */
+.boton-detalles-usuario,
+.boton-editar-usuario,
+.boton-eliminar-usuario,
+.boton-ver-historial {
+    display: flex;            /* Disposición flexible */
+    align-items: center;      /* Alinea contenido al centro verticalmente */
+    gap: 6px;                 /* Espacio entre icono y texto */
+    background: #21b7c2;      /* Fondo turquesa */
+    padding: 8px 14px;        /* Espacio interno */
+    border-radius: 6px;       /* Esquinas redondeadas */
+    color: #fff;              /* Texto en blanco */
+    font-weight: bold;        /* Texto en negrita */
+    height: 40px;             /* Altura fija para uniformidad */
+    transition: all 0.3s ease; /* Transición suave para todos los efectos hover */
+    flex: 1; /* Mismo ancho para ambos botones */
+    max-width: calc(50% - 6px); /* Máximo ancho considerando el gap */
+    line-height: 1.2; /* Reduce el espacio entre las líneas del texto */
+    height: auto; /* Permite que el botón crezca según el contenido */
+    min-height: 40px; /* Altura mínima para mantener consistencia */
+    padding: 6px 8px; /* Reduce el padding vertical para aprovechar mejor el espacio */
+    justify-content: center; /* Centrado del contenido */
+    text-decoration: none; /* Quita subrayado de enlaces */
+}
+
+/* Efecto hover para los botones */
+.boton-detalles-usuario:hover,
+.boton-editar-usuario:hover,
+.boton-eliminar-usuario:hover,
+.boton-ver-historial:hover {
+    background: #1a9bb8;         /* Color turquesa más oscuro */
+    transform: translateY(-2px); /* Se eleva ligeramente */
+    box-shadow: 0 4px 12px rgba(33, 183, 194, 0.4); /* Sombra turquesa */
+}
+
+/* Texto específico de botones */
+.boton-detalles-usuario span,
+.boton-editar-usuario span,
+.boton-eliminar-usuario span,
+.boton-ver-historial span {
+    line-height: 1.1; /* Líneas muy juntas para compactar */
+    font-size: 0.85em; /* Texto ligeramente más pequeño */
+    text-align: center; /* Centrado del texto */
+}
+
+/* Color específico para el botón de eliminar */
+.boton-eliminar-usuario {
+    background: linear-gradient(135deg, #ff6b6b, #e05555); /* Gradiente rojizo */
+    border-color: #ff6b6b; /* Borde rojo */
+    box-shadow: 0 3px 10px rgba(255, 107, 107, 0.2); /* Sombra rojiza */
+}
+
+.boton-eliminar-usuario:hover {
+    background: linear-gradient(135deg, #ff8080, #ff6b6b); /* Gradiente más brillante */
+    border-color: #ff8080; /* Borde más brillante */
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3); /* Sombra más intensa */
+}
+
+/* Iconos dentro de los botones */
+.icono-detalles-usuario,
+.icono-editar,
+.icono-eliminar,
+.icono-historial {
+    width: 30px;              /* Ancho mayor para mejor visibilidad */
+    height: auto;             /* Altura automática */
+}
+
+/* MENSAJE CUANDO NO HAY USUARIOS */
+
+/* Estilos para cuando no hay usuarios */
+.sin-usuarios {
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados */
+    align-items: center; /* Centrado horizontal */
+    justify-content: center; /* Centrado vertical */
+    padding: 60px 20px; /* Espaciado interno generoso */
+    text-align: center; /* Texto centrado */
+    background: linear-gradient(135deg, rgba(33, 183, 194, 0.1), rgba(33, 183, 194, 0.05)); /* Fondo turquesa muy sutil */
+    border: 2px dashed #21b7c2; /* Borde punteado turquesa */
+    border-radius: 20px; /* Esquinas muy redondeadas */
+    margin: 40px auto; /* Centrado con margen */
+    max-width: 600px; /* Ancho máximo */
+    min-height: 200px; /* Altura mínima */
+    position: relative; /* Para efectos adicionales */
+    overflow: hidden; /* Evita desbordamientos */
+}
+
+.sin-usuarios h2 {
+    color: #21b7c2; /* Color turquesa */
+    font-size: 1.5em; /* Tamaño destacado */
+    font-weight: 600; /* Semi-negrita */
+    margin: 0; /* Sin márgenes */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra en el texto */
+    line-height: 1.4; /* Altura de línea cómoda */
+}
+
+/* Efecto hover para sin-usuarios */
+.sin-usuarios:hover {
+    background: linear-gradient(135deg, rgba(33, 183, 194, 0.15), rgba(33, 183, 194, 0.08)); /* Fondo más marcado */
+    border-color: #26d1de; /* Borde más brillante */
+    transform: scale(1.02); /* Se agranda ligeramente */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* RESPONSIVIDAD */
+
+/* Tablets grandes */
+@media (max-width: 1024px) {
+    #contenedor-panel-administrador {
+        max-width: 1000px; /* Ancho ligeramente reducido para tablets grandes */
+        padding: 0 18px; /* Padding intermedio */
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Columnas intermedias */
+        gap: 28px; /* Espacio intermedio */
+    }
+    
+    .usuario {
+        padding: 19px; /* Espaciado intermedio */
+        max-width: 425px; /* Ancho máximo intermedio */
+    }
+    
+    .usuario h2 {
+        font-size: 1.25em; /* Título ligeramente más pequeño */
+    }
+    
+    .sin-usuarios {
+        padding: 55px 18px; /* Padding intermedio */
+        margin: 35px auto; /* Margen intermedio */
+        max-width: 550px; /* Ancho intermedio */
+        min-height: 190px; /* Altura intermedia */
+    }
+    
+    .sin-usuarios h2 {
+        font-size: 1.45em; /* Título intermedio */
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    main {
+        padding-top: 70px; /* Menos espacio superior */
+    }
+    
+    #contenedor-panel-administrador {
+        margin: 20px auto; /* Menos margen */
+        padding: 0 10px; /* Padding mínimo */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Columnas aún más pequeñas */
+        gap: 20px; /* Espacio reducido */
+    }
+    
+    .usuario {
+        padding: 15px; /* Padding reducido */
+        max-width: 350px; /* Ancho máximo reducido en móviles grandes */
+    }
+    
+    .usuario h2 {
+        font-size: 1.2em; /* Título más pequeño */
+    }
+    
+    .info-usuario p,
+    .estadisticas-usuario p {
+        font-size: 0.85em; /* Texto más pequeño */
+        padding: 5px 8px; /* Padding reducido */
+    }
+    
+    .botones-usuario {
+        gap: 8px; /* Menos espacio entre botones */
+    }
+    
+    .boton-detalles-usuario,
+    .boton-editar-usuario,
+    .boton-eliminar-usuario,
+    .boton-ver-historial {
+        padding: 8px 12px; /* Padding reducido */
+        font-size: 0.85em; /* Texto más pequeño */
+    }
+    
+    .icono-detalles-usuario,
+    .icono-editar,
+    .icono-eliminar,
+    .icono-historial {
+        width: 18px; /* Iconos más pequeños */
+        height: 18px; /* Iconos más pequeños */
+    }
+    
+    .sin-usuarios {
+        padding: 40px 15px; /* Padding reducido */
+        margin: 25px auto; /* Margen reducido */
+        max-width: 400px; /* Ancho reducido */
+        min-height: 160px; /* Altura reducida */
+        border-radius: 15px; /* Bordes menos redondeados */
+    }
+    
+    .sin-usuarios h2 {
+        font-size: 1.3em; /* Título más pequeño */
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    #contenedor-panel-administrador {
+        margin: 15px auto; /* Margen mínimo */
+        padding: 0 5px; /* Padding mínimo */
+        grid-template-columns: 1fr; /* Una sola columna */
+        gap: 15px; /* Espacio mínimo */
+    }
+    
+    .usuario {
+        padding: 12px; /* Padding mínimo */
+        max-width: 100%; /* En móviles pequeños ocupa todo el ancho disponible */
+    }
+    
+    .usuario h2 {
+        font-size: 1.15em; /* Título más pequeño */
+        min-height: 2em; /* Reducir altura mínima en móvil */
+    }
+    
+    .info-usuario p,
+    .estadisticas-usuario p {
+        font-size: 0.8em; /* Texto más pequeño */
+        padding: 4px 6px; /* Padding mínimo */
+    }
+    
+    .botones-usuario {
+        gap: 6px; /* Menos espacio vertical */
+    }
+    
+    .boton-detalles-usuario,
+    .boton-editar-usuario,
+    .boton-eliminar-usuario,
+    .boton-ver-historial {
+        padding: 8px 10px; /* Padding más compacto */
+        font-size: 0.8em; /* Texto más pequeño */
+    }
+    
+    .icono-detalles-usuario,
+    .icono-editar,
+    .icono-eliminar,
+    .icono-historial {
+        width: 16px; /* Iconos más pequeños */
+        height: 16px; /* Iconos más pequeños */
+    }
+    
+    .sin-usuarios {
+        padding: 30px 12px; /* Padding mínimo */
+        margin: 20px 10px; /* Margen mínimo */
+        max-width: 100%; /* Ancho completo */
+        min-height: 140px; /* Altura mínima */
+        border-radius: 12px; /* Bordes menos redondeados */
+    }
+    
+    .sin-usuarios h2 {
+        font-size: 1.2em; /* Título compacto */
+        line-height: 1.3; /* Altura de línea compacta */
+    }
+}
+
+/* Móviles muy pequeños (menos de 360px) */
+@media (max-width: 360px) {
+    #contenedor-panel-administrador {
+        margin: 10px auto; /* Margen extremadamente reducido */
+        padding: 0 3px; /* Padding extremadamente reducido */
+        gap: 12px; /* Espacio extremadamente reducido */
+    }
+    
+    .usuario {
+        padding: 10px; /* Padding extremadamente reducido */
+        border-radius: 12px; /* Bordes menos redondeados */
+    }
+    
+    .usuario h2 {
+        font-size: 1.1em; /* Título muy compacto */
+        min-height: 1.8em; /* Altura mínima muy reducida */
+    }
+    
+    .info-usuario p,
+    .estadisticas-usuario p {
+        font-size: 0.75em; /* Texto muy pequeño */
+        padding: 3px 5px; /* Padding muy reducido */
+    }
+    
+    .botones-usuario {
+        gap: 5px; /* Espacio muy reducido */
+    }
+
+    .boton-detalles-usuario,
+    .boton-editar-usuario,
+    .boton-eliminar-usuario,
+    .boton-ver-historial {
+        padding: 7px 8px; /* Padding muy reducido */
+        font-size: 0.75em; /* Texto muy pequeño */
+    }
+    
+    .icono-detalles-usuario,
+    .icono-editar,
+    .icono-eliminar,
+    .icono-biblioteca {
+        width: 14px; /* Iconos muy pequeños */
+        height: 14px; /* Iconos muy pequeños */
+    }
+    
+    .sin-usuarios {
+        padding: 25px 8px; /* Padding extremadamente reducido */
+        margin: 15px 5px; /* Margen extremadamente reducido */
+        min-height: 120px; /* Altura extremadamente reducida */
+        border-radius: 10px; /* Bordes muy poco redondeados */
+    }
+    
+    .sin-usuarios h2 {
+        font-size: 1.1em; /* Título extremadamente compacto */
+        line-height: 1.2; /* Altura de línea muy compacta */
+    }
+}

@@ -1,0 +1,398 @@
+/* Estilos para la página de modo de visión */
+
+/* Reset básico para que todo empiece sin márgenes ni padding */
+* {
+    margin: 0; /* Sin márgenes por defecto */
+    padding: 0; /* Sin padding por defecto */
+    box-sizing: border-box; /* El padding y border se incluyen en el ancho total */
+}
+
+/* Cuerpo de la página */
+body {
+    background: #111; /* Fondo negro oscuro */
+    color: #fff; /* Texto blanco */
+    font-family: Arial, sans-serif; /* Fuente simple */
+    min-height: 100vh; /* Mínimo altura completa de la pantalla */
+    display: flex; /* Flexbox para centrar */
+    flex-direction: column; /* Dirección vertical */
+    justify-content: center; /* Centrado vertical */
+    padding: 20px; /* Espacio alrededor */
+}
+
+/* Título principal centrado */
+h1 {
+    text-align: center; /* Centrado */
+    margin-bottom: 20px; /* Espacio abajo también para separar del contenido */
+    color: #21b7c2; /* Color turquesa que uso en todo el sitio */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra sutil para que destaque un poco */
+    font-weight: 600; /* Un poco más gruesa que la normal para que se note */
+}
+
+/* Línea horizontal decorativa debajo del título */
+main hr {
+    width: 80%; /* No muy ancha para que se vea elegante */
+    height: 2px; /* Finita pero visible */
+    border: none; /* Quito el borde feo que viene por defecto */
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(33, 183, 194, 0.3) 20%, 
+        rgba(33, 183, 194, 0.6) 50%, 
+        rgba(33, 183, 194, 0.3) 80%, 
+        transparent 100%); /* Me gusta este gradiente turquesa que se desvanece en los bordes */
+    margin: 10px auto 15px auto; /* Centrada y con espacios cómodos arriba y abajo */
+    border-radius: 2px; /* Bordes ligeramente suaves para que no sea tan cuadrada */
+    opacity: 0.8; /* Un poquito transparente para que no destaque demasiado */
+}
+
+/* Contenedor principal que agrupa información y opciones */
+.contenedor-principal {
+    max-width: 100%; /* ancho máximo cómodamente legible */
+    margin: 0 auto; /* centrar en la página */
+    display: flex; /* usar flexbox */
+    flex-direction: column; /* apilar en columna */
+    gap: 24px; /* separación entre columnas */
+    align-items: center; /* centrar elementos */
+    justify-content: center; /* centrar verticalmente */
+}
+
+/* Cuadro de información */
+.informacion {
+    background: rgba(33, 183, 194, 0.1) !important; /* Fondo turquesa suave */
+    border-left: 3px solid #26d1de; /* Borde izquierdo turquesa */
+    padding: 12px 18px; /* Padding generoso */
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin: 20px 0; /* Margen vertical */
+    line-height: 1.4; /* Altura de línea */
+    text-align: left; /* Alineo a la izquierda para mejor lectura */
+    transition: all 0.28s ease; /* Transición suave para efectos */
+    max-width: 900px; /* Limito el ancho para evitar que se extienda demasiado */
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25); /* Sombra sutil para elevar el panel */
+}
+
+/* Efecto hover para la información */
+.informacion:hover {
+    background: rgba(33, 183, 194, 0.2) !important; /* Fondo más intenso al hover */
+    border-left-color: #21b7c2; /* Borde más brillante */
+    color: #fff; /* Texto más claro */
+    transform: translateX(5px); /* Se mueve ligeramente a la derecha */
+    box-shadow: 0 2px 8px rgba(33, 183, 194, 0.3); /* Sombra turquesa */
+}
+
+/* Ajustes del subtítulo dentro del panel de información */
+.informacion h3 {
+    margin: 8px auto; /* Margen arriba y abajo */
+    font-size: 1.2em; /* Tamaño ligeramente mayor */
+    max-width: 40%; /* No muy ancho para que destaque */
+}
+
+/* Texto dentro del cuadro de información */
+.informacion p {
+    margin: 0; /* Sin márgenes para que quede compacto */
+    font-size: 1em; /* Tamaño estándar que se lee bien */
+    color: #ccc; /* Gris claro para no cansar la vista */
+    line-height: 1.7; /* Altura de línea cómoda */
+}
+
+/* Contenedor de opciones (botones) */
+.opciones {
+    display: flex; /* usar flexbox */
+    flex-direction: row; /* fila horizontal */
+    justify-content: space-between; /* espacio entre botones */
+    align-items: center; /* centrar verticalmente */
+    max-width: 70%; /* Limito el ancho para que no se extienda demasiado */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    min-height: 300px; /* Altura mínima para que se vea bien */
+}
+
+/* Opción individual dentro del contenedor */
+.opcion {
+    display: flex; /* Flexbox para alinear contenido */
+    flex-direction: row; /* fila horizontal */
+    justify-content: center; /* Centrado horizontal */
+    gap: 12px; /* Espacio entre elementos */
+    align-items: center; /* Alineación vertical */
+    border: 4px double #21b7c2; /* Borde doble turquesa */
+    border-radius: 12px; /* Esquinas redondeadas suaves */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 100%; /* Máximo ancho completo */
+    min-height: 200px; /* Altura mínima para que se vea bien */
+    margin: 10px 40px; /* Margen superior e inferior, margen horizontal */
+    background: linear-gradient(145deg, #222, #1a1a1a); /* Gradiente sutil para profundidad */
+    box-shadow: 0 8px 25px rgba(33, 183, 194, 0.2); /* Sombra turquesa */
+}
+
+/* Estilo común para los botones-enlace */
+.opciones a {
+    background: linear-gradient(135deg, #21b7c2, #1a9bb8); /* Gradiente turquesa */
+    color: #fff; /* Texto blanco */
+    border: 2px solid #21b7c2; /* Borde turquesa */
+    padding: 17px 20px; /* Padding para mejor ajuste */
+    font-size: 0.95em; /* Tamaño para que quepa mejor */
+    font-weight: bold; /* Negrita */
+    cursor: pointer; /* Cursor de manita */
+    transition: all 0.3s ease; /* Transición suave */
+    border-radius: 8px; /* Esquinas redondeadas */
+    min-width: 250px; /* Ancho mínimo para acomodar el texto del total */
+    height: 48px; /* Altura fija */
+    line-height: 1.2; /* Altura de línea compacta */
+    white-space: nowrap; /* Evita que el texto se rompa en líneas */
+    overflow: hidden; /* Oculta texto que se desborde */
+    text-overflow: ellipsis; /* Puntos suspensivos si es muy largo */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Sombra en el texto */
+    position: relative; /* Para efectos */
+    z-index: 10; /* Z-index alto para visibilidad */
+    text-decoration: none; /* Quitar subrayado */
+    display: flex; /* Flex para centrar texto */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+}
+
+
+/* Hover y focus para accesibilidad */
+.opciones a:hover,
+.opciones a:focus {
+    transform: translateY(-3px); /* Se eleva ligeramente */
+    box-shadow: 0 12px 30px rgba(33, 183, 194, 0.18); /* Sombra turquesa */
+    outline: none; /* Quitar outline feo */
+}
+
+/* Estilo para el foco visible (accesibilidad) */
+.opciones a:focus-visible {
+    box-shadow: 0 0 0 4px rgba(33,183,194,0.16), 0 12px 30px rgba(33,183,194,0.18); /* Sombra de foco */
+}
+
+/* Icono dentro de la opción */
+.icono-opcion {
+    width: 32px; /* Anchura del icono */
+    height: 32px; /* Altura del icono */
+    margin-right: 8px; /* Espacio entre icono y texto */
+    filter: brightness(0) invert(1); /* Icono blanco */
+    transition: filter 0.18s ease, transform 0.18s ease; /* Transiciones suaves */
+}
+
+
+/* Media queries para responsive */
+
+/* Tablets grandes */
+@media (max-width: 1024px) {
+    body {
+        padding: 18px; /* Menos padding */
+    }
+
+    h1 {
+        font-size: 2.3em; /* Título más pequeño */
+        margin-bottom: 28px; /* Menos espacio */
+    }
+
+    .contenedor-principal {
+        padding: 18px 12px; /* Menos padding */
+        max-width: 95%; /* Ancho ajustado */
+    }
+
+    .informacion {
+        padding: 10px 14px; /* Menos padding */
+        max-width: 500px; /* Ancho máximo ajustado */
+    }
+
+    .informacion h3 {
+        font-size: 1.15em; /* Subtítulo más pequeño */
+    }
+
+    .informacion p {
+        font-size: 0.98em; /* Texto un poco más pequeño */
+    }
+
+    .opciones {
+        max-width: 80%; /* Ancho ajustado */
+        min-height: 280px; /* Altura ajustada */
+    }
+
+    .opcion {
+        min-height: 180px; /* Altura reducida */
+        margin: 10px 30px; /* Menos margen */
+        padding: 15px; /* Padding interno para separar botones de bordes */
+    }
+
+    .opciones a {
+        padding: 14px 18px; /* Menos padding */
+        font-size: 0.92em; /* Texto un poco más pequeño */
+        min-width: 220px; /* Ancho mínimo ajustado */
+        height: 46px; /* Altura ajustada */
+    }
+
+    .icono-opcion {
+        width: 30px; /* Icono ligeramente más pequeño */
+        height: 30px; /* Icono ligeramente más pequeño */
+    }
+}
+
+/* Tablets medianas */
+@media (max-width: 768px) {
+    body {
+        padding: 15px; /* Menos padding */
+    }
+
+    h1 {
+        font-size: 2em; /* Título más pequeño */
+        margin-bottom: 25px; /* Menos espacio */
+    }
+
+    .contenedor-principal {
+        padding: 12px; /* Menos padding */
+        max-width: 100%; /* Ancho completo */
+        gap: 20px; /* Menos gap */
+    }
+
+    .informacion {
+        padding: 10px 12px; /* Menos padding */
+        max-width: 100%; /* Ancho completo */
+    }
+
+    .informacion h3 {
+        font-size: 1.1em; /* Subtítulo más pequeño */
+        max-width: 60%; /* Ancho ajustado */
+    }
+
+    .informacion p {
+        font-size: 0.95em; /* Texto más pequeño */
+        line-height: 1.6; /* Menos altura de línea */
+    }
+
+    .opciones {
+        flex-direction: column; /* Apilado verticalmente */
+        max-width: 90%; /* Ancho ajustado */
+        min-height: auto; /* Sin altura mínima */
+        gap: 15px; /* Espacio entre opciones */
+    }
+
+    .opcion {
+        min-height: 150px; /* Altura reducida */
+        margin: 8px 15px; /* Menos margen */
+        padding: 12px; /* Padding interno para separar botones de bordes */
+    }
+
+    .opciones a {
+        padding: 12px 16px; /* Menos padding */
+        font-size: 0.95em; /* Texto más pequeño */
+        min-width: auto; /* Sin ancho mínimo */
+        width: 100%; /* Ancho completo */
+        height: 44px; /* Altura ajustada */
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    body {
+        padding: 10px; /* Padding mínimo */
+    }
+
+    h1 {
+        font-size: 1.8em; /* Título pequeño */
+        margin-bottom: 20px; /* Menos espacio */
+    }
+
+    .contenedor-principal {
+        padding: 8px; /* Padding reducido */
+        gap: 15px; /* Gap reducido */
+    }
+
+    .informacion {
+        padding: 8px 10px; /* Padding reducido */
+        border-radius: 6px; /* Bordes menos redondeados */
+        margin: 15px 0; /* Menos margen */
+    }
+
+    .informacion h3 {
+        font-size: 1em; /* Subtítulo pequeño */
+        max-width: 80%; /* Ancho ajustado */
+        margin: 6px auto; /* Menos margen */
+    }
+
+    .informacion p {
+        font-size: 0.9em; /* Texto pequeño */
+        line-height: 1.5; /* Altura de línea reducida */
+    }
+
+    .opciones {
+        flex-direction: column; /* Apilado */
+        max-width: 100%; /* Ancho completo */
+        gap: 12px; /* Gap reducido */
+    }
+
+    .opcion {
+        min-height: 120px; /* Altura reducida */
+        margin: 6px 8px; /* Margen mínimo */
+        border-radius: 10px; /* Bordes menos redondeados */
+        padding: 10px; /* Padding interno para separar botones de bordes */
+    }
+
+    .opciones a {
+        padding: 10px 12px; /* Padding reducido */
+        font-size: 0.9em; /* Texto pequeño */
+        height: 42px; /* Altura reducida */
+        border-radius: 6px; /* Bordes menos redondeados */
+    }
+
+    .icono-opcion {
+        width: 28px; /* Icono más pequeño */
+        height: 28px; /* Icono más pequeño */
+        margin-right: 6px; /* Menos espacio */
+    }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 360px) {
+    body {
+        padding: 8px; /* Padding muy reducido */
+    }
+
+    h1 {
+        font-size: 1.6em; /* Título muy pequeño */
+        margin-bottom: 18px; /* Menos espacio */
+    }
+
+    .contenedor-principal {
+        padding: 6px; /* Padding mínimo */
+        gap: 12px; /* Gap mínimo */
+    }
+
+    .informacion {
+        padding: 6px 8px; /* Padding mínimo */
+        border-radius: 4px; /* Bordes poco redondeados */
+        margin: 12px 0; /* Poco margen */
+    }
+
+    .informacion h3 {
+        font-size: 0.95em; /* Subtítulo muy pequeño */
+        max-width: 90%; /* Ancho ajustado */
+        margin: 5px auto; /* Poco margen */
+    }
+
+    .informacion p {
+        font-size: 0.85em; /* Texto muy pequeño */
+        line-height: 1.4; /* Altura de línea mínima */
+    }
+
+    .opciones {
+        gap: 10px; /* Gap mínimo */
+    }
+
+    .opcion {
+        min-height: 100px; /* Altura mínima */
+        margin: 5px 5px; /* Margen mínimo */
+        border-radius: 8px; /* Bordes poco redondeados */
+        padding: 8px; /* Padding interno para separar botones de bordes */
+    }
+
+    .opciones a {
+        padding: 8px 10px; /* Padding mínimo */
+        font-size: 0.85em; /* Texto muy pequeño */
+        height: 38px; /* Altura mínima */
+    }
+
+    .icono-opcion {
+        width: 24px; /* Icono muy pequeño */
+        height: 24px; /* Icono muy pequeño */
+        margin-right: 5px; /* Espacio mínimo */
+    }
+}

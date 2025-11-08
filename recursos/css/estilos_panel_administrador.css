@@ -1,0 +1,136 @@
+/* Estilos para el panel de administración */
+
+/* Cuerpo principal de la página con espaciado */
+main {
+    margin-top: 30px; /* Espacio arriba para que no quede pegado al encabezado */
+    padding-top: 80px; /* Espacio para el encabezado fijo que no tape nada */
+    min-height: 100vh; /* Altura mínima de toda la ventana para ocupar toda la pantalla */
+}
+
+/* Título principal centrado con efecto turquesa */
+h1 {
+    text-align: center; /* Centrado porque se ve más profesional */
+    margin-top: 20px; /* Espacio arriba para que respire */
+    margin-bottom: 20px; /* Espacio abajo también para separar */
+    color: #21b7c2; /* Color turquesa consistente del sitio */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra sutil para que destaque */
+    font-weight: 600; /* Un poco más gruesa que la normal */
+}
+
+/* Línea horizontal decorativa con gradiente */
+main hr {
+    width: 80%; /* No muy ancha para que se vea elegante */
+    height: 2px; /* Finita pero visible */
+    border: none; /* Quito el borde feo por defecto */
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(33, 183, 194, 0.3) 20%, 
+        rgba(33, 183, 194, 0.6) 50%, 
+        rgba(33, 183, 194, 0.3) 80%, 
+        transparent 100%); /* Gradiente turquesa que se desvanece en los bordes */
+    margin: 20px auto 20px auto; /* Centrada y con espacios cómodos */
+    border-radius: 2px; /* Bordes ligeramente suaves */
+    opacity: 0.8; /* Un poquito transparente para no destacar demasiado */
+}
+
+#contenedor-panel-administrador {
+    max-width: 1200px; /* Ancho máximo para pantallas grandes */
+    margin: 40px auto; /* Centrado con margen generoso */
+    padding: 0 20px; /* Espaciado lateral para que no toque los bordes */
+}
+
+/* RESPONSIVIDAD PARA DISPOSITIVOS MÓVILES */
+
+/* Tablets grandes */
+@media (max-width: 1024px) {
+    main {
+        margin-top: 25px; /* Margen reducido */
+        padding-top: 70px; /* Padding reducido */
+    }
+
+    h1 {
+        font-size: 2.3em; /* Título más pequeño */
+        margin: 18px 0; /* Margen reducido */
+    }
+
+    #contenedor-panel-administrador {
+        max-width: 950px; /* Ancho reducido */
+        margin: 35px auto; /* Margen reducido */
+        padding: 0 18px; /* Padding reducido */
+    }
+
+    main hr {
+        width: 85%; /* Ligeramente más ancha */
+    }
+}
+
+/* Tablets medianas */
+@media (max-width: 768px) {
+    main {
+        margin-top: 20px; /* Margen más reducido */
+        padding-top: 60px; /* Padding más reducido */
+    }
+
+    h1 {
+        font-size: 2em; /* Título más pequeño */
+        margin: 15px 0; /* Margen más reducido */
+    }
+
+    #contenedor-panel-administrador {
+        max-width: 100%; /* Ancho completo */
+        margin: 30px auto; /* Margen reducido */
+        padding: 0 15px; /* Padding reducido */
+    }
+
+    main hr {
+        width: 90%; /* Más ancha */
+        height: 1.5px; /* Más delgada */
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    main {
+        margin-top: 15px; /* Margen muy reducido */
+        padding-top: 50px; /* Padding muy reducido */
+    }
+
+    h1 {
+        font-size: 1.7em; /* Título compacto */
+        margin: 12px 0; /* Margen muy reducido */
+    }
+
+    #contenedor-panel-administrador {
+        margin: 25px auto; /* Margen muy reducido */
+        padding: 0 12px; /* Padding muy reducido */
+    }
+
+    main hr {
+        width: 95%; /* Casi completa */
+        height: 1px; /* Muy delgada */
+        margin: 15px auto; /* Margen reducido */
+    }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 360px) {
+    main {
+        margin-top: 10px; /* Margen extremadamente reducido */
+        padding-top: 40px; /* Padding extremadamente reducido */
+    }
+
+    h1 {
+        font-size: 1.5em; /* Título muy compacto */
+        margin: 10px 0; /* Margen extremadamente reducido */
+    }
+
+    #contenedor-panel-administrador {
+        margin: 20px auto; /* Margen extremadamente reducido */
+        padding: 0 10px; /* Padding extremadamente reducido */
+    }
+
+    main hr {
+        width: 100%; /* Ancho completo */
+        margin: 12px auto; /* Margen muy reducido */
+    }
+}

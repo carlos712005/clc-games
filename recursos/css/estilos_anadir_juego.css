@@ -1,0 +1,721 @@
+/* Estilos para formulario de añadir juego */
+
+/* Estilos globales para el formulario de añadir juego */
+* {
+    margin: 0; /* Elimino márgenes por defecto del navegador */
+    padding: 0; /* Elimino padding por defecto del navegador */
+    box-sizing: border-box; /* Incluyo padding y border en el tamaño total */
+}
+
+/* Configuración del cuerpo de la página */
+body {
+    background: #111; /* Fondo muy oscuro que combina con todo el sitio */
+    color: #fff; /* Texto blanco por defecto */
+    font-family: Arial, sans-serif; /* Fuente consistente con todo el sitio */
+    min-height: 100vh; /* Altura mínima completa de la ventana */
+    display: flex; /* Estructura flexible para centrar todo */
+    flex-direction: column; /* Organización vertical de elementos */
+    align-items: center; /* Centrado horizontal perfecto */
+    justify-content: flex-start; /* Alineación superior para formularios largos */
+    padding: 20px; /* Espaciado interno para que no toque los bordes */
+    line-height: 1.6; /* Espaciado entre líneas cómodo para leer */
+}
+
+/* Sección principal que contiene todo el formulario */
+#anadir-juego {
+    width: 100%; /* Ancho completo disponible */
+    max-width: 500px; /* Ancho máximo para formularios largos */
+    margin: 0 auto; /* Centrado horizontal */
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados verticalmente */
+    align-items: center; /* Centrado horizontal */
+}
+
+/* Título principal de la página */
+#anadir-juego h1 {
+    font-size: 2.5em; /* Tamaño grande y llamativo */
+    font-weight: bold; /* Texto en negrita para que destaque */
+    color: #21b7c2; /* Color turquesa que me gusta y uso en todo el sitio */
+    margin: 20px 0 30px 0; /* Espaciado superior e inferior generoso */
+    text-align: center; /* Centrado del texto */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra turquesa sutil */
+}
+
+/* Subtítulos de secciones del formulario */
+#anadir-juego h2 {
+    font-size: 1.4em; /* Tamaño mediano apropiado */
+    color: #21b7c2; /* Color turquesa para diferenciación */
+    margin: 0 0 20px 0; /* Espaciado generoso superior e inferior */
+    text-align: left; /* Alineado a la izquierda */
+    border-bottom: 2px solid #21b7c2; /* Línea inferior turquesa */
+    padding-bottom: 8px; /* Espacio entre texto y línea */
+    font-weight: bold; /* Texto en negrita */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover en subtítulos */
+#anadir-juego h2:hover {
+    color: #1a9bb8; /* Color turquesa más oscuro al hacer hover */
+    transform: translateX(5px); /* Ligero desplazamiento a la derecha */
+}
+
+/* Mensaje de error */
+#anadir-juego .mensaje-error {
+    background: rgba(184, 24, 0, 0.1); /* Fondo rojo semitransparente */
+    color: #ff6b6b; /* Texto rojo claro */
+    padding: 15px 20px; /* Espaciado interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    border-left: 4px solid #b81800; /* Borde izquierdo rojo para que llame la atención */
+    margin-bottom: 25px; /* Espacio inferior */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrado del texto */
+    max-width: 600px; /* Ancho máximo */
+    animation: shake 0.5s ease-in-out; /* Animación de vibración */
+    width: 100%; /* Ancho completo disponible */
+    box-sizing: border-box; /* Incluir padding en el ancho */
+}
+
+/* Mensaje de éxito */
+#anadir-juego .mensaje-exito {
+    background: rgba(40, 167, 69, 0.1); /* Fondo verde semitransparente */
+    color: #28a745; /* Texto verde */
+    padding: 15px 20px; /* Espaciado interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    border-left: 4px solid #28a745; /* Borde izquierdo verde */
+    margin-bottom: 25px; /* Espacio inferior */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrado del texto */
+    max-width: 600px; /* Ancho máximo */
+    width: 100%; /* Ancho completo disponible */
+    box-sizing: border-box; /* Incluir padding en el ancho */
+}
+
+/* Formulario principal con todos los campos */
+#formulario-anadir-juego,
+.formulario-anadir {
+    background: #222; /* Fondo gris oscuro consistente */
+    padding: 40px; /* Espaciado interno generoso */
+    border-radius: 12px; /* Esquinas redondeadas */
+    box-shadow: 0 8px 24px rgba(33, 183, 194, 0.2); /* Sombra turquesa sutil */
+    border: 2px solid #333; /* Borde gris oscuro */
+    transition: all 0.3s ease; /* Transición suave */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Efecto hover en el formulario */
+#formulario-anadir-juego:hover,
+.formulario-anadir:hover {
+    box-shadow: 0 12px 32px rgba(33, 183, 194, 0.3); /* Sombra más intensa */
+    border-color: #21b7c2; /* Borde turquesa */
+}
+
+/* Secciones del formulario */
+.seccion-formulario-anadir {
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin-bottom: 30px; /* Espacio entre secciones */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Etiquetas de los campos */
+.seccion-formulario-anadir label {
+    display: block; /* Cada etiqueta ocupa toda la línea */
+    margin-bottom: 8px; /* Espacio inferior */
+    margin-top: 15px; /* Espacio superior */
+    font-weight: bold; /* Texto en negrita */
+    color: #fff; /* Texto blanco */
+    font-size: 1em; /* Tamaño estándar */
+}
+
+/* Primera etiqueta de cada sección sin margen superior */
+.seccion-formulario-anadir label:first-of-type {
+    margin-top: 0; /* Sin margen superior */
+}
+
+/* Campos de entrada de texto, número, fecha y file */
+.seccion-formulario-anadir input[type="text"],
+.seccion-formulario-anadir input[type="number"],
+.seccion-formulario-anadir input[type="date"],
+.seccion-formulario-anadir input[type="file"] {
+    width: 100%; /* Ancho completo del contenedor */
+    padding: 12px 16px; /* Espaciado interno generoso para comodidad */
+    margin-bottom: 15px; /* Espacio inferior entre campos */
+    border: 2px solid transparent; /* Borde transparente inicial */
+    border-radius: 25px; /* Bordes muy redondeados como me gusta */
+    background: #333; /* Fondo gris oscuro */
+    color: #fff; /* Texto blanco */
+    font-size: 1em; /* Tamaño de fuente normal */
+    transition: all 0.3s ease; /* Transición suave para efectos */
+    outline: none; /* Sin borde predeterminado del navegador */
+    box-sizing: border-box; /* Incluir padding en el ancho */
+}
+
+/* Campos numéricos - evitar flechas predeterminadas */
+.seccion-formulario-anadir input[type="number"] {
+    appearance: textfield; /* Evitar flechas predeterminadas en Chrome */
+    -moz-appearance: textfield; /* Evitar flechas en Firefox */
+}
+
+/* Eliminar flechas de input number en Chrome, Safari, Edge */
+.seccion-formulario-anadir input[type="number"]::-webkit-outer-spin-button,
+.seccion-formulario-anadir input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Sin flechas */
+    margin: 0; /* Sin margen */
+}
+
+/* Ícono del calendario en inputs de fecha - estilizar para que se vea en blanco */
+.seccion-formulario-anadir input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: brightness(0) invert(1); /* Convierte el icono a blanco */
+    cursor: pointer; /* Cursor de manita */
+    opacity: 0.8; /* Opacidad para que no destaque demasiado */
+    transition: opacity 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover en el ícono del calendario */
+.seccion-formulario-anadir input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1; /* Opacidad completa al hacer hover */
+}
+
+/* Personalizar el calendario desplegable (limitado por navegador) */
+.seccion-formulario-anadir input[type="date"]::-webkit-datetime-edit {
+    color: #fff; /* Texto blanco en el input */
+}
+
+/* Personalizar los campos dentro del input de fecha */
+.seccion-formulario-anadir input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+    color: #fff; /* Texto blanco */
+}
+
+/* Separadores dentro del input de fecha */
+.seccion-formulario-anadir input[type="date"]::-webkit-datetime-edit-text {
+    color: #ccc; /* Separadores en gris claro */
+}
+
+/* Campos específicos dentro del input de fecha */
+.seccion-formulario-anadir input[type="date"]::-webkit-datetime-edit-month-field,
+.seccion-formulario-anadir input[type="date"]::-webkit-datetime-edit-day-field,
+.seccion-formulario-anadir input[type="date"]::-webkit-datetime-edit-year-field {
+    color: #fff; /* Texto blanco en campos */
+}
+
+/* Forzar esquema de color oscuro en el calendario nativo */
+.seccion-formulario-anadir input[type="date"] {
+    color-scheme: dark; /* Fuerza tema oscuro en el calendario nativo */
+}
+
+/* Estilo del botón de selección de archivo */
+.seccion-formulario-anadir input[type="file"]::file-selector-button {
+    background: #21b7c2; /* Fondo turquesa */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 8px 16px; /* Espaciado interno */
+    cursor: pointer; /* Cursor de manita */
+    font-weight: bold; /* Texto en negrita */
+    font-size: 0.9em; /* Tamaño de fuente ligeramente más pequeño */
+    transition: background 0.3s ease; /* Transición suave */
+    margin-right: 10px; /* Espacio entre el botón y el texto */
+}
+
+/* Efecto hover en el botón de selección */
+.seccion-formulario-anadir input[type="file"]::file-selector-button:hover {
+    background: #1a9bb8; /* Turquesa más oscuro */
+}
+
+/* Campos textarea */
+.seccion-formulario-anadir textarea {
+    width: 100%; /* Ancho completo del contenedor */
+    padding: 12px 16px; /* Espaciado interno generoso */
+    margin-bottom: 15px; /* Espacio inferior entre campos */
+    border: 2px solid transparent; /* Borde transparente inicial */
+    border-radius: 15px; /* Bordes menos redondeados que los inputs para distinguir */
+    background: #333; /* Fondo gris oscuro */
+    color: #fff; /* Texto blanco */
+    font-size: 1em; /* Tamaño de fuente normal */
+    transition: all 0.3s ease; /* Transición suave para efectos */
+    outline: none; /* Sin borde predeterminado del navegador */
+    box-sizing: border-box; /* Incluir padding en el ancho */
+    resize: vertical; /* Permitir redimensionar solo verticalmente */
+    font-family: inherit; /* Heredar la fuente del sistema */
+    line-height: 1.5; /* Altura de línea cómoda para lectura */
+    min-height: 80px; /* Altura mínima para que se vea bien */
+}
+
+/* Barra de scroll personalizada para textarea */
+.seccion-formulario-anadir textarea::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de scroll */
+}
+
+/* Fondo de la barra de scroll */
+.seccion-formulario-anadir textarea::-webkit-scrollbar-track {
+    background: #2a2a2a; /* Fondo oscuro */
+    border-radius: 4px; /* Esquinas redondeadas */
+}
+
+/* Parte que se mueve de la barra de scroll */
+.seccion-formulario-anadir textarea::-webkit-scrollbar-thumb {
+    background: #21b7c2; /* Color turquesa */
+    border-radius: 4px; /* Esquinas redondeadas */
+}
+
+/* Cuando paso el ratón por la barra de scroll */
+.seccion-formulario-anadir textarea::-webkit-scrollbar-thumb:hover {
+    background: #26d1de; /* Turquesa más claro */
+}
+
+/* Campos select */
+.seccion-formulario-anadir select {
+    width: 100%; /* Ancho completo del contenedor */
+    padding: 12px 16px; /* Espaciado interno igual que los inputs */
+    margin-bottom: 15px; /* Espacio inferior entre campos */
+    border: 2px solid transparent; /* Borde transparente inicial */
+    border-radius: 25px; /* Bordes muy redondeados */
+    background: #333; /* Fondo gris que mantengo consistente */
+    color: #fff; /* Texto blanco */
+    font-size: 1em; /* Tamaño de fuente normal */
+    transition: all 0.3s ease; /* Transición suave para efectos */
+    outline: none; /* Sin borde predeterminado del navegador */
+    cursor: pointer; /* Cursor de manita para indicar interactividad */
+    box-sizing: border-box; /* Incluir padding en el ancho */
+}
+
+/* Select múltiple - bordes menos redondeados */
+.seccion-formulario-anadir select[multiple] {
+    border-radius: 15px; /* Bordes menos redondeados para mejor visualización */
+    padding: 8px 12px; /* Padding reducido para mejor visualización de opciones */
+    background: #333; /* Fondo consistente */
+    overflow-y: auto; /* Scroll vertical si hace falta */
+    max-height: 250px; /* Altura máxima para evitar que sea demasiado grande */
+    min-height: 120px; /* Altura mínima para ver varias opciones */
+}
+
+/* Opciones dentro de los select múltiples */
+.seccion-formulario-anadir select[multiple] option {
+    background: #333; /* Fondo oscuro para las opciones */
+    color: #fff; /* Texto blanco */
+    padding: 8px 12px; /* Espaciado interno generoso */
+    border-radius: 5px; /* Esquinas ligeramente redondeadas */
+    margin: 2px 0; /* Espacio pequeño entre opciones */
+    cursor: pointer; /* Cursor de manita */
+    transition: background 0.2s ease; /* Transición suave en el fondo */
+}
+
+/* Opciones seleccionadas en select múltiple */
+.seccion-formulario-anadir select[multiple] option:checked {
+    background: linear-gradient(135deg, #21b7c2, #1a9bb8); /* Gradiente turquesa para opciones seleccionadas */
+    color: #fff; /* Texto blanco */
+    font-weight: bold; /* Texto en negrita para destacar */
+}
+
+/* Efecto hover en opciones del select múltiple */
+.seccion-formulario-anadir select[multiple] option:hover {
+    background: #3a3a3a; /* Fondo más claro al pasar el cursor */
+}
+
+/* Barra de scroll personalizada para select múltiple */
+.seccion-formulario-anadir select[multiple]::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra */
+}
+
+/* Fondo de la barra de scroll del select */
+.seccion-formulario-anadir select[multiple]::-webkit-scrollbar-track {
+    background: #2a2a2a; /* Fondo oscuro */
+    border-radius: 4px; /* Esquinas redondeadas */
+}
+
+/* Parte que se mueve de la barra de scroll */
+.seccion-formulario-anadir select[multiple]::-webkit-scrollbar-thumb {
+    background: #21b7c2; /* Color turquesa */
+    border-radius: 4px; /* Esquinas redondeadas */
+}
+
+/* Cuando paso el ratón por la barra de scroll */
+.seccion-formulario-anadir select[multiple]::-webkit-scrollbar-thumb:hover {
+    background: #26d1de; /* Turquesa más claro */
+}
+
+/* Opciones dentro de los select simples */
+.seccion-formulario-anadir select option {
+    background: #333; /* Fondo oscuro para las opciones */
+    color: #fff; /* Texto blanco */
+    padding: 8px; /* Espaciado interno */
+}
+
+/* Placeholder en inputs */
+.seccion-formulario-anadir input::placeholder,
+.seccion-formulario-anadir textarea::placeholder {
+    color: #ccc; /* Color gris claro */
+    font-style: italic; /* Cursiva */
+}
+
+/* Efectos focus en campos */
+.seccion-formulario-anadir input:focus,
+.seccion-formulario-anadir textarea:focus,
+.seccion-formulario-anadir select:focus {
+    border-color: #21b7c2; /* Borde turquesa */
+    box-shadow: 0 0 10px rgba(33, 183, 194, 0.3); /* Sombra turquesa */
+    background: #3a3a3a; /* Fondo más claro */
+    transform: scale(1.02); /* Ligero aumento */
+}
+
+/* Efectos hover en campos */
+.seccion-formulario-anadir input:hover,
+.seccion-formulario-anadir textarea:hover,
+.seccion-formulario-anadir select:hover {
+    background: #3a3a3a; /* Fondo más claro */
+    border-color: rgba(33, 183, 194, 0.5); /* Borde turquesa semitransparente */
+}
+
+/* Párrafos informativos dentro del formulario */
+.info-nota-anadir {
+    font-size: 0.9em; /* Tamaño reducido */
+    color: #ccc; /* Color gris claro */
+    font-style: italic; /* Cursiva */
+    margin-top: 5px; /* Espacio superior */
+    margin-bottom: 10px; /* Espacio inferior */
+    line-height: 1.5; /* Espaciado entre líneas */
+}
+
+/* Botón principal de envío */
+.boton-anadir-juego {
+    width: 100%; /* Ancho completo */
+    background: #21b7c2; /* Fondo turquesa */
+    color: #fff; /* Texto blanco */
+    padding: 15px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 25px; /* Bordes muy redondeados */
+    font-size: 1.2em; /* Tamaño mayor */
+    font-weight: bold; /* Negrita */
+    cursor: pointer; /* Cursor de mano */
+    transition: all 0.3s ease; /* Transición suave */
+    margin-top: 20px; /* Espacio superior */
+    min-height: 52px; /* Altura mínima */
+    text-transform: uppercase; /* Mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+/* Efecto hover en botón principal */
+.boton-anadir-juego:hover {
+    background: #1a9bb8; /* Turquesa más oscuro */
+    transform: translateY(-3px); /* Elevación */
+    box-shadow: 0 6px 16px rgba(33, 183, 194, 0.4); /* Sombra intensa */
+}
+
+/* Efecto active en botón principal */
+.boton-anadir-juego:active {
+    transform: translateY(0); /* Volver a posición original */
+    box-shadow: 0 2px 6px rgba(33, 183, 194, 0.3); /* Sombra reducida */
+}
+
+/* Enlace de volver al panel */
+#volver-panel-admin,
+.enlace-volver-panel {
+    color: #21b7c2; /* Color turquesa consistente */
+    text-decoration: none; /* Sin subrayado inicial */
+    font-weight: bold; /* Texto en negrita */
+    transition: all 0.3s ease; /* Transición suave */
+    display: inline-block; /* Para permitir transformaciones */
+    margin-top: 20px; /* Espacio superior */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Efecto cuando paso el ratón por el enlace */
+#volver-panel-admin:hover,
+.enlace-volver-panel:hover {
+    color: #1a9bb8; /* Turquesa más oscuro */
+    text-decoration: underline; /* Subrayado al hacer hover */
+    transform: translateY(-1px); /* Ligera elevación */
+}
+
+/* Efectos de enfoque para accesibilidad */
+.boton-anadir-juego:focus,
+.seccion-formulario-anadir input:focus,
+.seccion-formulario-anadir textarea:focus,
+.seccion-formulario-anadir select:focus {
+    box-shadow: 0 0 10px rgba(33, 183, 194, 0.3),
+                0 0 0 2px rgba(33, 183, 194, 0.2); /* Sombreado */
+}
+
+/* Focus visible para navegación por teclado */
+.boton-anadir-juego:focus-visible,
+.seccion-formulario-anadir input:focus-visible,
+.seccion-formulario-anadir textarea:focus-visible,
+.seccion-formulario-anadir select:focus-visible {
+    outline: 2px solid #21b7c2; /* Outline turquesa */
+    outline-offset: 2px; /* Separación del outline */
+}
+
+/* Campos requeridos inválidos */
+.seccion-formulario-anadir input:required:invalid,
+.seccion-formulario-anadir textarea:required:invalid,
+.seccion-formulario-anadir select:required:invalid {
+    border-color: rgba(255, 107, 107, 0.3); /* Borde rojo sutil */
+}
+
+/* Campos requeridos válidos */
+.seccion-formulario-anadir input:required:valid,
+.seccion-formulario-anadir textarea:required:valid,
+.seccion-formulario-anadir select:required:valid {
+    border-color: rgba(33, 183, 194, 0.3); /* Borde turquesa sutil */
+}
+
+/* Indicador visual para campos requeridos */
+label:after {
+    content: " *"; /* Asterisco después de cada etiqueta */
+    color: #ff6b6b; /* Color rojo para el asterisco */
+    font-weight: bold; /* Negrita para el asterisco */
+}
+
+/* RESPONSIVIDAD PARA DISPOSITIVOS MÓVILES */
+
+/* Tablets grandes */
+@media (max-width: 1024px) {
+    #anadir-juego {
+        padding: 35px 18px; /* Espaciado reducido */
+    }
+
+    #anadir-juego h1 {
+        font-size: 2.3em; /* Título más pequeño */
+        margin: 18px 0 35px 0; /* Mantener espacio cómodo arriba y abajo */
+    }
+
+    #formulario-anadir-juego,
+    .formulario-anadir {
+        padding: 35px 30px; /* Espaciado reducido */
+        max-width: 850px; /* Ancho reducido */
+    }
+
+    .seccion-formulario-anadir {
+        padding: 22px; /* Espaciado reducido */
+        margin-bottom: 28px; /* Menos espacio */
+    }
+
+    .seccion-formulario-anadir legend {
+        font-size: 1.35em; /* Tamaño reducido */
+    }
+
+    .seccion-formulario-anadir input,
+    .seccion-formulario-anadir textarea,
+    .seccion-formulario-anadir select {
+        padding: 11px 15px; /* Espaciado reducido */
+        font-size: 0.98em; /* Fuente reducida */
+        margin-bottom: 14px; /* Espacio entre campos */
+    }
+
+    .seccion-formulario-anadir textarea {
+        min-height: 70px; /* Altura mínima reducida */
+    }
+
+    .seccion-formulario-anadir select[multiple] {
+        max-height: 220px; /* Altura máxima reducida */
+    }
+
+    .seccion-formulario-anadir label {
+        margin-top: 13px; /* Espacio superior entre labels */
+        font-size: 0.98em; /* Fuente ligeramente más pequeña */
+    }
+
+    .boton-anadir-juego {
+        padding: 14px 18px; /* Espaciado reducido */
+        font-size: 1.15em; /* Fuente reducida */
+        min-height: 50px; /* Altura reducida */
+    }
+
+    #volver-panel-admin,
+    .enlace-volver-panel {
+        margin: 25px auto 15px; /* Espaciado balanceado */
+        padding: 9px 18px; /* Padding intermedio */
+        font-size: 0.9em; /* Un poco más pequeño */
+        letter-spacing: 0.4px; /* Espaciado normal */
+        min-width: 130px; /* Ancho mínimo adecuado */
+    }
+}
+
+/* Tablets medianas */
+@media (max-width: 768px) {
+    #anadir-juego {
+        padding: 30px 15px; /* Espaciado reducido */
+    }
+
+    #anadir-juego h1 {
+        font-size: 2.2em; /* Título más pequeño */
+        margin: 15px 0 30px 0; /* Menos espacio arriba y abajo */
+    }
+
+    #formulario-anadir-juego,
+    .formulario-anadir {
+        padding: 30px 25px; /* Espaciado reducido */
+        max-width: 700px; /* Ancho reducido */
+    }
+
+    .seccion-formulario-anadir {
+        padding: 20px; /* Espaciado reducido */
+        margin-bottom: 25px; /* Menos espacio */
+    }
+
+    .seccion-formulario-anadir legend {
+        font-size: 1.3em; /* Tamaño reducido */
+    }
+
+    .boton-anadir-juego {
+        min-height: 48px; /* Altura reducida */
+        font-size: 1.1em; /* Fuente reducida */
+    }
+
+    #volver-panel-admin,
+    .enlace-volver-panel {
+        margin: 20px auto 12px; /* Menos margen */
+        padding: 8px 16px; /* Padding reducido */
+        font-size: 0.85em; /* Fuente más pequeña */
+        letter-spacing: 0.3px; /* Menos espaciado */
+        min-width: 120px; /* Ancho mínimo reducido */
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    #anadir-juego {
+        padding: 20px 10px; /* Espaciado mínimo */
+    }
+
+    #anadir-juego h1 {
+        font-size: 1.9em; /* Título compacto */
+        margin: 10px 0 25px 0; /* Espacio reducido */
+    }
+
+    #formulario-anadir-juego,
+    .formulario-anadir {
+        padding: 25px 20px; /* Espaciado mínimo */
+        max-width: 100%; /* Ancho completo */
+        margin: 0 5px 15px 5px; /* Margen mínimo */
+    }
+
+    .seccion-formulario-anadir {
+        padding: 18px; /* Espaciado reducido */
+        margin-bottom: 22px; /* Menos espacio */
+    }
+
+    .seccion-formulario-anadir legend {
+        font-size: 1.2em; /* Tamaño reducido */
+        padding: 0 8px; /* Padding reducido */
+    }
+
+    .seccion-formulario-anadir label {
+        margin-top: 10px; /* Espacio reducido */
+        font-size: 0.95em; /* Fuente reducida */
+    }
+
+    .seccion-formulario-anadir input,
+    .seccion-formulario-anadir textarea,
+    .seccion-formulario-anadir select {
+        padding: 10px 14px; /* Espaciado reducido */
+        font-size: 0.95em; /* Fuente reducida */
+        margin-bottom: 12px; /* Espacio reducido */
+        border-radius: 20px; /* Bordes menos redondeados */
+    }
+
+    .seccion-formulario-anadir textarea {
+        min-height: 60px; /* Altura mínima reducida */
+        border-radius: 12px; /* Bordes menos redondeados */
+    }
+
+    .seccion-formulario-anadir select[multiple] {
+        max-height: 180px; /* Altura máxima reducida */
+        border-radius: 12px; /* Bordes menos redondeados */
+    }
+
+    .boton-anadir-juego {
+        padding: 12px 16px; /* Espaciado reducido */
+        font-size: 1em; /* Fuente normal */
+        min-height: 46px; /* Altura reducida */
+        margin-top: 15px; /* Espacio reducido */
+    }
+
+    #volver-panel-admin,
+    .enlace-volver-panel {
+        margin: 18px auto 10px; /* Menos margen */
+        padding: 7px 14px; /* Padding muy reducido */
+        font-size: 0.8em; /* Fuente pequeña */
+        letter-spacing: 0.2px; /* Espaciado mínimo */
+        min-width: 100px; /* Ancho mínimo pequeño */
+        border-radius: 16px; /* Bordes menos redondeados */
+    }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 360px) {
+    #anadir-juego {
+        padding: 15px 8px; /* Espaciado muy reducido */
+    }
+
+    #anadir-juego h1 {
+        font-size: 1.7em; /* Título muy compacto */
+        margin: 8px 0 20px 0; /* Espacio muy reducido */
+    }
+
+    #formulario-anadir-juego,
+    .formulario-anadir {
+        padding: 20px 15px; /* Espaciado muy reducido */
+        margin: 0 2px 12px 2px; /* Margen muy reducido */
+        border-radius: 10px; /* Bordes menos redondeados */
+    }
+
+    .seccion-formulario-anadir {
+        padding: 15px; /* Espaciado muy reducido */
+        margin-bottom: 20px; /* Espacio muy reducido */
+        border-radius: 6px; /* Bordes menos redondeados */
+    }
+
+    .seccion-formulario-anadir legend {
+        font-size: 1.1em; /* Tamaño muy reducido */
+        padding: 0 6px; /* Padding muy reducido */
+    }
+
+    .seccion-formulario-anadir label {
+        margin-top: 8px; /* Espacio muy reducido */
+        font-size: 0.9em; /* Fuente muy reducida */
+        margin-bottom: 6px; /* Espacio muy reducido */
+    }
+
+    .seccion-formulario-anadir input,
+    .seccion-formulario-anadir textarea,
+    .seccion-formulario-anadir select {
+        padding: 8px 12px; /* Espaciado muy reducido */
+        font-size: 0.9em; /* Fuente muy reducida */
+        margin-bottom: 10px; /* Espacio muy reducido */
+        border-radius: 18px; /* Bordes menos redondeados */
+    }
+
+    .seccion-formulario-anadir textarea {
+        min-height: 55px; /* Altura mínima muy reducida */
+        border-radius: 10px; /* Bordes menos redondeados */
+    }
+
+    .seccion-formulario-anadir select[multiple] {
+        border-radius: 10px; /* Bordes menos redondeados */
+        min-height: 100px; /* Altura reducida */
+        max-height: 160px; /* Altura máxima muy reducida */
+    }
+
+    .boton-anadir-juego {
+        padding: 10px 14px; /* Espaciado muy reducido */
+        font-size: 0.95em; /* Fuente muy reducida */
+        min-height: 42px; /* Altura muy reducida */
+        margin-top: 12px; /* Espacio muy reducido */
+        border-radius: 20px; /* Bordes menos redondeados */
+        letter-spacing: 0.5px; /* Espaciado reducido */
+    }
+
+    #volver-panel-admin,
+    .enlace-volver-panel {
+        margin: 15px auto 8px; /* Margen muy reducido */
+        padding: 6px 12px; /* Padding muy pequeño */
+        font-size: 0.75em; /* Fuente muy pequeña */
+        letter-spacing: 0.1px; /* Espaciado mínimo */
+        min-width: 90px; /* Ancho mínimo pequeño */
+        border-radius: 15px; /* Bordes poco redondeados */
+    }
+
+    .info-nota-anadir {
+        font-size: 0.85em; /* Fuente muy reducida */
+    }
+}

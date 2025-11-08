@@ -1,0 +1,891 @@
+/* Estilos para el encabezado fijo y menú lateral */
+* {
+    box-sizing: border-box; /* Para que padding y border no aumenten el tamaño total */
+}
+
+/* Cuerpo principal de la página */
+body {
+    margin: 0px; /* Elimino márgenes del navegador */
+    padding: 0; /* Sin padding por defecto */
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #111 100%); /* Gradiente oscuro que me gusta */
+    font-family: Arial, sans-serif; /* Fuente consistente en todo el sitio */
+    color: #fff; /* Texto blanco por defecto */
+    line-height: 1.6; /* Altura de línea cómoda para leer */
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados verticalmente */
+}
+
+/* ENCABEZADO PRINCIPAL */
+.encabezado {
+  background-color: #222;   /* Color de fondo gris oscuro */
+  color: #fff;              /* Texto en blanco */
+  width: 100%;              /* Ancho completo de la pantalla */
+  position: fixed;          /* Se mantiene fijo al hacer scroll */
+  top: 0;                   /* Pegado al borde superior */
+  left: 0;                  /* Pegado al borde izquierdo */
+  z-index: 1000;            /* Valor alto para estar por encima de otros elementos */
+  padding: 10px 20px;       /* Espacio interno arriba/abajo y izquierda/derecha */
+}
+
+/* Contenedor que organiza todos los elementos del encabezado */
+.barra-encabezado {
+  display: flex;                    /* Disposición flexible en línea */
+  align-items: center;              /* Alinea verticalmente al centro */
+  justify-content: space-between;   /* Distribuye espacio entre elementos */
+  gap: 20px;                        /* Espacio de 20px entre elementos */
+}
+
+/* Botón del menú hamburguesa en el lado izquierdo */
+.boton-menu {
+  display: flex;            /* Disposición flexible */
+  align-items: center;      /* Alinea contenido al centro verticalmente */
+  gap: 8px;                 /* Espacio entre icono y texto */
+  cursor: pointer;          /* Cambia cursor a manita al pasar por encima */
+  transition: all 0.3s ease; /* Transición suave para todos los efectos hover */
+}
+
+/* Elimina el subrayado de todos los enlaces tipo botón */
+.boton-login,
+.boton-editar,
+.boton-salir,
+.boton-carrito,
+.boton-menu,
+.boton-detalles,
+.boton-favorito,
+.boton-jugar,
+.boton-volver-atras,
+#boton-anadir-juego,
+#boton-anadir-usuario,
+.boton-editar-juego,
+.boton-reactivar,
+.boton-eliminar {
+  text-decoration: none;    /* Sin subrayado en los enlaces */
+}
+
+/* Tamaño del icono del menú hamburguesa */
+#icono-menu {
+  width: 28px;              /* Ancho del icono */
+  height: 28px;             /* Alto del icono */
+  transition: transform 0.3s ease; /* Transición suave para efectos del icono */
+}
+
+/* Área que contiene el logo y título del sitio */
+.zona-identidad {
+  display: flex;            /* Disposición flexible */
+  align-items: center;      /* Alinea elementos al centro verticalmente */
+  gap: 12px;                /* Espacio entre logo y título */
+}
+
+/* Tamaño del logo principal del sitio */
+#logo-sitio {
+  height: 70px;             /* Altura fija del logo */
+  transition: transform 0.3s ease; /* Transición suave para efecto hover */
+}
+
+/* Efecto hover en el logo - se agranda ligeramente */
+#logo-sitio:hover {
+  transform: scale(1.05);   /* Aumenta el tamaño un 5% */
+}
+
+/* Estilo del título principal del sitio */
+.titulo-sitio {
+  font-size: 1.5em;         /* Tamaño de fuente 1.5 veces el tamaño base */
+  font-weight: bold;        /* Texto en negrita */
+  margin: 0;                /* Sin márgenes externos */
+}
+
+/* Área del buscador central */
+.zona-buscador {
+  flex: 1;                  /* Ocupa todo el espacio disponible */
+  max-width: 600px;         /* Ancho máximo para pantallas grandes */
+}
+
+/* Formulario que contiene el campo de búsqueda */
+.formulario-busqueda {
+  display: flex;            /* Disposición flexible */
+  width: 100%;              /* Ocupa todo el ancho del contenedor */
+}
+
+/* Campo de texto donde el usuario escribe la búsqueda */
+#cuadro-busqueda {
+  flex: 1;                          /* Ocupa todo el espacio disponible */
+  padding: 12px 16px;               /* Espacio interno arriba/abajo y lados */
+  border: 2px solid transparent;    /* Borde transparente de 2px */
+  border-radius: 25px 0 0 25px;     /* Redondeado solo en el lado izquierdo */
+  background: #333;                 /* Fondo gris más oscuro que el encabezado */
+  color: #fff;                      /* Texto en blanco */
+  font-size: 1em;                   /* Tamaño de fuente normal */
+  transition: all 0.3s ease;        /* Transición suave para efectos hover */
+}
+
+/* Texto de ayuda que aparece cuando el campo está vacío */
+#cuadro-busqueda::placeholder {
+  color: #ccc;              /* Color gris claro para el placeholder */
+}
+
+/* Estilo cuando el usuario hace clic en el campo de búsqueda */
+#cuadro-busqueda:focus {
+  border-color: #21b7c2;    /* Borde turquesa cuando está activo */
+  outline: none;            /* Quita el borde predeterminado del navegador */
+  box-shadow: 0 0 10px rgba(33, 183, 194, 0.3); /* Sombra turquesa suave */
+}
+
+/* Efecto hover en el campo de búsqueda */
+#cuadro-busqueda:hover {
+  background: #3a3a3a;      /* Fondo ligeramente más claro */
+}
+
+/* Botón con el icono de la lupa */
+.boton-lupa {
+  background: #21b7c2;              /* Fondo turquesa */
+  border: none;                     /* Sin borde */
+  border-radius: 0 25px 25px 0;     /* Redondeado solo en el lado derecho */
+  padding: 0 16px;                  /* Espacio interno solo en los lados */
+  cursor: pointer;                  /* Cursor de manita */
+  transition: all 0.3s ease;        /* Transición suave para efectos hover */
+}
+
+/* Efecto hover en el botón de la lupa */
+.boton-lupa:hover {
+  background: #1a9bb8;              /* Color turquesa más oscuro */
+  transform: translateY(-2px);      /* Se eleva ligeramente */
+  box-shadow: 0 4px 8px rgba(33, 183, 194, 0.3); /* Sombra turquesa */
+}
+
+/* Icono de la lupa dentro del botón */
+#icono-lupa {
+  width: 20px;              /* Ancho del icono */
+  height: 20px;             /* Alto del icono */
+  transition: transform 0.3s ease; /* Transición para efectos del icono */
+}
+
+/* Efecto hover en el icono de la lupa - gira ligeramente */
+.boton-lupa:hover #icono-lupa {
+  transform: rotate(15deg); /* Rotación de 15 grados */
+}
+
+/* Área derecha con botones de login y carrito */
+.zona-derecha {
+  display: flex;            /* Disposición flexible */
+  align-items: center;      /* Alinea elementos al centro verticalmente */
+  gap: 16px;                /* Espacio entre botones */
+}
+
+/* Estilo común para todos los botones principales */
+.boton-menu, .boton-volver-atras, .boton-login, 
+.boton-carrito, .boton-editar, .boton-salir,
+.boton-detalles, .boton-favorito, .boton-jugar,
+#boton-anadir-juego, #boton-anadir-usuario,
+.boton-editar-juego, .boton-eliminar, .boton-reactivar {
+  display: flex;            /* Disposición flexible */
+  align-items: center;      /* Alinea contenido al centro verticalmente */
+  gap: 6px;                 /* Espacio entre icono y texto */
+  background: #21b7c2;      /* Fondo turquesa */
+  padding: 8px 14px;        /* Espacio interno */
+  border-radius: 6px;       /* Esquinas redondeadas */
+  color: #fff;              /* Texto en blanco */
+  font-weight: bold;        /* Texto en negrita */
+  height: 40px;             /* Altura fija para uniformidad */
+  transition: all 0.3s ease; /* Transición suave para todos los efectos hover */
+}
+
+/* Efectos hover para todos los botones principales */
+.boton-menu:hover, .boton-volver-atras:hover, 
+.boton-login:hover, .boton-carrito:hover, 
+.boton-editar:hover, .boton-salir:hover, .boton-detalles:hover, 
+.boton-favorito:hover, .boton-jugar:hover,
+#boton-anadir-juego:hover, #boton-anadir-usuario:hover,
+.boton-editar-juego:hover, .boton-eliminar:hover, .boton-reactivar:hover {
+  background: #1a9bb8;         /* Color turquesa más oscuro */
+  transform: translateY(-2px); /* Se eleva ligeramente */
+  box-shadow: 0 4px 12px rgba(33, 183, 194, 0.4); /* Sombra turquesa */
+}
+
+/* Efecto hover especial para el botón del menú - el icono gira */
+.boton-menu:hover #icono-menu {
+  transform: rotate(90deg);     /* Rotación de 90 grados */
+}
+
+/* Efecto hover para el botón de login - el icono se agranda */
+.boton-volver-atras:hover #icono-volver, 
+.boton-login:hover #icono-login, 
+.boton-editar:hover #icono-editar, 
+.boton-salir:hover #icono-salir, 
+.boton-reactivar:hover #icono-reactivar {
+  transform: scale(1.2);        /* Aumenta el tamaño un 20% */
+}
+
+/* Efecto hover para el botón del carrito - rebote del icono */
+.boton-carrito:hover #icono-carrito,
+#boton-anadir-juego:hover, #boton-anadir-usuario:hover,
+#icono-anadir {
+  animation: bounce 0.6s ease;  /* Animación de rebote */
+}
+
+/* Animación de rebote para el carrito */
+@keyframes bounce {
+  0%, 20%, 60%, 100% {
+    transform: translateY(0);   /* Posición normal */
+  }
+  40% {
+    transform: translateY(-8px); /* Se eleva */
+  }
+  80% {
+    transform: translateY(-4px); /* Se eleva menos */
+  }
+}
+
+/* Tamaño de los iconos en los botones principales */
+#icono-menu, #icono-volver, #icono-login, 
+#icono-editar, #icono-salir, #icono-reactivar {
+  width: 20px;              /* Ancho estándar de iconos */
+  height: auto;             /* Altura automática para mantener proporción */
+  transition: transform 0.3s ease; /* Transición suave para efectos de iconos */
+}
+
+/* El icono del detalles es ligeramente más grande */
+#icono-detalles, #icono-jugar, #icono-editar, #icono-eliminar, #icono-reactivar {
+  width: 30px;              /* Ancho mayor para mejor visibilidad */
+  height: auto;             /* Altura automática */
+}
+
+/* El icono del carrito es ligeramente más grande */
+#icono-carrito, #icono-anadir {
+  width: 25px;              /* Ancho mayor para mejor visibilidad */
+  height: auto;             /* Altura automática */
+}
+
+/* Número que indica cantidad de productos en el carrito */
+.cantidad-carrito {
+  background: #b81800;      /* Fondo rojo para destacar */
+  border-radius: 50%;       /* Forma circular */
+  padding: 2px 6px;         /* Espacio interno mínimo */
+  font-size: 0.8em;         /* Tamaño de fuente más pequeño */
+  margin-left: 4px;         /* Espacio a la izquierda */
+  transition: all 0.3s ease; /* Transición para efectos hover */
+}
+
+/* Efecto hover en el número del carrito - pulsa */
+.boton-carrito:hover .cantidad-carrito {
+  background: #d91e00;      /* Rojo más brillante */
+  transform: scale(1.1);    /* Aumenta ligeramente de tamaño */
+}
+
+/* MENÚ LATERAL */
+
+/* Checkbox invisible que controla la apertura del menú */
+.control-menu { 
+  display: none;            /* Completamente invisible */
+}
+
+/* Cortina oscura que aparece detrás del menú lateral */
+.cortina {
+  position: fixed;          /* Posición fija en pantalla */
+  top: 0;                   /* Pegada al borde superior */
+  left: 0;                  /* Pegada al borde izquierdo */
+  right: 0;                 /* Pegada al borde derecho */
+  bottom: 0;                /* Pegada al borde inferior */
+  background: linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(26, 26, 26, 0.9) 50%, rgba(17, 17, 17, 0.85) 100%); /* Gradiente oscuro que coincide con el diseño de la página */
+  display: none;            /* Oculta por defecto */
+  backdrop-filter: blur(2px); /* Efecto de desenfoque sutil */
+}
+
+/* Mostrar la cortina cuando el checkbox está marcado */
+.control-menu:checked ~ .cortina {
+  display: block;           /* Se vuelve visible */
+}
+
+/* Panel lateral que contiene el menú */
+.menu-lateral {
+  position: fixed;              /* Posición fija en pantalla */
+  top: 0;                       /* Pegado al borde superior */
+  left: 0;                      /* Pegado al borde izquierdo */
+  width: 280px;                 /* Ancho fijo del menú */
+  height: 100vh;                /* Altura completa de la ventana */
+  background: #111;             /* Fondo muy oscuro */
+  color: #fff;                  /* Texto blanco */
+  transform: translateX(-100%); /* Oculto fuera de pantalla a la izquierda */
+  transition: transform 0.3s;   /* Animación suave de 0.3 segundos */
+  padding: 20px;                /* Espacio interno */
+  box-sizing: border-box;       /* Incluye padding en el ancho total */
+  overflow-y: auto;             /* Scroll vertical si el contenido es largo */
+}
+
+/* Mostrar el menú lateral cuando el checkbox está marcado */
+.control-menu:checked ~ .menu-lateral {
+  transform: translateX(0);     /* Lo mueve a su posición visible */
+}
+
+/* Cabecera del menú lateral */
+.cabecera-lateral {
+  display: flex;                /* Disposición flexible */
+  justify-content: space-between;  /* Distribuye espacio entre elementos */
+  align-items: center;          /* Alinea elementos al centro verticalmente */
+  margin-bottom: 20px;          /* Espacio inferior */
+}
+
+/* Botón para cerrar el menú lateral */
+#boton-cerrar {
+  background: none;             /* Sin fondo */
+  border: none;                 /* Sin borde */
+  color: #fff;                  /* Color blanco */
+  font-size: 1.5em;             /* Tamaño grande para visibilidad */
+  cursor: pointer;              /* Cursor de manita */
+  transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+/* Efecto hover en el botón de cerrar */
+#boton-cerrar:hover {
+  color: #21b7c2;               /* Cambia a color turquesa al pasar el cursor */
+}
+
+/* Lista principal de opciones del menú */
+.lista-menu {
+  list-style: none;            /* Sin viñetas */
+  padding: 0;                  /* Sin espacio interno */
+  margin: 0;                   /* Sin márgenes externos */
+}
+
+/* Cada elemento de la lista del menú */
+.lista-menu li {
+  margin-bottom: 12px;         /* Espacio inferior entre elementos */
+}
+
+/* Enlaces y botones dentro del menú */
+.enlace-menu, .enlace-submenu {
+  display: flex;               /* Disposición flexible para alinear imagen y texto */
+  align-items: center;         /* Centra verticalmente imagen y texto */
+  gap: 12px;                   /* Espacio entre imagen y texto */
+  padding: 12px;               /* Espacio interno */
+  background: #222;            /* Fondo gris oscuro */
+  border-radius: 6px;          /* Esquinas redondeadas */
+  transition: all 0.3s ease;   /* Transición suave para efectos hover */
+  color: #fff;                 /* Texto en blanco */
+  text-decoration: none;       /* Sin subrayado en enlaces */
+  min-height: 44px;            /* Altura mínima para mejor área de click */
+  box-sizing: border-box;      /* Incluye padding en el cálculo del tamaño */
+  cursor: pointer !important;  /* Fuerza el cursor de manita */
+}
+
+/* Asegurar que las imágenes del menú lateral mantengan su tamaño */
+.enlace-menu img {
+  width: 30px;                 /* Ancho fijo de las imágenes */
+  height: 30px;                /* Alto fijo de las imágenes */
+  flex-shrink: 0;              /* Evita que la imagen se reduzca */
+}
+
+/* Asegurar que el texto no se desborde */
+.enlace-menu span {
+  flex: 1;                     /* El texto ocupa el espacio restante */
+}
+
+/* Efecto al pasar el cursor por encima de enlaces y botones del menú */
+.enlace-menu:hover, .enlace-submenu:hover {
+  background: #21b7c2;         /* Cambia a color turquesa */
+  transform: translateX(10px);  /* Se desplaza ligeramente hacia la derecha */
+  box-shadow: 0 2px 8px rgba(33, 183, 194, 0.3); /* Sombra turquesa suave */
+}
+
+
+/* ESTILOS PARA EL SUBMENÚ DE EDICIÓN */
+
+/* Contenedor del elemento con submenú */
+.menu-con-submenu {
+  position: relative;          /* Para posicionar el submenú de forma absoluta dentro */
+}
+
+/* Flecha indicadora del submenú */
+.flecha-submenu {
+  margin-left: auto;           /* Empuja la flecha al extremo derecho */
+  max-width: 10px;              /* Ancho de la imagen de flecha */
+  max-height: 10px;             /* Alto de la imagen de flecha */
+  transition: transform 0.3s ease; /* Transición suave para rotación */
+  flex-shrink: 0;              /* Evita que la imagen se reduzca */
+  filter: brightness(0) invert(1); /* Icono blanco */
+  margin-right: px;         /* Espacio a la derecha */
+}
+
+.enlace-submenu {
+  max-width: 87%;                /* Ancho máximo para el enlace del submenú */
+  margin-left: auto;             /* Empuja la flecha al extremo derecho */
+  margin-top: 12px;               /* Espacio superior */
+  margin-right: 12px;             /* Espacio a la derecha */
+}
+
+/* Estado activo/seleccionado del submenú */
+.enlace-submenu.activo {
+  background: rgba(33, 183, 194, 0.25); /* Fondo más visible para el seleccionado */
+  color: #fff;                           /* Texto blanco para contraste */
+  border-left: 3px solid #26d1de;        /* Borde izquierdo acentuado */
+  border-radius: 4px;                    /* Esquinas suaves */
+}
+
+/* Estilo del enlace principal de edición */
+.enlace-edicion {
+  justify-content: space-between; /* Distribuye espacio entre elementos */
+}
+
+/* Submenú de edición oculto por defecto */
+.submenu-edicion {
+  list-style: none;            /* Sin viñetas */
+  padding: 0;                  /* Sin espaciado interno */
+  margin: 8px 0 0 0;           /* Margen superior para separar del enlace principal */
+  overflow: hidden;            /* Para ocultar contenido */
+  transition: all 0.3s ease;   /* Transición suave */
+}
+
+.icono-submenu {
+  width: 30px;                 /* Ancho fijo de las imágenes */
+  height: 30px;                /* Alto fijo de las imágenes */
+  flex-shrink: 0;              /* Evita que la imagen se reduzca */
+}
+
+/* ESTILOS PARA EL MENÚ DE FILTROS */
+
+/* Lista de filtros - estructura para el formulario */
+.lista-filtros {
+    padding: 0;                  /* Sin espaciado interno */
+    margin: 0;                   /* Sin márgenes */
+    display: flex;               /* Para organizar los elementos */
+    flex-direction: column;      /* Los elementos van uno debajo del otro */
+    height: calc(100vh - 120px); /* Altura total menos espacio de la cabecera */
+}
+
+/* Formulario dentro de los filtros */
+.lista-filtros form {
+    flex: 1;                     /* Ocupa todo el espacio disponible */
+    display: flex;               /* Para organizar los elementos internos */
+    flex-direction: column;      /* Elementos uno debajo del otro */
+    padding: 0;                  /* Sin espaciado */
+    margin: 0;                   /* Sin márgenes */
+}
+
+/* Cada grupo de filtro */
+.categoria-filtro {
+    margin-bottom: 15px;         /* Espacio entre cada filtro */
+    padding: 12px 15px;          /* Espaciado interno cómodo */
+    background: rgba(33, 183, 194, 0.08); /* Fondo turquesa muy claro */
+    border-radius: 6px;          /* Esquinas redondeadas */
+    border-left: 3px solid #21b7c2; /* Línea izquierda turquesa */
+}
+
+/* Etiquetas de los filtros */
+.categoria-filtro label {
+    display: block;              /* Ocupa toda la línea */
+    color: #21b7c2;              /* Color turquesa */
+    font-weight: bold;           /* Texto en negrita */
+    margin-bottom: 8px;          /* Espacio inferior */
+    font-size: 0.95rem;          /* Tamaño de letra un poco más pequeño */
+}
+
+/* Listas desplegables de los filtros */
+.categoria-filtro select {
+    width: 100%;                 /* Ancho completo */
+    padding: 8px 12px;           /* Espaciado interno */
+    background: #333;            /* Fondo gris oscuro */
+    color: #fff;                 /* Texto blanco */
+    border: 1px solid #21b7c2;   /* Borde turquesa */
+    border-radius: 4px;          /* Esquinas ligeramente redondeadas */
+    font-size: 0.9rem;           /* Tamaño de letra apropiado */
+}
+
+/* Cuando se pasa el ratón por encima de las listas */
+.categoria-filtro select:hover {
+    background: #3a3a3a;         /* Fondo un poco más claro */
+    border-color: #26d1de;       /* Borde turquesa más brillante */
+}
+
+/* Cuando se hace clic en las listas */
+.categoria-filtro select:focus {
+    outline: none;               /* Sin borde predeterminado */
+    border-color: #26d1de;       /* Borde turquesa brillante */
+    box-shadow: 0 0 8px rgba(38, 209, 222, 0.3); /* Sombra turquesa suave */
+}
+
+/* Barras deslizantes de precio */
+.categoria-filtro input[type="range"] {
+    width: 100%;                 /* Ancho completo */
+    margin: 8px 0;               /* Margen arriba y abajo */
+    height: 6px;                 /* Altura de la barra */
+    background: #333;            /* Fondo gris oscuro */
+    border-radius: 3px;          /* Esquinas redondeadas */
+    outline: none;               /* Sin borde al hacer clic */
+    cursor: pointer;             /* Cursor de manita */
+}
+
+/* Números que muestran el valor de las barras */
+.categoria-filtro output {
+    display: inline-block;       /* En línea pero con propiedades especiales */
+    background: #21b7c2;         /* Fondo turquesa */
+    color: #fff;                 /* Texto blanco */
+    padding: 4px 8px;            /* Espaciado interno pequeño */
+    border-radius: 12px;         /* Bordes muy redondeados */
+    font-size: 0.85rem;          /* Tamaño de letra pequeño */
+    font-weight: bold;           /* Texto en negrita */
+    margin-left: 8px;            /* Espacio a la izquierda */
+    min-width: 35px;             /* Ancho mínimo */
+    text-align: center;          /* Texto centrado */
+}
+
+/* Inputs de tipo fecha (date) */
+.categoria-filtro input[type="date"] {
+    width: 100%;                 /* Ancho completo del contenedor */
+    padding: 8px 12px;           /* Espaciado interno igual que los selects */
+    background: #333;            /* Fondo gris oscuro */
+    color: #fff;                 /* Texto blanco */
+    border-radius: 4px;          /* Esquinas redondeadas */
+    font-size: 0.9rem;           /* Tamaño de letra */
+    cursor: pointer;             /* Cursor de manita */
+    transition: all 0.3s ease;   /* Transición suave */
+    color-scheme: dark;          /* Esquema de color oscuro para el calendario */
+    border: 1px solid #21b7c2;   /* Borde turquesa */
+ }
+
+/* Cuando se pasa el ratón por el input date */
+.categoria-filtro input[type="date"]:hover {
+    background: #3a3a3a;         /* Fondo un poco más claro */
+    border-color: #26d1de;       /* Borde turquesa más brillante */
+}
+
+/* Cuando el input date tiene el foco */
+.categoria-filtro input[type="date"]:focus {
+    outline: none;               /* Sin borde predeterminado */
+    border-color: #26d1de;       /* Borde turquesa brillante */
+    box-shadow: 0 0 8px rgba(38, 209, 222, 0.3); /* Sombra turquesa suave */
+}
+
+/* Estilos para el icono del calendario en inputs date */
+.categoria-filtro input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: brightness(0) invert(1); /* Convierte el icono a blanco */
+    cursor: pointer;             /* Cursor de manita */
+    opacity: 0.8;                /* Opacidad reducida */
+    transition: opacity 0.3s;    /* Transición suave */
+}
+
+/* Cuando se pasa el ratón por el icono del calendario */
+.categoria-filtro input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;                  /* Opacidad completa */
+}
+
+/* Áreas que contienen los botones de aplicar filtros, limpiar filtros y volver */
+.zona-boton-volver, .acciones-filtro {
+    margin-top: 15px;            /* Margen superior igual que acciones-filtro */
+    padding: 15px;               /* Espaciado interno igual */
+    background: rgba(33, 183, 194, 0.05); /* Fondo turquesa muy claro */
+    border-radius: 6px;          /* Esquinas redondeadas */
+}
+
+/* Botones de volver, limpiar filtros y aplicar filtros */
+.boton-volver, .boton-limpiar, .boton-aplicar {
+    width: 100%;                 /* Ocupa todo el ancho del contenedor */
+    padding: 10px 15px;          /* Espaciado interno igual que otros botones */
+    background: #21b7c2;         /* Fondo turquesa */
+    color: #fff;                 /* Texto blanco */
+    border: 2px solid #21b7c2;   /* Borde turquesa */
+    border-radius: 6px;          /* Esquinas redondeadas igual que los otros */
+    font-size: 0.9rem;           /* Tamaño de letra igual */
+    font-weight: bold;           /* Texto en negrita */
+    cursor: pointer;             /* Cursor de manita */
+    transition: all 0.3s ease;   /* Transición suave */
+}
+
+/* Cuando se pasa el ratón por el botón volver, limpiar y aplicar */
+.boton-volver:hover, .boton-limpiar:hover, .boton-aplicar:hover {
+    background: #21b7c2;         /* Fondo turquesa igual que boton-limpiar */
+    color: #fff;                 /* Texto blanco */
+    transform: translateY(-2px); /* Se eleva un poquito igual que los otros */
+    box-shadow: 0 4px 8px rgba(33, 183, 194, 0.3); /* Sombra turquesa */
+}
+
+/* Cuando se hace clic en el botón volver */
+.boton-volver:active {
+    transform: translateY(-1px); /* Se eleva menos al hacer clic */
+}
+
+.enlace-modo-vision {
+  display: flex;                      /* que ocupe toda la anchura disponible */
+  width: 100%;                         /* ancho completo del contenedor (menu-lateral) */
+  background: #ffffff;                 /* fondo blanco solicitado */
+  color: #111;                         /* texto oscuro para contraste sobre blanco */
+  padding: 12px 21px;                  /* padding cómodo para área de click */
+  border-radius: 0;                    /* sin radios para que toque los bordes */
+  text-decoration: none;               /* sin subrayado */
+  font-weight: bold;                   /* destacarlo como opción importante */
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.12); /* sombra sutil por encima para separarlo */
+  position: absolute;                  /* fijo respecto al contenedor .menu-lateral */
+  left: 0;                             /* alinear al borde izquierdo */
+  bottom: 0;                           /* fijarlo en la parte inferior */
+  box-sizing: border-box;              /* incluir padding en el ancho */
+  border-top: 1px solid rgba(0,0,0,0.06); /* separación sutil con el contenido */
+  text-align: center;                  /* centrar el texto */
+  z-index: 1200;                       /* sobre otros elementos dentro del menú */
+  align-items: center;               /* centrar verticalmente */
+  gap: 4px;                             /* espacio entre icono y texto */
+  transition: all 0.3s ease;          /* transición suave para efectos hover */
+}
+
+/* Hover / focus states para accesibilidad y retroalimentación */
+.enlace-modo-vision:hover,
+.enlace-modo-vision:focus {
+  background: #f5f5f5;                 /* ligero cambio de fondo al pasar el cursor */
+  transform: translateY(-1px);         /* pequeño movimiento para indicar interacción */
+}
+
+
+/* RESPONSIVE - MEDIA QUERIES */
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .encabezado {
+        padding: 8px 15px; /* Menos padding en tablets */
+    }
+    
+    .barra-encabezado {
+        gap: 15px; /* Menos espacio entre elementos */
+    }
+    
+    .zona-buscador {
+        max-width: 500px; /* Buscador más pequeño en tablets */
+    }
+    
+    #logo-sitio {
+        height: 60px; /* Logo más pequeño */
+    }
+    
+    .titulo-sitio {
+        font-size: 1.3em; /* Título un poco más pequeño */
+    }
+    
+    /* Botones del encabezado más compactos */
+    .boton-menu, .boton-volver-atras, .boton-login, 
+    .boton-carrito, .boton-editar, .boton-salir,
+    .boton-detalles, .boton-favorito, .boton-jugar,
+    #boton-anadir-juego, #boton-anadir-usuario,
+    .boton-editar-juego, .boton-eliminar, .boton-reactivar {
+        padding: 6px 10px; /* Menos padding */
+        height: 36px; /* Altura reducida */
+        font-size: 0.9em; /* Texto más pequeño */
+    }
+    
+    #cuadro-busqueda {
+        padding: 10px 14px; /* Campo de búsqueda más compacto */
+        font-size: 0.9em; /* Texto más pequeño */
+    }
+    
+    .menu-lateral {
+        width: 260px; /* Menú lateral más estrecho */
+    }
+}
+
+/* Móviles grandes */
+@media (max-width: 768px) {
+    .encabezado {
+        padding: 6px 10px; /* Padding mínimo en móviles */
+    }
+    
+    .barra-encabezado {
+        gap: 10px; /* Espacio mínimo entre elementos */
+    }
+    
+    .zona-buscador {
+        max-width: 400px; /* Buscador aún más pequeño */
+    }
+    
+    #logo-sitio {
+        height: 50px; /* Logo más pequeño en móviles */
+    }
+    
+    .titulo-sitio {
+        font-size: 1.1em; /* Título más pequeño */
+    }
+    
+    /* Botones muy compactos en móviles */
+    .boton-menu, .boton-volver-atras, .boton-login, 
+    .boton-carrito, .boton-editar, .boton-salir,
+    .boton-detalles, .boton-favorito, .boton-jugar,
+    #boton-anadir-juego, #boton-anadir-usuario,
+    .boton-editar-juego, .boton-eliminar, .boton-reactivar {
+        padding: 5px 8px; /* Padding muy reducido */
+        height: 32px; /* Altura mínima */
+        font-size: 0.85em; /* Texto más pequeño */
+        gap: 4px; /* Menos espacio entre icono y texto */
+    }
+    
+    /* Iconos más pequeños en móviles */
+    #icono-menu, #icono-volver, #icono-login, 
+    #icono-editar, #icono-salir, #icono-favoritos, #icono-reactivar {
+        width: 18px; /* Iconos más pequeños */
+    }
+    
+    #icono-carrito, #icono-anadir {
+        width: 22px; /* Carrito un poco más grande pero reducido */
+    }
+    
+    #cuadro-busqueda {
+        padding: 8px 12px; /* Campo muy compacto */
+        font-size: 0.85em; /* Texto pequeño */
+    }
+    
+    .boton-lupa {
+        padding: 0 12px; /* Botón lupa más compacto */
+    }
+    
+    #icono-lupa {
+        width: 18px; /* Lupa más pequeña */
+        height: 18px;
+    }
+    
+    .menu-lateral {
+        width: 240px; /* Menú lateral más estrecho */
+        padding: 15px; /* Menos padding interno */
+    }
+    
+    .enlace-menu {
+        padding: 10px; /* Enlaces del menú más compactos */
+        gap: 10px; /* Menos espacio entre imagen y texto */
+    }
+    
+    .enlace-menu img {
+        width: 25px; /* Imágenes del menú más pequeñas */
+        height: 25px;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    .encabezado {
+        padding: 5px 8px; /* Padding mínimo absoluto */
+    }
+    
+    .barra-encabezado {
+        gap: 8px; /* Espacio muy reducido */
+        flex-wrap: wrap; /* Permite que se envuelvan elementos si es necesario */
+    }
+    
+    .zona-identidad {
+        gap: 8px; /* Menos espacio entre logo y título */
+    }
+    
+    #logo-sitio {
+        height: 45px; /* Logo muy pequeño */
+    }
+    
+    .titulo-sitio {
+        font-size: 1em; /* Título compacto */
+    }
+    
+    .zona-buscador {
+        order: 3; /* Mueve el buscador al final */
+        width: 100%; /* Buscador ocupa toda la línea */
+        max-width: none; /* Sin límite de ancho */
+        margin-top: 5px; /* Espacio superior */
+    }
+    
+    /* Botones extremadamente compactos */
+    .boton-menu, .boton-volver-atras, .boton-login, 
+    .boton-carrito, .boton-editar, .boton-salir,
+    #boton-anadir-juego, #boton-anadir-usuario {
+        padding: 4px 6px; /* Padding mínimo */
+        height: 28px; /* Altura muy reducida */
+        font-size: 0.8em; /* Texto muy pequeño */
+        gap: 3px; /* Espacio mínimo entre icono y texto */
+    }
+    
+    /* Ocultar texto en algunos botones para ahorrar espacio */
+    .boton-menu span,
+    .boton-volver-atras span,
+    .boton-login span,
+    .boton-editar span,
+    .boton-salir span {
+        display: none; /* Solo mostrar iconos */
+    }
+    
+    .boton-carrito span:last-child {
+        display: none; /* Ocultar texto "Carrito" */
+    }
+    
+    /* Iconos muy pequeños */
+    #icono-menu, #icono-volver, #icono-login, 
+    #icono-editar, #icono-salir, #icono-favoritos, #icono-reactivar {
+        width: 16px; /* Iconos mínimos */
+    }
+    
+    #icono-carrito, #icono-anadir {
+        width: 20px; /* Carrito pequeño */
+    }
+    
+    #cuadro-busqueda {
+        padding: 6px 10px; /* Campo muy compacto */
+        font-size: 0.8em; /* Texto muy pequeño */
+    }
+    
+    .boton-lupa {
+        padding: 0 10px; /* Botón lupa muy compacto */
+    }
+    
+    #icono-lupa {
+        width: 16px; /* Lupa muy pequeña */
+        height: 16px;
+    }
+    
+    .menu-lateral {
+        width: 220px; /* Menú lateral muy estrecho */
+        padding: 12px; /* Padding mínimo */
+    }
+    
+    .cabecera-lateral {
+        margin-bottom: 15px; /* Menos espacio en cabecera */
+    }
+    
+    .enlace-menu {
+        padding: 8px; /* Enlaces muy compactos */
+        gap: 8px; /* Espacio mínimo */
+        min-height: 40px; /* Altura mínima reducida */
+    }
+    
+    .enlace-menu img {
+        width: 22px; /* Imágenes muy pequeñas */
+        height: 22px;
+    }
+    
+    /* Filtros más compactos */
+    .categoria-filtro {
+        margin-bottom: 12px; /* Menos espacio entre filtros */
+        padding: 10px 12px; /* Padding reducido */
+    }
+    
+    .categoria-filtro label {
+        font-size: 0.9rem; /* Etiquetas más pequeñas */
+        margin-bottom: 6px; /* Menos espacio */
+    }
+    
+    .categoria-filtro select {
+        padding: 6px 10px; /* Selects más compactos */
+        font-size: 0.85rem; /* Texto más pequeño */
+    }
+    
+    .boton-volver, .boton-limpiar, .boton-aplicar {
+        padding: 8px 12px; /* Botones de filtros más compactos */
+        font-size: 0.85rem; /* Texto más pequeño */
+    }
+}
+
+/* Móviles muy pequeños (menos de 360px) */
+@media (max-width: 360px) {
+    .titulo-sitio {
+        display: none; /* Ocultar título en pantallas muy pequeñas */
+    }
+    
+    .zona-derecha {
+        gap: 6px; /* Espacio mínimo entre botones */
+    }
+    
+    .menu-lateral {
+        width: 200px; /* Menú muy estrecho */
+    }
+    
+    .cantidad-carrito {
+        font-size: 0.7em; /* Número del carrito muy pequeño */
+        padding: 1px 4px; /* Padding mínimo */
+    }
+}
