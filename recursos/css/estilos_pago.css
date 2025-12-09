@@ -168,6 +168,49 @@ input:focus-visible {
     min-height: 48px; /* Altura mínima para que sea fácil de pulsar */
 }
 
+/* Botón para método de pago con tarjeta */
+#boton-tarjeta {
+    width: 100%; /* Ancho completo */
+    background: #21b7c2; /* Fondo turquesa sólido */
+    color: #fff; /* Texto blanco */
+    padding: 16px 24px; /* Espaciado interno generoso */
+    border: none; /* Sin borde */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 1.1em; /* Tamaño grande */
+    font-weight: bold; /* Negrita */
+    cursor: pointer; /* Cursor de mano */
+    transition: all 0.3s ease; /* Transición suave */
+    min-height: 56px; /* Altura mínima para que sea fácil de pulsar */
+    display: flex; /* Flexbox */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    gap: 12px; /* Espacio entre icono y texto */
+}
+
+/* Ícono de tarjeta dentro del botón */
+#boton-tarjeta .icono-tarjeta {
+    height: 24px; /* Altura del icono */
+    width: auto; /* Ancho automático */
+    filter: brightness(0) invert(1); /* Vuelvo el icono blanco */
+}
+
+/* Texto del botón de tarjeta */
+#boton-tarjeta span {
+    font-size: 1em; /* Tamaño del texto */
+    line-height: 1; /* Altura de línea */
+}
+
+/* Efecto hover en botón de tarjeta */
+#boton-tarjeta:hover {
+    background: #1a9bb8; /* Turquesa más oscuro */
+    transform: translateY(-2px); /* Se eleva un poco */
+}
+
+/* Efecto active en botón de tarjeta */
+#boton-tarjeta:active {
+    transform: translateY(0); /* Vuelve a su posición */
+}
+
 /* Cuando paso el ratón por el botón */
 .boton-pagar:hover {
     background: #1a9bb8; /* Turquesa más oscuro */
@@ -190,6 +233,63 @@ input:focus-visible {
 .boton-pagar:focus-visible {
     outline: 2px solid #21b7c2; /* Borde turquesa */
     outline-offset: 2px; /* Separación del borde */
+}
+
+/* Separador horizontal */
+hr {
+    width: 80%; /* No muy ancha para que se vea bien */
+    height: 2px; /* Finita pero visible */
+    border: none; /* Quito el borde feo por defecto */
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(33, 183, 194, 0.3) 20%, 
+        rgba(33, 183, 194, 0.6) 50%, 
+        rgba(33, 183, 194, 0.3) 80%, 
+        transparent 100%); /* Gradiente turquesa que se desvanece */
+    margin: 10px auto 15px auto; /* Centrada y con espacios cómodos */
+    border-radius: 2px; /* Bordes ligeramente suaves */
+    opacity: 0.8; /* Un poquito transparente para que no destaque demasiado */
+}
+
+/* Botón de PayPal (compra o reembolso) */
+#boton-paypal button.paypal-estilo {
+    background: #ffc439; /* Color amarillo característico de PayPal */
+    color: #2C2E2F; /* Texto oscuro */
+    display: inline-block; /* Bloque en línea */
+    text-align: center; /* Centrado */
+    min-height: max-content; /* Altura automática */
+    height: 100%; /* Altura completa */
+    padding: 12px 12px; /* Espaciado interno */
+    position: relative; /* Posición relativa */
+    width: 100%; /* Ancho completo */
+    box-sizing: border-box; /* Incluyo padding y border en el ancho */
+    border: none; /* Sin borde */
+    vertical-align: top; /* Alineación superior */
+    cursor: pointer; /* Cursor de mano */
+    overflow: hidden; /* Oculta desbordamientos */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+    user-select: none; /* No seleccionable */
+    white-space: nowrap; /* No permite saltos de línea */
+    text-transform: none; /* Sin transformación de texto */
+    font-size: 0; /* Tamaño de fuente 0 para ocultar texto */
+    font-family: PayPal Plain, system-ui, -apple-system, Roboto, "Segoe UI", Helvetica-Neue, Helvetica, Arial, sans-serif; /* Fuente específica de PayPal */
+}
+
+/* Efecto hover en el botón de PayPal */
+#boton-paypal button.paypal-estilo:hover {
+    background: #ffc439; /* Color amarillo característico de PayPal */
+    transform: translateY(-1px); /* Se eleva un poco */
+}
+
+/* Logo de PayPal dentro del botón */
+#boton-paypal button.paypal-estilo img {
+    height: 22px; /* Altura del logo */
+    vertical-align: middle; /* Alineación vertical */
+}
+
+/* Estilo específico para la tarjeta de solo PayPal */
+.solo-paypal {
+    min-width: 600px; /* Ancho máximo para solo PayPal */
 }
 
 /* Contenedor de logos de pago */
@@ -227,8 +327,9 @@ input:focus-visible {
         max-width: 500px; /* Ancho máximo ajustado */
     }
 
-    .tarjeta-pago h2 {
+    h2 {
         font-size: 1.25em; /* Subtítulos más pequeños */
+        margin: 28px 0 18px 0; /* Espacio ajustado */
     }
 
     .input-pago {
@@ -236,10 +337,15 @@ input:focus-visible {
         font-size: 0.98em; /* Texto un poco más pequeño */
     }
 
-    .boton-pagar {
+    .boton-pagar,
+    #boton-tarjeta {
         padding: 11px 60px; /* Menos padding */
         font-size: 1.05em; /* Texto un poco más pequeño */
         min-height: 46px; /* Altura ajustada */
+    }
+
+    .solo-paypal {
+        min-width: 500px; /* Ajustar ancho */
     }
 }
 
@@ -259,7 +365,13 @@ input:focus-visible {
         max-width: 450px; /* Ancho ajustado */
     }
 
-    .boton-pagar {
+    h2 {
+        font-size: 1.2em; /* Subtítulos ajustados */
+        margin: 25px 0 16px 0; /* Menos espacio */
+    }
+
+    .boton-pagar,
+    #boton-tarjeta {
         padding: 11px 50px; /* Menos padding horizontal */
         min-height: 44px; /* Altura ajustada */
     }
@@ -268,6 +380,14 @@ input:focus-visible {
         padding: 10px 14px; /* Menos padding */
         font-size: 0.95em; /* Texto más pequeño */
         margin-bottom: 18px; /* Menos espacio */
+    }
+
+    .fila-pago {
+        gap: 10px; /* Menos espacio entre campos */
+    }
+
+    .solo-paypal {
+        min-width: 450px; /* Ajustar ancho */
     }
 }
 
@@ -288,9 +408,9 @@ input:focus-visible {
         border-radius: 10px; /* Bordes menos redondeados */
     }
 
-    .tarjeta-pago h2 {
+    h2 {
         font-size: 1.1em; /* Subtítulos pequeños */
-        margin: 25px 0 15px 0; /* Menos espacio */
+        margin: 20px 0 14px 0; /* Menos espacio */
     }
 
     .input-pago {
@@ -300,7 +420,8 @@ input:focus-visible {
         border-radius: 20px; /* Bordes menos redondeados */
     }
 
-    .boton-pagar {
+    .boton-pagar,
+    #boton-tarjeta {
         padding: 10px 40px; /* Padding ajustado */
         font-size: 1em; /* Tamaño normal */
         min-height: 42px; /* Altura reducida */
@@ -308,8 +429,25 @@ input:focus-visible {
         border-radius: 20px; /* Bordes menos redondeados */
     }
 
+    #boton-tarjeta {
+        padding: 14px 20px; /* Padding específico para botón tarjeta */
+        gap: 10px; /* Menos espacio entre icono y texto */
+    }
+
+    #boton-tarjeta .icono-tarjeta {
+        height: 20px; /* Icono más pequeño */
+    }
+
+    .fila-pago {
+        gap: 8px; /* Menos espacio */
+    }
+
     .logos-pago img {
         max-width: 98%; /* Ancho casi completo */
+    }
+
+    .solo-paypal {
+        min-width: 100%; /* Ancho completo en móviles */
     }
 }
 
@@ -330,7 +468,7 @@ input:focus-visible {
         border-radius: 8px; /* Bordes poco redondeados */
     }
 
-    .tarjeta-pago h2 {
+    h2 {
         font-size: 1em; /* Subtítulos pequeños */
         margin: 15px 0 12px 0; /* Poco espacio */
     }
@@ -342,7 +480,8 @@ input:focus-visible {
         border-radius: 18px; /* Bordes poco redondeados */
     }
 
-    .boton-pagar {
+    .boton-pagar,
+    #boton-tarjeta {
         padding: 8px 30px; /* Padding mínimo */
         font-size: 0.95em; /* Texto pequeño */
         min-height: 38px; /* Altura mínima */
@@ -350,7 +489,26 @@ input:focus-visible {
         border-radius: 18px; /* Bordes poco redondeados */
     }
 
+    #boton-tarjeta {
+        padding: 12px 16px; /* Padding específico */
+        gap: 8px; /* Espacio mínimo entre icono y texto */
+        font-size: 0.9em; /* Texto más pequeño */
+    }
+
+    #boton-tarjeta .icono-tarjeta {
+        height: 18px; /* Icono muy pequeño */
+    }
+
+    .fila-pago {
+        flex-direction: column; /* Columna en pantallas muy pequeñas */
+        gap: 0; /* Sin espacio entre campos */
+    }
+
     .logos-pago img {
         max-width: 100%; /* Ancho completo */
+    }
+
+    .solo-paypal {
+        min-width: 100%; /* Ancho completo */
     }
 }

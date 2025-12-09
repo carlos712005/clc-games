@@ -15,6 +15,7 @@
     }
 
     $id_usuario = (int)$_GET['id']; /* Convierto el ID a entero para seguridad */
+    $_SESSION['id_usuario_buscado'] = $id_usuario; /* Guardo el ID del usuario buscado */
 
     try { /* Inicio bloque try para capturar errores de base de datos */
         // Obtener los datos del usuario

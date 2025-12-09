@@ -1,5 +1,22 @@
 <?php
 
+    // Función para verificar si el último historial coincide con el tipo y estado dados
+    function verificarExistencia($conexion, $ultimo_historial_id, $tipo, $estado) {
+        $consulta = $conexion->prepare("
+            SELECT h.id AS id_historial, h.id_usuario, h.tipo, h.estado, h.total, h.metodo_pago, h.comentario, h.creado_en,
+                    hc.id AS id_detalle, hc.id_juego, hc.precio, hc.estado AS estado_detalle, hc.comentario AS comentario_detalle
+            FROM historial h
+            INNER JOIN historial_compras hc ON hc.id_historial = h.id
+            WHERE h.id = :id_historial AND h.tipo = :tipo AND h.estado = :estado
+            LIMIT 1
+        "); /* Verifico si el último historial coincide con el tipo y estado especificados */
+        $consulta->bindParam(':id_historial', $ultimo_historial_id, PDO::PARAM_INT); /* Vinculo el ID del historial */
+        $consulta->bindParam(':tipo', $tipo, PDO::PARAM_STR); /* Vinculo el tipo */
+        $consulta->bindParam(':estado', $estado, PDO::PARAM_STR); /* Vinculo el estado */
+        $consulta->execute(); /* Ejecuto la consulta */
+        return $consulta->fetch(PDO::FETCH_ASSOC); /* Retorno el resultado */
+    }
+
     // Función para mostrar los juegos con filtros aplicados
     function mostrarJuegos($juegos, $conexion, $es_admin_panel = false, $id_usuario = null) { /* Función principal que recibe los juegos, la conexión a BD, opcionalmente si es panel admin y opcionalmente un id_usuario específico */
         // Variable para determinar si mostrar el juego
@@ -10,11 +27,21 @@
         // Determinar qué id_usuario usar (el pasado como parámetro o el de la sesión)
         $id_usuario_actual = $id_usuario !== null ? $id_usuario : (isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : null);
         
+        if (empty($juegos)) { /* Si no hay juegos */ ?>
+            <div class="sin-juegos"> <!-- Contenedor para el mensaje -->
+                <h2 data-translate="no_hay_juegos">No hay juegos disponibles.</h2> <!-- Mensaje informativo -->
+            </div>
+            <?php return; /* Termino la función si no hay historial */
+        }
+
         foreach ($juegos as $juego) { /* Recorro todos los juegos que me llegaron */
             try { /* Inicio bloque try para capturar errores de base de datos */
                 
                 $existe_en_carrito = false; /* Inicializo la variable que indica si el juego está en el carrito */
                 $existe_en_biblioteca = false; /* Inicializo la variable que indica si el juego está en la biblioteca */
+                $reserva_solicitada = false; /* Inicializo la variable que indica si el juego tiene una reserva solicitada */
+                $reserva_aprobada = false; /* Inicializo la variable que indica si el juego tiene una reserva aprobada */
+                $reserva_rechazada = false; /* Inicializo la variable que indica si el juego tiene una reserva rechazada */
 
                 if($id_usuario_actual !== null) { /* Si hay un usuario especificado (logueado o pasado como parámetro) */
                     // Verificar si el juego está en el carrito para el usuario especificado
@@ -34,6 +61,29 @@
                     $juego_en_biblioteca = $consulta->fetch(PDO::FETCH_ASSOC); /* Obtengo los datos del juego como array asociativo */
 
                     if($juego_en_biblioteca) $existe_en_biblioteca = true; /* Marco que el juego está en la biblioteca */
+                
+                    // Obtengo el ID del último registro en historial para este usuario+juego (cualquier tipo/estado)
+                    $consulta = $conexion->prepare("
+                        SELECT h.id
+                        FROM historial h
+                        INNER JOIN historial_compras hc ON hc.id_historial = h.id
+                        WHERE h.id_usuario = :id_usuario AND hc.id_juego = :id_juego
+                        ORDER BY h.creado_en DESC
+                        LIMIT 1
+                    "); /* Último historial asociado al juego para el usuario */
+                    $consulta->bindParam(':id_usuario', $id_usuario_actual, PDO::PARAM_INT); /* Vinculo el ID del usuario */
+                    $consulta->bindParam(':id_juego', $juego['id'], PDO::PARAM_INT); /* Vinculo el ID del juego */
+                    $consulta->execute(); /* Ejecuto la consulta */
+                    $ultimo_historial_id = $consulta->fetchColumn(); /* ID del último historial (o false si no hay) */
+
+                    if($ultimo_historial_id) { /* Si existe algún historial previo del juego */
+                        $reserva_en_solicitud = verificarExistencia($conexion, $ultimo_historial_id, 'RESERVA', 'PENDIENTE'); /* Verifico si el último historial es una reserva pendiente */
+                        $reserva_esta_aprobada = verificarExistencia($conexion, $ultimo_historial_id, 'RESERVA', 'APROBADA'); /* Verifico si el último historial es una reserva aprobada */
+                        $reserva_esta_rechazada = verificarExistencia($conexion, $ultimo_historial_id, 'RESERVA', 'RECHAZADA'); /* Verifico si el último historial es una reserva rechazada */
+                        if($reserva_en_solicitud) $reserva_solicitada = true; /* Si el último registro es reserva pendiente, marco la bandera */
+                        if($reserva_esta_aprobada) $reserva_aprobada = true; /* Si el último registro es reserva aprobada, marco la bandera */
+                        if($reserva_esta_rechazada) $reserva_rechazada = true; /* Si el último registro es reserva rechazada, marco la bandera */
+                    }
                 }
                 
                 // Obtener los filtros asociados al juego actual
@@ -139,57 +189,71 @@
                     
                     ?> <!-- Inicio de HTML para mostrar el juego -->
                     <div class="juego"> <!-- Contenedor principal de cada juego -->
+                        <?php 
+                        $es_proximamente = false; /* Inicializo la variable que indica si el juego es próximo a lanzarse */
+                        // Verificar si el juego tiene fecha de lanzamiento futura
+                        if(isset($juego['fecha_lanzamiento']) && strtotime($juego['fecha_lanzamiento']) > time()) {
+                            $es_proximamente = true; /* Marco que el juego es próximo a lanzarse */
+                        }
+                        ?>
                         <h2><?php echo htmlspecialchars($juego['nombre']); ?></h2> <!-- Título del juego, escapado para seguridad -->
+                        <?php if($es_proximamente) { ?> <!-- Si el juego está próximo a lanzarse -->
+                            <div class="etiqueta-proximamente"> <!-- Contenedor para la etiqueta de próximo lanzamiento -->
+                                <p><strong>Próximamente - Lanzamiento: <?php echo date('d/m/Y', strtotime($juego['fecha_lanzamiento'])); ?></strong></p> <!-- Muestro la fecha de lanzamiento formateada -->
+                            </div>
+                        <?php } ?> <!-- Fin del condicional de juego próximamente -->
                         <img src="../<?php echo htmlspecialchars($juego['portada']); ?>" alt="<?php echo htmlspecialchars($juego['nombre']); ?>" id="imagen-juego"> <!-- Imagen del juego con ruta relativa -->
-                        <p>Tipo de juego: <?php echo htmlspecialchars($nombre_tipo); ?></p> <!-- Muestro el tipo de juego que obtuve antes -->
-                        <p>Generos: <?php /* Inicio sección para mostrar géneros */
-                                        if(!empty($datos_filtros_juego)) { /* Si el juego tiene filtros asociados */
-                                            $generos = []; /* Array para almacenar los géneros */
-                                            foreach($datos_filtros_juego as $filtro) { /* Recorro todos los filtros del juego */
-                                                if($filtro['tipo_filtro'] === 'generos') { /* Si el filtro es un género */
-                                                    $generos[] = htmlspecialchars($filtro['nombre']); /* Añado el género al array, escapado */
-                                                } 
-                                            }
-                                            if(!empty($generos)) { /* Si encontré géneros */
-                                                echo implode(', ', $generos) . '.'; /* Los muestro separados por comas */
-                                            }
-                                        } ?></p> <!-- Cierro la sección de géneros -->
-                        <p>Categorías: <?php /* Inicio sección para mostrar categorías */
-                                        if(!empty($datos_filtros_juego)) { /* Si el juego tiene filtros asociados */
-                                            $categorias = []; /* Array para almacenar las categorías */
-                                            foreach($datos_filtros_juego as $filtro) { /* Recorro todos los filtros del juego */
-                                                if($filtro['tipo_filtro'] === 'categorias') { /* Si el filtro es una categoría */
-                                                    $categorias[] = htmlspecialchars($filtro['nombre']); /* Añado la categoría al array, escapado */
-                                                } 
-                                            }
-                                            if(!empty($categorias)) { /* Si encontré categorías */
-                                                echo implode(', ', $categorias) . '.'; /* Las muestro separadas por comas */
-                                            }
-                                        } ?></p> <!-- Cierro la sección de categorías -->
-                        <p>Modos: <?php /* Inicio sección para mostrar modos de juego */
-                                        if(!empty($datos_filtros_juego)) { /* Si el juego tiene filtros asociados */
-                                            $modos = []; /* Array para almacenar los modos */
-                                            foreach($datos_filtros_juego as $filtro) { /* Recorro todos los filtros del juego */
-                                                if($filtro['tipo_filtro'] === 'modos') { /* Si el filtro es un modo */
-                                                    $modos[] = htmlspecialchars($filtro['nombre']); /* Añado el modo al array, escapado */
-                                                } 
-                                            }
-                                            if(!empty($modos)) { /* Si encontré modos */
-                                                echo implode(', ', $modos) . '.'; /* Los muestro separados por comas */
-                                            }
-                                        } ?></p> <!-- Cierro la sección de modos -->
-                        <p>Clasificaciones PEGI: <?php /* Inicio sección para mostrar clasificaciones PEGI */
-                                        if(!empty($datos_filtros_juego)) { /* Si el juego tiene filtros asociados */
-                                            $clasificaciones = []; /* Array para almacenar las clasificaciones */
-                                            foreach($datos_filtros_juego as $filtro) { /* Recorro todos los filtros del juego */
-                                                if($filtro['tipo_filtro'] === 'clasificacionPEGI') { /* Si el filtro es una clasificación PEGI */
-                                                    $clasificaciones[] = htmlspecialchars($filtro['nombre']); /* Añado la clasificación al array, escapado */
-                                                } 
-                                            }
-                                            if(!empty($clasificaciones)) { /* Si encontré clasificaciones */
-                                                echo implode(', ', $clasificaciones) . '.'; /* Las muestro separadas por comas */
-                                            }
-                                        } ?></p> <!-- Cierro la sección de clasificaciones PEGI -->
+                        <div class="info-juego"> <!-- Grupo de etiquetas informativas para aislar estilos -->
+                            <p>Tipo de juego: <?php echo htmlspecialchars($nombre_tipo); ?></p> <!-- Muestro el tipo de juego que obtuve antes -->
+                            <p>Generos: <?php /* Inicio sección para mostrar géneros */
+                                            if(!empty($datos_filtros_juego)) { /* Si el juego tiene filtros asociados */
+                                                $generos = []; /* Array para almacenar los géneros */
+                                                foreach($datos_filtros_juego as $filtro) { /* Recorro todos los filtros del juego */
+                                                    if($filtro['tipo_filtro'] === 'generos') { /* Si el filtro es un género */
+                                                        $generos[] = htmlspecialchars($filtro['nombre']); /* Añado el género al array, escapado */
+                                                    } 
+                                                }
+                                                if(!empty($generos)) { /* Si encontré géneros */
+                                                    echo implode(', ', $generos) . '.'; /* Los muestro separados por comas */
+                                                }
+                                            } ?></p> <!-- Cierro la sección de géneros -->
+                            <p>Categorías: <?php /* Inicio sección para mostrar categorías */
+                                            if(!empty($datos_filtros_juego)) { /* Si el juego tiene filtros asociados */
+                                                $categorias = []; /* Array para almacenar las categorías */
+                                                foreach($datos_filtros_juego as $filtro) { /* Recorro todos los filtros del juego */
+                                                    if($filtro['tipo_filtro'] === 'categorias') { /* Si el filtro es una categoría */
+                                                        $categorias[] = htmlspecialchars($filtro['nombre']); /* Añado la categoría al array, escapado */
+                                                    } 
+                                                }
+                                                if(!empty($categorias)) { /* Si encontré categorías */
+                                                    echo implode(', ', $categorias) . '.'; /* Las muestro separadas por comas */
+                                                }
+                                            } ?></p> <!-- Cierro la sección de categorías -->
+                            <p>Modos: <?php /* Inicio sección para mostrar modos de juego */
+                                            if(!empty($datos_filtros_juego)) { /* Si el juego tiene filtros asociados */
+                                                $modos = []; /* Array para almacenar los modos */
+                                                foreach($datos_filtros_juego as $filtro) { /* Recorro todos los filtros del juego */
+                                                    if($filtro['tipo_filtro'] === 'modos') { /* Si el filtro es un modo */
+                                                        $modos[] = htmlspecialchars($filtro['nombre']); /* Añado el modo al array, escapado */
+                                                    } 
+                                                }
+                                                if(!empty($modos)) { /* Si encontré modos */
+                                                    echo implode(', ', $modos) . '.'; /* Los muestro separados por comas */
+                                                }
+                                            } ?></p> <!-- Cierro la sección de modos -->
+                            <p>Clasificaciones PEGI: <?php /* Inicio sección para mostrar clasificaciones PEGI */
+                                            if(!empty($datos_filtros_juego)) { /* Si el juego tiene filtros asociados */
+                                                $clasificaciones = []; /* Array para almacenar las clasificaciones */
+                                                foreach($datos_filtros_juego as $filtro) { /* Recorro todos los filtros del juego */
+                                                    if($filtro['tipo_filtro'] === 'clasificacionPEGI') { /* Si el filtro es una clasificación PEGI */
+                                                        $clasificaciones[] = htmlspecialchars($filtro['nombre']); /* Añado la clasificación al array, escapado */
+                                                    } 
+                                                }
+                                                if(!empty($clasificaciones)) { /* Si encontré clasificaciones */
+                                                    echo implode(', ', $clasificaciones) . '.'; /* Las muestro separadas por comas */
+                                                }
+                                            } ?></p> <!-- Cierro la sección de clasificaciones PEGI -->
+                        </div> <!-- Fin grupo info-juego -->
                         <p id="descripcion-juego"><?php echo htmlspecialchars($juego['resumen']); ?></p> <!-- Descripción del juego escapada -->
                         <p id="precio-juego">Precio: <?php if($juego['precio'] !== '0.00') echo str_replace('.', ',', htmlspecialchars($juego['precio'])) . " €"; else echo "Gratis"; ?></p> <!-- Precio del juego (mostrado con una coma en vez de un punto), si es 0 muestro "Gratis" -->
                         
@@ -205,20 +269,50 @@
                                 <img src="../recursos/imagenes/detalles.png" alt="Icono de Detalle" id="icono-detalles"> <!-- Icono de detalles -->  
                                 <span>Ver detalles</span> <!-- Texto del botón -->
                             </a>
-                            <?php if(!$existe_en_biblioteca && !$es_admin_panel && (isset($_SESSION['modo_admin']) && !$_SESSION['modo_admin'])) { /* Si el juego no está en la biblioteca y no estoy en el panel de administrador y no soy un modo admin */
-                                if($existe_en_carrito) { ?> <!-- Si el juego ya está en el carrito -->
-                                    <a href="#" onclick="eliminarDelCarrito(<?php echo $juego['id']; ?>, '<?php echo $juego['nombre']; ?>', this)" id="tarjeta-eliminar<?php echo $juego['id']; ?>" class="boton-carrito"> <!-- Enlace para quitar del carrito -->
-                                        <img src="../recursos/imagenes/en_carrito2.png" alt="Icono de Carrito" id="icono-carrito"> <!-- Icono del carrito -->
-                                        <span>Quitar del carrito</span> <!-- Texto del botón -->
-                                    </a>
-                                <?php } else { ?> <!-- Si el juego no está en el carrito -->
-                                    <a <?php if (isset($_SESSION['id_usuario'])) { echo 'href="#" onclick="mandar(\'agregar\', ' . $juego['id'] . ', \'modal1\', \'<h1>Juego añadido al carrito</h1>\', false , null, this)"'; } else { echo 'href="../sesiones/formulario_autenticacion.php"'; } ?> id="tarjeta-anadir<?php echo $juego['id']; ?>" class="boton-carrito" title="Añadir al carrito"> <!-- Enlace para añadir al carrito -->
-                                        <img src="../recursos/imagenes/carrito2.png" alt="Icono de Carrito" id="icono-carrito"> <!-- Icono del carrito -->
-                                        <span>Añadir al carrito</span> <!-- Texto del botón -->
-                                    </a>
-                                <?php }
-                            } else if ($juego['tipo'] == 'interno') {?> <!-- Si el juego es interno (no externo) -->
-                                <a href="#" class="boton-jugar"> <!-- Enlace para jugar -->
+                            <?php if(!$existe_en_biblioteca && !$es_admin_panel && (isset($_SESSION['modo_admin']) && !$_SESSION['modo_admin'])) { /* Si el juego no está en la biblioteca y no estoy en el panel de administrador y no estoy en modo admin */
+                                if(!isset($es_proximamente) || !$es_proximamente) { ?> <!-- Si el juego no es "Próximamente" -->    
+                                    <?php if($existe_en_carrito) { ?> <!-- Si el juego ya está en el carrito -->
+                                        <a href="#" onclick="eliminarDelCarrito(<?php echo $juego['id']; ?>, '<?php echo $juego['nombre']; ?>', this)" id="tarjeta-eliminar<?php echo $juego['id']; ?>" class="boton-carrito"> <!-- Enlace para quitar del carrito -->
+                                            <img src="../recursos/imagenes/en_carrito2.png" alt="Icono de Carrito" id="icono-carrito"> <!-- Icono del carrito -->
+                                            <span>Quitar del carrito</span> <!-- Texto del botón -->
+                                        </a>
+                                    <?php } else { ?> <!-- Si el juego no está en el carrito -->
+                                        <a <?php if (isset($_SESSION['id_usuario'])) { echo 'href="#" onclick="mandar(\'agregar\', ' . $juego['id'] . ', \'modal1\', \'<h1>Juego añadido al carrito</h1>\', false , null, this)"'; } else { echo 'href="../sesiones/formulario_autenticacion.php"'; } ?> id="tarjeta-anadir<?php echo $juego['id']; ?>" class="boton-carrito" title="Añadir al carrito"> <!-- Enlace para añadir al carrito -->
+                                            <img src="../recursos/imagenes/carrito2.png" alt="Icono de Carrito" id="icono-carrito"> <!-- Icono del carrito -->
+                                            <span>Añadir al carrito</span> <!-- Texto del botón -->
+                                        </a>
+                                    <?php }
+                                } else { /* Si el juego es "Próximamente" */
+                                    $reserva = []; /* Inicializo el array para guardar la reserva */
+                                    $reserva[] = [ /* Agrego los datos del juego a la reserva */
+                                        'id' => $juego['id'], /* ID del juego */
+                                        'nombre' => $juego['nombre'], /* Nombre del juego */
+                                        'portada' => $juego['portada'], /* Portada del juego */
+                                        'tipo' => $nombre_tipo, /* Uso el nombre del tipo en lugar de la clave */
+                                        'precio' => $juego['precio'], /* Precio del juego */
+                                        'resumen' => $juego['resumen'] /* Resumen del juego */
+                                    ]; 
+                                    $reserva_json = htmlspecialchars(json_encode($reserva), ENT_QUOTES, 'UTF-8'); /* Escapo el JSON para usarlo de forma segura en HTML */ ?>
+                                    <input type="hidden" id="reserva-json<?php echo $juego['id']; ?>" value="<?php echo $reserva_json; ?>" /> <!-- Input oculto para conservar siempre el JSON de la reserva (independiente del estado del botón) -->
+                                    <?php if((!$reserva_solicitada || $reserva_rechazada) && !$reserva_aprobada) { /* Si no hay reserva solicitada */ ?>
+                                        <a <?php if(isset($_SESSION['id_usuario'])) { echo 'href="#" onclick="mostrarResumenPedido(\'' . $reserva_json . '\', true, \'reserva\', this)"'; } else { echo 'href="../sesiones/formulario_autenticacion.php"'; } ?> id="reserva-pedir<?php echo $juego['id']; ?>" class="boton-reservar"> <!-- Enlace de reservar -->
+                                            <img src="../recursos/imagenes/reservable.png" alt="Icono de Reservar" id="icono-reservar"> <!-- Icono de reservar -->
+                                            <span>Solicitar reserva</span> <!-- Texto del botón -->
+                                        </a>
+                                    <?php } else if($reserva_aprobada) { /* Si hay reserva solicitada y aprobada */ ?>
+                                        <a href="#" onclick="completarSolicitud('reserva', <?php echo $juego['id']; ?>)" id="reserva-cancelar<?php echo $juego['id']; ?>" class="completar-reserva"> <!-- Enlace de completar reserva -->
+                                            <img src="../recursos/imagenes/reservable.png" alt="Icono de Completar Reserva" id="icono-reservar"> <!-- Icono de Completar Reserva -->
+                                            <span>Completar reserva</span> <!-- Texto del botón -->
+                                        </a>
+                                    <?php } else { /* Si la reserva está solicitada pero no aprobada ni rechazada */ ?>
+                                        <a href="#" onclick="cancelarSolicitud('cancelar_solicitud_reserva', <?php echo $juego['id']; ?>, '<?php echo $juego['nombre']; ?>', <?php echo $juego['precio']; ?>, this)" id="reserva-cancelar<?php echo $juego['id']; ?>" class="boton-cancelar-solicitud-reserva"> <!-- Enlace de cancelar solicitud -->
+                                            <img src="../recursos/imagenes/cancelar_solicitud.png" alt="Icono de Cancelar Solicitud" id="icono-cancelar-solicitud"> <!-- Icono de Cancelar Solicitud -->
+                                            <span>Cancelar solicitud</span> <!-- Texto del botón -->
+                                        </a>
+                                    <?php }
+                                }
+                            } else { ?> <!-- Si el juego esta en la biblioteca -->
+                                <a href="#" onclick="opcionNoDisponible()" class="boton-jugar"> <!-- Enlace para jugar -->
                                     <img src="../recursos/imagenes/jugar.png" alt="Icono de Jugar" id="icono-jugar"> <!-- Icono de jugar -->
                                     <span>Jugar</span> <!-- Texto del botón -->
                                 </a>
@@ -254,6 +348,7 @@
                 exit; /* Termino la ejecución */
             }
         } /* Fin del foreach que recorre todos los juegos */
+        
         if (!$hay_juegos_coincidentes) { /* Si no encontré ningún juego que cumpla los filtros */
             ?> <!-- Inicio HTML para mensaje de "sin juegos" -->
             <div class="sin-juegos"> <!-- Contenedor para el mensaje -->
@@ -264,3 +359,16 @@
     } /* Fin de la función mostrarJuegos */
     
 ?>
+
+<script>
+    // Función para mostrar mensaje de opción no disponible
+    function opcionNoDisponible() {        
+        // Mostrar modal con mensaje de opción no disponible
+        const mensaje = `<h1>¡Opción no disponible!</h1>
+                            <p>Esta función no está habilitada en esta versión de CLC Games.</p>
+                            <p>Podría incorporarse en futuras ampliaciones del proyecto.</p>
+                        `; /* Mensaje HTML */
+        
+        modal('modal1', mensaje, false); /* Llamo a la función modal para mostrar el mensaje */
+    }
+</script>

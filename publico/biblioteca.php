@@ -60,9 +60,9 @@
     <!-- Script para la biblioteca -->
     <script src="../recursos/js/biblioteca.js" defer></script> <!-- Script específico para la biblioteca -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            mostrarBiblioteca(<?php echo $id_usuario ? $id_usuario : 'null'; ?>); /* Al cargar la página, muestro los juegos de la biblioteca */
-            eliminarAdvertencia(); /* Al cargar la página, inicio el temporizador para eliminar la advertencia */
+        document.addEventListener('DOMContentLoaded', function() { /* Espero a que el DOM esté cargado */
+            mostrarBiblioteca(<?php echo $id_usuario ? $id_usuario : 'null'; ?>); /* Muestro los juegos de la biblioteca */
+            eliminarAdvertencia(); /* Inicio el temporizador para eliminar la advertencia */
         });
     </script>
 

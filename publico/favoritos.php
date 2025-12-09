@@ -60,9 +60,9 @@
     <!-- Script para favoritos -->
     <script src="../recursos/js/favoritos.js" defer></script> <!-- Script específico para favoritos -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            mostrarFavoritos(<?php echo $id_usuario ? $id_usuario : 'null'; ?>); /* Al cargar la página, muestro los juegos favoritos */
-            eliminarAdvertencia(); /* Al cargar la página, inicio el temporizador para eliminar la advertencia */
+        document.addEventListener('DOMContentLoaded', function() { /* Espero a que el DOM esté cargado */
+            mostrarFavoritos(<?php echo $id_usuario ? $id_usuario : 'null'; ?>); /* Muestro los juegos favoritos */
+            eliminarAdvertencia(); /* Inicio el temporizador para eliminar la advertencia */
         });
     </script>
 

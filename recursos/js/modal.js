@@ -48,7 +48,8 @@ function modal(nombre, contenido, cancelar) {
     // Solo añadir el evento de cierre por click fuera si NO hay botón con id 'confirmar-pago', 'motivo-devolucion' o 'inicio-devolucion'
     setTimeout(() => {
         // Verifico si el modal no contiene esos botones específicos
-        if (!modal.querySelector('#confirmar-pago') && !modal.querySelector('#motivo-devolucion') && !modal.querySelector('#inicio-devolucion')) {
+        if (!modal.querySelector('#confirmar-pago') && !modal.querySelector('#motivo-devolucion') && !modal.querySelector('#inicio-devolucion')
+                && !modal.querySelector('#modal-procesando') && !modal.querySelector('#modal-tarjeta')) {
             modal.addEventListener('click', (evento) => { /* Añado evento click al fondo del modal */
                 if (evento.target === modal) { /* Si el click fue fuera de la ventana (en el fondo del modal) */
                     const modalElemento = document.getElementById(nombre); /* Obtengo el elemento modal por su ID */

@@ -133,6 +133,242 @@ h1 {
     margin: 0; /* Sin márgenes */
 }
 
+/* Secciones de comentarios */
+.comentarios-usuario,
+.comentarios-globales {
+    background: #333; /* Fondo gris oscuro */
+    padding: 25px; /* Espaciado interno generoso */
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin-bottom: 25px; /* Espacio inferior */
+}
+
+/* Secciones de valoraciones */
+.valoraciones-usuario,
+.valoraciones-globales {
+    background: #333; /* Igual estilo base que comentarios */
+    padding: 25px; /* Espaciado interno generoso */
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin-bottom: 25px; /* Espacio inferior */
+}
+
+/* Títulos de secciones de valoraciones */
+.valoraciones-usuario h2,
+.valoraciones-globales h2 {
+    color: #21b7c2; /* Color turquesa para los títulos */
+    margin: 0 0 15px 0; /* Solo margen inferior */
+    font-size: 1.4em; /* Tamaño medio para subtítulos */
+    font-weight: 600; /* Semi-negrita */
+}
+
+/* Contenedores de estrellas */
+.valoraciones-estrellas {
+    display: flex; /* Layout flexible */
+    gap: 10px; /* Espacio entre estrellas */
+    flex-wrap: wrap; /* Permito que las estrellas se envuelvan */
+}
+
+/* Contenedor de la valoración media */
+.valoraciones-media {
+    display: flex; /* Layout flexible */
+    flex-direction: column; /* Elementos uno debajo del otro */
+    gap: 20px; /* Espacio entre elementos */
+}
+
+/* Contenedor interno para las estrellas de la media */
+.valoraciones-media-estrellas {
+    display: flex; /* Layout flexible */
+    align-items: center; /* Alineo verticalmente al centro */
+    gap: 10px; /* Espacio entre estrellas */
+    flex-wrap: wrap; /* Permito que las estrellas se envuelvan */
+}
+
+/* Estilos para las imágenes de estrellas */
+.valoraciones-estrellas img, .valoraciones-media img {
+    width: 24px; /* Ancho fijo para las estrellas */
+    height: 24px; /* Alto fijo para las estrellas */
+    cursor: pointer; /* Cursor de puntero para indicar interactividad */
+    transition: transform 0.2s ease, filter 0.3s ease; /* Transición suave para transformaciones */
+    user-select: none; /* Evito selección accidental */
+}
+
+/* Efecto hover en las estrellas */
+.valoraciones-estrellas img:hover {
+    transform: scale(1.15) rotate(-3deg); /* Agrando y giro ligeramente */
+    filter: drop-shadow(0 0 6px rgba(33, 183, 194, 0.7)); /* Sombra turquesa */
+}
+
+/* Estilo para la estrella media (no interactiva) */
+.valoraciones-media img.estrella-media {
+    cursor: default !important; /* Cursor por defecto para indicar no interactividad */
+    filter: brightness(0.92); /* Ligero oscurecimiento para diferenciar */
+}
+
+/* Texto de la valoración media */
+.valoraciones-media-texto {
+    font-size: 0.95em; /* Tamaño ligeramente más pequeño */
+    color: #ddd; /* Gris claro */
+    font-weight: 600; /* Semi-negrita */
+}
+
+/* Formulario de valoración */
+.form-valoracion {
+    display: flex; /* Layout flexible */
+    flex-direction: column; /* Elementos uno debajo del otro */
+    gap: 20px; /* Espacio entre elementos */
+}
+
+/* Títulos de secciones de comentarios */
+.comentarios-usuario h2,
+.comentarios-globales h2 {
+    color: #21b7c2; /* Color turquesa para los títulos */
+    margin: 0 0 15px 0; /* Solo margen inferior */
+    font-size: 1.4em; /* Tamaño medio para subtítulos */
+    font-weight: 600; /* Semi-negrita */
+}
+
+/* Formulario de comentario */
+.comentarios-usuario form {
+    display: flex; /* Layout flexible */
+    flex-direction: column; /* Elementos uno debajo del otro */
+    gap: 20px; /* Espacio entre elementos */
+}
+
+/* Textarea del comentario */
+.comentarios-usuario textarea {
+    width: 100%; /* Ancho completo */
+    padding: 12px; /* Espaciado interno */
+    background: #222; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+    border: 2px solid #21b7c2; /* Borde turquesa */
+    border-radius: 6px; /* Esquinas redondeadas */
+    font-family: inherit; /* Hereda la fuente */
+    font-size: 1em; /* Tamaño normal */
+    resize: vertical; /* Solo permite redimensionar verticalmente */
+    box-sizing: border-box; /* Incluye padding y border en el ancho */
+}
+
+/* Textarea en foco */
+.comentarios-usuario textarea:focus {
+    outline: none; /* Sin contorno por defecto */
+    border-color: #26d1de; /* Color más claro en foco */
+    box-shadow: 0 0 8px rgba(33, 183, 194, 0.4); /* Resplandor turquesa */
+}
+
+/* Mensajes de éxito y error */
+.comentarios-usuario p {
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 6px; /* Esquinas redondeadas */
+    margin: 0 0 12px 0; /* Margen inferior */
+}
+
+/* Cada comentario individual */
+.comentario-item {
+    background: #222; /* Fondo oscuro */
+    padding: 15px; /* Espaciado interno */
+    border-radius: 6px; /* Esquinas redondeadas */
+    margin-bottom: 15px; /* Espacio inferior */
+    border-left: 3px solid #21b7c2; /* Borde izquierdo turquesa */
+}
+
+/* Usuario y fecha del comentario */
+.comentario-item p:first-child {
+    color: #21b7c2; /* Color turquesa */
+    font-weight: bold; /* Negrita */
+    margin: 0 0 8px 0; /* Margen inferior */
+    font-size: 0.95em; /* Ligeramente más pequeño */
+}
+
+/* Texto del comentario */
+.comentario-item p:last-child {
+    color: #ddd; /* Gris claro */
+    margin: 0; /* Sin margen */
+    line-height: 1.5; /* Altura de línea cómoda */
+}
+
+/* Enlace para ver más/menos comentarios */
+.comentarios-globales > p > a {
+    color: #21b7c2; /* Color turquesa */
+    text-decoration: none; /* Sin subrayado */
+    font-weight: bold; /* Negrita */
+    transition: color 0.3s ease; /* Transición suave */
+}
+
+/* Enlace en hover */
+.comentarios-globales > p > a:hover {
+    color: #26d1de; /* Color más claro al hover */
+    text-decoration: underline; /* Subrayado al hover */
+}
+
+/* Mensaje de error */
+.mensaje-error {
+    background: rgba(184, 24, 0, 0.1); /* Fondo rojo semitransparente */
+    color: #ff6b6b; /* Texto rojo claro */
+    padding: 15px 20px; /* Espaciado interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    border-left: 4px solid #b81800; /* Borde izquierdo rojo para que llame la atención */
+    margin-bottom: 25px; /* Espacio inferior */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrado del texto */
+    max-width: 600px; /* Ancho máximo */
+    animation: shake 0.5s ease-in-out; /* Animación de vibración */
+    width: 100%; /* Ancho completo disponible */
+    box-sizing: border-box; /* Incluir padding en el ancho */
+}
+
+/* Mensaje de éxito */
+.mensaje-exito {
+    background: rgba(40, 167, 69, 0.1); /* Fondo verde semitransparente */
+    color: #28a745; /* Texto verde */
+    padding: 15px 20px; /* Espaciado interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    border-left: 4px solid #28a745; /* Borde izquierdo verde */
+    margin-bottom: 25px; /* Espacio inferior */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrado del texto */
+    max-width: 600px; /* Ancho máximo */
+    width: 100%; /* Ancho completo disponible */
+    box-sizing: border-box; /* Incluir padding en el ancho */
+}
+
+/* Botones de modificar, publicar y eliminar comentario/valoración */
+.boton-modificar-comentario,
+.boton-publicar-comentario,
+.boton-eliminar-comentario,
+.boton-modificar-valoracion,
+.boton-publicar-valoracion,
+.boton-eliminar-valoracion {
+    background: #21b7c2; /* Fondo turquesa */
+    color: #fff; /* Texto blanco */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 6px; /* Esquinas redondeadas */
+    font-weight: bold; /* Texto en negrita */
+    font-size: 0.95em; /* Tamaño normal */
+    cursor: pointer; /* Cursor de puntero */
+    transition: all 0.3s ease; /* Transición suave */
+    max-width: fit-content; /* Ancho máximo ajustado al contenido */
+}
+
+/* Botón de modificar, publicar y eliminar comentario/valoración en hover */
+.boton-modificar-comentario:hover,
+.boton-publicar-comentario:hover,
+.boton-eliminar-comentario:hover,
+.boton-modificar-valoracion:hover,
+.boton-publicar-valoracion:hover,
+.boton-eliminar-valoracion:hover {
+    background: #1a9bb8; /* Color más oscuro al hover */
+    transform: translateY(-2px); /* Se eleva ligeramente */
+    box-shadow: 0 4px 12px rgba(33,183,194,0.4); /* Sombra turquesa */
+}
+
+/* Contenedores de botones de comentario y valoración */
+.botones-comentario, .botones-valoracion {
+    display: flex; /* Layout flexible */
+    flex-direction: row; /* Dirección horizontal */
+    gap: 15px; /* Espacio entre botones */
+    flex-wrap: wrap; /* Permito que los botones se envuelvan */
+}
+
 /* Sección de opciones y botones */
 .opciones {
     background: #333; /* Fondo gris oscuro igual que otras secciones */
@@ -162,9 +398,18 @@ h1 {
 .boton-comprar,
 .boton-descambiar,
 .boton-jugar,
+.boton-reservar,
+.boton-cancelar-solicitud-reserva,
+.completar-reserva,
 .boton-editar-juego,
 .boton-reactivar,
-.boton-eliminar {
+.boton-eliminar,
+.boton-modificar-comentario,
+.boton-publicar-comentario,
+.boton-eliminar-comentario,
+.boton-modificar-valoracion,
+.boton-publicar-valoracion,
+.boton-eliminar-valoracion {
     display: flex; /* Disposición flexible */
     align-items: center; /* Alinea contenido al centro verticalmente */
     gap: 6px; /* Espacio entre icono y texto */
@@ -186,8 +431,16 @@ h1 {
 #icono-comprar,
 #icono-descambiar,
 #icono-jugar,
+#icono-reservar,
 #icono-editar,
-#icono-eliminar {
+#icono-eliminar,
+#icono-reactivar,
+#icono-modificar-comentario,
+#icono-publicar-comentario,
+#icono-eliminar-comentario,
+#icono-modificar-valoracion,
+#icono-publicar-valoracion,
+#icono-eliminar-valoracion {
     width: 30px; /* Ancho estándar de iconos */
     height: 30px; /* Alto estándar de iconos */
     flex-shrink: 0; /* No se reducen los iconos */
@@ -200,12 +453,75 @@ h1 {
 .boton-comprar:hover,
 .boton-descambiar:hover,
 .boton-jugar:hover,
+.boton-reservar:hover,
+.boton-cancelar-solicitud-reserva:hover,
+.completar-reserva:hover,
 .boton-editar-juego:hover,
 .boton-reactivar:hover,
-.boton-eliminar:hover {
+.boton-eliminar:hover,
+.boton-modificar-comentario:hover,
+.boton-publicar-comentario:hover,
+.boton-eliminar-comentario:hover,
+.boton-modificar-valoracion:hover,
+.boton-publicar-valoracion:hover,
+.boton-eliminar-valoracion:hover {
     background: #1a9bb8; /* Color más oscuro al hover */
     transform: translateY(-2px); /* Se eleva ligeramente */
     box-shadow: 0 4px 12px rgba(33, 183, 194, 0.4); /* Sombra turquesa */
+}
+
+/* Botón para eliminar */
+.boton-eliminar,
+.boton-eliminar-valoracion,
+.boton-eliminar-comentario {
+    background: #b81800; /* Fondo rojo oscuro */
+}
+
+/* Botón eliminar en hover */
+.boton-eliminar:hover,
+.boton-eliminar-valoracion:hover,
+.boton-eliminar-comentario:hover {
+    background: #d22a10; /* Color más claro al hover */
+    box-shadow: 0 4px 12px rgba(184,24,0,0.4); /* Sombra roja */
+}
+
+/* Etiqueta para juegos próximamente */
+.etiqueta-proximamente {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%) !important; /* Gradiente morado a azul */
+    border: 2px solid #2575fc !important; /* Borde azul */
+    border-radius: 10px !important; /* Esquinas redondeadas */
+    padding: 10px 15px 10px 15px !important; /* Espaciado interno (superior=0) */
+    margin: 10px 0 15px 0 !important; /* Márgenes verticales */
+    text-align: center; /* Texto centrado */
+    box-shadow: 0 4px 15px rgba(37, 117, 252, 0.4) !important; /* Sombra azul intensa */
+    position: relative; /* Para efectos adicionales */
+    overflow: hidden !important; /* Evita desbordamientos */
+    color: #fff !important; /* Texto blanco */
+    font-size: 0.95em !important; /* Tamaño apropiado */
+    font-weight: bold; /* Negrita */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra en el texto */
+}
+
+/* Efecto hover para la etiqueta en detalles */
+main:hover .etiqueta-proximamente {
+    background: linear-gradient(135deg, #7b1dd9 0%, #3a8aff 100%) !important; /* Gradiente más brillante */
+    border-color: #3a8aff !important; /* Borde más brillante */
+    box-shadow: 0 6px 20px rgba(37, 117, 252, 0.5) !important; /* Sombra más intensa */
+}
+
+/* Mensaje de rechazo */
+.mensaje-rechazado {
+    background: rgba(255, 99, 71, 0.1); /* Fondo rojo claro semitransparente */
+    color: #ff6347; /* Texto rojo tomate */
+    padding: 15px 20px; /* Espaciado interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    border-left: 4px solid #ff6347; /* Borde izquierdo rojo tomate */
+    margin-bottom: 25px; /* Espacio inferior */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrado del texto */
+    max-width: 600px; /* Ancho máximo */
+    width: 100%; /* Ancho completo disponible */
+    box-sizing: border-box; /* Incluir padding en el ancho */
 }
 
 /* RESPONSIVIDAD - Adaptación a diferentes tamaños de pantalla */
@@ -249,9 +565,31 @@ h1 {
     
     /* Secciones más compactas */
     .descripcion-completa,
-    .requisitos-sistema {
+    .requisitos-sistema,
+    .comentarios-usuario,
+    .comentarios-globales,
+    .valoraciones-usuario,
+    .valoraciones-globales {
         padding: 22px; /* Padding reducido */
         margin-bottom: 22px; /* Margen reducido */
+    }
+    
+    /* Comentarios más compactos */
+    .comentario-item {
+        padding: 14px; /* Padding reducido */
+        margin-bottom: 14px; /* Margen reducido */
+    }
+    
+    /* Texto de comentarios más pequeño */
+    .comentarios-usuario textarea {
+        padding: 11px; /* Padding reducido */
+        font-size: 0.95em; /* Texto ligeramente más pequeño */
+    }
+    
+    /* Botón de enviar comentario más compacto */
+    .comentarios-usuario button[type="submit"] {
+        padding: 9px 18px; /* Padding reducido */
+        font-size: 0.95em; /* Texto ligeramente más pequeño */
     }
     
     /* Sección de opciones más compacta */
@@ -267,9 +605,18 @@ h1 {
     .boton-comprar,
     .boton-descambiar,
     .boton-jugar,
+    .boton-reservar,
+    .boton-cancelar-solicitud-reserva,
+    .completar-reserva,
     .boton-editar-juego,
     .boton-reactivar,
-    .boton-eliminar {
+    .boton-eliminar,
+    .boton-modificar-comentario,
+    .boton-publicar-comentario,
+    .boton-eliminar-comentario,
+    .boton-modificar-valoracion,
+    .boton-publicar-valoracion,
+    .boton-eliminar-valoracion {
         padding: 7px 12px; /* Padding reducido */
         font-size: 0.95em; /* Texto ligeramente más pequeño */
         height: 36px; /* Altura reducida */
@@ -282,8 +629,16 @@ h1 {
     #icono-comprar,
     #icono-descambiar,
     #icono-jugar,
+    #icono-reservar,
     #icono-editar,
-    #icono-eliminar {
+    #icono-eliminar,
+    #icono-reactivar,
+    #icono-modificar-comentario,
+    #icono-publicar-comentario,
+    #icono-eliminar-comentario,
+    #icono-modificar-valoracion,
+    #icono-publicar-valoracion,
+    #icono-eliminar-valoracion {
         width: 18px; /* Iconos más pequeños */
         height: 18px; /* Mantengo proporción */
     }
@@ -292,6 +647,13 @@ h1 {
     #icono-comprar {
         width: 24px; /* Icono de comprar proporcionalmente más pequeño */
         height: 24px; /* Mantengo proporción */
+    }
+
+    /* Etiqueta próximamente en tablets grandes */
+    .etiqueta-proximamente {
+        padding: 9px 14px; /* Padding intermedio */
+        margin: 9px 0 14px 0; /* Márgenes intermedios */
+        font-size: 0.92em; /* Texto intermedio */
     }
 }
 
@@ -343,16 +705,53 @@ h1 {
     
     /* Secciones más compactas */
     .descripcion-completa,
-    .requisitos-sistema {
+    .requisitos-sistema,
+    .comentarios-usuario,
+    .comentarios-globales,
+    .valoraciones-usuario,
+    .valoraciones-globales {
         padding: 20px; /* Padding reducido */
         margin-bottom: 20px; /* Margen reducido */
     }
     
     /* Títulos más pequeños */
     .descripcion-completa h2,
-    .requisitos-sistema h2 {
+    .requisitos-sistema h2,
+    .comentarios-usuario h2,
+    .comentarios-globales h2,
+    .valoraciones-usuario h2,
+    .valoraciones-globales h2 {
         font-size: 1.3em; /* Títulos más pequeños */
         margin-bottom: 12px; /* Margen reducido */
+    }
+
+    /* Ajusto tamaño estrellas */
+    .valoraciones-estrellas img, .valoraciones-media img {
+        width: 22px; /* Ancho de las estrellas */
+        height: 22px; /* Alto de las estrellas */
+    }
+    
+    /* Comentarios más compactos */
+    .comentario-item {
+        padding: 13px; /* Padding reducido */
+        margin-bottom: 13px; /* Margen reducido */
+    }
+    
+    /* Texto de comentarios más pequeño */
+    .comentarios-usuario textarea {
+        padding: 10px; /* Padding reducido */
+        font-size: 0.95em; /* Texto más pequeño */
+    }
+    
+    /* Botón de enviar comentario más compacto */
+    .comentarios-usuario button[type="submit"] {
+        padding: 8px 16px; /* Padding reducido */
+        font-size: 0.9em; /* Texto más pequeño */
+    }
+    
+    /* Formulario de comentarios más compacto */
+    .comentarios-usuario form {
+        gap: 10px; /* Menos espacio entre elementos */
     }
     
     /* Sección de opciones más compacta */
@@ -368,9 +767,18 @@ h1 {
     .boton-comprar,
     .boton-descambiar,
     .boton-jugar,
+    .boton-reservar,
+    .boton-cancelar-solicitud-reserva,
+    .completar-reserva,
     .boton-editar-juego,
     .boton-reactivar,
-    .boton-eliminar {
+    .boton-eliminar,
+    .boton-modificar-comentario,
+    .boton-publicar-comentario,
+    .boton-eliminar-comentario,
+    .boton-modificar-valoracion,
+    .boton-publicar-valoracion,
+    .boton-eliminar-valoracion {
         padding: 6px 10px; /* Padding más reducido */
         font-size: 0.9em; /* Texto más pequeño */
         height: 32px; /* Altura reducida */
@@ -384,8 +792,16 @@ h1 {
     #icono-comprar,
     #icono-descambiar,
     #icono-jugar,
+    #icono-reservar,
     #icono-editar,
-    #icono-eliminar {
+    #icono-eliminar,
+    #icono-reactivar,
+    #icono-modificar-comentario,
+    #icono-publicar-comentario,
+    #icono-eliminar-comentario,
+    #icono-modificar-valoracion,
+    #icono-publicar-valoracion,
+    #icono-eliminar-valoracion {
         width: 16px; /* Iconos más pequeños */
         height: 16px; /* Mantengo proporción */
     }
@@ -394,6 +810,13 @@ h1 {
     #icono-comprar {
         width: 21px; /* Icono de comprar proporcionalmente más pequeño */
         height: 21px; /* Mantengo proporción */
+    }
+
+    /* Etiqueta próximamente en tablets */
+    .etiqueta-proximamente {
+        padding: 9px 13px; /* Padding ligeramente reducido */
+        margin: 9px 0 13px 0; /* Márgenes reducidos */
+        font-size: 0.9em; /* Texto ligeramente más pequeño */
     }
 }
 
@@ -445,16 +868,30 @@ h1 {
     
     /* Secciones muy compactas */
     .descripcion-completa,
-    .requisitos-sistema {
+    .requisitos-sistema,
+    .comentarios-usuario,
+    .comentarios-globales,
+    .valoraciones-usuario,
+    .valoraciones-globales {
         padding: 18px; /* Padding muy reducido */
         margin-bottom: 18px; /* Margen muy reducido */
     }
     
     /* Títulos muy pequeños */
     .descripcion-completa h2,
-    .requisitos-sistema h2 {
+    .requisitos-sistema h2,
+    .comentarios-usuario h2,
+    .comentarios-globales h2,
+    .valoraciones-usuario h2,
+    .valoraciones-globales h2 {
         font-size: 1.2em; /* Títulos muy pequeños */
         margin-bottom: 10px; /* Margen mínimo */
+    }
+
+    /* Ajusto tamaño estrellas */
+    .valoraciones-estrellas img, .valoraciones-media img {
+        width: 20px; /* Ancho de las estrellas */
+        height: 20px; /* Alto de las estrellas */
     }
     
     /* Texto más pequeño */
@@ -462,6 +899,31 @@ h1 {
     .requisitos-sistema p {
         font-size: 0.9em; /* Texto más pequeño */
         line-height: 1.5; /* Altura de línea ajustada */
+    }
+    
+    /* Comentarios muy compactos */
+    .comentario-item {
+        padding: 12px; /* Padding muy reducido */
+        margin-bottom: 12px; /* Margen muy reducido */
+        font-size: 0.9em; /* Texto más pequeño */
+    }
+    
+    /* Texto de comentarios más pequeño */
+    .comentarios-usuario textarea {
+        padding: 10px; /* Padding reducido */
+        font-size: 0.9em; /* Texto pequeño */
+    }
+    
+    /* Botón de enviar comentario más compacto */
+    .comentarios-usuario button[type="submit"] {
+        padding: 9px 16px; /* Padding compacto */
+        font-size: 0.85em; /* Texto pequeño */
+        width: 100%; /* Ancho completo en móviles */
+    }
+    
+    /* Formulario de comentarios más compacto */
+    .comentarios-usuario form {
+        gap: 8px; /* Espacio mínimo */
     }
     
     /* Sección de opciones muy compacta */
@@ -478,9 +940,18 @@ h1 {
     .boton-comprar,
     .boton-descambiar,
     .boton-jugar,
+    .boton-reservar,
+    .boton-cancelar-solicitud-reserva,
+    .completar-reserva,
     .boton-editar-juego,
     .boton-reactivar,
-    .boton-eliminar {
+    .boton-eliminar,
+    .boton-modificar-comentario,
+    .boton-publicar-comentario,
+    .boton-eliminar-comentario,
+    .boton-modificar-valoracion,
+    .boton-publicar-valoracion,
+    .boton-eliminar-valoracion {
         padding: 10px 14px; /* Padding compacto */
         font-size: 0.85em; /* Texto pequeño */
         width: 100%; /* Ancho completo en móviles */
@@ -500,8 +971,17 @@ h1 {
     #icono-comprar,
     #icono-descambiar,
     #icono-jugar,
+    #icono-reservar,
     #icono-editar,
-    #icono-eliminar {
+    #icono-eliminar,
+    #icono-reactivar,
+    #icono-modificar-comentario,
+    #icono-publicar-comentario,
+    #icono-eliminar-comentario,
+    #icono-modificar-valoracion,
+    #icono-publicar-valoracion,
+    #icono-eliminar-valoracion 
+    {
         width: 16px; /* Iconos pequeños */
         height: 16px; /* Mantengo proporción */
     }
@@ -510,6 +990,14 @@ h1 {
     #icono-comprar {
         width: 20px; /* Icono de comprar un poco más grande */
         height: 20px; /* Mantengo proporción */
+    }
+
+    /* Etiqueta próximamente en móviles pequeños */
+    .etiqueta-proximamente {
+        padding: 8px 10px; /* Padding reducido */
+        margin: 8px 0 12px 0; /* Márgenes reducidos */
+        border-radius: 8px; /* Bordes menos redondeados */
+        font-size: 0.85em; /* Texto más pequeño */
     }
 }
 
@@ -558,16 +1046,30 @@ h1 {
     
     /* Secciones mínimas */
     .descripcion-completa,
-    .requisitos-sistema {
+    .requisitos-sistema,
+    .comentarios-usuario,
+    .comentarios-globales,
+    .valoraciones-usuario,
+    .valoraciones-globales {
         padding: 15px; /* Padding mínimo */
         margin-bottom: 15px; /* Margen mínimo */
     }
     
     /* Títulos mínimos */
     .descripcion-completa h2,
-    .requisitos-sistema h2 {
+    .requisitos-sistema h2,
+    .comentarios-usuario h2,
+    .comentarios-globales h2,
+    .valoraciones-usuario h2,
+    .valoraciones-globales h2 {
         font-size: 1.1em; /* Títulos mínimos */
         margin-bottom: 8px; /* Margen muy pequeño */
+    }
+
+    /* Ajusto tamaño estrellas */
+    .valoraciones-estrellas img, .valoraciones-media img {
+        width: 18px; /* Ancho de las estrellas */
+        height: 18px; /* Alto de las estrellas */
     }
     
     /* Texto muy pequeño */
@@ -575,6 +1077,31 @@ h1 {
     .requisitos-sistema p {
         font-size: 0.85em; /* Texto muy pequeño */
         line-height: 1.4; /* Altura de línea compacta */
+    }
+    
+    /* Comentarios mínimos */
+    .comentario-item {
+        padding: 10px; /* Padding mínimo */
+        margin-bottom: 10px; /* Margen mínimo */
+        font-size: 0.85em; /* Texto muy pequeño */
+    }
+    
+    /* Texto de comentarios muy pequeño */
+    .comentarios-usuario textarea {
+        padding: 8px; /* Padding mínimo */
+        font-size: 0.85em; /* Texto muy pequeño */
+    }
+    
+    /* Botón de enviar comentario muy compacto */
+    .comentarios-usuario button[type="submit"] {
+        padding: 8px 14px; /* Padding mínimo */
+        font-size: 0.8em; /* Texto muy pequeño */
+        width: 100%; /* Ancho completo */
+    }
+    
+    /* Formulario de comentarios muy compacto */
+    .comentarios-usuario form {
+        gap: 6px; /* Espacio muy reducido */
     }
     
     /* Sección de opciones mínima */
@@ -596,9 +1123,18 @@ h1 {
     .boton-comprar,
     .boton-descambiar,
     .boton-jugar,
+    .boton-reservar,
+    .boton-cancelar-solicitud-reserva,
+    .completar-reserva,
     .boton-editar-juego,
     .boton-reactivar,
-    .boton-eliminar {
+    .boton-eliminar,
+    .boton-modificar-comentario,
+    .boton-publicar-comentario,
+    .boton-eliminar-comentario,
+    .boton-modificar-valoracion,
+    .boton-publicar-valoracion,
+    .boton-eliminar-valoracion {
         padding: 8px 12px; /* Padding mínimo */
         font-size: 0.8em; /* Texto muy pequeño */
         height: 34px; /* Altura mínima pero usable */
@@ -612,8 +1148,16 @@ h1 {
     #icono-comprar,
     #icono-descambiar,
     #icono-jugar,
+    #icono-reservar,
     #icono-editar,
-    #icono-eliminar {
+    #icono-eliminar,
+    #icono-reactivar,
+    #icono-modificar-comentario,
+    #icono-publicar-comentario,
+    #icono-eliminar-comentario,
+    #icono-modificar-valoracion,
+    #icono-publicar-valoracion,
+    #icono-eliminar-valoracion {
         width: 14px; /* Iconos muy pequeños */
         height: 14px; /* Mantengo proporción */
     }
@@ -622,6 +1166,14 @@ h1 {
     #icono-comprar {
         width: 18px; /* Icono de comprar proporcionalmente más pequeño */
         height: 18px; /* Mantengo proporción */
+    }
+
+    /* Etiqueta próximamente en móviles muy pequeños */
+    .etiqueta-proximamente {
+        padding: 7px 8px; /* Padding mínimo */
+        margin: 7px 0 10px 0; /* Márgenes mínimos */
+        border-radius: 7px; /* Bordes muy poco redondeados */
+        font-size: 0.8em; /* Texto muy pequeño */
     }
 }
 

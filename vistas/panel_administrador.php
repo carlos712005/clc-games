@@ -25,13 +25,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Mostrar mensaje de éxito si existe
             <?php if (isset($_SESSION['mensaje_exito'])) { ?> /* Si existe un mensaje de éxito */
-                modal('modal-exito', '<h2><?php echo htmlspecialchars($_SESSION['mensaje_exito']); ?></h2>', false); /* Muestro el modal con el mensaje */
+                modal('modal-exito', '<h1><?php echo htmlspecialchars($_SESSION['mensaje_exito']); ?></h1>', false); /* Muestro el modal con el mensaje */
                 <?php unset($_SESSION['mensaje_exito']); ?> /* Elimino el mensaje de la sesión */
             <?php } ?>
 
             // Mostrar mensaje de error si existe
             <?php if (isset($_SESSION['error_general'])) { ?> /* Si existe un mensaje de error */
-                modal('modal-error', '<h2><?php echo htmlspecialchars($_SESSION['error_general']); ?></h2>', false); /* Muestro el modal con el mensaje de error */
+                modal('modal-error', '<h1><?php echo htmlspecialchars($_SESSION['error_general']); ?></h1>', false); /* Muestro el modal con el mensaje de error */
                 <?php unset($_SESSION['error_general']); ?> /* Elimino el mensaje de la sesión */
             <?php } ?>
 
@@ -42,6 +42,9 @@
             <?php } ?>
         });
     </script>
+
+    <!-- Script para historial (siempre disponible para carga dinámica de pedidos) -->
+    <script src="../recursos/js/historial.js" defer></script> <!-- Script específico para historial -->
 
     <!-- Pie de página -->
     <?php include __DIR__ . '/comunes/pie.php'; ?> <!-- Incluyo el pie de página con estilos -->

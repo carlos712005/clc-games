@@ -78,11 +78,14 @@ main hr {
     max-width: 20%; /* No ocupa todo el ancho */
 }
 
-/* Campos de información de la transacción (tipo, estado, fecha, total) */
+/* Campos de información de la transacción */
+.historial-cliente,
 .historial-tipo,
 .historial-estado,
 .historial-fecha,
-.historial-total {
+.historial-total,
+.historial-metodo-pago,
+.historial-comentario {
     font-size: 1em; /* Tamaño normal de texto */
     color: #ccc; /* Gris claro para que no destaque demasiado */
     margin-bottom: 5px; /* Espacio abajo */
@@ -94,9 +97,20 @@ main hr {
 }
 
 /* Colores diferentes para cada campo según importancia */
+.historial-cliente { 
+    border-left-color: #6a11cb; /* Morado relacionado con el gradiente de fondo */
+    background: linear-gradient(135deg, rgba(106, 17, 203, 0.15), rgba(37, 117, 252, 0.1)); /* Gradiente morado-azul sutil */
+    color: #fff; /* Texto blanco para mayor contraste */
+}
 .historial-tipo { border-left-color: #21b7c2; } /* Turquesa estándar */
 .historial-estado { border-left-color: #26d1de; } /* Turquesa más claro */
 .historial-fecha { border-left-color: #1a9bb8; } /* Turquesa más oscuro */
+.historial-metodo-pago { border-left-color: #1a9bb8; } /* Turquesa más oscuro */
+.historial-comentario { 
+    border-left-color: #1a9bb8; /* Turquesa más oscuro */
+    color: #ff6b6b; /* Rojo para llamar la atención */
+    font-style: italic; /* Cursiva */
+}
 .historial-total { 
     border-left-color: #ff6b6b; /* Rojo para llamar la atención */
     color: #fff; /* Texto blanco para que se lea bien */
@@ -110,8 +124,16 @@ main hr {
     justify-content: flex-end; /* Alineado a la derecha */
 }
 
-/* Botón para ver detalles de la transacción */
-.historial-boton-detalles {
+/* Contenedor de acciones específico para administradores */
+.historial-acciones.administrador {
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados verticalmente */
+    justify-content: center; /* Espacio entre elementos para administradores */
+}
+
+/* Botones */
+.historial-boton-detalles, #confirmar-rechazo,
+.historial-boton-confirmar, .historial-boton-rechazar {
     background: linear-gradient(90deg, #21b7c2 0%, #26d1de 100%); /* Gradiente turquesa */
     color: #fff; /* Texto blanco */
     border: none; /* Sin borde por defecto */
@@ -126,14 +148,54 @@ main hr {
     gap: 8px; /* Espacio entre icono y texto */
 }
 
-/* Efecto hover del botón de detalles */
-.historial-boton-detalles:hover {
+/* Estilo del botón de confirmar */
+.historial-boton-confirmar {
+    background: linear-gradient(135deg, #28a745, #20c453); /* Gradiente verde */
+    border: 2px solid #28a745; /* Borde verde */
+}
+
+/* Estilo del botón de rechazar */
+.historial-boton-rechazar {
+    background: linear-gradient(135deg, #dc3545, #e4606d); /* Gradiente rojo */
+    border: 2px solid #dc3545; /* Borde rojo */
+}
+
+/* Contenedor de botones para administradores */
+.historial-acciones.administrador div {
+    display: flex; /* Estructura flexible */
+    flex-direction: row; /* Elementos apilados horizontalmente */
+    justify-content: center; /* Espacio entre elementos para administradores */
+    gap: 20px; /* Espacio entre botones */
+}
+
+/* Quitar subrayado de los enlaces dentro de las acciones de administrador */
+.historial-acciones.administrador div a {
+    text-decoration: none; /* Sin subrayado en los enlaces */
+}
+
+/* Efecto hover del botón de detalles y del botón de confirmar rechazo */
+.historial-boton-detalles:hover, #confirmar-rechazo:hover {
     background: linear-gradient(90deg, #26d1de 0%, #21b7c2 100%); /* Gradiente invertido */
     box-shadow: 0 4px 16px rgba(33,183,194,0.25); /* Sombra más intensa */
 }
 
-/* Texto dentro del botón de detalles */
-.historial-boton-detalles span {
+/* Efecto hover del botón confirmar */
+.historial-boton-confirmar:hover {
+    background: linear-gradient(135deg, #20c453, #28a745); /* Gradiente invertido */
+    box-shadow: 0 4px 16px rgba(40,167,69,0.25); /* Sombra más intensa */
+}
+
+/* Efecto hover del botón rechazar */
+.historial-boton-rechazar:hover {
+    background: linear-gradient(135deg, #e4606d, #dc3545); /* Gradiente invertido */
+    box-shadow: 0 4px 16px rgba(220,53,69,0.25); /* Sombra más intensa */
+}
+
+/* Texto dentro de los botones */
+.historial-boton-detalles span,
+#confirmar-rechazo span,
+.historial-boton-confirmar span,
+.historial-boton-rechazar span {
     line-height: 1.1; /* Líneas muy juntas para compactar */
     font-size: 0.85em; /* Texto ligeramente más pequeño */
     text-align: center; /* Centrado del texto */
@@ -397,6 +459,74 @@ main hr {
     transition: all 0.3s ease; /* Transición suave */
 }
 
+/* Campo de texto para el motivo del rechazo de la devolución o reserva */
+#motivo-rechazo {
+    display: block; /* Necesario para que margin auto funcione */
+    width: 100%; /* Ancho completo */
+    max-width: 600px; /* Ancho máximo para evitar que sea demasiado ancho */
+    min-height: 100px; /* Altura mínima para que sea cómodo escribir */
+    padding: 12px; /* Espaciado interno */
+    margin: 15px auto; /* Centrado horizontal con auto */
+    background: rgba(51, 51, 51, 0.8); /* Fondo gris oscuro semitransparente */
+    border: 2px solid #333; /* Borde gris oscuro */
+    border-radius: 8px; /* Esquinas redondeadas */
+    color: #fff; /* Texto blanco */
+    font-family: inherit; /* Usa la misma fuente del sitio */
+    font-size: 0.95em; /* Tamaño de fuente normal */
+    line-height: 1.5; /* Altura de línea cómoda */
+    resize: vertical; /* Permite redimensionar solo verticalmente */
+    transition: all 0.3s ease; /* Transición suave */
+    box-sizing: border-box; /* Incluye padding y border en el ancho */
+}
+
+/* Cuando el campo de motivo está enfocado */
+#motivo-rechazo:focus {
+    outline: none; /* Sin outline por defecto */
+    border-color: #21b7c2; /* Borde turquesa al enfocar */
+    background: rgba(51, 51, 51, 0.95); /* Fondo más sólido al enfocar */
+    box-shadow: 0 0 15px rgba(33, 183, 194, 0.3); /* Sombra turquesa */
+}
+
+/* Placeholder del campo de motivo */
+#motivo-rechazo::placeholder {
+    color: #999; /* Color gris para el placeholder */
+    font-style: italic; /* Cursiva para diferenciar */
+    opacity: 0.8; /* Ligeramente transparente */
+}
+
+/* Barra de scroll del textarea de motivo */
+#motivo-rechazo::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra */
+}
+
+/* Fondo de la barra de scroll del textarea */
+#motivo-rechazo::-webkit-scrollbar-track {
+    background: #222; /* Fondo oscuro */
+    border-radius: 4px; /* Esquinas redondeadas */
+}
+
+/* Parte que se mueve de la barra de scroll del textarea */
+#motivo-rechazo::-webkit-scrollbar-thumb {
+    background: #21b7c2; /* Color turquesa */
+    border-radius: 4px; /* Esquinas redondeadas */
+}
+
+/* Hover en la barra de scroll del textarea */
+#motivo-rechazo::-webkit-scrollbar-thumb:hover {
+    background: #26d1de; /* Más claro al hover */
+}
+
+/* Advertencia de rechazo */
+#advertencia-rechazo {
+    background: rgba(33, 183, 194, 0.1) !important; /* Fondo turquesa suave */
+    border-left: 3px solid #26d1de; /* Borde izquierdo turquesa */
+    padding: 8px 16px; /* Padding generoso */
+    border-radius: 4px; /* Esquinas redondeadas */
+    margin: 10px 0; /* Margen vertical */
+    line-height: 1.3; /* Altura de línea */
+    text-align: center; /* Centrado */
+    transition: all 0.3s ease; /* Transición suave para efectos */
+}
 
 /* Responsividad para dispositivos móviles y tablets */
 
@@ -422,17 +552,22 @@ main hr {
     }
     
     /* Campos de información reducidos */
+    .historial-cliente,
     .historial-tipo,
     .historial-estado,
     .historial-fecha,
-    .historial-total {
+    .historial-total,
+    .historial-metodo-pago {
         font-size: 0.97em; /* Tamaño ligeramente más pequeño */
         padding: 3.5px 8px; /* Padding intermedio */
         border-radius: 0 7px 7px 0; /* Bordes ligeramente menos redondeados */
     }
     
-    /* Botón de detalles ajustado */
-    .historial-boton-detalles {
+    /* Botones ajustados */
+    .historial-boton-detalles,
+    .historial-boton-confirmar,
+    .historial-boton-rechazar,
+    #confirmar-rechazo {
         font-size: 0.97em; /* Tamaño ligeramente más pequeño */
         padding: 6.5px 15px; /* Padding intermedio */
     }
@@ -465,6 +600,12 @@ main hr {
     .sin-historial h2 {
         font-size: 1.45em; /* Título intermedio */
     }
+
+    /* Textarea de motivo en tablets grandes */
+    #motivo-rechazo {
+        max-width: 90%; /* Ancho adaptativo */
+        font-size: 0.9em; /* Tamaño ligeramente menor */
+    }
 }
 
 
@@ -490,17 +631,22 @@ main hr {
     }
     
     /* Campos de información compactos */
+    .historial-cliente,
     .historial-tipo,
     .historial-estado,
     .historial-fecha,
-    .historial-total {
+    .historial-total,
+    .historial-metodo-pago {
         font-size: 0.95em; /* Tamaño más pequeño */
         padding: 3px 7px; /* Padding reducido */
         border-radius: 0 6px 6px 0; /* Bordes menos redondeados */
     }
     
-    /* Botón de detalles compacto */
-    .historial-boton-detalles {
+    /* Botones compactos */
+    .historial-boton-detalles,
+    .historial-boton-confirmar,
+    .historial-boton-rechazar,
+    #confirmar-rechazo {
         font-size: 0.95em; /* Tamaño más pequeño */
         padding: 6px 12px; /* Padding reducido */
     }
@@ -556,6 +702,14 @@ main hr {
     .sin-historial h2 {
         font-size: 1.3em; /* Título más pequeño */
     }
+
+    /* Textarea de motivo adaptado para tablets */
+    #motivo-rechazo {
+        max-width: 100%; /* Ancho completo */
+        font-size: 0.85em; /* Tamaño menor */
+        min-height: 80px; /* Altura mínima reducida */
+        padding: 10px; /* Padding reducido */
+    }
 }
 
 
@@ -579,17 +733,22 @@ main hr {
     }
     
     /* Campos de información muy pequeños */
+    .historial-cliente
     .historial-tipo,
     .historial-estado,
     .historial-fecha,
-    .historial-total {
+    .historial-total,
+    .historial-metodo-pago {
         font-size: 0.9em; /* Tamaño pequeño */
         padding: 2px 5px; /* Padding muy reducido */
         border-radius: 0 4px 4px 0; /* Bordes muy poco redondeados */
     }
     
-    /* Botón de detalles muy pequeño */
-    .historial-boton-detalles {
+    /* Botones muy pequeños */
+    .historial-boton-detalles,
+    .historial-boton-confirmar,
+    .historial-boton-rechazar,
+    #confirmar-rechazo {
         font-size: 0.9em; /* Tamaño pequeño */
         padding: 5px 8px; /* Padding muy reducido */
     }
@@ -639,6 +798,15 @@ main hr {
         font-size: 1.2em; /* Título compacto */
         line-height: 1.3; /* Altura de línea compacta */
     }
+
+    /* Textarea pequeño en móviles */
+    #motivo-rechazo {
+        max-width: 100%; /* Ancho completo */
+        font-size: 0.8em; /* Tamaño pequeño */
+        min-height: 70px; /* Altura mínima muy reducida */
+        padding: 8px; /* Padding muy reducido */
+        margin: 10px 0; /* Margen reducido */
+    }
 }
 
 
@@ -663,17 +831,22 @@ main hr {
     }
     
     /* Campos de información extremadamente pequeños */
+    .historial-cliente,
     .historial-tipo,
     .historial-estado,
     .historial-fecha,
-    .historial-total {
+    .historial-total,
+    .historial-metodo-pago {
         font-size: 0.85em; /* Tamaño muy pequeño */
         padding: 1px 4px; /* Padding extremadamente reducido */
         border-radius: 0 3px 3px 0; /* Bordes muy poco redondeados */
     }
     
-    /* Botón de detalles extremadamente pequeño */
-    .historial-boton-detalles {
+    /* Botones extremadamente pequeños */
+    .historial-boton-detalles,
+    .historial-boton-confirmar,
+    .historial-boton-rechazar,
+    #confirmar-rechazo {
         font-size: 0.85em; /* Tamaño muy pequeño */
         padding: 4px 6px; /* Padding extremadamente reducido */
     }
@@ -727,5 +900,14 @@ main hr {
     .sin-historial h2 {
         font-size: 1.1em; /* Título extremadamente compacto */
         line-height: 1.2; /* Altura de línea muy compacta */
+    }
+
+    /* Textarea muy pequeño */
+    #motivo-rechazo {
+        max-width: 100%; /* Ancho completo */
+        font-size: 0.75em; /* Tamaño muy pequeño */
+        min-height: 60px; /* Altura mínima extrema */
+        padding: 6px; /* Padding extremo */
+        margin: 8px 0; /* Margen extremo */
     }
 }

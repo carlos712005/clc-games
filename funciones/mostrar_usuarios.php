@@ -46,56 +46,53 @@
                                             ($filtros_elegidos['fecha_acceso_hasta'] !== null); /* Verifico si puso fecha de acceso hasta */
                     
                     if ($hay_filtros_activos) { /* Si el usuario aplicó algún filtro específico */
-                        // Solo filtrar si hay filtros específicos seleccionados
                         // Verificar si el usuario cumple CON TODOS los filtros elegidos
                         $mostrar_usuario = true; /* Asumo que el usuario cumple hasta que demuestre lo contrario */
                         
                         // Verificar cada filtro individualmente - TODOS deben cumplirse
                         if ($filtros_elegidos['rol'] !== 'null' && $filtros_elegidos['rol'] != $usuario['id_rol']) { /* Si eligió un rol y no coincide */
-                            $mostrar_usuario = false; // No cumple el filtro de rol /* Marco que no debe mostrarse */
+                            $mostrar_usuario = false; /* Marco que no debe mostrarse */
                         }
                         if ($filtros_elegidos['acronimo'] !== 'null' && $filtros_elegidos['acronimo'] != $usuario['acronimo']) { /* Si eligió un acrónimo y no coincide */
-                            $mostrar_usuario = false; // No cumple el filtro de acrónimo /* Marco que no debe mostrarse */
+                            $mostrar_usuario = false; /* Marco que no debe mostrarse */
                         }
                         if ($filtros_elegidos['email'] !== 'null' && $filtros_elegidos['email'] != $usuario['email']) { /* Si eligió un correo y no coincide */
-                            $mostrar_usuario = false; // No cumple el filtro de correo /* Marco que no debe mostrarse */
+                            $mostrar_usuario = false; /* Marco que no debe mostrarse */
                         }
                         if ($filtros_elegidos['dni'] !== 'null' && $filtros_elegidos['dni'] != $usuario['dni']) { /* Si eligió un DNI y no coincide */
-                            $mostrar_usuario = false; // No cumple el filtro de DNI /* Marco que no debe mostrarse */
+                            $mostrar_usuario = false; /* Marco que no debe mostrarse */
                         }
                         if ($filtros_elegidos['nombre'] !== 'null' && $filtros_elegidos['nombre'] != $usuario['nombre']) { /* Si eligió un nombre y no coincide */
-                            $mostrar_usuario = false; // No cumple el filtro de nombre /* Marco que no debe mostrarse */
+                            $mostrar_usuario = false; /* Marco que no debe mostrarse */
                         }
                         if ($filtros_elegidos['apellidos'] !== 'null' && $filtros_elegidos['apellidos'] != $usuario['apellidos']) { /* Si eligió apellidos y no coincide */
-                            $mostrar_usuario = false; // No cumple el filtro de apellidos /* Marco que no debe mostrarse */
+                            $mostrar_usuario = false; /* Marco que no debe mostrarse */
                         }
                         // Filtros de fecha de creación
                         if ($filtros_elegidos['fecha_creacion_desde'] !== null && $usuario['creado_en'] < $filtros_elegidos['fecha_creacion_desde']) { /* Si la fecha de creación es anterior al filtro */
-                            $mostrar_usuario = false; // No cumple el filtro de fecha de creación desde /* Marco que no debe mostrarse */
+                            $mostrar_usuario = false; /* Marco que no debe mostrarse */
                         }
                         if ($filtros_elegidos['fecha_creacion_hasta'] !== null && $usuario['creado_en'] > $filtros_elegidos['fecha_creacion_hasta'] . ' 23:59:59') { /* Si la fecha de creación es posterior al filtro */
-                            $mostrar_usuario = false; // No cumple el filtro de fecha de creación hasta /* Marco que no debe mostrarse */
+                            $mostrar_usuario = false; /* Marco que no debe mostrarse */
                         }
                         // Filtros de fecha de última actualización
                         if ($filtros_elegidos['fecha_actualizacion_desde'] !== null && $usuario['actualizado_en'] < $filtros_elegidos['fecha_actualizacion_desde']) { /* Si la fecha de última actualización es anterior al filtro */
-                            $mostrar_usuario = false; // No cumple el filtro de fecha de última actualización desde /* Marco que no debe mostrarse */
+                            $mostrar_usuario = false; /* Marco que no debe mostrarse */
                         }
                         if ($filtros_elegidos['fecha_actualizacion_hasta'] !== null && $usuario['actualizado_en'] > $filtros_elegidos['fecha_actualizacion_hasta'] . ' 23:59:59') { /* Si la fecha de última actualización es posterior al filtro */
-                            $mostrar_usuario = false; // No cumple el filtro de fecha de última actualización hasta /* Marco que no debe mostrarse */
+                            $mostrar_usuario = false; /* Marco que no debe mostrarse */
                         }
                         // Filtros de fecha de último acceso
                         if ($filtros_elegidos['fecha_acceso_desde'] !== null && $usuario['ultimo_acceso'] < $filtros_elegidos['fecha_acceso_desde']) { /* Si la fecha de último acceso es anterior al filtro */
-                            $mostrar_usuario = false; // No cumple el filtro de fecha de acceso desde /* Marco que no debe mostrarse */
+                            $mostrar_usuario = false; /* Marco que no debe mostrarse */
                         }
                         if ($filtros_elegidos['fecha_acceso_hasta'] !== null && $usuario['ultimo_acceso'] > $filtros_elegidos['fecha_acceso_hasta'] . ' 23:59:59') { /* Si la fecha de último acceso es posterior al filtro */
-                            $mostrar_usuario = false; // No cumple el filtro de fecha de acceso hasta /* Marco que no debe mostrarse */
+                            $mostrar_usuario = false; /* Marco que no debe mostrarse */
                         }
-                    } else { /* Si todos los filtros están en valor por defecto */
-                        // Si todos los filtros están en "null", mostrar todos los usuarios
+                    } else { /* Si todos los filtros están en "null", mostrar todos los usuarios */
                         $mostrar_usuario = true; /* Muestro todos los usuarios porque no hay filtros específicos */
                     }
-                } else { /* Si no hay filtros en la sesión */
-                    // Si no hay filtros elegidos, mostrar todos los usuarios
+                } else { /* Si no hay filtros elegidos (no hay filtros en la sesión), mostrar todos los usuarios */
                     $mostrar_usuario = true; /* Muestro todos los usuarios porque no se han aplicado filtros */
                 }
                 

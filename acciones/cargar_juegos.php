@@ -12,9 +12,32 @@
     $_SESSION['modo_edicion'] = 'juegos'; /* Indico que estamos en modo edición de juegos */
 
     try { /* Inicio bloque try para capturar errores */
-        
-        // Obtener todos los juegos
-        $consulta = $conexion->prepare("SELECT id, nombre, portada, tipo, activo, precio, resumen FROM juegos ORDER BY actualizado_en DESC"); /* Preparo consulta para obtener juegos */
+        // Verificar si hay una búsqueda activa
+        if(isset($_SESSION['datos_busqueda']) && isset($_SESSION['datos_busqueda']['juegos_encontrados'])) {
+            $ids_juegos = $_SESSION['datos_busqueda']['juegos_encontrados']; /* Obtengo los IDs de juegos encontrados */
+            
+            // Preparar una consulta con los IDs de juegos encontrados
+            $cantidad = count($ids_juegos); /* Cantidad de juegos encontrados */
+            $signos = array_fill(0, $cantidad, '?'); /* Creo un array de forma ['?', '?', '?', ...] */
+            $cadena = implode(',', $signos); /* Uno con comas: '?,?,?' */
+            $consulta = $conexion->prepare("
+                SELECT j.id, j.nombre, j.fecha_lanzamiento, j.portada, j.tipo, j.activo, j.precio, j.resumen
+                FROM juegos j
+                WHERE j.id IN ($cadena)
+                ORDER BY actualizado_en DESC
+            "); /* Preparo consulta para obtener los juegos encontrados ordenados por fecha de actualización */
+            foreach($ids_juegos as $indice => $id) { /* Recorro los IDs de juegos */
+                $consulta->bindValue($indice + 1, $id, PDO::PARAM_INT); /* Vinculo cada ID de juego (empezando en posición 1) */
+            }
+        } else { /* No hay búsqueda activa */
+            // Verificar si existen datos de búsqueda para limpiar
+            if(isset($_SESSION['texto_busqueda']) && isset($_SESSION['datos_busqueda'])) {
+                unset($_SESSION['texto_busqueda']); /* Elimino el texto de búsqueda */
+                unset($_SESSION['datos_busqueda']); /* Elimino los datos de búsqueda */
+            }
+            // Obtener todos los juegos
+            $consulta = $conexion->prepare("SELECT id, nombre, fecha_lanzamiento, portada, tipo, activo, precio, resumen FROM juegos ORDER BY actualizado_en DESC"); /* Preparo consulta para obtener juegos */
+        }
         $consulta->execute(); /* Ejecuto la consulta */
         $juegos = $consulta->fetchAll(PDO::FETCH_ASSOC); /* Obtengo todos los juegos */
         

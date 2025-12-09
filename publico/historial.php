@@ -42,15 +42,39 @@
     }
 
     try { /* Inicio bloque try para capturar errores */
-        $consulta = $conexion->prepare("
-            SELECT h.id AS id_historial, h.id_usuario, h.tipo, h.estado, h.total, h.comentario, h.creado_en,
-                    hc.id AS id_detalle, hc.id_juego, hc.precio, hc.estado AS estado_detalle, hc.comentario AS comentario_detalle
-            FROM historial h
-            LEFT JOIN historial_compras hc ON hc.id_historial = h.id
-            WHERE h.id_usuario = :id_usuario
-            ORDER BY h.creado_en DESC, hc.id ASC
-            "); /* Preparo consulta para obtener el historial de compras del usuario */
-        $consulta->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT); /* Vinculo el ID del usuario */
+        // Verificar si hay una búsqueda activa
+        if(isset($_SESSION['datos_busqueda']) && isset($_SESSION['datos_busqueda']['historiales_encontrados'])) {
+            $ids_historial = $_SESSION['datos_busqueda']['historiales_encontrados']; /* Obtengo los IDs de acciones del historial encontradas */
+            
+            // Preparar una consulta con los IDs de acciones del historial encontradas
+            $cantidad = count($ids_historial); /* Cantidad de acciones del historial encontradas */
+            $signos = array_fill(0, $cantidad, '?'); /* Creo un array de forma ['?', '?', '?', ...] */
+            $cadena = implode(',', $signos); /* Uno con comas: '?,?,?' */
+            $consulta = $conexion->prepare("
+                SELECT h.id AS id_historial, h.id_usuario, h.tipo, h.estado, h.total, h.metodo_pago, h.comentario, h.creado_en, h.actualizado_en,
+                        hc.id AS id_detalle, hc.id_juego, hc.precio, hc.estado AS estado_detalle, hc.comentario AS comentario_detalle
+                FROM historial h
+                LEFT JOIN historial_compras hc ON hc.id_historial = h.id
+                WHERE h.id IN ($cadena) AND h.id_usuario = ?
+                ORDER BY h.actualizado_en DESC, h.creado_en DESC, hc.id ASC
+            "); /* Preparo consulta para obtener el historial de compras del usuario, ordenadas por fecha de actualización y creación */
+            // Vincular los IDs de historial primero, luego el id_usuario al final
+            foreach($ids_historial as $indice => $id) { /* Recorro los IDs de acciones del historial */
+                $consulta->bindValue($indice + 1, $id, PDO::PARAM_INT); /* Vinculo cada ID de historial (empezando en posición 1) */
+            }
+            $consulta->bindValue($cantidad + 1, $id_usuario, PDO::PARAM_INT); /* Vinculo el ID del usuario al final */
+        } else { /* No hay búsqueda activa */
+            // Obtener todo el historial del usuario
+            $consulta = $conexion->prepare("
+                SELECT h.id AS id_historial, h.id_usuario, h.tipo, h.estado, h.total, h.metodo_pago, h.comentario, h.creado_en, h.actualizado_en,
+                        hc.id AS id_detalle, hc.id_juego, hc.precio, hc.estado AS estado_detalle, hc.comentario AS comentario_detalle
+                FROM historial h
+                LEFT JOIN historial_compras hc ON hc.id_historial = h.id
+                WHERE h.id_usuario = :id_usuario
+                ORDER BY h.actualizado_en DESC, h.creado_en DESC, hc.id ASC
+                "); /* Preparo consulta para obtener el historial de compras del usuario */
+            $consulta->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT); /* Vinculo el ID del usuario */
+        }
         $consulta->execute(); /* Ejecuto la consulta */
 
         $historial = $consulta->fetchAll(PDO::FETCH_ASSOC); // Guardo un array de filas (cada fila = un detalle)
@@ -109,13 +133,16 @@
                     'tipo' => $fila['tipo'], /* Tipo de historial */
                     'estado' => $fila['estado'], /* Estado del historial */
                     'total' => $fila['total'], /* Total del historial */
-                    'creado_en' => $fila['creado_en'] /* Fecha de creación del historial */
+                    'metodo_pago' => $fila['metodo_pago'], /* Método de pago del historial */
+                    'comentario' => $fila['comentario'], /* Comentario del historial */
+                    'creado_en' => $fila['creado_en'], /* Fecha de creación del historial */
+                    'actualizado_en' => $fila['actualizado_en'] /* Fecha de última actualización del historial */
                 ]; /* Creo una nueva entrada en el array */
             }
         }
         
     } catch (PDOException $e) { /* Si hay error al obtener el historial */
-        echo "Error: " . $e->getMessage(); /* En caso de error, muestro mensaje */
+        echo "Error: " . $e->getMessage(); /* Muestro mensaje */
     }
     ?>
 
@@ -156,8 +183,21 @@
                             <strong>Estado:</strong> <?php echo htmlspecialchars($h['estado']); ?> <!-- Muestro el estado del historial -->
                         </div>
                         <div class="historial-fecha"> <!-- Contenedor de la fecha del historial -->
-                            <strong>Fecha:</strong> <?php echo date('d/m/Y H:i', strtotime($h['creado_en'])); ?> <!-- Muestro la fecha formateada del historial -->
+                            <strong>Fecha de creación:</strong> <?php echo date('d/m/Y H:i', strtotime($h['creado_en'])); ?> <!-- Muestro la fecha formateada del historial -->
                         </div>
+                        <div class="historial-fecha"> <!-- Contenedor de la fecha de actualización del historial -->
+                            <strong>Última actualización:</strong> <?php echo date('d/m/Y H:i', strtotime($h['actualizado_en'])); ?> <!-- Muestro la fecha formateada de última actualización del historial -->
+                        </div>
+                        <?php if($h['metodo_pago'] !== null) { ?> <!-- Si hay método de pago -->
+                            <div class="historial-metodo-pago"> <!-- Contenedor del método de pago del historial -->
+                                <strong>Método de Pago:</strong> <?php echo mb_strtoupper(htmlspecialchars($h['metodo_pago']), 'UTF-8'); ?> <!-- Muestro el método de pago del historial -->
+                            </div>
+                        <?php } ?>
+                        <?php if($h['comentario'] !== null && trim($h['comentario']) !== '') { ?> <!-- Si hay comentario -->
+                            <div class="historial-comentario"> <!-- Contenedor del comentario del historial -->
+                                <strong>Comentario:</strong> <?php echo nl2br(htmlspecialchars($h['comentario'])); ?> <!-- Muestro el comentario del historial con saltos de línea -->
+                            </div>
+                        <?php } ?>
                         <div class="historial-total"> <!-- Contenedor del total del historial -->
                             <strong>Total:</strong> <?php echo ($h['total'] == '0.00') ? 'Gratis' : number_format($h['total'], 2, ',', '.') . ' €'; ?> <!-- Muestro el total del historial formateado -->
                         </div>

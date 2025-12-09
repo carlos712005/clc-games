@@ -197,9 +197,10 @@
     opacity: 0.8; /* Ligeramente transparente */
 }
 
-/* Botones principales del carrito (tramitar pedido y confirmar devolución) */
+/* Botones principales del carrito (tramitar pedido y confirmar devolución y solicitud) */
 #tramitar-pedido,
-#confirmar-devolucion {
+#confirmar-devolucion,
+#confirmar-solicitud {
     background: linear-gradient(135deg, #21b7c2, #1a9bb8); /* Gradiente turquesa */
     color: #fff; /* Texto blanco */
     border: 2px solid #21b7c2; /* Borde turquesa */
@@ -223,7 +224,8 @@
 
 /* Efecto hover de los botones principales */
 #tramitar-pedido:hover,
-#confirmar-devolucion:hover {
+#confirmar-devolucion:hover,
+#confirmar-solicitud:hover {
     background: linear-gradient(135deg, #26d1de, #21b7c2); /* Gradiente más brillante */
     border-color: #26d1de; /* Borde más brillante */
     transform: translateY(-2px); /* Se eleva */
@@ -232,14 +234,16 @@
 
 /* Efecto active (cuando haces clic) en los botones principales */
 #tramitar-pedido:active,
-#confirmar-devolucion:active {
+#confirmar-devolucion:active,
+#confirmar-solicitud:active {
     transform: translateY(0) scale(0.98); /* Se hunde ligeramente */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Sombra reducida */
 }
 
 /* Botones de cancelar y vaciar (color rojo) */
 #vaciar-carrito, 
-#cancelar-pedido {
+#cancelar-pedido,
+#cancelar-reserva {
     background: linear-gradient(135deg, #dc3545, #c82333); /* Gradiente rojo */
     color: #fff; /* Texto blanco */
     border: 2px solid #dc3545; /* Borde rojo */
@@ -268,7 +272,8 @@
 
 /* Efecto active de los botones rojos */
 #vaciar-carrito:active, 
-#cancelar-pedido:active {
+#cancelar-pedido:active,
+#cancelar-reserva:active {
     transform: translateY(0) scale(0.98); /* Se hunde ligeramente */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Sombra reducida */
 }
@@ -326,9 +331,10 @@
     letter-spacing: 2px; /* Espaciado entre letras */
 }
 
-/* Bloques de estadísticas del pedido y advertencia de devolución */
+/* Bloques de estadísticas del pedido y advertencia de devolución y cancelación de solicitud */
 .estadisticas-pedido,
-#advertencia-devolucion {
+#advertencia-devolucion,
+#advertencia-cancelacion {
     background: rgba(33, 183, 194, 0.1) !important; /* Fondo turquesa suave */
     border-left: 3px solid #26d1de; /* Borde izquierdo turquesa */
     padding: 8px 16px; /* Padding generoso */
@@ -357,8 +363,8 @@
     flex-wrap: wrap; /* Permitir que los botones se envuelvan */
 }
 
-/* Botón de confirmar pago (verde) */
-#confirmar-pago {
+/* Botón de confirmar pago, solicitar devolución y solicitar reserva (verde) */
+#confirmar-pago, #solicitar-devolucion, #solicitar-reserva {
     background: linear-gradient(135deg, #28a745, #20c453); /* Gradiente verde */
     color: #fff; /* Texto blanco */
     border: 2px solid #28a745; /* Borde verde */
@@ -377,22 +383,22 @@
     letter-spacing: 1px; /* Espaciado entre letras */
 }
 
-/* Efecto hover del botón confirmar pago */
-#confirmar-pago:hover {
+/* Efecto hover del botón confirmar pago, solicitar devolución y solicitar reserva (verde) */
+#confirmar-pago:hover, #solicitar-devolucion:hover, #solicitar-reserva:hover {
     background: linear-gradient(135deg, #32cd32, #28a745); /* Gradiente más brillante */
     border-color: #32cd32; /* Borde más brillante */
     transform: translateY(-3px); /* Se eleva */
     box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4); /* Sombra verde */
 }
 
-/* Efecto active del botón confirmar pago */
-#confirmar-pago:active {
+/* Efecto active del botón confirmar pago, solicitar devolución y solicitar reserva (verde) */
+#confirmar-pago:active, #solicitar-devolucion:active, #solicitar-reserva:active {
     transform: translateY(-1px) scale(0.98); /* Se hunde ligeramente */
     box-shadow: 0 4px 15px rgba(40, 167, 69, 0.6); /* Sombra reducida */
 }
 
-/* Campo de texto para el motivo de devolución */
-#motivo-devolucion {
+/* Campo de texto para el motivo de devolución o cancelación de petición */
+#motivo-devolucion, #motivo-cancelacion {
     display: block; /* Necesario para que margin auto funcione */
     width: 100%; /* Ancho completo */
     max-width: 600px; /* Ancho máximo para evitar que sea demasiado ancho */
@@ -411,40 +417,45 @@
     box-sizing: border-box; /* Incluye padding y border en el ancho */
 }
 
-/* Cuando el campo de motivo está enfocado */
-#motivo-devolucion:focus {
+/* Cuando el campo de motivo o cancelación está enfocado */
+#motivo-devolucion:focus, #motivo-cancelacion:focus {
     outline: none; /* Sin outline por defecto */
     border-color: #21b7c2; /* Borde turquesa al enfocar */
     background: rgba(51, 51, 51, 0.95); /* Fondo más sólido al enfocar */
     box-shadow: 0 0 15px rgba(33, 183, 194, 0.3); /* Sombra turquesa */
 }
 
-/* Placeholder del campo de motivo */
-#motivo-devolucion::placeholder {
+/* Placeholder del campo de motivo y de cancelación */
+#motivo-devolucion::placeholder,
+#motivo-cancelacion::placeholder {
     color: #999; /* Color gris para el placeholder */
     font-style: italic; /* Cursiva para diferenciar */
     opacity: 0.8; /* Ligeramente transparente */
 }
 
 /* Barra de scroll del textarea de motivo */
-#motivo-devolucion::-webkit-scrollbar {
+#motivo-devolucion::-webkit-scrollbar,
+#motivo-cancelacion::-webkit-scrollbar {
     width: 8px; /* Ancho de la barra */
 }
 
 /* Fondo de la barra de scroll del textarea */
-#motivo-devolucion::-webkit-scrollbar-track {
+#motivo-devolucion::-webkit-scrollbar-track, 
+#motivo-cancelacion::-webkit-scrollbar-track {
     background: #222; /* Fondo oscuro */
     border-radius: 4px; /* Esquinas redondeadas */
 }
 
 /* Parte que se mueve de la barra de scroll del textarea */
-#motivo-devolucion::-webkit-scrollbar-thumb {
+#motivo-devolucion::-webkit-scrollbar-thumb,
+#motivo-cancelacion::-webkit-scrollbar-thumb {
     background: #21b7c2; /* Color turquesa */
     border-radius: 4px; /* Esquinas redondeadas */
 }
 
 /* Hover en la barra de scroll del textarea */
-#motivo-devolucion::-webkit-scrollbar-thumb:hover {
+#motivo-devolucion::-webkit-scrollbar-thumb:hover,
+#motivo-cancelacion::-webkit-scrollbar-thumb:hover {
     background: #26d1de; /* Más claro al hover */
 }
 
@@ -483,7 +494,7 @@
     }
     
     /* Textarea de motivo en tablets grandes */
-    #motivo-devolucion {
+    #motivo-devolucion, #motivo-cancelacion {
         max-width: 90%; /* Ancho adaptativo */
         font-size: 0.9em; /* Tamaño ligeramente menor */
     }
@@ -581,13 +592,16 @@
     
     /* Botones en ancho completo */
     #confirmar-pago,
-    #cancelar-pedido {
+    #solicitar-devolucion,
+    #solicitar-reserva,
+    #cancelar-pedido,
+    #cancelar-reserva {
         width: 100%; /* Ancho completo */
         min-width: auto; /* Sin ancho mínimo */
     }
     
     /* Textarea de motivo adaptado para tablets */
-    #motivo-devolucion {
+    #motivo-devolucion, #motivo-cancelacion {
         max-width: 100%; /* Ancho completo */
         font-size: 0.85em; /* Tamaño menor */
         min-height: 80px; /* Altura mínima reducida */
@@ -691,7 +705,10 @@
     
     /* Botones más pequeños */
     #confirmar-pago,
-    #cancelar-pedido {
+    #solicitar-devolucion,
+    #solicitar-reserva,
+    #cancelar-pedido,
+    #cancelar-reserva {
         padding: 10px 15px; /* Padding reducido */
         font-size: 0.9em; /* Texto más pequeño */
         height: 40px; /* Altura reducida */
@@ -699,7 +716,7 @@
     }
     
     /* Textarea pequeño en móviles */
-    #motivo-devolucion {
+    #motivo-devolucion, #motivo-cancelacion {
         max-width: 100%; /* Ancho completo */
         font-size: 0.8em; /* Tamaño pequeño */
         min-height: 70px; /* Altura mínima muy reducida */
@@ -788,7 +805,10 @@
     
     /* Botones muy pequeños sin mayúsculas */
     #confirmar-pago,
-    #cancelar-pedido {
+    #solicitar-devolucion,
+    #solicitar-reserva,
+    #cancelar-pedido,
+    #cancelar-reserva {
         padding: 8px 12px; /* Padding extremo */
         font-size: 0.8em; /* Texto muy pequeño */
         height: 36px; /* Altura extrema */
@@ -797,7 +817,7 @@
     }
     
     /* Textarea muy pequeño */
-    #motivo-devolucion {
+    #motivo-devolucion, #motivo-cancelacion {
         max-width: 100%; /* Ancho completo */
         font-size: 0.75em; /* Tamaño muy pequeño */
         min-height: 60px; /* Altura mínima extrema */

@@ -8,6 +8,12 @@
         header('Location: ../publico/index.php'); // Redirijo al índice público
         exit; // Termino la ejecución
     }
+
+    // Limpiar búsqueda si existen los datos
+	if( isset($_SESSION['texto_busqueda']) || isset($_SESSION['datos_busqueda']) ) {
+		unset($_SESSION['texto_busqueda']); /* Elimino el texto de búsqueda */
+		unset($_SESSION['datos_busqueda']); /* Elimino los datos de búsqueda */
+	}
     
     // Inicializar la variable de si es modo administrador si no existe
     if(!isset($_SESSION['modo_admin'])) {

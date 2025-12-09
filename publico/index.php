@@ -58,25 +58,67 @@
 
         <div id="contenedor-juegos" class="contenedor-juegos"> <!-- Contenedor principal para mostrar todos los juegos -->
 
-            <?php /* Inicio bloque PHP para obtener juegos de la base de datos */
+            <?php
                 try { /* Inicio bloque try para capturar errores de base de datos */
                     if(isset($_SESSION['id_usuario'])) { /* Si el usuario está logueado */
-                        $consulta = $conexion->prepare("
-                            SELECT j.id, j.nombre, j.portada, j.tipo, j.activo, j.precio, j.resumen, b.id_juego AS en_biblioteca
-                            FROM juegos j
-                            LEFT JOIN biblioteca b ON j.id = b.id_juego AND b.id_usuario = :id_usuario
-                            WHERE j.activo = 1
-                            ORDER BY b.id_juego ASC, j.actualizado_en DESC
-                        "); /* Preparo consulta para obtener los juegos solo activos, ordenados por biblioteca y fecha de actualización */
-                        $consulta->bindParam(':id_usuario', $_SESSION['id_usuario'], PDO::PARAM_INT); /* Vinculo el ID del usuario */
+                        /* Verificar si hay una búsqueda activa */
+                        if(isset($_SESSION['datos_busqueda']) && isset($_SESSION['datos_busqueda']['juegos_encontrados'])) {
+                            $ids_juegos = $_SESSION['datos_busqueda']['juegos_encontrados']; /* Obtengo los IDs de juegos encontrados */
+                            
+                            // Preparar una consulta con los IDs de juegos encontrados
+                            $cantidad = count($ids_juegos); /* Cantidad de juegos encontrados */
+                            $signos = array_fill(0, $cantidad, '?'); /* Creo un array de forma ['?', '?', '?', ...] */
+                            $cadena = implode(',', $signos); /* Uno con comas: '?,?,?' */
+                            $consulta = $conexion->prepare("
+                                SELECT j.id, j.nombre, j.fecha_lanzamiento, j.portada, j.tipo, j.activo, j.precio, j.resumen, b.id_juego AS en_biblioteca
+                                FROM juegos j
+                                LEFT JOIN biblioteca b ON j.id = b.id_juego AND b.id_usuario = ?
+                                WHERE j.id IN ($cadena) AND j.activo = 1
+                                ORDER BY b.id_juego ASC, j.actualizado_en DESC
+                            "); /* Preparo consulta para obtener los juegos encontrados que estén activos, ordenados por biblioteca y fecha de actualización */
+                            // Vincular id_usuario primero (posición 1), luego los IDs de juegos
+                            $consulta->bindValue(1, $_SESSION['id_usuario'], PDO::PARAM_INT); /* Vinculo el ID del usuario */
+                            foreach($ids_juegos as $indice => $id) { /* Recorro los IDs de juegos */
+                                $consulta->bindValue($indice + 2, $id, PDO::PARAM_INT); /* Vinculo cada ID de juego (empezando en posición 2) */
+                            }
+                        } else { /* No hay búsqueda activa */
+                            // Obtener todos los juegos activos
+                            $consulta = $conexion->prepare("
+                                SELECT j.id, j.nombre, j.fecha_lanzamiento, j.portada, j.tipo, j.activo, j.precio, j.resumen, b.id_juego AS en_biblioteca
+                                FROM juegos j
+                                LEFT JOIN biblioteca b ON j.id = b.id_juego AND b.id_usuario = :id_usuario
+                                WHERE j.activo = 1
+                                ORDER BY b.id_juego ASC, j.actualizado_en DESC
+                            "); /* Preparo consulta para obtener los juegos solo activos, ordenados por biblioteca y fecha de actualización */
+                            $consulta->bindParam(':id_usuario', $_SESSION['id_usuario'], PDO::PARAM_INT); /* Vinculo el ID del usuario */
+                        }
                     } else { /* Si el usuario no está logueado */
-                        $consulta = $conexion->prepare("SELECT id, nombre, portada, tipo, activo, precio, resumen FROM juegos WHERE activo = 1 ORDER BY actualizado_en DESC"); /* Preparo consulta para obtener solo juegos activos ordenados por fecha de actualización */
+                        // Verificar si hay una búsqueda activa
+                        if(isset($_SESSION['datos_busqueda']) && isset($_SESSION['datos_busqueda']['juegos_encontrados'])) {
+                            $ids_juegos = $_SESSION['datos_busqueda']['juegos_encontrados']; /* Obtengo los IDs de juegos encontrados */
+                            
+                            // Preparar una consulta con los IDs de juegos encontrados
+                            $cantidad = count($ids_juegos); /* Cantidad de juegos encontrados */
+                            $signos = array_fill(0, $cantidad, '?'); /* Creo un array de forma ['?', '?', '?', ...] */
+                            $cadena = implode(',', $signos); /* Uno con comas: '?,?,?' */
+                            $consulta = $conexion->prepare("
+                                SELECT id, nombre, fecha_lanzamiento, portada, tipo, activo, precio, resumen 
+                                FROM juegos
+                                WHERE id IN ($cadena) AND activo = 1
+                                ORDER BY actualizado_en DESC
+                            "); /* Preparo consulta para obtener los juegos encontrados que estén activos, ordenados por fecha de actualización */
+                            foreach($ids_juegos as $indice => $id) { /* Recorro los IDs de juegos */
+                                $consulta->bindValue($indice + 1, $id, PDO::PARAM_INT); /* Vinculo cada ID de juego (empezando en posición 1) */
+                            }
+                        } else { /* No hay búsqueda activa */
+                            // Obtener todos los juegos activos
+                            $consulta = $conexion->prepare("SELECT id, nombre, fecha_lanzamiento, portada, tipo, activo, precio, resumen FROM juegos WHERE activo = 1 ORDER BY actualizado_en DESC"); /* Preparo consulta para obtener solo juegos activos ordenados por fecha de actualización */
+                        }
                     }
                     $consulta->execute(); /* Ejecuto la consulta */
                     $juegos = $consulta->fetchAll(PDO::FETCH_ASSOC); /* Obtengo todos los juegos como array asociativo */
                 } catch (PDOException $e) { /* Si hay error en la consulta */
-                    $_SESSION['mensaje_error'] = 'Error al conectar con la base de datos: ' . $e->getMessage(); /* Guardo el error en sesión */
-                    header('Location: index.php'); /* Redirijo al mismo index */
+                    echo 'Error al conectar con la base de datos: ' . $e->getMessage(); /* Muestro mensaje de error */
                     exit; /* Termino la ejecución */
                 }
 

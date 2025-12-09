@@ -12,9 +12,27 @@
     $_SESSION['modo_edicion'] = 'usuarios'; /* Indico que estamos en modo edición de usuarios */
 
     try { /* Inicio bloque try para capturar errores */
-        
-        // Obtener todos los usuarios
-        $consulta = $conexion->prepare("SELECT * FROM usuarios ORDER BY creado_en DESC"); /* Preparo consulta para obtener usuarios */
+        // Verificar si hay una búsqueda activa
+        if(isset($_SESSION['datos_busqueda']) && isset($_SESSION['datos_busqueda']['usuarios_encontrados'])) {
+            $ids_usuarios = $_SESSION['datos_busqueda']['usuarios_encontrados']; /* Obtengo los IDs de usuarios encontrados */
+            
+            // Preparar una consulta con los IDs de usuarios encontrados
+            $cantidad = count($ids_usuarios); /* Cantidad de usuarios encontrados */
+            $signos = array_fill(0, $cantidad, '?'); /* Creo un array de forma ['?', '?', '?', ...] */
+            $cadena = implode(',', $signos); /* Uno con comas: '?,?,?' */
+            $consulta = $conexion->prepare("SELECT * FROM usuarios WHERE id IN ($cadena) ORDER BY creado_en DESC"); /* Preparo consulta para obtener los usuarios encontrados, ordenados por fecha de creación */
+            foreach($ids_usuarios as $indice => $id) { /* Recorro los IDs de usuarios */
+                $consulta->bindValue($indice + 1, $id, PDO::PARAM_INT); /* Vinculo cada ID de usuario (empezando en posición 1) */
+            }
+        } else { /* No hay búsqueda activa */
+            // Verificar si existen datos de búsqueda para limpiar
+            if(isset($_SESSION['texto_busqueda']) && isset($_SESSION['datos_busqueda'])) {
+                unset($_SESSION['texto_busqueda']); /* Elimino el texto de búsqueda */
+                unset($_SESSION['datos_busqueda']); /* Elimino los datos de búsqueda */
+            }
+            // Obtener todos los usuarios
+            $consulta = $conexion->prepare("SELECT * FROM usuarios ORDER BY creado_en DESC"); /* Preparo consulta para obtener usuarios */
+        }
         $consulta->execute(); /* Ejecuto la consulta */
         $usuarios = $consulta->fetchAll(PDO::FETCH_ASSOC); /* Obtengo todos los usuarios */
         

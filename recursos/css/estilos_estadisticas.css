@@ -1,0 +1,467 @@
+/* Estilos para la página de estadísticas */
+
+/* Cuerpo principal de la página */
+main {
+    margin-top: 30px; /* Espacio arriba para que no quede pegado al encabezado */
+    padding-top: 80px; /* Espacio para el encabezado fijo que no tape nada */
+    min-height: 100vh; /* Altura mínima de toda la ventana para ocupar toda la pantalla */
+}
+
+/* Contenedor principal que envuelve todas las estadísticas */
+.contenedor-estadisticas {
+    max-width: 1200px; /* Ancho máximo en pantallas grandes */
+    margin: 40px auto; /* Centrado con márgenes verticales generosos */
+    padding: 0 20px; /* Espaciado lateral para que no toque los bordes */
+}
+
+/* Título principal de la página de estadísticas */
+.contenedor-estadisticas h1 {
+    text-align: center; /* Centrado porque se ve mejor */
+    margin-top: 20px; /* Espacio arriba para que respire */
+    margin-bottom: 20px; /* Espacio abajo también */
+    color: #21b7c2; /* Color turquesa corporativo */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra sutil para que destaque */
+    font-weight: 600; /* Un poco más gruesa que la normal */
+}
+
+/* Títulos secundarios de secciones */
+h2 {
+    margin-top: 2rem; /* Espacio arriba para separar secciones */
+}
+
+/* BLOQUE 1: RESUMEN GLOBAL */
+/* Sección que contiene el resumen global de estadísticas */
+.bloque-resumen-global {
+    margin-bottom: 3rem; /* Espacio generoso debajo del bloque */
+}
+
+/* Título del bloque de resumen global */
+.bloque-resumen-global h2 {
+    margin-bottom: 1.5rem; /* Espacio debajo del título */
+    border-bottom: 2px solid #21b7c2; /* Línea inferior turquesa decorativa */
+    max-width: 40%; /* No ocupa todo el ancho para que se vea bien */
+    color: #21b7c2; /* Color turquesa corporativo */
+    font-size: 1.5rem; /* Tamaño destacado para el título */
+    font-weight: 600; /* Negrita suave */
+    text-shadow: 0 1px 3px rgba(33, 183, 194, 0.2); /* Sombra sutil turquesa */
+}
+
+/* Tarjeta contenedora de cada categoría de estadísticas (Ganancias, Pedidos, Reservas, Devoluciones) */
+.categoria-estadisticas {
+    background: linear-gradient(135deg, #222 0%, #1a1a1a 100%); /* Gradiente oscuro para profundidad */
+    border: 3px double #21b7c2; /* Borde doble turquesa que me gusta */
+    border-radius: 16px; /* Esquinas bien redondeadas */
+    padding: 1.5rem; /* Espaciado interno generoso */
+    margin-bottom: 1.5rem; /* Espacio entre categorías */
+    box-shadow: 0 8px 25px rgba(33, 183, 194, 0.18); /* Sombra turquesa suave */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+}
+
+/* Efecto hover en las tarjetas de categorías */
+.categoria-estadisticas:hover {
+    transform: translateY(-4px); /* Se eleva ligeramente al pasar el cursor */
+    box-shadow: 0 12px 30px rgba(33, 183, 194, 0.25); /* Sombra más intensa en hover */
+}
+
+/* Título de cada categoría dentro del bloque */
+.titulo-categoria {
+    color: #21b7c2; /* Color turquesa corporativo */
+    font-size: 1.3rem; /* Tamaño destacado para subtítulos */
+    font-weight: 600; /* Negrita suave */
+    margin-bottom: 1rem; /* Espacio debajo del título */
+    padding-bottom: 0.8rem; /* Padding para separar del borde inferior */
+    border-bottom: 2px solid rgba(33, 183, 194, 0.3); /* Línea inferior turquesa suave */
+}
+
+/* Grid que organiza los indicadores dentro de cada categoría */
+.grupo-indicadores {
+    display: grid; /* Rejilla para organizar indicadores */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 280px)); /* Columnas de tamaño fijo que se ajustan */
+    justify-content: center; /* Centro las columnas en el contenedor */
+    gap: 1rem; /* Espacio entre indicadores */
+}
+
+/* Cada indicador individual que muestra un dato (texto + valor) */
+.indicador {
+    display: flex; /* Flex para alinear texto y valor */
+    justify-content: space-between; /* Separo texto y valor a los extremos */
+    align-items: center; /* Centro verticalmente */
+    padding: 0.8rem 1rem; /* Espaciado interno cómodo */
+    background: rgba(33, 183, 194, 0.05); /* Fondo turquesa muy sutil */
+    border-left: 3px solid #21b7c2; /* Raya izquierda turquesa para destacar */
+    border-radius: 6px; /* Esquinas suavemente redondeadas */
+    transition: all 0.3s ease; /* Transición suave para hover */
+    min-width: 280px; /* Ancho mínimo para mantener coherencia */
+    max-width: 280px; /* Ancho máximo para mantener coherencia */
+}
+
+/* Efecto hover en los indicadores */
+.indicador:hover {
+    background: rgba(33, 183, 194, 0.12); /* Fondo un poco más visible en hover */
+    transform: translateX(5px); /* Se desplaza a la derecha ligeramente */
+}
+
+/* Texto descriptivo del indicador (lado izquierdo) */
+.indicador-texto {
+    color: white; /* Texto blanco para buena legibilidad */
+    font-size: 0.95rem; /* Tamaño estándar */
+    font-weight: 500; /* Peso medio */
+}
+
+/* Valor numérico del indicador (lado derecho) */
+.indicador-valor {
+    color: #21b7c2; /* Color turquesa para destacar el valor */
+    font-size: 1.1rem; /* Un poco más grande que el texto */
+    font-weight: 700; /* Negrita para que resalte */
+}
+
+/* BLOQUE 2: RESUMEN POR PERIODOS */
+/* Sección que contiene los resúmenes de 7 días, 30 días y 12 meses */
+.bloque-periodos {
+    margin-bottom: 3rem; /* Espacio generoso debajo del bloque */
+}
+
+/* Título del bloque de periodos */
+.bloque-periodos h2 {
+    margin-bottom: 1.5rem; /* Espacio debajo del título */
+    border-bottom: 2px solid #21b7c2; /* Línea inferior turquesa decorativa */
+    max-width: 30%; /* Más estrecha que en el bloque global */
+    color: #21b7c2; /* Color turquesa corporativo */
+    font-size: 1.5rem; /* Tamaño destacado para el título */
+    font-weight: 600; /* Negrita suave */
+    text-shadow: 0 1px 3px rgba(33, 183, 194, 0.2); /* Sombra sutil turquesa */
+}
+
+/* Grid que organiza las tarjetas de periodos */
+.contenedor-periodos {
+    display: grid; /* Rejilla para organizar periodos */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas que se adaptan */
+    gap: 2rem; /* Espacio generoso entre periodos */
+}
+
+/* Tarjeta individual de cada periodo (7 días, 30 días, 12 meses) */
+.periodo {
+    background: linear-gradient(135deg, #222 0%, #1a1a1a 100%); /* Gradiente oscuro para profundidad */
+    border: 3px double #21b7c2; /* Borde doble turquesa */
+    border-radius: 16px; /* Esquinas bien redondeadas */
+    padding: 1.5rem; /* Espaciado interno generoso */
+    transition: all 0.4s ease; /* Transición suave para efectos hover */
+    box-shadow: 0 8px 25px rgba(33, 183, 194, 0.18); /* Sombra turquesa suave */
+    overflow: hidden; /* Evita desbordamientos */
+}
+
+/* Efecto hover en las tarjetas de periodos */
+.periodo:hover {
+    transform: translateY(-8px) scale(1.02); /* Se eleva y agranda ligeramente en hover */
+    border-color: #26d1de; /* Color más claro al hacer hover */
+    box-shadow: 0 15px 40px rgba(33, 183, 194, 0.4), 0 0 30px rgba(38, 209, 222, 0.3); /* Sombra más intensa y resplandor */
+    background: linear-gradient(145deg, #2a2a2a, #222); /* Gradiente más marcado */
+}
+
+/* Título de cada tarjeta de periodo */
+.periodo h3 {
+    margin-bottom: 1rem; /* Espacio debajo del título del periodo */
+    color: #21b7c2; /* Color turquesa corporativo */
+    font-size: 1.3rem; /* Tamaño destacado para subtítulos */
+    border-bottom: 2px solid #21b7c2; /* Línea inferior turquesa */
+    padding-bottom: 0.5rem; /* Padding para separar del borde */
+    font-weight: 600; /* Negrita suave */
+}
+
+/* Contenedor que apila los datos de cada periodo */
+.datos-periodo {
+    display: flex; /* Flex para organizar datos */
+    flex-direction: column; /* Apilados verticalmente */
+    gap: 0.8rem; /* Espacio entre cada dato */
+}
+
+/* Cada fila de dato dentro del periodo (texto + valor) */
+.dato-periodo {
+    display: flex; /* Flex para alinear texto y valor */
+    justify-content: space-between; /* Separo texto y valor a los extremos */
+    padding: 0.5rem 0; /* Espaciado vertical */
+    border-bottom: 1px solid rgba(33, 183, 194, 0.2); /* Línea divisoria turquesa sutil */
+}
+
+/* Quito la línea divisoria del último dato */
+.dato-periodo:last-child {
+    border-bottom: none; /* Quito la línea del último elemento */
+}
+
+/* Texto descriptivo del dato (lado izquierdo) */
+.dato-periodo .texto {
+    color: white; /* Texto blanco para buena legibilidad */
+    font-weight: 500; /* Peso medio */
+}
+
+/* Valor numérico del dato (lado derecho) */
+.dato-periodo .valor {
+    color: #21b7c2; /* Color turquesa para destacar el valor */
+    font-weight: bold; /* Negrita para que resalte */
+}
+
+/* BLOQUE 3: TABLA CON BARRAS */
+/* Sección que contiene la tabla de evolución de ventas por mes */
+.bloque-tabla-barras {
+    margin-bottom: 3rem; /* Espacio generoso debajo del bloque */
+}
+
+/* Título del bloque de tabla con barras */
+.bloque-tabla-barras h2 {
+    margin-bottom: 1.5rem; /* Espacio debajo del título */
+    border-bottom: 2px solid #21b7c2; /* Línea inferior turquesa decorativa */
+    max-width: 50%; /* Ancho intermedio para el título */
+    color: #21b7c2; /* Color turquesa corporativo */
+    font-size: 1.5rem; /* Tamaño destacado para el título */
+    font-weight: 600; /* Negrita suave */
+    text-shadow: 0 1px 3px rgba(33, 183, 194, 0.2); /* Sombra sutil turquesa */
+}
+
+/* Contenedor principal de la tabla con estilos de tarjeta */
+.contenedor-tabla {
+    background: linear-gradient(135deg, #222 0%, #1a1a1a 100%); /* Gradiente oscuro para profundidad */
+    border: 3px double #21b7c2; /* Borde doble turquesa */
+    border-radius: 16px; /* Esquinas bien redondeadas */
+    overflow: hidden; /* Evita desbordamientos */
+    box-shadow: 0 8px 25px rgba(33, 183, 194, 0.18); /* Sombra turquesa suave */
+}
+
+/* Tabla de estadísticas con barras de progreso */
+.tabla-estadisticas {
+    width: 100%; /* Tabla a ancho completo */
+    border-collapse: collapse; /* Sin espacios entre celdas */
+}
+
+/* Cabecera de la tabla con fondo oscuro y línea turquesa */
+.tabla-estadisticas thead {
+    border-bottom: 3px double #26d1de; /* Línea inferior doble turquesa */
+    background: rgba(26, 26, 26, 0.5); /* Fondo oscuro semi-transparente */
+}
+
+/* Celdas de encabezado (Año, Mes, Ventas) */
+.tabla-estadisticas th {
+    padding: 1.5rem 1.2rem; /* Espaciado interno generoso */
+    text-align: left; /* Alineado a la izquierda */
+    font-weight: 700; /* Negrita fuerte */
+    color: #21b7c2; /* Color turquesa corporativo */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra sutil para destacar */
+    letter-spacing: 1px; /* Espaciado entre letras para legibilidad */
+    font-size: 1.05rem; /* Un poco más grande que el texto normal */
+}
+
+/* Celdas de datos de la tabla */
+.tabla-estadisticas td {
+    padding: 1rem 1.2rem; /* Espaciado interno cómodo */
+    border-bottom: 1px solid rgba(33, 183, 194, 0.2); /* Línea divisoria turquesa sutil */
+}
+
+/* Filas del cuerpo de la tabla con efectos de transición */
+.tabla-estadisticas tbody tr {
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+}
+
+/* Efecto hover en las filas de la tabla */
+.tabla-estadisticas tbody tr:hover {
+    background: rgba(33, 183, 194, 0.1); /* Fondo turquesa sutil en hover */
+    box-shadow: inset 0 0 10px rgba(33, 183, 194, 0.1); /* Sombra interna sutil */
+}
+
+/* Quito el borde inferior de la última fila */
+.tabla-estadisticas tbody tr:last-child td {
+    border-bottom: none; /* Quito la línea del último elemento */
+}
+
+/* Columna del año en la tabla */
+.columna-anio {
+    color: white; /* Texto blanco para buena legibilidad */
+    font-weight: 600; /* Negrita suave */
+    width: 80px; /* Ancho fijo para la columna */
+    text-align: center; /* Centrado en la celda */
+}
+
+/* Columna del mes en la tabla */
+.columna-mes {
+    color: white; /* Texto blanco para buena legibilidad */
+    font-weight: 600; /* Negrita suave */
+    width: 110px; /* Ancho fijo para la columna */
+    text-align: center; /* Centrado en la celda */
+}
+
+/* Columna de ventas con la barra de progreso horizontal */
+.columna-ventas {
+    flex: 1; /* Ocupa el espacio restante */
+    min-width: 300px; /* Ancho mínimo para que quepan las barras */
+}
+
+/* Contenedor de la barra de progreso (fondo transparente) */
+.barra {
+    background: transparent; /* Fondo transparente */
+    border-radius: 10px; /* Esquinas redondeadas */
+    height: 45px; /* Altura estándar de la barra */
+    position: relative; /* Para elementos internos absolutos */
+    overflow: visible; /* Permite que el contenido se vea fuera si es necesario */
+}
+
+/* Barra de relleno con gradiente turquesa que indica el progreso */
+.barra-relleno {
+    background: linear-gradient(90deg, #21b7c2, #26d1de); /* Gradiente turquesa horizontal */
+    height: 100%; /* Altura completa de la barra contenedora */
+    border-radius: 8px; /* Esquinas redondeadas */
+    transition: all 0.4s ease; /* Transición suave para efectos hover */
+    display: flex; /* Flex para alinear el valor */
+    align-items: center; /* Centro verticalmente el valor */
+    padding: 0 0.5rem; /* Espaciado interno lateral */
+    box-shadow: 0 4px 12px rgba(33, 183, 194, 0.25), inset 0 1px 3px rgba(0, 0, 0, 0.2); /* Sombra externa e interna */
+    position: relative; /* Para efectos de transformación */
+}
+
+/* Etiqueta con el valor numérico dentro de la barra */
+.valor-barra {
+    color: #fff; /* Texto blanco para buena legibilidad */
+    font-weight: bold; /* Negrita para que resalte */
+    font-size: 1rem; /* Tamaño estándar */
+    margin-left: auto; /* Empuja el valor a la derecha */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Sombra sutil para legibilidad */
+}
+
+/* Efecto hover en el contenedor de la barra */
+.tabla-estadisticas tbody tr:hover .barra {
+    box-shadow: 0 6px 18px rgba(33, 183, 194, 0.25); /* Sombra más intensa en hover */
+}
+
+/* Efecto hover en la barra de relleno con gradiente más claro */
+.tabla-estadisticas tbody tr:hover .barra-relleno {
+    background: linear-gradient(90deg, #26d1de, #2ed5e3); /* Gradiente más claro en hover */
+    box-shadow: 0 0 15px rgba(38, 209, 222, 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.2); /* Sombra más intensa y resplandor */
+    transform: scaleY(1.05); /* Se agranda verticalmente ligeramente */
+}
+
+
+/* RESPONSIVIDAD */
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 1024px) {
+    .contenedor-estadisticas {
+        max-width: 950px; /* Ancho máximo reducido para tablets grandes */
+        margin: 35px auto; /* Márgenes verticales algo menores */
+        padding: 0 18px; /* Padding lateral reducido */
+    }
+
+    .contenedor-estadisticas h1 {
+        font-size: 2rem; /* Título un poco más pequeño */
+    }
+
+    .bloque-resumen-global h2,
+    .bloque-periodos h2,
+    .bloque-tabla-barras h2 {
+        font-size: 1.3rem; /* Subtítulos reducidos */
+    }
+}
+
+/* Ajustes para pantallas de tablets y móviles */
+@media (max-width: 768px) {
+    main {
+        padding-top: 60px; /* Menos espacio superior en tablets */
+    }
+
+    .contenedor-estadisticas {
+        max-width: 100%; /* Ancho completo en tablets */
+        margin: 30px auto; /* Márgenes verticales menores */
+        padding: 0 15px; /* Padding lateral reducido */
+    }
+
+    .contenedor-estadisticas h1 {
+        font-size: 1.6rem; /* Título más pequeño */
+    }
+
+    .bloque-resumen-global h2,
+    .bloque-periodos h2,
+    .bloque-tabla-barras h2 {
+        font-size: 1.2rem; /* Subtítulos más pequeños */
+    }
+
+    .contenedor-periodos {
+        grid-template-columns: 1fr; /* Una sola columna en tablets */
+    }
+
+    .tabla-estadisticas th,
+    .tabla-estadisticas td {
+        padding: 0.8rem; /* Padding reducido en celdas */
+        font-size: 0.95rem; /* Texto ligeramente más pequeño */
+    }
+
+    .columna-mes {
+        width: 100px; /* Ancho reducido para la columna de mes */
+    }
+}
+
+/* Ajustes para pantallas de móviles */
+@media (max-width: 480px) {
+    .contenedor-estadisticas h1 {
+        font-size: 1.4rem; /* Título compacto para móviles */
+        margin: 12px 0; /* Márgenes verticales reducidos */
+    }
+
+    .bloque-resumen-global h2,
+    .bloque-periodos h2,
+    .bloque-tabla-barras h2 {
+        font-size: 1.1rem; /* Subtítulos compactos */
+    }
+
+    .periodo {
+        padding: 1.2rem; /* Padding reducido en periodos */
+        border-radius: 12px; /* Esquinas menos redondeadas */
+    }
+
+    .tabla-estadisticas th,
+    .tabla-estadisticas td {
+        padding: 0.6rem; /* Padding muy reducido en celdas */
+        font-size: 0.9rem; /* Texto más pequeño */
+    }
+
+    .barra {
+        height: 30px; /* Barra más baja en móviles */
+    }
+
+    .valor-barra {
+        font-size: 0.85rem; /* Texto del valor más pequeño */
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 360px) {
+    .contenedor-estadisticas h1 {
+        font-size: 1.2rem; /* Título muy compacto para móviles pequeños */
+        margin: 10px 0; /* Márgenes mínimos */
+    }
+
+    .bloque-resumen-global h2,
+    .bloque-periodos h2,
+    .bloque-tabla-barras h2 {
+        font-size: 1rem; /* Subtítulos muy compactos */
+    }
+
+    .tabla-estadisticas th,
+    .tabla-estadisticas td {
+        padding: 0.5rem; /* Padding mínimo en celdas */
+        font-size: 0.85rem; /* Texto más pequeño */
+    }
+
+    .columna-anio {
+        width: 70px; /* Ancho muy reducido para año */
+    }
+
+    .columna-mes {
+        width: 90px; /* Ancho muy reducido para mes */
+    }
+
+    .barra {
+        height: 26px; /* Barra muy baja en móviles pequeños */
+    }
+
+    .valor-barra {
+        font-size: 0.78rem; /* Texto del valor muy pequeño */
+    }
+}
+
+

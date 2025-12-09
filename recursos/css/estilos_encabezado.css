@@ -53,12 +53,19 @@ body {
 .boton-detalles,
 .boton-favorito,
 .boton-jugar,
+.boton-reservar,
+.boton-cancelar-solicitud-reserva,
+.completar-reserva,
 .boton-volver-atras,
 #boton-anadir-juego,
 #boton-anadir-usuario,
+#boton-descargar-pdf,
 .boton-editar-juego,
 .boton-reactivar,
-.boton-eliminar {
+.boton-eliminar,
+.boton-vistas,
+.boton-eliminar-todas,
+.boton-marcar-leida {
   text-decoration: none;    /* Sin subrayado en los enlaces */
 }
 
@@ -164,6 +171,11 @@ body {
   transform: rotate(15deg); /* Rotación de 15 grados */
 }
 
+/* Botón para limpiar la búsqueda */
+#boton-limpiar-busqueda {
+  display: none;           /* Oculto por defecto */
+}
+
 /* Área derecha con botones de login y carrito */
 .zona-derecha {
   display: flex;            /* Disposición flexible */
@@ -174,9 +186,11 @@ body {
 /* Estilo común para todos los botones principales */
 .boton-menu, .boton-volver-atras, .boton-login, 
 .boton-carrito, .boton-editar, .boton-salir,
-.boton-detalles, .boton-favorito, .boton-jugar,
-#boton-anadir-juego, #boton-anadir-usuario,
-.boton-editar-juego, .boton-eliminar, .boton-reactivar {
+.boton-detalles, .boton-favorito, .boton-jugar, .boton-reservar,
+.completar-reserva, .boton-cancelar-solicitud-reserva,
+#boton-anadir-juego, #boton-anadir-usuario, #boton-descargar-pdf,
+.boton-editar-juego, .boton-eliminar, .boton-reactivar,
+.boton-vistas, .boton-eliminar-todas, .boton-marcar-leida, .boton-eliminar {
   display: flex;            /* Disposición flexible */
   align-items: center;      /* Alinea contenido al centro verticalmente */
   gap: 6px;                 /* Espacio entre icono y texto */
@@ -193,9 +207,11 @@ body {
 .boton-menu:hover, .boton-volver-atras:hover, 
 .boton-login:hover, .boton-carrito:hover, 
 .boton-editar:hover, .boton-salir:hover, .boton-detalles:hover, 
-.boton-favorito:hover, .boton-jugar:hover,
-#boton-anadir-juego:hover, #boton-anadir-usuario:hover,
-.boton-editar-juego:hover, .boton-eliminar:hover, .boton-reactivar:hover {
+.boton-favorito:hover, .boton-jugar:hover, .boton-reservar:hover,
+.completar-reserva:hover, .boton-cancelar-solicitud-reserva:hover,
+#boton-anadir-juego:hover, #boton-anadir-usuario:hover, #boton-descargar-pdf:hover,
+.boton-editar-juego:hover, .boton-eliminar:hover, .boton-reactivar:hover,
+.boton-vistas:hover, .boton-eliminar-todas:hover, .boton-marcar-leida:hover {
   background: #1a9bb8;         /* Color turquesa más oscuro */
   transform: translateY(-2px); /* Se eleva ligeramente */
   box-shadow: 0 4px 12px rgba(33, 183, 194, 0.4); /* Sombra turquesa */
@@ -215,10 +231,10 @@ body {
   transform: scale(1.2);        /* Aumenta el tamaño un 20% */
 }
 
-/* Efecto hover para el botón del carrito - rebote del icono */
+/* Efecto hover para el botón del carrito, añadir juego, añadir usuario y descargar pdf - rebote del icono */
 .boton-carrito:hover #icono-carrito,
-#boton-anadir-juego:hover, #boton-anadir-usuario:hover,
-#icono-anadir {
+#boton-anadir-juego:hover, #boton-anadir-usuario:hover, #boton-descargar-pdf:hover,
+#icono-anadir, #icono-descargar-pdf {
   animation: bounce 0.6s ease;  /* Animación de rebote */
 }
 
@@ -237,26 +253,38 @@ body {
 
 /* Tamaño de los iconos en los botones principales */
 #icono-menu, #icono-volver, #icono-login, 
-#icono-editar, #icono-salir, #icono-reactivar {
+#icono-editar, #icono-salir, #icono-reactivar,
+#icono-modificar-comentario, #icono-publicar-comentario, #icono-eliminar-comentario, 
+#icono-modificar-valoracion, #icono-publicar-valoracion, #icono-eliminar-valoracion,
+#icono-ojo-abierto, #icono-eliminar {
   width: 20px;              /* Ancho estándar de iconos */
   height: auto;             /* Altura automática para mantener proporción */
   transition: transform 0.3s ease; /* Transición suave para efectos de iconos */
 }
 
-/* El icono del detalles es ligeramente más grande */
-#icono-detalles, #icono-jugar, #icono-editar, #icono-eliminar, #icono-reactivar {
+/* Forzar el icono del ojo a blanco para buen contraste */
+#icono-ojo-abierto {
+  filter: brightness(0) invert(1); /* Icono blanco */
+}
+
+/* Iconos ligeramente más grandes */
+#icono-detalles, #icono-jugar,  #icono-reservar, #icono-cancelar-solicitud,
+#icono-editar, #icono-eliminar, #icono-reactivar,
+#icono-modificar-comentario, #icono-publicar-comentario, #icono-eliminar-comentario,
+#icono-modificar-valoracion, #icono-publicar-valoracion, #icono-eliminar-valoracion,
+#icono-aprobar, #icono-rechazar, #icono-confirmar {
   width: 30px;              /* Ancho mayor para mejor visibilidad */
   height: auto;             /* Altura automática */
 }
 
-/* El icono del carrito es ligeramente más grande */
-#icono-carrito, #icono-anadir {
+/* El icono del carrito, añadir y descargar pdf es ligeramente más grande */
+#icono-carrito, #icono-anadir, #icono-descargar-pdf {
   width: 25px;              /* Ancho mayor para mejor visibilidad */
   height: auto;             /* Altura automática */
 }
 
-/* Número que indica cantidad de productos en el carrito */
-.cantidad-carrito {
+/* Número que indica cantidad de productos en el carrito y notificaciones */
+.cantidad-carrito, .cantidad-notificaciones {
   background: #b81800;      /* Fondo rojo para destacar */
   border-radius: 50%;       /* Forma circular */
   padding: 2px 6px;         /* Espacio interno mínimo */
@@ -265,8 +293,9 @@ body {
   transition: all 0.3s ease; /* Transición para efectos hover */
 }
 
-/* Efecto hover en el número del carrito - pulsa */
-.boton-carrito:hover .cantidad-carrito {
+/* Efecto hover en el número del carrito y notificaciones */
+.boton-carrito:hover .cantidad-carrito, 
+.boton-notificaciones:hover .cantidad-notificaciones {
   background: #d91e00;      /* Rojo más brillante */
   transform: scale(1.1);    /* Aumenta ligeramente de tamaño */
 }
@@ -377,6 +406,11 @@ body {
 /* Asegurar que el texto no se desborde */
 .enlace-menu span {
   flex: 1;                     /* El texto ocupa el espacio restante */
+}
+
+/* Asegurar que las imágenes del menú lateral mantengan su tamaño en submenús */
+.enlace-notificaciones span{
+  flex: none;                     /* Quito el crecimiento flexible */
 }
 
 /* Efecto al pasar el cursor por encima de enlaces y botones del menú */
@@ -631,6 +665,115 @@ body {
   transform: translateY(-1px);         /* pequeño movimiento para indicar interacción */
 }
 
+/* Estilos para el autocompletado del buscador */
+.zona-buscador {
+    position: relative; /* Para posicionar las sugerencias */
+}
+
+/* Flecha que apunta hacia abajo */
+.zona-buscador::after {
+    content: '';                    /* Contenido vacío para crear el triángulo */
+    position: absolute;             /* Posición absoluta */
+    top: calc(100% + 3px);          /* Justo debajo del campo de búsqueda */
+    left: 50%;                      /* Centrado horizontalmente */
+    transform: translateX(-50%);    /* Ajuste para centrar perfectamente */
+    width: 0;                       /* Sin ancho para crear triángulo */
+    height: 0;                      /* Sin alto para crear triángulo */
+    border-left: 12px solid transparent;   /* Lado izquierdo transparente */
+    border-right: 12px solid transparent;  /* Lado derecho transparente */
+    border-top: 12px solid #21b7c2;        /* Triángulo turquesa apuntando abajo */
+    z-index: 1001;                  /* Entre el campo y las sugerencias */
+    display: none;                  /* Oculto por defecto */
+}
+
+/* Mostrar flecha cuando hay sugerencias visibles */
+.zona-buscador:has(.sugerencias-busqueda[style*="display: block"])::after {
+    display: block;                 /* Mostrar la flecha */
+}
+
+/* Contenedor de las sugerencias de búsqueda */
+.sugerencias-busqueda {
+    position: absolute; /* Posición absoluta respecto a .zona-buscador */
+    top: 100%;          /* Justo debajo del campo de búsqueda */
+    margin-top: 20px;   /* Espacio para que la flecha sea visible */
+    left: 0;            /* Alineado a la izquierda */
+    right: 0;           /* Alineado a la derecha */
+    background: #222;   /* Fondo gris oscuro igual que el encabezado */
+    border: 2px solid #21b7c2; /* Borde turquesa igual que los inputs */
+    max-height: 300px;  /* Altura máxima antes de hacer scroll */
+    overflow-y: auto;   /* Scroll vertical si hay muchas sugerencias */
+    overflow-x: hidden; /* Prohibir scroll horizontal */
+    z-index: 1000;      /* Sobre otros elementos */
+    box-shadow: 0 4px 12px rgba(33, 183, 194, 0.4); /* Sombra turquesa igual que los botones */
+    border-radius: 25px; /* Bordes redondeados como el buscador */
+}
+
+/* Barra de scroll vertical de las sugerencias */
+.sugerencias-busqueda::-webkit-scrollbar {
+    width: 6px; /* Ancho de la barra más delgado */
+}
+
+/* Fondo de la barra de scroll */
+.sugerencias-busqueda::-webkit-scrollbar-track {
+    background: #222; /* Fondo oscuro */
+    border-radius: 4px; /* Esquinas redondeadas */
+    margin: 14px 0; /* Margen arriba y abajo para que no llegue a los bordes */
+}
+
+/* Parte que se mueve de la barra de scroll */
+.sugerencias-busqueda::-webkit-scrollbar-thumb {
+    background: #21b7c2; /* Color turquesa */
+    border-radius: 4px; /* Esquinas redondeadas */
+    min-height: 40px; /* Altura mínima del thumb */
+}
+
+/* Hover en la barra de scroll */
+.sugerencias-busqueda::-webkit-scrollbar-thumb:hover {
+    background: #26d1de; /* Más claro al hover */
+}
+
+/* Cada sugerencia individual */
+.sugerencia-item {
+    padding: 12px 15px;       /* Espaciado interno */
+    cursor: pointer;          /* Cursor de manita */
+    border-bottom: 1px solid #333; /* Línea divisoria oscura */
+    display: flex;            /* Usar flexbox para layout */
+    justify-content: space-between; /* Espacio entre texto y tipo */
+    align-items: center;      /* Centrar verticalmente */
+    transition: all 0.3s ease; /* Transición suave */
+    color: #fff;              /* Texto blanco */
+}
+
+/* Texto resaltado en las sugerencias */
+.sugerencia-item strong {
+    color: #21b7c2;           /* Color turquesa para el texto coincidente */
+    font-weight: bold;        /* Negrita */
+}
+
+/* Tipo de sugerencia (juego/filtro) */
+.sugerencia-item small {
+    color: #aaa;              /* Gris claro para el tipo */
+    font-size: 0.85em;        /* Texto más pequeño */
+    text-transform: uppercase; /* Mayúsculas */
+}
+
+/* Efecto hover en cada sugerencia */
+.sugerencia-item:hover {
+    background: #21b7c2;      /* Fondo turquesa al pasar el cursor */
+    transform: translateX(5px); /* Se desplaza ligeramente igual que el menú */
+}
+
+/* Cambiar color del texto al hacer hover */
+.sugerencia-item:hover strong,
+.sugerencia-item:hover small {
+    color: #fff;              /* Todo el texto se vuelve blanco en hover */
+}
+
+/* Quitar el borde inferior en la última sugerencia */
+.sugerencia-item:last-child {
+    border-bottom: none;      /* Sin línea divisoria en la última sugerencia */
+}
+
 
 /* RESPONSIVE - MEDIA QUERIES */
 
@@ -659,9 +802,11 @@ body {
     /* Botones del encabezado más compactos */
     .boton-menu, .boton-volver-atras, .boton-login, 
     .boton-carrito, .boton-editar, .boton-salir,
-    .boton-detalles, .boton-favorito, .boton-jugar,
-    #boton-anadir-juego, #boton-anadir-usuario,
-    .boton-editar-juego, .boton-eliminar, .boton-reactivar {
+    .boton-detalles, .boton-favorito, .boton-jugar, .boton-reservar,
+    .completar-reserva, .boton-cancelar-solicitud-reserva,
+    #boton-anadir-juego, #boton-anadir-usuario, #boton-descargar-pdf,
+    .boton-editar-juego, .boton-eliminar, .boton-reactivar,
+    .boton-vistas, .boton-eliminar-todas, .boton-marcar-leida {
         padding: 6px 10px; /* Menos padding */
         height: 36px; /* Altura reducida */
         font-size: 0.9em; /* Texto más pequeño */
@@ -670,6 +815,22 @@ body {
     #cuadro-busqueda {
         padding: 10px 14px; /* Campo de búsqueda más compacto */
         font-size: 0.9em; /* Texto más pequeño */
+    }
+    
+    /* Ajustes para el autocompletado */
+    .sugerencias-busqueda {
+        max-height: 250px; /* Altura máxima reducida */
+        border-radius: 20px; /* Bordes un poco menos redondeados */
+    }
+    
+    .zona-buscador::after {
+        border-left: 10px solid transparent; /* Flecha más pequeña */
+        border-right: 10px solid transparent; /* Flecha más pequeña */
+        border-top: 10px solid #21b7c2; /* Flecha turquesa */
+    }
+    
+    .sugerencia-item {
+        padding: 10px 12px; /* Padding reducido */
     }
     
     .menu-lateral {
@@ -702,9 +863,11 @@ body {
     /* Botones muy compactos en móviles */
     .boton-menu, .boton-volver-atras, .boton-login, 
     .boton-carrito, .boton-editar, .boton-salir,
-    .boton-detalles, .boton-favorito, .boton-jugar,
-    #boton-anadir-juego, #boton-anadir-usuario,
-    .boton-editar-juego, .boton-eliminar, .boton-reactivar {
+    .boton-detalles, .boton-favorito, .boton-jugar, .boton-reservar,
+    .completar-reserva, .boton-cancelar-solicitud-reserva,
+    #boton-anadir-juego, #boton-anadir-usuario, #boton-descargar-pdf,
+    .boton-editar-juego, .boton-eliminar, .boton-reactivar,
+    .boton-vistas, .boton-eliminar-todas, .boton-marcar-leida {
         padding: 5px 8px; /* Padding muy reducido */
         height: 32px; /* Altura mínima */
         font-size: 0.85em; /* Texto más pequeño */
@@ -713,11 +876,12 @@ body {
     
     /* Iconos más pequeños en móviles */
     #icono-menu, #icono-volver, #icono-login, 
-    #icono-editar, #icono-salir, #icono-favoritos, #icono-reactivar {
+    #icono-editar, #icono-salir, #icono-favoritos, #icono-reactivar,
+    #icono-ojo-abierto, #icono-eliminar {
         width: 18px; /* Iconos más pequeños */
     }
     
-    #icono-carrito, #icono-anadir {
+    #icono-carrito, #icono-anadir, #icono-descargar-pdf {
         width: 22px; /* Carrito un poco más grande pero reducido */
     }
     
@@ -733,6 +897,29 @@ body {
     #icono-lupa {
         width: 18px; /* Lupa más pequeña */
         height: 18px;
+    }
+    
+    /* Ajustes para el autocompletado */
+    .sugerencias-busqueda {
+        max-height: 220px; /* Altura máxima más reducida */
+        margin-top: 10px; /* Menos espacio */
+        border-radius: 18px; /* Bordes menos redondeados */
+    }
+    
+    .zona-buscador::after {
+        top: calc(100% + 2px); /* Ajustar posición de la flecha */
+        border-left: 9px solid transparent; /* Flecha más pequeña */
+        border-right: 9px solid transparent; /* Flecha más pequeña */
+        border-top: 9px solid #21b7c2; /* Flecha turquesa */
+    }
+    
+    .sugerencia-item {
+        padding: 9px 11px; /* Padding más reducido */
+        font-size: 0.9em; /* Texto más pequeño */
+    }
+    
+    .sugerencia-item small {
+        font-size: 0.75em; /* Tipo más pequeño */
     }
     
     .menu-lateral {
@@ -784,7 +971,7 @@ body {
     /* Botones extremadamente compactos */
     .boton-menu, .boton-volver-atras, .boton-login, 
     .boton-carrito, .boton-editar, .boton-salir,
-    #boton-anadir-juego, #boton-anadir-usuario {
+    #boton-anadir-juego, #boton-anadir-usuario, #boton-descargar-pdf {
         padding: 4px 6px; /* Padding mínimo */
         height: 28px; /* Altura muy reducida */
         font-size: 0.8em; /* Texto muy pequeño */
@@ -806,11 +993,12 @@ body {
     
     /* Iconos muy pequeños */
     #icono-menu, #icono-volver, #icono-login, 
-    #icono-editar, #icono-salir, #icono-favoritos, #icono-reactivar {
+    #icono-editar, #icono-salir, #icono-favoritos, #icono-reactivar,
+    #icono-ojo-abierto, #icono-eliminar {
         width: 16px; /* Iconos mínimos */
     }
     
-    #icono-carrito, #icono-anadir {
+    #icono-carrito, #icono-anadir, #icono-descargar-pdf {
         width: 20px; /* Carrito pequeño */
     }
     
@@ -826,6 +1014,37 @@ body {
     #icono-lupa {
         width: 16px; /* Lupa muy pequeña */
         height: 16px;
+    }
+    
+    /* Ajustes para el autocompletado */
+    .sugerencias-busqueda {
+        max-height: 180px; /* Altura máxima muy reducida */
+        margin-top: 8px; /* Espacio mínimo */
+        border-radius: 15px; /* Bordes menos redondeados */
+    }
+    
+    .zona-buscador::after {
+        top: calc(100% + 1px); /* Ajustar posición */
+        border-left: 8px solid transparent; /* Flecha pequeña */
+        border-right: 8px solid transparent; /* Flecha pequeña */
+        border-top: 8px solid #21b7c2; /* Flecha turquesa */
+    }
+    
+    .sugerencia-item {
+        padding: 8px 10px; /* Padding mínimo */
+        font-size: 0.85em; /* Texto pequeño */
+    }
+    
+    .sugerencia-item strong {
+        font-size: 1em; /* Mantener legible el resaltado */
+    }
+    
+    .sugerencia-item small {
+        font-size: 0.7em; /* Tipo muy pequeño */
+    }
+    
+    .sugerencias-busqueda::-webkit-scrollbar {
+        width: 4px; /* Barra de scroll más delgada */
     }
     
     .menu-lateral {
@@ -880,11 +1099,42 @@ body {
         gap: 6px; /* Espacio mínimo entre botones */
     }
     
+    /* Ajustes para el autocompletado */
+    .sugerencias-busqueda {
+        max-height: 150px; /* Altura máxima muy limitada */
+        margin-top: 6px; /* Espacio muy reducido */
+        border-radius: 12px; /* Bordes menos redondeados */
+        font-size: 0.8em; /* Texto base más pequeño */
+    }
+    
+    .zona-buscador::after {
+        border-left: 7px solid transparent; /* Flecha muy pequeña */
+        border-right: 7px solid transparent; /* Flecha muy pequeña */
+        border-top: 7px solid #21b7c2; /* Flecha turquesa */
+    }
+    
+    .sugerencia-item {
+        padding: 6px 8px; /* Padding muy reducido */
+        font-size: 0.8em; /* Texto muy pequeño */
+    }
+    
+    .sugerencia-item strong {
+        font-size: 1em; /* Mantener proporción */
+    }
+    
+    .sugerencia-item small {
+        font-size: 0.65em; /* Tipo muy pequeño */
+    }
+    
+    .sugerencias-busqueda::-webkit-scrollbar {
+        width: 3px; /* Barra de scroll muy delgada */
+    }
+    
     .menu-lateral {
         width: 200px; /* Menú muy estrecho */
     }
     
-    .cantidad-carrito {
+    .cantidad-carrito, .cantidad-notificaciones {
         font-size: 0.7em; /* Número del carrito muy pequeño */
         padding: 1px 4px; /* Padding mínimo */
     }

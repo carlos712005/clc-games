@@ -66,19 +66,70 @@ function mandar(accion, id_juego, nombreModal, mensaje, cancelar, total = null, 
         if (carrito_unico && accion === "realizar_pedido") { /* Si es un carrito único, indico que es así */
             datos.append('compra_unica', "si"); /* Indico que es una compra única */
         }        
+    } else if(accion === "realizar_reserva") { /* Si es realizar reserva */
+        if(id_juego == null && carrito.length > 0) { /* Si no se pasó ID pero hay un juego en el carrito */
+            datos.append('id_juego', carrito[0].id); /* Envío el ID del juego */
+        } else { /* Si se pasó el ID del juego */
+            datos.append('id_juego', id_juego); /* Envío el ID del juego */
+        }
+        datos.append('total', total); /* Envío el total */
+        if (carrito_unico && accion === "realizar_reserva") { /* Si es un carrito único, indico que es así */
+            datos.append('compra_unica', "si"); /* Indico que es una compra única */
+        }
     } else if(accion === "cancelar_devolucion") { /* Si es cancelar devolución */
         datos.append('id_juego', id_juego); /* Envío el ID del juego */
         datos.append('total', total); /* Envío el total */
     } else if(accion === "realizar_devolucion") { /* Si es realizar devolución */
         datos.append('id_juego', id_juego); /* Envío el ID del juego */
         datos.append('total', total); /* Envío el total */
+    } else if(accion === "solicitar_reserva") { /* Si es solicitar reserva */
+        datos.append('id_juego', id_juego); /* Envío el ID del juego */
+        datos.append('total', total); /* Envío el total */
+    } else if(accion === "solicitar_devolucion") { /* Si es solicitar devolución */
+        datos.append('id_juego', id_juego); /* Envío el ID del juego */
+        datos.append('total', total); /* Envío el total */
         datos.append('motivo', motivo); /* Envío el motivo */
+    } else if(accion === "cancelar_solicitud_reserva" || accion === "cancelar_solicitud_devolucion") { /* Si es cancelar solicitud de reserva o devolución */
+        datos.append('id_juego', id_juego); /* Envío el ID del juego */
+        datos.append('total', total); /* Envío el total */
+        if(motivo != null && motivo !== "") { /* Si se pasó un motivo */
+            datos.append('motivo', motivo); /* Envío el motivo */
+        }
     }
 
     // Realizar petición asíncrona al servidor
     const xhttp = new XMLHttpRequest(); /* Creo objeto para petición AJAX */
     xhttp.onreadystatechange = function() { /* Defino qué hacer cuando cambie el estado */
         if (this.readyState == 4 && this.status == 200) { /* Si la petición se completó exitosamente */
+            const respuesta = JSON.parse(this.responseText); /* Convierto respuesta JSON en objeto */
+            if(respuesta.total_notificaciones_no_leidas !== undefined) { /* Si se envió el total de notificaciones no leídas */
+                const total = respuesta.total_notificaciones_no_leidas; /* Guardo el total */
+                
+                // Actualizar botones del menú (usando clase ya que hay IDs duplicados)
+                const botonesMenu = document.querySelectorAll('.boton-menu'); /* Obtengo ambos botones */
+                botonesMenu.forEach(boton => { /* Recorro cada botón */
+                    if(boton.id === 'menu-con-notificaciones') { /* Si es el botón CON notificaciones */
+                        const contador = boton.querySelector('.cantidad-notificaciones'); /* Busco el contador */
+                        if(contador) contador.textContent = total; /* Actualizo el contador */
+                        boton.style.display = total > 0 ? 'inline-flex' : 'none'; /* Muestro u oculto */
+                    } else if(boton.id === 'menu-sin-notificaciones') { /* Si es el botón SIN notificaciones */
+                        boton.style.display = total > 0 ? 'none' : 'inline-flex'; /* Muestro u oculto */
+                    }
+                });
+                
+                // Actualizar enlaces de notificaciones
+                const enlacesNotif = document.querySelectorAll('.enlace-notificaciones'); /* Obtengo ambos enlaces */
+                enlacesNotif.forEach(enlace => { /* Recorro cada enlace */
+                    if(enlace.id === 'enlace-con-notificaciones') { /* Si es el enlace CON notificaciones */
+                        const contador = enlace.querySelector('.cantidad-notificaciones'); /* Busco el contador */
+                        if(contador) contador.textContent = total; /* Actualizo el contador */
+                        enlace.style.display = total > 0 ? 'flex' : 'none'; /* Muestro u oculto */
+                    } else if(enlace.id === 'enlace-sin-notificaciones') { /* Si es el enlace SIN notificaciones */
+                        enlace.style.display = total > 0 ? 'none' : 'flex'; /* Muestro u oculto */
+                    }
+                });
+            }
+            
             if(nombreModal == null && mensaje == null && cancelar == null) return; /* Si no hay modal que mostrar, salgo */
             
             if(cancelar) modal(nombreModal, mensaje, true); /* Si requiere confirmación, muestro modal con botones */
@@ -144,6 +195,64 @@ function mandar(accion, id_juego, nombreModal, mensaje, cancelar, total = null, 
                     boton.querySelector('span').textContent = 'Añadir al carrito'; /* Cambio el texto a Añadir al carrito */
                     boton.querySelector('img').src = '../recursos/imagenes/carrito2.png'; /* Cambio la imagen a carrito vacío */
                     boton.id = boton.id.replace('tarjeta-eliminar', 'tarjeta-anadir'); /* Cambio el ID del botón */
+                } else if(boton.id.startsWith('reserva-pedir')) { /* Si el botón es de pedir reserva */
+                    const nombreJuego = carrito[0].nombre; /* Capturo el nombre del juego */
+                    const precioJuego = carrito[0].precio; /* Capturo el precio del juego */
+                    boton.onclick = function() { /* Actualizo el evento onclick del botón */
+                        cancelarSolicitud("cancelar_solicitud_reserva", id_juego, nombreJuego, precioJuego, boton); /* Cambio a función de cancelar solicitud de reserva */
+                    };
+                    boton.querySelector('span').textContent = 'Cancelar solicitud'; /* Cambio el texto a Cancelar solicitud */
+                    boton.querySelector('img').src = '../recursos/imagenes/cancelar_solicitud.png'; /* Cambio la imagen a cancelar solicitud */
+                    boton.id = boton.id.replace('reserva-pedir', 'reserva-cancelar'); /* Cambio el ID del botón */
+                } else if(boton.id.startsWith('reserva-cancelar')) { /* Si el botón es de cancelar reserva */
+                    const hiddenReserva = document.getElementById('reserva-json' + id_juego); /* Obtengo el input oculto con el JSON original */
+                    const reservaJson = hiddenReserva ? hiddenReserva.value : null; /* Uso su valor si existe */
+                    boton.onclick = function() { /* Actualizo el evento onclick del botón */
+                        if(reservaJson) { /* Si existe el JSON original */
+                            mostrarResumenPedido(reservaJson, true, 'reserva', boton); /* Muestro el resumen con el JSON original */
+                        } else { /* Si no existe el JSON original */
+                            mostrarResumenPedido(JSON.stringify(carrito), true, 'reserva', boton); /* Uso el carrito actual si falta el oculto */
+                        }
+                    };
+                    boton.querySelector('span').textContent = 'Solicitar reserva'; /* Cambio el texto a Solicitar reserva */
+                    boton.querySelector('img').src = '../recursos/imagenes/reservable.png'; /* Cambio la imagen a reservable */
+                    boton.id = boton.id.replace('reserva-cancelar', 'reserva-pedir'); /* Cambio el ID del botón */
+                } else if(boton.id.startsWith('devolucion-pedir')) { /* Si el botón es de pedir devolución */
+                    const hiddenDevolucion = document.getElementById('devolucion-json' + id_juego); /* Obtengo el input oculto con el JSON original */
+                    const devolucionJson = hiddenDevolucion ? hiddenDevolucion.value : null; /* Uso su valor si existe */
+                    boton.onclick = function() { /* Actualizo el evento onclick del botón */
+                        if(devolucionJson) { /* Si existe el JSON original */
+                            // Decodificar entidades HTML antes de parsear
+                            const textarea = document.createElement('textarea'); /* Creo un textarea temporal */
+                            textarea.innerHTML = devolucionJson; /* Asigno el JSON escapado al innerHTML */
+                            const devolucionDecodificado = textarea.value; /* Obtengo el valor decodificado */
+                            const devolucionData = JSON.parse(devolucionDecodificado); /* Parseo el JSON decodificado */
+                            cancelarSolicitud("cancelar_solicitud_devolucion", devolucionData[0].id, devolucionData[0].nombre, devolucionData[0].precio, boton); /* Cambio a función de cancelar solicitud de devolución */
+                        } else { /* Si no existe el JSON original */
+                            modal("modal1", "<h1>Error: No se encontraron los datos del juego</h1>", false); /* Muestro mensaje de error */
+                        }
+                    };
+                    boton.querySelector('span').textContent = 'Cancelar devolución'; /* Cambio el texto a Cancelar solicitud */
+                    boton.querySelector('img').src = '../recursos/imagenes/rechazar_devolucion.png'; /* Cambio la imagen a rechazar devolución */
+                    boton.id = boton.id.replace('devolucion-pedir', 'devolucion-cancelar'); /* Cambio el ID del botón */
+                } else if(boton.id.startsWith('devolucion-cancelar')) { /* Si el botón es de cancelar devolución */
+                    const hiddenDevolucion = document.getElementById('devolucion-json' + id_juego); /* Obtengo el input oculto con el JSON original */
+                    const devolucionJson = hiddenDevolucion ? hiddenDevolucion.value : null; /* Uso su valor si existe */
+                    boton.onclick = function() { /* Actualizo el evento onclick del botón */
+                        if(devolucionJson) { /* Si existe el JSON original */
+                            // Decodificar entidades HTML antes de parsear
+                            const textarea = document.createElement('textarea'); /* Creo un textarea temporal */
+                            textarea.innerHTML = devolucionJson; /* Asigno el JSON escapado al innerHTML */
+                            const devolucionDecodificado = textarea.value; /* Obtengo el valor decodificado */
+                            const devolucionData = JSON.parse(devolucionDecodificado); /* Parseo el JSON decodificado */
+                            descambiarJuego(devolucionData[0].id, devolucionData[0].precio, devolucionData[0].nombre, boton); /* Llamo a descambiarJuego con el botón */
+                        } else { /* Si no existe el JSON original */
+                            descambiarJuego(carrito[0].id, carrito[0].precio, carrito[0].nombre, boton); /* Uso el carrito actual si falta el oculto */
+                        }
+                    };
+                    boton.querySelector('span').textContent = 'Solicitar devolución'; /* Cambio el texto a Solicitar devolución */
+                    boton.querySelector('img').src = '../recursos/imagenes/descambiar.png'; /* Cambio la imagen a descambiar */
+                    boton.id = boton.id.replace('devolucion-cancelar', 'devolucion-pedir'); /* Cambio el ID del botón */
                 }
             }
         }
@@ -307,7 +416,7 @@ function mostrarCarrito() {
 }
 
 // Función que muestra el resumen del pedido antes del método de pago
-function mostrarResumenPedido(carrito, compra_unica = null) {
+function mostrarResumenPedido(carrito, compra_unica = null, solicitud = null, boton = null) {
     if(compra_unica) { /* Si es compra única, convierto el carrito de JSON escapado a objeto */
         // Decodificar entidades HTML
         const textarea = document.createElement('textarea'); /* Creo un textarea temporal */
@@ -348,14 +457,25 @@ function mostrarResumenPedido(carrito, compra_unica = null) {
                             </div>`; /* Añado cada producto al resumen con imagen, nombre, tipo y precio */
     }
 
-    // Finalizar HTML del resumen y añadir botones
-    contenidoResumen += `       </div>
-                                <hr>
-                                <div class="botones-resumen-pedido">
-                                    <button id="confirmar-pago" class="boton-pagar">Proceder al Pago</button>
-                                    <button id="cancelar-pedido" class="boton-cancelar">Cancelar</button>
-                                </div>
-                            </div>`; /* Cierro estructura y añado botones de acción */
+    if(solicitud == "reserva") { /* Si la solicitud es una reserva */
+        // Finalizar HTML del resumen y añadir botones
+        contenidoResumen += `   </div>
+                                    <hr>
+                                    <div class="botones-resumen-pedido">
+                                        <button id="solicitar-reserva" class="boton-pagar">Solicitar Reserva</button>
+                                        <button id="cancelar-reserva" class="boton-cancelar">Cancelar</button>
+                                    </div>
+                                </div>`; /* Cierro estructura y añado botones de acción */
+    } else { /* Si es un pedido normal */
+        // Finalizar HTML del resumen y añadir botones
+        contenidoResumen += `   </div>
+                                    <hr>
+                                    <div class="botones-resumen-pedido">
+                                        <button id="confirmar-pago" class="boton-pagar">Proceder al Pago</button>
+                                        <button id="cancelar-pedido" class="boton-cancelar">Cancelar</button>
+                                    </div>
+                                </div>`; /* Cierro estructura y añado botones de acción */
+    }
 
     // Mostrar modal con el resumen del pedido SIN botones por defecto
     modal("modal1", contenidoResumen, false); /* Muestro el modal con el resumen completo */
@@ -371,46 +491,76 @@ function mostrarResumenPedido(carrito, compra_unica = null) {
         }
     }, 10); /* Timeout muy corto para que no se vea el parpadeo */
 
-    // Configurar eventos para los botones del resumen
-    document.getElementById("confirmar-pago").addEventListener('click', () => { /* Evento para proceder al pago */
-        if(compra_unica) { /* Si es compra única, guardo el carrito en sessionStorage para que enviar() lo use */
-            sessionStorage.setItem('carritoCompraUnica', JSON.stringify(carrito)); /* Guardo el carrito en sessionStorage */
-        }
-        
-        // Cerrar modal de resumen
-        const modalResumen = document.getElementById("modal1"); /* Busco el modal de resumen */
-        if (modalResumen) document.body.removeChild(modalResumen); /* Cierro el modal de resumen */
-        if(totalPedido != "0,00") { /* Si el total es distinto de 0.00, redirijo a la página de pago */
-            window.location.href = "../vistas/pago.php"; /* Redirijo a la página de pago */
-        } else { /* Si el total es 0.00 (juegos gratuitos), realizo el pedido directamente */
-            if(compra_unica) mandar("realizar_pedido", null, "modal2", "<h1>Pedido realizado correctamente</h1>", false, totalPedido, null, carrito); /* Realizo el pedido pasando el carrito único si es compra única */
-            else mandar("realizar_pedido", null, "modal2", "<h1>Pedido realizado correctamente</h1>", false, totalPedido); /* Si no es compra única, realizo el pedido sin pasar el carrito */
-            setTimeout(() => { /* Espero un momento para que se procese */
-                const modal2 = document.getElementById("modal2"); /* Busco el modal de éxito */
-                if (modal2) document.body.removeChild(modal2); /* Cierro el modal de éxito */
-                window.location.href = "../publico/index.php"; /* Redirijo a la página principal */
-            }, 1000); /* Cierro el modal de éxito después de un momento */
-        }
-    });
+    const botonSolicitarReserva = document.getElementById("solicitar-reserva"); /* Busco el botón de solicitar reserva */
+    const botonConfirmarPago = document.getElementById("confirmar-pago"); /* Busco el botón de confirmar pago */
 
-    document.getElementById("cancelar-pedido").addEventListener('click', () => { /* Evento para cancelar el pedido */
-        modal("modal2", "<h1>¿Está seguro de cancelar el pedido?</h1>", true); /* Muestro modal de confirmación */
-        document.getElementById("aceptar-modal2").addEventListener('click', () => { /* Si confirma la cancelación */
-            const modal2 = document.getElementById("modal2"); /* Busco el modal de confirmación */
-            if (modal2) document.body.removeChild(modal2); /* Cierro el modal de confirmación */
-            // Cerrar modal de resumen y volver al carrito
+    if(botonSolicitarReserva) { /* Si el botón de solicitar reserva existe */
+        botonSolicitarReserva.addEventListener('click', () => { /* Evento para solicitar reserva */
+            // Cerrar modal de resumen
             const modalResumen = document.getElementById("modal1"); /* Busco el modal de resumen */
             if (modalResumen) document.body.removeChild(modalResumen); /* Cierro el modal de resumen */
-            // Ejecutar cancelación del pedido señalando si es compra única o no
-            if(compra_unica) mandar("cancelar_pedido", null, "modal2", "<h1>Pedido cancelado correctamente</h1>", false, totalPedido, null, carrito); /* Cancelo el pedido pasando el carrito único */
-            else mandar("cancelar_pedido", null, "modal2", "<h1>Pedido cancelado correctamente</h1>", false, totalPedido); /* Cancelo el pedido */
-            setTimeout(() => { /* Espero un momento para que se procese */
-                const modal2 = document.getElementById("modal2"); /* Busco el modal de éxito */
-                if (modal2) document.body.removeChild(modal2); /* Cierro el modal de éxito solo si existe */
-                if(!compra_unica) mostrarCarrito(); /* Vuelvo a mostrar el carrito normal */
-            }, 1500);
+            mandar("solicitar_reserva", carrito[0].id, "modal2", "<h1>Reserva solicitada correctamente</h1>", false, carrito[0].precio, boton, carrito, null); /* Realizo la solicitud de reserva */
         });
-    });
+
+        document.getElementById("cancelar-reserva").addEventListener('click', () => { /* Evento para cancelar la reserva */
+            modal("modal2", "<h1>¿Está seguro de cancelar la solicitud de reserva?</h1>", true); /* Muestro modal de confirmación */
+            document.getElementById("aceptar-modal2").addEventListener('click', () => { /* Si confirma la cancelación */
+                const modal2 = document.getElementById("modal2"); /* Busco el modal de confirmación */
+                if (modal2) document.body.removeChild(modal2); /* Cierro el modal de confirmación */
+                // Cerrar modal de resumen
+                const modalResumen = document.getElementById("modal1"); /* Busco el modal de resumen */
+                if (modalResumen) document.body.removeChild(modalResumen); /* Cierro el modal de resumen */
+                // Ejecutar cancelación de la solicitud de reserva
+                mandar("cancelar_solicitud_reserva", carrito[0].id, "modal2", "<h1>Solicitud de reserva cancelada correctamente</h1>", false, totalPedido); /* Cancelo la solicitud de reserva */
+                setTimeout(() => { /* Espero un momento para que se procese */
+                    const modal2 = document.getElementById("modal2"); /* Busco el modal de éxito */
+                    if (modal2) document.body.removeChild(modal2); /* Cierro el modal de éxito solo si existe */
+                }, 1500);
+            });
+        });
+    }    
+    
+    if(botonConfirmarPago) { /* Si el botón de confirmar pago existe */
+        document.getElementById("confirmar-pago").addEventListener('click', () => { /* Evento para proceder al pago */
+            if(compra_unica) { /* Si es compra única, guardo el carrito en sessionStorage para que enviar() lo use */
+                sessionStorage.setItem('carritoCompraUnica', JSON.stringify(carrito)); /* Guardo el carrito en sessionStorage */
+            }
+            
+            // Cerrar modal de resumen
+            const modalResumen = document.getElementById("modal1"); /* Busco el modal de resumen */
+            if (modalResumen) document.body.removeChild(modalResumen); /* Cierro el modal de resumen */
+            if(totalPedido != "0,00") { /* Si el total es distinto de 0.00, redirijo a la página de pago */
+                window.location.href = "../vistas/pago.php"; /* Redirijo a la página de pago */
+            } else { /* Si el total es 0.00 (juegos gratuitos), realizo el pedido directamente */
+                if(compra_unica) mandar("realizar_pedido", null, "modal2", "<h1>Pedido realizado correctamente</h1>", false, totalPedido, null, carrito); /* Realizo el pedido pasando el carrito único si es compra única */
+                else mandar("realizar_pedido", null, "modal2", "<h1>Pedido realizado correctamente</h1>", false, totalPedido); /* Si no es compra única, realizo el pedido sin pasar el carrito */
+                setTimeout(() => { /* Espero un momento para que se procese */
+                    const modal2 = document.getElementById("modal2"); /* Busco el modal de éxito */
+                    if (modal2) document.body.removeChild(modal2); /* Cierro el modal de éxito */
+                    window.location.href = "../publico/index.php"; /* Redirijo a la página principal */
+                }, 1000); /* Cierro el modal de éxito después de un momento */
+            }
+        });
+
+        document.getElementById("cancelar-pedido").addEventListener('click', () => { /* Evento para cancelar el pedido */
+            modal("modal2", "<h1>¿Está seguro de cancelar el pedido?</h1>", true); /* Muestro modal de confirmación */
+            document.getElementById("aceptar-modal2").addEventListener('click', () => { /* Si confirma la cancelación */
+                const modal2 = document.getElementById("modal2"); /* Busco el modal de confirmación */
+                if (modal2) document.body.removeChild(modal2); /* Cierro el modal de confirmación */
+                // Cerrar modal de resumen y volver al carrito
+                const modalResumen = document.getElementById("modal1"); /* Busco el modal de resumen */
+                if (modalResumen) document.body.removeChild(modalResumen); /* Cierro el modal de resumen */
+                // Ejecutar cancelación del pedido señalando si es compra única o no
+                if(compra_unica) mandar("cancelar_pedido", null, "modal2", "<h1>Pedido cancelado correctamente</h1>", false, totalPedido, null, carrito); /* Cancelo el pedido pasando el carrito único */
+                else mandar("cancelar_pedido", null, "modal2", "<h1>Pedido cancelado correctamente</h1>", false, totalPedido); /* Cancelo el pedido */
+                setTimeout(() => { /* Espero un momento para que se procese */
+                    const modal2 = document.getElementById("modal2"); /* Busco el modal de éxito */
+                    if (modal2) document.body.removeChild(modal2); /* Cierro el modal de éxito solo si existe */
+                    if(!compra_unica) mostrarCarrito(); /* Vuelvo a mostrar el carrito normal */
+                }, 1500);
+            });
+        });
+    }
 }
 
 /* Funciones los campos relacionados con el pago: número de tarjeta, fecha de expiración, CVC y titular */
@@ -608,25 +758,34 @@ function enviar() {
         let contenedorBotones = document.getElementById("botones"); /* Obtengo el contenedor de botones del modal */
         if (contenedorBotones) { /* Si existe el contenedor */
             contenedorBotones.style.display = "none"; /* Oculto los botones del modal si existen */
+            const hr = document.querySelector('#modal2 hr'); /* Obtengo línea separadora */
+            if (hr) hr.style.display = 'none'; /* Oculto línea */
         }
         
         const id_juego = JSON.parse(sessionStorage.getItem('id_juego_reembolso')); /* Obtengo el ID del juego a devolver */
         const total = JSON.parse(sessionStorage.getItem('total_reembolso')); /* Obtengo el total a reembolsar */
-        const motivo = JSON.parse(sessionStorage.getItem('motivo_devolucion')); /* Obtengo el motivo de la devolución */
 
         setTimeout(() => { /* Simulo tiempo de procesamiento */
             const m1 = document.getElementById("modal1"); /* Obtengo el modal de procesamiento */
             if (m1) document.body.removeChild(m1); /* Cierro el modal de procesamiento */
             modal("modal2", "<h1>Reembolso realizado correctamente</h1>", false); /* Muestro modal de éxito */
+            
+            // Oculto el botón de cerrar del modal de éxito
+            setTimeout(() => { /* Timeout muy corto para que no se vea el parpadeo */
+                const botonCerrar = document.getElementById('cerrar-modal2'); /* Obtengo botón cerrar */
+                if (botonCerrar) botonCerrar.style.display = 'none'; /* Oculto botón */
+                const hr = document.querySelector('#modal2 hr'); /* Obtengo línea separadora */
+                if (hr) hr.style.display = 'none'; /* Oculto línea */
+            }, 0);
+            
             setTimeout(() => { /* Espero un momento */
                 if (document.getElementById("modal2")) document.body.removeChild(document.getElementById("modal2")); /* Cierro el modal de éxito */
-                mandar("realizar_devolucion", id_juego, null, null, null, total, null, null, motivo); /* Realizo la devolución */
+                mandar("realizar_devolucion", id_juego, null, null, null, total, null, null, null); /* Realizo la devolución */
                 setTimeout(() => { /* Espero un momento para que se procese */
                     // Limpiar sessionStorage
                     sessionStorage.removeItem('devolucion'); /* Elimino marca de devolución */
                     sessionStorage.removeItem('id_juego_reembolso'); /* Elimino ID del juego */
                     sessionStorage.removeItem('total_reembolso'); /* Elimino total a reembolsar */
-                    sessionStorage.removeItem('motivo_devolucion'); /* Elimino motivo de la devolución */
                     window.location.href = "../publico/index.php"; /* Redirijo a la página principal */
                 }, 1000);
             }, 1000);
@@ -634,11 +793,14 @@ function enviar() {
     } else { /* Si es un pago normal */
         /* Mostrar un breve estado de procesamiento y luego confirmar */
         modal("modal1", "<h1>Procesando pago...</h1>", false);
-
-        let contenedorBotones = document.getElementById("botones"); /* Obtengo el contenedor de botones del modal */
-        if (contenedorBotones) { /* Si existe el contenedor */
-            contenedorBotones.style.display = "none"; /* Oculto los botones del modal si existen */
-        }
+        
+        // Oculto el botón de cerrar del modal de éxito
+        setTimeout(() => { /* Timeout muy corto para que no se vea el parpadeo */
+            const botonCerrar = document.getElementById('cerrar-modal1'); /* Obtengo botón cerrar */
+            if (botonCerrar) botonCerrar.style.display = 'none'; /* Oculto botón */
+            const hr = document.querySelector('#modal1 hr'); /* Obtengo línea separadora */
+            if (hr) hr.style.display = 'none'; /* Oculto línea */
+        }, 0);
         
         // Verificar si hay un carrito de compra única en sessionStorage
         const carritoCompraUnica = sessionStorage.getItem('carritoCompraUnica'); /* Obtengo el carrito de compra única si existe */
@@ -654,13 +816,30 @@ function enviar() {
             const m1 = document.getElementById("modal1"); /* Obtengo el modal de procesamiento */
             if (m1) document.body.removeChild(m1); /* Cierro el modal de procesamiento */
             modal("modal2", "<h1>Pago realizado correctamente</h1>", false); /* Muestro modal de éxito */
+            // Oculto el botón de cerrar del modal de éxito
+            setTimeout(() => { /* Timeout muy corto para que no se vea el parpadeo */
+                const botonCerrar = document.getElementById('cerrar-modal2'); /* Obtengo botón cerrar */
+                if (botonCerrar) botonCerrar.style.display = 'none'; /* Oculto botón */
+                const hr = document.querySelector('#modal2 hr'); /* Obtengo línea separadora */
+                if (hr) hr.style.display = 'none'; /* Oculto línea */
+            }, 0);
             setTimeout(() => { /* Espero un momento */
                 if (document.getElementById("modal2")) document.body.removeChild(document.getElementById("modal2")); /* Cierro el modal de éxito */
                 // Solo paso carrito como carrito_unico si realmente es compra única
-                if(carritoCompraUnica) {
-                    mandar("realizar_pedido", null, null, null, null, calcularTotalCarrito(carrito), null, carrito); /* Paso el carrito como carrito_unico */
-                } else {
-                    mandar("realizar_pedido", null, null, null, null, calcularTotalCarrito(carrito), null, null); /* No paso carrito_unico */
+                if(carritoCompraUnica) { /* Si es compra única */
+                    if(sessionStorage.getItem('reserva')) { /* Si es una reserva */
+                        mandar("realizar_reserva", null, null, null, null, calcularTotalCarrito(carrito), null, carrito); /* Paso el carrito como carrito_unico */
+                        sessionStorage.removeItem('reserva'); /* Elimino marca de reserva */
+                    } else { /* Si es un pedido normal */
+                        mandar("realizar_pedido", null, null, null, null, calcularTotalCarrito(carrito), null, carrito); /* Paso el carrito como carrito_unico */
+                    }
+                } else { /* Si es compra normal */
+                    if(sessionStorage.getItem('reserva')) { /* Si es una reserva */
+                        mandar("realizar_reserva", null, null, null, null, calcularTotalCarrito(carrito), null, null); /* No paso carrito_unico */
+                        sessionStorage.removeItem('reserva'); /* Elimino marca de reserva */
+                    } else { /* Si es un pedido normal */
+                        mandar("realizar_pedido", null, null, null, null, calcularTotalCarrito(carrito), null, null); /* No paso carrito_unico */
+                    }
                 }
                 setTimeout(() => { /* Espero un momento para que se procese */
                     // Limpiar sessionStorage si era compra única
@@ -680,14 +859,12 @@ document.addEventListener('DOMContentLoaded', function() { /* Cuando el DOM est�
     const esDevolucion = sessionStorage.getItem('devolucion'); /* Compruebo si hay marca de devolución */
     const tieneIdJuego = sessionStorage.getItem('id_juego_reembolso'); /* Compruebo si hay ID del juego */
     const tieneTotal = sessionStorage.getItem('total_reembolso'); /* Compruebo si hay total a reembolsar */
-    const tieneMotivo = sessionStorage.getItem('motivo_devolucion'); /* Compruebo si hay motivo de devolución */
     
     // Si hay marca de devolución pero faltan datos, limpiar todo
-    if (esDevolucion && (!tieneIdJuego || !tieneTotal || !tieneMotivo)) {
+    if (esDevolucion && (!tieneIdJuego || !tieneTotal)) {
         sessionStorage.removeItem('devolucion'); /* Elimino marca de devolución */
         sessionStorage.removeItem('id_juego_reembolso'); /* Elimino ID del juego */
         sessionStorage.removeItem('total_reembolso'); /* Elimino total a reembolsar */
-        sessionStorage.removeItem('motivo_devolucion'); /* Elimino motivo de la devolución */
     }
     
     formatearNumeroTarjeta(); /* Activo formateo de número de tarjeta */
@@ -705,11 +882,68 @@ document.addEventListener('DOMContentLoaded', function() { /* Cuando el DOM est�
             boton.textContent = "Confirmar Devolución"; /* Cambio el texto del botón */
         }
     }
+
+    // Evento para botón de tarjeta
+    const botonTarjeta = document.getElementById('boton-tarjeta'); // obtengo botón de tarjeta
+    if (botonTarjeta) { // si existe
+        botonTarjeta.addEventListener('click', function() { // añado evento click
+            // Creo contenido del modal con formulario de tarjeta
+            const contenidoModal = `
+                <h2>Ingresa los datos de tu tarjeta</h2>
+                <form class="formulario-pago" autocomplete="off">
+                <label for="numero-tarjeta" class="campo-pago">Número de tarjeta:</label>
+                <input type="text" id="numero-tarjeta" inputmode="numeric" placeholder="1234 5678 9012 3456" maxlength="19" class="input-pago" required/>
+                
+                <div class="fila-pago">
+                    <div>
+                    <label for="fecha-expiracion" class="campo-pago">MM / AA:</label>
+                    <input type="text" id="fecha-expiracion" inputmode="numeric" placeholder="MM / AA" maxlength="7" class="input-pago" required/>
+                    </div>
+                    <div>
+                    <label for="cvc" class="campo-pago">CVC:</label>
+                    <input type="text" id="cvc" inputmode="numeric" placeholder="123" maxlength="4" class="input-pago" required/>
+                    </div>
+                </div>
+
+                <label for="titular" class="campo-pago">Nombre del titular:</label>
+                <input type="text" id="titular" placeholder="Nombre y apellidos" class="input-pago" required/>
+
+                <button type="button" class="boton-pagar">Pagar</button>
+                </form>
+            `; // contenido HTML del formulario
+            
+            modal('modal-tarjeta', contenidoModal, false); // muestro modal
+            
+            // Oculto el botón de cerrar y el hr del modal de tarjeta
+            setTimeout(() => { /* Timeout muy corto para que no se vea el parpadeo */
+                const botonCerrar = document.getElementById('cerrar-modal-tarjeta'); // obtengo botón cerrar
+                if (botonCerrar) botonCerrar.style.display = 'none'; // oculto botón
+                const hr = document.querySelector('#modal-tarjeta hr'); // obtengo línea separadora
+                if (hr) hr.style.display = 'none'; // oculto línea
+            }, 0);
+            
+            // Inicializo funciones de formateo para los campos del formulario
+            setTimeout(() => { // espero un momento para que se cree el formulario
+                formatearNumeroTarjeta(); // formateo número de tarjeta
+                formatearFechaExpiracion(); // formateo fecha de expiración
+                limitarCVC(); // limito CVC a números
+                limitarTitular(); // limito titular a letras
+                
+                // Añado evento al botón pagar del modal
+                const botonPagar = document.querySelector('#modal-tarjeta .boton-pagar'); // obtengo botón pagar
+                if (botonPagar) { // si existe
+                    botonPagar.addEventListener('click', function() { // añado evento click
+                        if (validarPago()) enviar(); // valido y envío si es correcto
+                    });
+                }
+            }, 0);
+        });
+    }
 });
 
-// Función que gestiona la devolución de un juego
-function descambiarJuego(id_juego, total, nombre) {
-    modal("modal1", "<h1>¿Estás seguro de que deseas descambiar el juego " + nombre + "?</h1><input type='hidden' id='inicio-devolucion'>", true); /* Muestro modal de confirmación */
+// Función para iniciar el proceso de descambio/devolución de un juego
+function descambiarJuego(id_juego, total, nombre, boton) {
+    modal("modal1", "<h1>¿Estás seguro de que deseas descambiar el juego " + nombre + "?</h1>", true); /* Muestro modal de confirmación */
     document.getElementById('cancelar-modal1').addEventListener('click', function() { /* Si cancela la devolución */
         const modal1 = document.getElementById("modal1"); /* Obtengo el modal 1 */
         if (modal1) document.body.removeChild(modal1); /* Cierro el modal 1 */
@@ -720,7 +954,7 @@ function descambiarJuego(id_juego, total, nombre) {
         if (modal1) document.body.removeChild(modal1); /* Cierro el modal 1 */
         // Mostrar modal para indicar el motivo de la devolución
         let mensaje = `<h1>Indique a continuación el motivo de la devolución:</h1>
-                    <textarea id='motivo-devolucion' rows='4' cols='50' placeholder='Escriba aquí el motivo de la devolución...' maxlength='500' style='resize: none;'></textarea>
+                    <textarea id='motivo-devolucion' rows='4' cols='50' placeholder='Escriba aquí el motivo de la devolución...' maxlength='500'></textarea>
                     <br>
                     <div id="advertencia-devolucion">
                         <p>Una vez confirme la devolución, será redirigido a la página de pago en donde deberá completar los datos de la tarjeta donde recibirá un reembolso de ${parseFloat(total).toFixed(2).replace('.', ',')} €.</p>
@@ -764,25 +998,166 @@ function descambiarJuego(id_juego, total, nombre) {
                     
                     const modal2 = document.getElementById("modal2"); /* Obtengo el modal 2 */
                     if (modal2) document.body.removeChild(modal2); /* Cierro el modal 2 */
-                    if(total != 0.00) { /* Si el total a reembolsar es distinto de 0.00, redirijo a la página de pago */
-                         // Guardar datos de la devolución en sessionStorage para usarlos en la página de pago
-                        sessionStorage.setItem('devolucion', JSON.stringify(true)); /* Marco que es una devolución */
-                        sessionStorage.setItem('id_juego_reembolso', JSON.stringify(id_juego)); /* Guardo el ID del juego */
-                        sessionStorage.setItem('total_reembolso', JSON.stringify(total)); /* Guardo el total a reembolsar */
-                        sessionStorage.setItem('motivo_devolucion', JSON.stringify(motivo)); /* Guardo el motivo de la devolución */
-                        window.location.href = "../vistas/pago.php"; /* Redirijo a la página de pago */
-                    } else { /* Si el total es 0.00, realizo la devolución directamente */
-                        const modal1 = document.getElementById("modal1"); /* Obtengo el modal 1 */
-                        if (modal1) document.body.removeChild(modal1); /* Cierro el modal 1 */
-                        mandar("realizar_devolucion", id_juego, "modal2", "<h1>Devolución realizada correctamente</h1>", false, total, null, null, motivo); /* Realizo la devolución */
-                        setTimeout(() => { /* Espero un momento para que se procese */
-                            const modal2 = document.getElementById("modal2"); /* Busco el modal de éxito */
-                            if (modal2) document.body.removeChild(modal2); /* Cierro el modal de éxito */
-                            window.location.href = "../publico/index.php"; /* Redirijo a la página principal */
-                        }, 1000);
-                    }
+                    mandar("solicitar_devolucion", id_juego, "modal2", "<h1>Solicitud de devolución enviada correctamente</h1>", false, total, boton, null, motivo); /* Realizo la solicitud de devolución */
+                    
+                    setTimeout(() => { /* Espero un momento para que se procese */
+                        const modal2 = document.getElementById("modal2"); /* Busco el modal de éxito */
+                        if (modal2) document.body.removeChild(modal2); /* Cierro el modal de éxito */
+                    }, 1000);
                 });
             }
         }, 50);        
+    });
+}
+
+// Función para cancelar una solicitud de reserva o devolución
+function cancelarSolicitud(tipo_solicitud, id_juego, nombre, total, boton) {
+    if(tipo_solicitud === "cancelar_solicitud_reserva") { /* Si es cancelación de reserva */
+        modal("modal1", "<h1>¿Estás seguro de que deseas cancelar solicitud de reserva del juego " + nombre + "?</h1>", true); /* Muestro modal de confirmación */
+    } else if(tipo_solicitud === "cancelar_solicitud_devolucion") { /* Si es cancelación de devolución */
+        modal("modal1", "<h1>¿Estás seguro de que deseas cancelar solicitud de devolución del juego " + nombre + "?</h1>", true); /* Muestro modal de confirmación */
+    }
+    document.getElementById('cancelar-modal1').addEventListener('click', function() { /* Si cancela la cancelación */
+        const modal1 = document.getElementById("modal1"); /* Obtengo el modal 1 */
+        if (modal1) document.body.removeChild(modal1); /* Cierro el modal 1 */
+        if(tipo_solicitud === "cancelar_solicitud_reserva") { /* Si es cancelación de reserva */
+            mandar(tipo_solicitud, id_juego, "modal2", "<h1>Cancelación de solicitud de reserva abortada</h1>", false, total); /* Cancelo la cancelación */
+        } else if(tipo_solicitud === "cancelar_solicitud_devolucion") { /* Si es cancelación de devolución */
+            mandar(tipo_solicitud, id_juego, "modal2", "<h1>Cancelación de solicitud de devolución abortada</h1>", false, total); /* Cancelo la cancelación */
+        }
+    });
+    document.getElementById('aceptar-modal1').addEventListener('click', function() { /* Si confirma la cancelación */
+        const modal1 = document.getElementById("modal1"); /* Obtengo el modal 1 */
+        if (modal1) document.body.removeChild(modal1); /* Cierro el modal 1 */
+        // Mostrar modal para indicar el motivo de la cancelación
+        let mensaje = `<h1>Indique a continuación el motivo de la cancelación: </h1>
+                    <textarea id='motivo-cancelacion' rows='4' cols='50' placeholder='Escriba aquí el motivo de la cancelación...' maxlength='500'></textarea>
+                    <br>
+                    <div id="advertencia-cancelacion">
+                        <p>Una vez confirme la cancelación, su solicitud será eliminada.</p>
+                    </div>`; /* Mensaje con textarea para el motivo */
+        modal("modal2", mensaje, false); /* Muestro modal para indicar el motivo */
+        
+        // Usar setTimeout para asegurar que el DOM se actualice
+        setTimeout(function() { /* Espero un momento para que se cree completamente el modal */
+            const botonCerrar = document.getElementById('cerrar-modal2'); /* Obtengo el botón de cerrar */
+
+            if (botonCerrar) { /* Si el botón existe */
+                // Primero eliminar el evento anterior de cerrar
+                const nuevoBoton = botonCerrar.cloneNode(true); /* Clono el botón para eliminar eventos */
+                botonCerrar.parentNode.replaceChild(nuevoBoton, botonCerrar); /* Reemplazo el botón antiguo por el nuevo sin eventos */
+                
+                nuevoBoton.textContent = "Confirmar Cancelación de Solicitud"; /* Cambio el texto del botón */
+                nuevoBoton.id = 'confirmar-solicitud'; /* Cambio el ID del botón */
+                
+                // Añadir evento al nuevo botón
+                nuevoBoton.addEventListener('click', function(e) { /* Evento para confirmar la cancelación */
+                    e.preventDefault(); /* Prevengo acción por defecto */
+                    e.stopPropagation(); /* Detengo propagación del evento */
+                    
+                    const textareaMotivo = document.getElementById('motivo-cancelacion'); /* Obtengo el textarea del motivo */
+                    
+                    if (!textareaMotivo) { /* Si no existe el textarea */
+                        modal("modal3", "<h1>Error: No se encontró el campo de motivo</h1>", false); /* Muestro mensaje de error */
+                        return; /* Salgo de la función */
+                    }
+                    
+                    const motivo = textareaMotivo.value.trim(); /* Obtengo el motivo y elimino espacios al inicio y final */
+                    
+                    if (motivo === '') { /* Si el motivo está vacío */
+                        modal("modal3", "<h1>Debe indicar el motivo de la cancelación</h1>", false); /* Muestro mensaje de error */
+                        return; /* Salgo de la función */
+                    }
+                    if (motivo.length < 10) { /* Si el motivo tiene menos de 10 caracteres */
+                        modal("modal3", "<h1>El motivo debe tener al menos 10 caracteres</h1>", false); /* Muestro mensaje de error */
+                        return; /* Salgo de la función */
+                    }
+                    
+                    const modal2 = document.getElementById("modal2"); /* Obtengo el modal 2 */
+                    if (modal2) document.body.removeChild(modal2); /* Cierro el modal 2 */
+                    if(tipo_solicitud === "cancelar_solicitud_reserva") { /* Si es cancelación de reserva */
+                        mandar(tipo_solicitud, id_juego, "modal2", "<h1>Solicitud de reserva cancelada correctamente</h1>", false, total, boton, null, motivo); /* Realizo la cancelación */
+                    } else if(tipo_solicitud === "cancelar_solicitud_devolucion") { /* Si es cancelación de devolución */
+                        mandar(tipo_solicitud, id_juego, "modal2", "<h1>Solicitud de devolución cancelada correctamente</h1>", false, total, boton, null, motivo); /* Realizo la cancelación */
+                    }
+
+                    setTimeout(() => { /* Espero un momento para que se procese */
+                        const modal2 = document.getElementById("modal2"); /* Busco el modal de éxito */
+                        if (modal2) document.body.removeChild(modal2); /* Cierro el modal de éxito */
+                    }, 1000);
+                });
+            }
+        }, 50);        
+    });
+}
+
+// Función para completar una solicitud de reserva o devolución
+function completarSolicitud(tipo_solicitud, id_juego) {
+    if(tipo_solicitud === "reserva") { /* Si es reserva */
+        modal("modal1", "<h1>¿Estás seguro de que deseas completar la reserva?</h1>", true); /* Muestro modal de confirmación */
+    } else if(tipo_solicitud === "devolucion") { /* Si es devolución */
+        modal("modal1", "<h1>¿Estás seguro de que deseas completar la devolución?</h1>", true); /* Muestro modal de confirmación */
+    }
+
+    document.getElementById('cancelar-modal1').addEventListener('click', function() { /* Si cancela la acción */
+        const modal1 = document.getElementById("modal1"); /* Obtengo el modal 1 */
+        if (modal1) document.body.removeChild(modal1); /* Cierro el modal 1 */
+    });
+    
+    document.getElementById('aceptar-modal1').addEventListener('click', function() { /* Si confirma la acción */
+        if(tipo_solicitud === "reserva") { /* Si es reserva */
+            const hiddenReserva = document.getElementById('reserva-json' + id_juego); /* Obtengo el input oculto con el JSON original */
+            const reservaJson = hiddenReserva ? hiddenReserva.value : null; /* Uso su valor si existe */
+        
+            if(reservaJson) { /* Si existe el JSON original */
+                // Decodificar entidades HTML antes de parsear
+                const textarea = document.createElement('textarea'); /* Creo un textarea temporal */
+                textarea.innerHTML = reservaJson; /* Asigno el JSON escapado al innerHTML */
+                const reservaDecodificado = textarea.value; /* Obtengo el valor decodificado */
+                const reservaData = JSON.parse(reservaDecodificado); /* Parseo el JSON decodificado */
+                
+                if(reservaData[0].precio != "0,00") { /* Si el total es distinto de 0.00, redirijo a la página de pago */
+                    sessionStorage.setItem('carritoCompraUnica', JSON.stringify(reservaData)); /* Guardo el carrito en sessionStorage */
+                    sessionStorage.setItem('reserva', JSON.stringify(true)); /* Marco que es una reserva */
+                    sessionStorage.setItem('id_juego_reserva', JSON.stringify(reservaData[0].id)); /* Guardo el ID del juego de la reserva */
+                    window.location.href = "../vistas/pago.php"; /* Redirijo a la página de pago */
+                } else { /* Si el total es 0.00 (juegos gratuitos), realizo el completado de la reserva directamente */
+                    mandar("realizar_reserva", null, "modal2", "<h1>Reserva completada correctamente</h1>", false, calcularTotalCarrito(reservaData), null, reservaData); /* Realizo el completado de la reserva */
+                    setTimeout(() => { /* Espero un momento para que se procese */
+                        const modal2 = document.getElementById("modal2"); /* Busco el modal de éxito */
+                        if (modal2) document.body.removeChild(modal2); /* Cierro el modal de éxito */
+                        window.location.href = "../publico/index.php"; /* Redirijo a la página principal */
+                    }, 1000); /* Cierro el modal de éxito después de un momento */
+                }
+            }
+        } else if(tipo_solicitud === "devolucion") { /* Si es devolución */
+            const hiddenDevolucion = document.getElementById('devolucion-json' + id_juego); /* Obtengo el input oculto con el JSON original */
+            const devolucionJson = hiddenDevolucion ? hiddenDevolucion.value : null; /* Uso su valor si existe */
+        
+            if(devolucionJson) { /* Si existe el JSON original */
+                // Decodificar entidades HTML antes de parsear
+                const textarea = document.createElement('textarea'); /* Creo un textarea temporal */
+                textarea.innerHTML = devolucionJson; /* Asigno el JSON escapado al innerHTML */
+                const devolucionDecodificado = textarea.value; /* Obtengo el valor decodificado */
+                const devolucionData = JSON.parse(devolucionDecodificado); /* Parseo el JSON decodificado */
+                
+                if(devolucionData[0].precio != 0.00) { /* Si el total a reembolsar es distinto de 0.00, redirijo a la página de pago */
+                    // Guardar datos de la devolución en sessionStorage para usarlos en la página de pago
+                    sessionStorage.setItem('devolucion', JSON.stringify(true)); /* Marco que es una devolución */
+                    sessionStorage.setItem('id_juego_reembolso', JSON.stringify(devolucionData[0].id)); /* Guardo el ID del juego */
+                    sessionStorage.setItem('total_reembolso', JSON.stringify(devolucionData[0].precio)); /* Guardo el total a reembolsar */
+                    window.location.href = "../vistas/pago.php"; /* Redirijo a la página de pago */
+                } else { /* Si el total es 0.00, realizo la devolución directamente */
+                    const modal1 = document.getElementById("modal1"); /* Obtengo el modal 1 */
+                    if (modal1) document.body.removeChild(modal1); /* Cierro el modal 1 */
+                    mandar("realizar_devolucion", devolucionData[0].id, "modal2", "<h1>Devolución realizada correctamente</h1>", false, devolucionData[0].precio, null, null, null); /* Realizo la devolución */
+                    setTimeout(() => { /* Espero un momento para que se procese */
+                        const modal2 = document.getElementById("modal2"); /* Busco el modal de éxito */
+                        if (modal2) document.body.removeChild(modal2); /* Cierro el modal de éxito */
+                        window.location.href = "../publico/index.php"; /* Redirijo a la página principal */
+                    }, 1000);
+                }
+            }
+        }
     });
 }

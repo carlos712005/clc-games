@@ -164,7 +164,72 @@ VALUES
  'recursos/imagenes/portadas/assassins_creed_iv.jpg','externo',19.99,
  'Acción y sigilo de piratas en el Caribe.',
  'Navega el Jackdaw, aborda navíos y explora islas con un sistema de combate naval ágil. Combina sigilo en tierra con misiones de exploración y coleccionables.',
- 'Requisitos orientativos (PC): CPU 4 núcleos, 8 GB RAM, GPU 2 GB VRAM, Windows 10 64-bit, ±30–40 GB.');
+ 'Requisitos orientativos (PC): CPU 4 núcleos, 8 GB RAM, GPU 2 GB VRAM, Windows 10 64-bit, ±30–40 GB.'),
+
+-- 21) Resident Evil Requiem - Survival horror cinematográfico
+('Resident Evil Requiem','resident_evil_requiem','Capcom','Capcom','2026-02-27',
+  'recursos/imagenes/portadas/resident_evil_requiem.jpg','externo',69.99,
+  'Survival horror intenso.',
+  'Resident Evil Requiem continúa la línea de terror atmosférico de la saga, combinando exploración claustrofóbica, criaturas mutadas y una narrativa madura. El jugador se mueve entre zonas oscuras y pasillos estrechos donde la gestión de recursos es crítica. La campaña incorpora decisiones que afectan a ciertos eventos y un sistema de combate renovado basado en esquivas, contraataques y vulnerabilidades enemigas. Incluye también modos adicionales como Desafío y Contrarreloj.',
+  'Requisitos orientativos (PC): CPU 8 núcleos, 16 GB RAM, GPU equivalente a RTX 2070 o superior, DirectX 12, 50 GB de espacio libre, Windows 10/11 64-bit.'),
+
+-- 22) Crimson Desert - Acción y aventura en mundo abierto
+('Crimson Desert','crimson_desert','Pearl Abyss','Pearl Abyss','2026-03-19',
+  'recursos/imagenes/portadas/crimson_desert.jpg','externo',69.99,
+  'Acción y aventura en mundo abierto.',
+  'Crimson Desert es un juego de acción y aventura en mundo abierto ambientado en el continente de Pywel, un mundo de fantasía medieval desgarrado por la guerra. Controlas a Kliff, líder de un grupo de mercenarios que lucha por sobrevivir mientras se ve atrapado entre facciones rivales, conspiraciones y criaturas peligrosas. Combina exploración libre, combates en tiempo real y misiones con narrativa cinematográfica, con gran énfasis en el mundo vivo y los eventos dinámicos.',
+  'Requisitos orientativos (PC): CPU 8 núcleos, 16 GB RAM, GPU dedicada con 8 GB VRAM (equivalente a RTX 2070 o superior), 70 GB de espacio libre en SSD, Windows 10/11 64-bit.'),
+
+-- 23) Warhammer 40,000: Boltgun 2 - Shooter retro frenético
+('Warhammer 40,000: Boltgun 2','warhammer_40000_boltgun_2','Auroch Digital','Focus Entertainment','2026-11-15',
+  'recursos/imagenes/portadas/boltgun2.jpg','externo',39.99,
+  'Shooter retro de acción frenética.',
+  'Warhammer 40,000: Boltgun 2 es la secuela del aclamado shooter retro inspirado en los FPS de los 90, combinando velocidad extrema, combate visceral y el estilo pixelado característico. Controla a un Marine Espacial en misiones sangrientas contra hordas del Caos, demonios y herejes, usando armas clásicas como el boltgun, la chainsword y artillería pesada. Incluye más niveles, enemigos mejorados y jefes masivos.',
+  'Requisitos orientativos (PC): CPU 4–6 núcleos, 12 GB RAM, GPU dedicada 4–6 GB VRAM, 10–20 GB de espacio libre, Windows 10/11 64-bit.'),
+
+-- 24) Pokémon Champions - Aventura Pokémon competitiva
+('Pokémon Champions','pokemon_champions','Game Freak','The Pokémon Company','2026-10-15',
+  'recursos/imagenes/portadas/pokemon_champions.jpg',
+  'externo',59.99,
+  'Aventura Pokémon competitiva.',
+  'Pokémon Champions propone una aventura renovada centrada en combates estratégicos y progresión competitiva. Explora nuevas regiones, captura especies inéditas y participa en una Liga de Alto Nivel donde cada victoria otorga puntos de rango y mejoras de entrenador. Incluye modos clásicos, desafíos semanales y funciones online para combatir o intercambiar criaturas con jugadores de todo el mundo.',
+  'Requisitos orientativos (PC/Emulación): CPU 4 núcleos, 8 GB RAM, GPU integrada moderna o 2 GB VRAM, Windows 10/11 64-bit.'),
+
+-- 25) Pong – Clásico arcade CLC Games
+('Pong','pong','CLC Games','CLC Games','2024-01-01',
+ 'recursos/imagenes/portadas/pong.jpg','interno',0.00,
+ 'Clásico arcade de palas.',
+ 'Versión moderna del mítico Pong, con controles fluidos y físicas revisadas. Ideal para partidas rápidas.',
+ 'Requisitos orientativos (PC): Navegador moderno compatible con HTML5, Windows 10/11.'), 
+
+-- 26) Buscaminas – Edición CLC Games
+('Buscaminas','buscaminas','CLC Games','CLC Games','2024-01-01',
+ 'recursos/imagenes/portadas/buscaminas.jpg','interno',0.00,
+ 'Busca minas sin explotar.',
+ 'Adaptación optimizada del clásico Buscaminas, con niveles de dificultad y diseño visual renovado.',
+ 'Requisitos orientativos (PC): Navegador moderno compatible con HTML5, Windows 10/11.'),
+
+-- 27) Solitario – Versión clásica CLC Games
+('Solitario','solitario','CLC Games','CLC Games','2024-01-01',
+ 'recursos/imagenes/portadas/solitario.jpg','interno',0.00,
+ 'Clásico juego de cartas.',
+ 'Versión digital del Solitario tradicional, con animaciones suaves y controles intuitivos.',
+ 'Requisitos orientativos (PC): Navegador moderno compatible con HTML5, Windows 10/11.'),
+
+-- 28) Ahorcado – Edición temática CLC Games
+('Ahorcado','ahorcado','CLC Games','CLC Games','2024-01-01',
+ 'recursos/imagenes/portadas/ahorcado.jpg','interno',0.00,
+ 'Adivina la palabra oculta.',
+ 'Juego del Ahorcado con categorías temáticas y diccionario propio. Perfecto para partidas rápidas.',
+ 'Requisitos orientativos (PC): Navegador moderno compatible con HTML5, Windows 10/11.'),
+
+-- 29) Tres en Raya – Versión estratégica CLC Games
+('Tres en Raya','tres_en_raya','CLC Games','CLC Games','2024-01-01',
+ 'recursos/imagenes/portadas/tres_en_raya.jpg','interno',0.00,
+ 'Clásico 3 en línea.',
+ 'Tres en Raya con modos jugador vs jugador y jugador vs IA sencilla. Interfaz minimalista.',
+ 'Requisitos orientativos (PC): Navegador moderno compatible con HTML5, Windows 10/11.');
+
 
 -- Tabla de filtros para categorización de juegos
 -- Sistema flexible para clasificar juegos por múltiples criterios
@@ -180,8 +245,8 @@ CREATE TABLE filtros (
 
 -- FILTROS TIPO: Diferencia entre juegos internos (jugables) y externos (solo venta)
 INSERT INTO filtros (id_fijo, nombre, tipo_filtro, clave, orden) VALUES
-(1,'Interno (jugable aquí)', 'tipos', 'interno', 1),        -- Juegos ejecutables en la plataforma
-(2,'Externo (no jugable aquí)', 'tipos', 'externo', 2);     -- Juegos solo para venta/descarga
+(1,'Juegos de la casa', 'tipos', 'interno', 1),        -- Juegos desarrollados CLC Games
+(2,'Juegos de terceros', 'tipos', 'externo', 2);     -- Juegos de otros desarrolladores
 
 -- FILTROS GÉNEROS: Clasificación por géneros de videojuegos
 INSERT INTO filtros (id_fijo, nombre, tipo_filtro, clave, orden) VALUES
@@ -323,6 +388,42 @@ INSERT INTO juegos_filtros (id_juego, id_filtro) VALUES
 INSERT INTO juegos_filtros (id_juego, id_filtro) VALUES
 (20, 3),(20, 4),(20, 26),(20, 29),(20, 32),(20, 37);        -- accion, aventura, juego_base, un_jugador, online, pegi18
 
+-- 21) Resident Evil Requiem - Acción/Aventura/Disparos horror cinematográfico adulto
+INSERT INTO juegos_filtros (id_juego, id_filtro) VALUES
+(21, 2),(21, 3),(21, 4),(21, 22),(21, 26),(21, 29),(21, 32),(21, 37);      -- externo, accion, aventura, disparos, juego_base, un_jugador, online, pegi18
+
+-- 22) Crimson Desert - Acción/Aventura mundo abierto adulto
+INSERT INTO juegos_filtros (id_juego, id_filtro) VALUES
+(22, 2),(22, 3),(22, 4),(22, 17),(22, 26),(22, 29),(22, 37);    -- externo, accion, aventura, mundo_abierto, juego_base, un_jugador, pegi18
+
+-- 23) Warhammer 40,000: Boltgun 2 - Acción/Disparos shooter retro frenético adulto
+INSERT INTO juegos_filtros (id_juego, id_filtro) VALUES
+(23, 2),(23, 3),(23, 22),(23, 26),(23, 29),(23, 32),(23, 37);   -- externo, accion, disparos, juego_base, un_jugador, online, pegi18
+
+-- 24) Pokémon Champions - Aventura/Rol competitivo teen
+INSERT INTO juegos_filtros (id_juego, id_filtro) VALUES
+(24, 2),(24, 4),(24, 5),(24, 26),(24, 29),(24, 32),(24, 34);    -- externo, aventura, rpg, juego_base, un_jugador, online, pegi7
+
+-- 25) Pong – Clásico arcade CLC Games
+INSERT INTO juegos_filtros (id_juego, id_filtro) VALUES
+(25, 1),(25, 7),(25, 19),(25, 26),(25, 29),(25, 30), (25, 33);  -- interno, deportes, party, juego_base, un_jugador, multijugador, pegi3
+
+-- 26) Buscaminas – Edición CLC Games
+INSERT INTO juegos_filtros (id_juego, id_filtro) VALUES
+(26, 1),(26, 9),(26, 26),(26, 29),(26, 33);                     -- interno, puzzle, juego_base, un_jugador, pegi3
+
+-- 27) Solitario – Versión clásica CLC Games
+INSERT INTO juegos_filtros (id_juego, id_filtro) VALUES
+(27, 1),(27, 9),(27, 26),(27, 29),(27, 33);                     -- interno, puzzle, juego_base, un_jugador, pegi3
+
+-- 28) Ahorcado – Edición temática CLC Games
+INSERT INTO juegos_filtros (id_juego, id_filtro) VALUES
+(28, 1),(28, 9),(28, 26),(28, 29),(28, 33);                     -- interno, puzzle, juego_base, un_jugador, pegi3
+
+-- 29) Tres en Raya – Versión estratégica CLC Games
+INSERT INTO juegos_filtros (id_juego, id_filtro) VALUES
+(29, 1),(29, 6),(29, 9),(29, 26),(29, 29),(29, 30),(29, 33);  -- interno, estrategia, puzzle, juego_base, un_jugador, multijugador, pegi3
+
 -- Tabla de roles de usuario
 -- Define los diferentes niveles de permisos en el sistema
 CREATE TABLE roles (
@@ -418,12 +519,19 @@ CREATE TABLE biblioteca (
 CREATE TABLE historial (
   id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,      -- ID de la operación global
   id_usuario BIGINT UNSIGNED NOT NULL,                -- Usuario que realizó la acción
-  tipo ENUM('COMPRA','DEVOLUCION') NOT NULL,          -- Tipo de operación general
-  estado ENUM('PENDIENTE','PAGADA','CANCELADA','APROBADA','RECHAZADA','PARCIAL')
+  tipo ENUM('COMPRA','RESERVA','SOLICITUD_DEVOLUCION','DEVOLUCION') NOT NULL,          -- Tipo de operación general
+  estado ENUM('PENDIENTE','PAGADA','CANCELADA','APROBADA','RECHAZADA','PARCIAL','PENDIENTE_REVISION','RESERVADA', 'COMPLETADA')
         NOT NULL DEFAULT 'PENDIENTE',                 -- Estado global de la operación
   total DECIMAL(10,2) NOT NULL DEFAULT 0.00,          -- Total acumulado de la operación
+  metodo_pago         VARCHAR(30)    NULL,            -- Método de pago utilizado
+  paypal_order_id     VARCHAR(64)    NULL,            -- ID de orden de PayPal
+  paypal_capture_id   VARCHAR(64)    NULL,            -- ID de captura de PayPal
+  paypal_email        VARCHAR(160)   NULL,            -- Email asociado a la cuenta PayPal
   comentario VARCHAR(255) NULL,                       -- Motivo o comentario general
   creado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Cuándo se creó el registro
+  actualizado_en TIMESTAMP NOT NULL 
+        DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,                  -- Última actualización del registro
 
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE   -- Eliminar historial si se borra el usuario
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -435,7 +543,7 @@ CREATE TABLE historial_compras (
   id_historial BIGINT UNSIGNED NOT NULL,              -- FK al historial principal
   id_juego BIGINT UNSIGNED NOT NULL,                  -- Juego afectado
   precio DECIMAL(8,2) NOT NULL,                       -- Precio congelado en la transacción
-  estado ENUM('PAGADO','CANCELADO','DEVUELTO','DEVOLUCION_CANCELADA')
+  estado ENUM('PAGADO','RESERVADO','CANCELADO','PENDIENTE_REVISION','DEVUELTO','RECHAZADA', 'APROBADA')
         NOT NULL,                                     -- Estado individual del juego
   comentario VARCHAR(255) NULL,                       -- Motivo específico
   creado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Cuándo se creó el registro
@@ -458,27 +566,49 @@ CREATE TABLE favoritos (
   FOREIGN KEY (id_juego)   REFERENCES juegos(id)   ON DELETE CASCADE     -- Eliminar de favoritos si se retira el juego de la tienda
 ) ENGINE=InnoDB;
 
--- Tabla de partidas jugadas (solo para juegos internos)
--- Registra las sesiones de juego de usuarios en juegos ejecutables en la plataforma
-CREATE TABLE partidas (
-  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,             -- ID único de la partida
+-- Tabla de comentarios de usuarios sobre juegos
+-- Permite a los usuarios dejar reseñas y opiniones sobre los juegos que poseen
+CREATE TABLE comentarios (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,            -- ID único del comentario
+    id_usuario BIGINT UNSIGNED NOT NULL,                      -- Usuario que hizo el comentario
+    id_juego BIGINT UNSIGNED NOT NULL,                        -- Juego comentado
+    comentario TEXT NOT NULL,                                 -- Texto del comentario
+    creado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,   -- Cuándo se creó el comentario
+    actualizado_en TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, -- Última actualización
+    UNIQUE(id_usuario, id_juego),                             -- Un usuario solo puede comentar una vez por juego
 
-  id_usuario BIGINT UNSIGNED NULL,                           -- Usuario que jugó
-  id_juego   BIGINT UNSIGNED NOT NULL,                       -- Juego jugado (debe ser tipo 'interno')
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,     -- Eliminar comentarios si se borra el usuario
+    FOREIGN KEY (id_juego) REFERENCES juegos(id) ON DELETE CASCADE          -- Eliminar comentarios si se retira el juego
+);
 
-  estado ENUM('EN_CURSO','FINALIZADA','ABANDONADA') NOT NULL DEFAULT 'EN_CURSO', -- Estado actual de la partida
-  resultado ENUM('VICTORIA','DERROTA','EMPATE') NULL,        -- Resultado final (se aplica al tipo de juego)
-  puntuacion INT NULL,                                       -- Puntos obtenidos, tiempo récord, etc.
-  movimientos INT NULL,                                      -- Jugadas realizadas, clics, acciones, etc.
+-- Tabla de valoraciones de usuarios sobre juegos
+-- Permite a los usuarios puntuar los juegos con una calificación numérica
+CREATE TABLE valoraciones (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,                           -- ID único de la valoración
+    id_usuario BIGINT UNSIGNED NOT NULL,                                     -- Usuario que hizo la valoración
+    id_juego BIGINT UNSIGNED NOT NULL,                                       -- Juego valorado
+    valoracion TINYINT UNSIGNED NOT NULL CHECK (valoracion BETWEEN 1 AND 5), -- Puntuación del 1 al 5
+    creado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,                  -- Cuándo se creó la valoración
+    actualizado_en TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,  -- Última actualización
 
-  inicio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,        -- Cuándo empezó la partida
-  fin    DATETIME NULL,                                      -- Cuándo terminó (NULL si está en curso)
-  duracion_segundos INT UNSIGNED NULL,                       -- Duración calculada en segundos
+    UNIQUE(id_usuario, id_juego),                                            -- Un usuario solo puede valorar una vez por juego
 
-  creado_en     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,     -- Cuándo se creó el registro
-  actualizado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP     -- Última actualización del registro
-                    ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,      -- Eliminar valoraciones si se borra el usuario
+    FOREIGN KEY (id_juego) REFERENCES juegos(id) ON DELETE CASCADE           -- Eliminar valoraciones si se retira el juego
+);
 
-  FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,     -- Eliminar partidas si se borra el usuario
-  FOREIGN KEY (id_juego)   REFERENCES juegos(id)   ON DELETE CASCADE      -- Eliminar partidas si se retira el juego
-) ENGINE=InnoDB;
+-- Tabla de notificaciones para usuarios
+-- Almacena mensajes del sistema dirigidos a usuarios específicos
+CREATE TABLE notificaciones (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,                        -- ID único
+  id_usuario BIGINT UNSIGNED NOT NULL,                                  -- Usuario destinatario
+  id_juego BIGINT UNSIGNED NULL,                                        -- Juego relacionado
+  mensaje VARCHAR(255) NOT NULL,                                        -- Texto visible para el usuario
+  tipo ENUM('INFO','ALERTA','SISTEMA') NOT NULL 
+      DEFAULT 'INFO',                                                   -- Tipo de notificación
+  leido TINYINT(1) NOT NULL DEFAULT 0,                                  -- 0 = no leída, 1 = leída
+  creado_en TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,               -- Fecha de creación
+
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,   -- Eliminar notificaciones si se borra el usuario
+  FOREIGN KEY (id_juego) REFERENCES juegos(id) ON DELETE SET NULL       -- Mantener notificación aunque se retire el juego
+);

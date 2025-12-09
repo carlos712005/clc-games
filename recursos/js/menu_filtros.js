@@ -36,22 +36,35 @@ function mostrarMenuFiltros() {
     // Controlar visibilidad de los filtros según el modo de edición
     const filtrosUsuarios = document.getElementById('parte-filtros-usuarios'); /* Obtengo el contenedor de filtros de usuarios */
     const filtrosJuegos = document.getElementById('parte-filtros-juegos'); /* Obtengo el contenedor de filtros de juegos */
+    const filtrosPedidos = document.getElementById('parte-filtros-pedidos'); /* Obtengo el contenedor de filtros de pedidos */
     
-    if (filtrosUsuarios && filtrosJuegos) { /* Si ambos contenedores existen */
+    if (filtrosUsuarios && filtrosJuegos && filtrosPedidos) { /* Si todos los contenedores existen */
         if (window.modoEdicion === 'usuarios') { /* Si el modo de edición es usuarios */
             filtrosUsuarios.style.display = 'block'; /* Muestro los filtros de usuarios */
             filtrosJuegos.style.display = 'none'; /* Oculto los filtros de juegos */
+            filtrosPedidos.style.display = 'none'; /* Oculto los filtros de pedidos */
+        } else if (window.modoEdicion === 'pedidos') { /* Si el modo de edición es pedidos */
+            filtrosUsuarios.style.display = 'none'; /* Oculto los filtros de usuarios */
+            filtrosJuegos.style.display = 'none'; /* Oculto los filtros de juegos */
+            filtrosPedidos.style.display = 'block'; /* Muestro los filtros de pedidos */
         } else { /* Si el modo de edición es juegos o cualquier otro */
             filtrosUsuarios.style.display = 'none'; /* Oculto los filtros de usuarios */
             filtrosJuegos.style.display = 'block'; /* Muestro los filtros de juegos */
+            filtrosPedidos.style.display = 'none'; /* Oculto los filtros de pedidos */
         }
     }
 
     // Configurar los rangos de precios
     configurarRangesPrecios(); /* Llamo a la función que configura los campos de precio */
 
+    // Configurar los rangos de totales de pedidos
+    configurarRangesTotalesPedidos(); /* Llamo a la función que configura los campos de totales de pedidos */
+
     // Configurar los rangos de fechas
     configurarRangesFechas(); /* Llamo a la función que configura los campos de fecha */
+    
+    // Configurar los rangos de fechas para pedidos
+    configurarRangesFechasPedidos(); /* Llamo a la función que configura los campos de fecha de pedidos */
     
     // Configurar evento para cerrar menú lateral al hacer click en el fondo (cortina)
     document.querySelectorAll('.cortina').forEach(cortinaElemento => { /* Busco todos los elementos con clase 'cortina' que actúan como fondo del menú lateral */
@@ -106,13 +119,13 @@ function configurarRangesPrecios() {
     if (campoMin && numeroMin) { /* Si ambos elementos existen */
         // Cuando muevo el campo mínimo
         campoMin.addEventListener('input', function() { /* Escucho cuando se mueve el campo mínimo */
-            // Actualizo el número que se muestra
-            numeroMin.value = campoMin.value; /* Sincronizo el valor numérico con el campo */
+            // Actualizo el número que se muestra con formato español (coma decimal)
+            numeroMin.value = campoMin.value.replace('.', ','); /* Sincronizo el valor numérico con el campo usando coma */
 
             // Si el mínimo es mayor que el máximo, corrijo el máximo
             if (parseInt(campoMin.value) > parseInt(campoMax.value)) { /* Si el mínimo supera al máximo */
                 campoMax.value = campoMin.value;  /* Ajusto el campo máximo */
-                numeroMax.value = campoMin.value;  /* Ajusto el valor numérico máximo */
+                numeroMax.value = campoMin.value.replace('.', ',');  /* Ajusto el valor numérico máximo con coma */
             }
         });
     }
@@ -121,13 +134,54 @@ function configurarRangesPrecios() {
     if (campoMax && numeroMax) { /* Si ambos elementos existen */
         // Cuando muevo el campo máximo
         campoMax.addEventListener('input', function() { /* Escucho cuando se mueve el campo máximo */
-            // Actualizo el número que se muestra
-            numeroMax.value = campoMax.value; /* Sincronizo el valor numérico con el campo */
+            // Actualizo el número que se muestra con formato español (coma decimal)
+            numeroMax.value = campoMax.value.replace('.', ','); /* Sincronizo el valor numérico con el campo usando coma */
 
             // Si el máximo es menor que el mínimo, corrijo el mínimo
             if (parseInt(campoMax.value) < parseInt(campoMin.value)) { /* Si el máximo es menor al mínimo */
                 campoMin.value = campoMax.value;  /* Ajusto el campo mínimo */
-                numeroMin.value = campoMax.value;  /* Ajusto el valor numérico mínimo */
+                numeroMin.value = campoMax.value.replace('.', ',');  /* Ajusto el valor numérico mínimo con coma */
+            }
+        });
+    }
+}
+
+// Función que configura el comportamiento de los campos de totales para pedidos
+function configurarRangesTotalesPedidos() {
+    // Busco los elementos de total mínimo
+    const campoMin = document.getElementById('filtro-pedido-total-min'); /* Obtengo el campo de total mínimo */
+    const numeroMin = document.getElementById('output-pedido-total-min'); /* Obtengo el campo numérico del total mínimo */
+    
+    // Busco los elementos de total máximo  
+    const campoMax = document.getElementById('filtro-pedido-total-max'); /* Obtengo el campo de total máximo */
+    const numeroMax = document.getElementById('output-pedido-total-max'); /* Obtengo el campo numérico del total máximo */
+    
+    // Si existen los elementos del total mínimo
+    if (campoMin && numeroMin) { /* Si ambos elementos existen */
+        // Cuando muevo el campo mínimo
+        campoMin.addEventListener('input', function() { /* Escucho cuando se mueve el campo mínimo */
+            // Actualizo el número que se muestra con formato español (coma decimal)
+            numeroMin.value = parseFloat(campoMin.value).toFixed(2).replace('.', ','); /* Sincronizo el valor numérico con el campo usando coma */
+
+            // Si el mínimo es mayor que el máximo, corrijo el máximo
+            if (parseFloat(campoMin.value) > parseFloat(campoMax.value)) { /* Si el mínimo supera al máximo */
+                campoMax.value = campoMin.value;  /* Ajusto el campo máximo */
+                numeroMax.value = parseFloat(campoMin.value).toFixed(2).replace('.', ',');  /* Ajusto el valor numérico máximo con coma */
+            }
+        });
+    }
+    
+    // Si existen los elementos del total máximo
+    if (campoMax && numeroMax) { /* Si ambos elementos existen */
+        // Cuando muevo el campo máximo
+        campoMax.addEventListener('input', function() { /* Escucho cuando se mueve el campo máximo */
+            // Actualizo el número que se muestra con formato español (coma decimal)
+            numeroMax.value = parseFloat(campoMax.value).toFixed(2).replace('.', ','); /* Sincronizo el valor numérico con el campo usando coma */
+
+            // Si el máximo es menor que el mínimo, corrijo el mínimo
+            if (parseFloat(campoMax.value) < parseFloat(campoMin.value)) { /* Si el máximo es menor al mínimo */
+                campoMin.value = campoMax.value;  /* Ajusto el campo mínimo */
+                numeroMin.value = parseFloat(campoMax.value).toFixed(2).replace('.', ',');  /* Ajusto el valor numérico mínimo con coma */
             }
         });
     }
@@ -143,6 +197,51 @@ function configurarRangesFechas() {
     ];
 
     paresFechas.forEach(par => { /* Recorro cada par de fechas */
+        const campoDesde = document.getElementById(par.desde); /* Obtengo el campo desde */
+        const campoHasta = document.getElementById(par.hasta); /* Obtengo el campo hasta */
+
+        // Si no existen los campos, saltar este par
+        if (!campoDesde || !campoHasta) { /* Si alguno no existe */
+            return; /* Continúo con el siguiente */
+        }
+
+        // Establecer la fecha máxima permitida (hoy) en ambos campos
+        campoDesde.max = new Date().toLocaleDateString('en-CA'); /* No permito seleccionar fechas futuras en el campo desde */
+        campoHasta.max = new Date().toLocaleDateString('en-CA'); /* No permito seleccionar fechas futuras en el campo hasta */
+
+        // Cuando cambia la fecha desde
+        campoDesde.addEventListener('change', function() { /* Escucho cuando cambia el campo desde */
+            // Si hay fecha desde y fecha hasta
+            if (campoDesde.value && campoHasta.value) { /* Si ambos tienen valor */
+                // Si la fecha desde es posterior a la fecha hasta
+                if (campoDesde.value > campoHasta.value) { /* Si desde es mayor que hasta */
+                    campoHasta.value = campoDesde.value; /* Ajusto el hasta al valor del desde */
+                }
+            }
+        });
+
+        // Cuando cambia la fecha hasta
+        campoHasta.addEventListener('change', function() { /* Escucho cuando cambia el campo hasta */
+            // Si hay fecha desde y fecha hasta
+            if (campoDesde.value && campoHasta.value) { /* Si ambos tienen valor */
+                // Si la fecha hasta es anterior a la fecha desde
+                if (campoHasta.value < campoDesde.value) { /* Si hasta es menor que desde */
+                    campoDesde.value = campoHasta.value; /* Ajusto el desde al valor del hasta */
+                }
+            }
+        });
+    });
+}
+
+// Función que configura el comportamiento de los campos de fecha para pedidos
+function configurarRangesFechasPedidos() {
+    // Pares de campos fecha desde/hasta para pedidos
+    const paresFechasPedidos = [
+        { desde: 'filtro_pedido_creado_desde', hasta: 'filtro_pedido_creado_hasta' },
+        { desde: 'filtro_pedido_actualizado_desde', hasta: 'filtro_pedido_actualizado_hasta' }
+    ];
+
+    paresFechasPedidos.forEach(par => { /* Recorro cada par de fechas */
         const campoDesde = document.getElementById(par.desde); /* Obtengo el campo desde */
         const campoHasta = document.getElementById(par.hasta); /* Obtengo el campo hasta */
 
@@ -244,7 +343,7 @@ function restaurarFiltrosDeSesion() {
         if (precioMin && outputMin) { /* Si ambos elementos existen */
             const valorMin = (filtros.precio_min !== undefined) ? filtros.precio_min : 0; /* Uso el filtro guardado o 0 por defecto */
             precioMin.value = valorMin; /* Establezco el valor del campo */
-            outputMin.value = valorMin; /* Actualizo el número mostrado */
+            outputMin.value = String(valorMin).replace('.', ','); /* Actualizo el número mostrado con coma */
         }
         
         // Precio máximo
@@ -253,7 +352,7 @@ function restaurarFiltrosDeSesion() {
         if (precioMax && outputMax) { /* Si ambos elementos existen */
             const valorMax = (filtros.precio_max !== undefined) ? filtros.precio_max : 100; /* Uso el filtro guardado o 100 por defecto */
             precioMax.value = valorMax; /* Establezco el valor del campo */
-            outputMax.value = valorMax; /* Actualizo el número mostrado */
+            outputMax.value = String(valorMax).replace('.', ','); /* Actualizo el número mostrado con coma */
         }
 
     } else if(modoEdicion === 'usuarios') {
@@ -355,6 +454,93 @@ function restaurarFiltrosDeSesion() {
         if (fechaAccesoHasta) { /* Si el elemento existe */
             fechaAccesoHasta.value = filtrosUsuarios.fecha_acceso_hasta || ''; /* Aplico el filtro o vacío */
         }
+    } else if(modoEdicion === 'pedidos') { /* Si el modo de edición es 'pedidos' */
+        // Obtener los filtros guardados en la variable global (definida en encabezado.php)
+        const filtrosPedidos = window.filtrosPedidos || {}; /* Obtengo los filtros de pedidos de la variable global o un objeto vacío */
+
+        // Tipo de operación
+        const selectTipo = document.getElementById('filtro_pedido_tipo'); /* Obtengo el select de tipo */
+        if (selectTipo) { /* Si el elemento existe */
+            selectTipo.value = filtrosPedidos.tipo || 'null'; /* Aplico el filtro o null */
+        }
+
+        // Estado del pedido
+        const selectEstado = document.getElementById('filtro_pedido_estado'); /* Obtengo el select de estado */
+        if (selectEstado) { /* Si el elemento existe */
+            selectEstado.value = filtrosPedidos.estado || 'null'; /* Aplico el filtro o null */
+        }
+
+        // Estado del detalle
+        const selectEstadoDetalle = document.getElementById('filtro_pedido_estado_detalle'); /* Obtengo el select de estado detalle */
+        if (selectEstadoDetalle) { /* Si el elemento existe */
+            selectEstadoDetalle.value = filtrosPedidos.estado_detalle || 'null'; /* Aplico el filtro o null */
+        }
+
+        // Acrónimo
+        const selectAcronimo = document.getElementById('filtro_pedido_acronimo'); /* Obtengo el select de acrónimo */
+        if (selectAcronimo) { /* Si el elemento existe */
+            selectAcronimo.value = filtrosPedidos.acronimo || 'null'; /* Aplico el filtro o null */
+        }
+
+        // Nombre
+        const selectNombre = document.getElementById('filtro_pedido_nombre'); /* Obtengo el select de nombre */
+        if (selectNombre) { /* Si el elemento existe */
+            selectNombre.value = filtrosPedidos.nombre || 'null'; /* Aplico el filtro o null */
+        }
+
+        // Apellidos
+        const selectApellidos = document.getElementById('filtro_pedido_apellidos'); /* Obtengo el select de apellidos */
+        if (selectApellidos) { /* Si el elemento existe */
+            selectApellidos.value = filtrosPedidos.apellidos || 'null'; /* Aplico el filtro o null */
+        }
+
+        // Método de pago
+        const selectMetodoPago = document.getElementById('filtro_pedido_metodo_pago'); /* Obtengo el select de método de pago */
+        if (selectMetodoPago) { /* Si el elemento existe */
+            selectMetodoPago.value = filtrosPedidos.metodo_pago || 'null'; /* Aplico el filtro o null */
+        }
+
+        // Total mínimo
+        const totalMin = document.getElementById('filtro-pedido-total-min'); /* Obtengo el campo de total mínimo */
+        const outputTotalMin = document.getElementById('output-pedido-total-min'); /* Obtengo el output del total mínimo */
+        if (totalMin && outputTotalMin) { /* Si ambos elementos existen */
+            const valorMin = (filtrosPedidos.total_min !== undefined) ? filtrosPedidos.total_min : window.totalMinHistorial; /* Uso el filtro guardado o el mínimo del historial */
+            totalMin.value = valorMin; /* Establezco el valor del campo */
+            outputTotalMin.value = parseFloat(valorMin).toFixed(2).replace('.', ','); /* Actualizo el número mostrado con coma */
+        }
+
+        // Total máximo
+        const totalMax = document.getElementById('filtro-pedido-total-max'); /* Obtengo el campo de total máximo */
+        const outputTotalMax = document.getElementById('output-pedido-total-max'); /* Obtengo el output del total máximo */
+        if (totalMax && outputTotalMax) { /* Si ambos elementos existen */
+            const valorMax = (filtrosPedidos.total_max !== undefined) ? filtrosPedidos.total_max : window.totalMaxHistorial; /* Uso el filtro guardado o el máximo del historial */
+            totalMax.value = valorMax; /* Establezco el valor del campo */
+            outputTotalMax.value = parseFloat(valorMax).toFixed(2).replace('.', ','); /* Actualizo el número mostrado con coma */
+        }
+
+        // Fecha de creación desde
+        const fechaCreadoDesde = document.getElementById('filtro_pedido_creado_desde'); /* Obtengo el input de fecha creado desde */
+        if (fechaCreadoDesde) { /* Si el elemento existe */
+            fechaCreadoDesde.value = filtrosPedidos.creado_desde || ''; /* Aplico el filtro o vacío */
+        }
+
+        // Fecha de creación hasta
+        const fechaCreadoHasta = document.getElementById('filtro_pedido_creado_hasta'); /* Obtengo el input de fecha creado hasta */
+        if (fechaCreadoHasta) { /* Si el elemento existe */
+            fechaCreadoHasta.value = filtrosPedidos.creado_hasta || ''; /* Aplico el filtro o vacío */
+        }
+
+        // Fecha de actualización desde
+        const fechaActualizadoDesde = document.getElementById('filtro_pedido_actualizado_desde'); /* Obtengo el input de fecha actualizado desde */
+        if (fechaActualizadoDesde) { /* Si el elemento existe */
+            fechaActualizadoDesde.value = filtrosPedidos.actualizado_desde || ''; /* Aplico el filtro o vacío */
+        }
+
+        // Fecha de actualización hasta
+        const fechaActualizadoHasta = document.getElementById('filtro_pedido_actualizado_hasta'); /* Obtengo el input de fecha actualizado hasta */
+        if (fechaActualizadoHasta) { /* Si el elemento existe */
+            fechaActualizadoHasta.value = filtrosPedidos.actualizado_hasta || ''; /* Aplico el filtro o vacío */
+        }
     }
 }
 
@@ -431,7 +617,7 @@ function restablecerFiltros(event) {
         const outputMin = document.getElementById('output-min'); /* Obtengo el output del precio mínimo */
         if (precioMin && outputMin) { /* Si ambos elementos existen */
             precioMin.value = 0; /* Establezco 0 como valor mínimo */
-            outputMin.value = 0; /* Actualizo el número mostrado */
+            outputMin.value = '0'; /* Actualizo el número mostrado */
         }
 
         // Precios - Max
@@ -439,7 +625,7 @@ function restablecerFiltros(event) {
         const outputMax = document.getElementById('output-max'); /* Obtengo el output del precio máximo */
         if (precioMax && outputMax) { /* Si ambos elementos existen */
             precioMax.value = 100; /* Establezco 100 como valor máximo */
-            outputMax.value = 100; /* Actualizo el número mostrado */
+            outputMax.value = '100'; /* Actualizo el número mostrado */
         }
         
     } else if(modoEdicion === 'usuarios') { /* Si el modo de edición es 'usuarios' */
@@ -515,6 +701,90 @@ function restablecerFiltros(event) {
         const fechaAccesoHasta = document.getElementById('filtro_fecha_acceso_hasta'); /* Obtengo el input de fecha de acceso hasta */
         if (fechaAccesoHasta) { /* Si el elemento existe */
             fechaAccesoHasta.value = ''; /* Lo limpio */
+        }
+    } else if(modoEdicion === 'pedidos') { /* Si el modo de edición es 'pedidos' */
+        // Restablecer filtros de pedidos a sus valores por defecto
+        
+        // Tipo
+        const selectTipo = document.getElementById('filtro_pedido_tipo'); /* Obtengo el select de tipo */
+        if (selectTipo) { /* Si el elemento existe */
+            selectTipo.value = 'null'; /* Lo pongo a null */
+        }
+
+        // Estado
+        const selectEstado = document.getElementById('filtro_pedido_estado'); /* Obtengo el select de estado */
+        if (selectEstado) { /* Si el elemento existe */
+            selectEstado.value = 'null'; /* Lo pongo a null */
+        }
+
+        // Estado detalle
+        const selectEstadoDetalle = document.getElementById('filtro_pedido_estado_detalle'); /* Obtengo el select de estado detalle */
+        if (selectEstadoDetalle) { /* Si el elemento existe */
+            selectEstadoDetalle.value = 'null'; /* Lo pongo a null */
+        }
+
+        // Acrónimo
+        const selectAcronimo = document.getElementById('filtro_pedido_acronimo'); /* Obtengo el select de acrónimo */
+        if (selectAcronimo) { /* Si el elemento existe */
+            selectAcronimo.value = 'null'; /* Lo pongo a null */
+        }
+
+        // Nombre
+        const selectNombre = document.getElementById('filtro_pedido_nombre'); /* Obtengo el select de nombre */
+        if (selectNombre) { /* Si el elemento existe */
+            selectNombre.value = 'null'; /* Lo pongo a null */
+        }
+
+        // Apellidos
+        const selectApellidos = document.getElementById('filtro_pedido_apellidos'); /* Obtengo el select de apellidos */
+        if (selectApellidos) { /* Si el elemento existe */
+            selectApellidos.value = 'null'; /* Lo pongo a null */
+        }
+
+        // Método de pago
+        const selectMetodoPago = document.getElementById('filtro_pedido_metodo_pago'); /* Obtengo el select de método de pago */
+        if (selectMetodoPago) { /* Si el elemento existe */
+            selectMetodoPago.value = 'null'; /* Lo pongo a null */
+        }
+
+        // Totales - Min
+        const totalMin = document.getElementById('filtro-pedido-total-min'); /* Obtengo el campo de total mínimo */
+        const outputTotalMin = document.getElementById('output-pedido-total-min'); /* Obtengo el output del total mínimo */
+        if (totalMin && outputTotalMin) { /* Si ambos elementos existen */
+            totalMin.value = window.totalMinHistorial; /* Establezco el mínimo del historial */
+            outputTotalMin.value = parseFloat(window.totalMinHistorial).toFixed(2).replace('.', ','); /* Actualizo el número mostrado con coma */
+        }
+
+        // Totales - Max
+        const totalMax = document.getElementById('filtro-pedido-total-max'); /* Obtengo el campo de total máximo */
+        const outputTotalMax = document.getElementById('output-pedido-total-max'); /* Obtengo el output del total máximo */
+        if (totalMax && outputTotalMax) { /* Si ambos elementos existen */
+            totalMax.value = window.totalMaxHistorial; /* Establezco el máximo del historial */
+            outputTotalMax.value = parseFloat(window.totalMaxHistorial).toFixed(2).replace('.', ','); /* Actualizo el número mostrado con coma */
+        }
+
+        // Fecha creado desde
+        const fechaCreadoDesde = document.getElementById('filtro_pedido_creado_desde'); /* Obtengo el input de fecha creado desde */
+        if (fechaCreadoDesde) { /* Si el elemento existe */
+            fechaCreadoDesde.value = ''; /* Lo limpio */
+        }
+
+        // Fecha creado hasta
+        const fechaCreadoHasta = document.getElementById('filtro_pedido_creado_hasta'); /* Obtengo el input de fecha creado hasta */
+        if (fechaCreadoHasta) { /* Si el elemento existe */
+            fechaCreadoHasta.value = ''; /* Lo limpio */
+        }
+
+        // Fecha actualizado desde
+        const fechaActualizadoDesde = document.getElementById('filtro_pedido_actualizado_desde'); /* Obtengo el input de fecha actualizado desde */
+        if (fechaActualizadoDesde) { /* Si el elemento existe */
+            fechaActualizadoDesde.value = ''; /* Lo limpio */
+        }
+
+        // Fecha actualizado hasta
+        const fechaActualizadoHasta = document.getElementById('filtro_pedido_actualizado_hasta'); /* Obtengo el input de fecha actualizado hasta */
+        if (fechaActualizadoHasta) { /* Si el elemento existe */
+            fechaActualizadoHasta.value = ''; /* Lo limpio */
         }
     }
 

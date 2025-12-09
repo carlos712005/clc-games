@@ -1,0 +1,507 @@
+/* Estilos para la página de notificaciones */
+
+/* Cuerpo principal de la página con espaciado */
+main {
+    margin-top: 30px; /* Espacio arriba para que no quede pegado al encabezado */
+    padding-top: 80px; /* Espacio para el encabezado fijo que no tape nada */
+    min-height: 100vh; /* Altura mínima de toda la ventana para ocupar toda la pantalla */
+}
+
+/* Título principal centrado con efecto turquesa */
+h1 {
+    text-align: center; /* Centrado porque se ve más profesional */
+    margin-top: 20px; /* Espacio arriba para que respire */
+    margin-bottom: 20px; /* Espacio abajo también para separar */
+    color: #21b7c2; /* Color turquesa consistente del sitio */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra sutil para que destaque */
+    font-weight: 600; /* Un poco más gruesa que la normal */
+}
+
+/* Línea horizontal decorativa con gradiente */
+main hr {
+    width: 80%; /* No muy ancha para que se vea elegante */
+    height: 2px; /* Finita pero visible */
+    border: none; /* Quito el borde feo por defecto */
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(33, 183, 194, 0.3) 20%, 
+        rgba(33, 183, 194, 0.6) 50%, 
+        rgba(33, 183, 194, 0.3) 80%, 
+        transparent 100%); /* Gradiente turquesa que se desvanece en los bordes */
+    margin: 20px auto 20px auto; /* Centrada y con espacios cómodos */
+    border-radius: 2px; /* Bordes ligeramente suaves */
+    opacity: 0.8; /* Un poquito transparente para no destacar demasiado */
+}
+
+/* Controles globales para acciones sobre todas las notificaciones */
+.controles-globales {
+    display: flex; /* Flexbox para alinear los botones */
+    justify-content: center; /* Centrar horizontalmente */
+    gap: 15px; /* Espacio entre botones */
+    margin-bottom: 30px; /* Espacio inferior */
+    flex-wrap: wrap; /* Permitir que se envuelvan en pantallas pequeñas */
+}
+
+/* Botones de acción global */
+.boton-accion-global {
+    background: linear-gradient(90deg, #21b7c2 0%, #26d1de 100%); /* Gradiente turquesa */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin borde por defecto */
+    border-radius: 7px; /* Esquinas redondeadas */
+    padding: 10px 20px; /* Espaciado interno */
+    cursor: pointer; /* Cursor de manita para indicar que es clickeable */
+    font-size: 1em; /* Tamaño normal */
+    font-weight: 600; /* Semi-negrita */
+    box-shadow: 0 2px 8px rgba(33,183,194,0.15); /* Sombra sutil */
+    display: flex; /* Estructura flexible */
+    align-items: center; /* Centrado vertical */
+    gap: 8px; /* Espacio entre icono y texto */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Icono dentro de los botones globales */
+.boton-accion-global img {
+    width: 18px; /* Ancho del icono */
+    height: 18px; /* Alto del icono */
+}
+
+/* Efecto hover de botones globales */
+.boton-accion-global:hover {
+    background: linear-gradient(90deg, #26d1de 0%, #21b7c2 100%); /* Gradiente invertido */
+    box-shadow: 0 4px 16px rgba(33,183,194,0.25); /* Sombra más intensa */
+    transform: translateY(-2px); /* Se eleva ligeramente */
+}
+
+/* Botón de eliminar todas con color rojo */
+.boton-eliminar-todas {
+    background: linear-gradient(135deg, #dc3545, #e4606d); /* Gradiente rojo */
+}
+
+/* Efecto hover del botón de eliminar todas */
+.boton-eliminar-todas:hover {
+    background: linear-gradient(135deg, #e4606d, #dc3545); /* Gradiente invertido */
+    box-shadow: 0 4px 16px rgba(220,53,69,0.25); /* Sombra más intensa */
+}
+
+/* Contenedor principal que envuelve todas las tarjetas de notificaciones */
+.contenedor-notificaciones {
+    max-width: 900px; /* Ancho máximo para no verse muy ancho en pantallas grandes */
+    margin: 40px auto; /* Centrado con margen generoso arriba y abajo */
+    padding: 0 20px; /* Espaciado lateral para que no toque los bordes */
+    display: flex; /* Estructura flexible para organizar las tarjetas */
+    flex-direction: column; /* Tarjetas apiladas verticalmente */
+    gap: 28px; /* Espacio generoso entre tarjetas */
+}
+
+/* Mensaje cuando no hay notificaciones */
+.sin-notificaciones {
+    display: flex; /* Estructura flexible */
+    flex-direction: column; /* Elementos apilados */
+    align-items: center; /* Centrado horizontal */
+    justify-content: center; /* Centrado vertical */
+    padding: 60px 20px; /* Espaciado interno generoso */
+    text-align: center; /* Texto centrado */
+    background: linear-gradient(135deg, rgba(33, 183, 194, 0.1), rgba(33, 183, 194, 0.05)); /* Fondo turquesa muy sutil */
+    border: 2px dashed #21b7c2; /* Borde punteado turquesa */
+    border-radius: 20px; /* Esquinas muy redondeadas */
+    margin: 40px auto; /* Centrado con margen */
+    max-width: 600px; /* Ancho máximo */
+    min-height: 200px; /* Altura mínima */
+}
+
+/* Título del mensaje de no notificaciones */
+.sin-notificaciones h2 {
+    color: #21b7c2; /* Color turquesa */
+    font-size: 1.5em; /* Tamaño destacado */
+    font-weight: 600; /* Semi-negrita */
+    margin: 0; /* Sin márgenes */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra en el texto */
+}
+
+/* Tarjeta individual de cada notificación */
+.notificacion {
+    background: linear-gradient(135deg, #222 0%, #1a1a1a 100%); /* Gradiente oscuro para darle profundidad */
+    border: 3px double #21b7c2; /* Borde doble turquesa como las tarjetas de juegos */
+    border-radius: 16px; /* Esquinas bien redondeadas para verse moderno */
+    transition: all 0.4s ease; /* Transición suave para efectos hover */
+    box-shadow: 0 8px 25px rgba(33, 183, 194, 0.18); /* Sombra turquesa sutil */
+    overflow: hidden; /* Evita desbordamientos de contenido */
+    padding: 22px 18px 16px 18px; /* Espaciado interno generoso */
+    color: #fff; /* Texto blanco */
+    position: relative; /* Para efectos con pseudo-elementos */
+}
+
+/* Efecto hover cuando paso el ratón por encima de la tarjeta */
+.notificacion:hover {
+    transform: translateY(-8px) scale(1.02); /* Se eleva y agranda ligeramente */
+    border-color: #26d1de; /* Color más claro y brillante al hacer hover */
+    box-shadow: 0 15px 40px rgba(33, 183, 194, 0.4),
+                0 0 30px rgba(38, 209, 222, 0.3); /* Sombra más intensa y resplandor */
+    background: linear-gradient(145deg, #2a2a2a, #222); /* Gradiente más marcado */
+}
+
+/* Notificación no leída - más destacada */
+.notificacion.no-leida {
+    border-color: #26d1de; /* Borde más brillante */
+    box-shadow: 0 8px 25px rgba(38, 209, 222, 0.3); /* Sombra más intensa */
+}
+
+/* Notificación leída - más tenue */
+.notificacion.leida {
+    opacity: 0.7; /* Más transparente */
+}
+
+/* Estilos por tipo de notificación */
+/* INFO: azul */
+.notificacion.tipo-INFO {
+    border-color: #21b7c2; /* Turquesa */
+    background: linear-gradient(135deg, rgba(33,183,194,0.08), #1a1a1a); /* Fondo sutil */
+}
+
+/* SISTEMA: azul */
+.notificacion.tipo-SISTEMA {
+    border-color: #3498db; /* Azul */
+    background: linear-gradient(135deg, rgba(52,152,219,0.08), #1a1a1a); /* Fondo sutil */
+}
+
+/* ALERTA: rojo */
+.notificacion.tipo-ALERTA {
+    border-color: #e74c3c; /* Rojo */
+    background: linear-gradient(135deg, rgba(231,76,60,0.08), #1a1a1a); /* Fondo sutil */
+}
+
+/* Etiqueta de tipo por color */
+/* Etiqueta de tipo INFO */
+.notificacion.tipo-INFO .tipo-etiqueta {
+    background: rgba(33,183,194,0.2); /* Fondo sutil */
+    color: #21b7c2; /* Color turquesa */
+    border-color: #21b7c2; /* Borde turquesa */
+}
+
+/* Etiqueta de tipo SISTEMA */
+.notificacion.tipo-SISTEMA .tipo-etiqueta {
+    background: rgba(52,152,219,0.2); /* Fondo sutil */
+    color: #3498db; /* Color azul */
+    border-color: #3498db; /* Borde azul */
+}
+
+/* Etiqueta de tipo ALERTA */
+.notificacion.tipo-ALERTA .tipo-etiqueta {
+    background: rgba(231,76,60,0.2); /* Fondo sutil */
+    color: #e74c3c; /* Color rojo */
+    border-color: #e74c3c; /* Borde rojo */
+}
+
+/* Borde izquierdo del mensaje por tipo */
+/* Mensaje de tipo INFO */
+.notificacion.tipo-INFO .mensaje-notificacion {
+    border-left-color: #21b7c2; /* Turquesa */
+    background: rgba(33,183,194,0.10); /* Fondo sutil turquesa */
+    color: #d6fbff; /* Texto turquesa claro */
+}
+
+/* Mensaje de tipo SISTEMA */
+.notificacion.tipo-SISTEMA .mensaje-notificacion {
+    border-left-color: #3498db; /* Azul */
+    background: rgba(52,152,219,0.10); /* Fondo sutil azul */
+    color: #d6eaff; /* Texto azulado claro */
+}
+
+/* Mensaje de tipo ALERTA */
+.notificacion.tipo-ALERTA .mensaje-notificacion {
+    border-left-color: #e74c3c; /* Rojo */
+    background: rgba(231,76,60,0.10); /* Fondo sutil rojo */
+    color: #ffd9d6; /* Texto rojizo claro */
+}
+
+/* Contenido de la notificación */
+.contenido-notificacion {
+    display: flex; /* Flexbox para alinear elementos */
+    flex-direction: column; /* Todo apilado verticalmente */
+    gap: 8px; /* Espacio entre elementos */
+}
+
+/* Información de la notificación */
+.info-notificacion {
+    flex: 1; /* Ocupar el espacio disponible */
+}
+
+/* Encabezado de la notificación */
+.encabezado-notificacion {
+    display: flex; /* Flexbox para alinear elementos */
+    align-items: center; /* Centrar verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-bottom: 10px; /* Espacio inferior */
+    flex-wrap: wrap; /* Permitir envolver en pantallas pequeñas */
+}
+
+/* Etiqueta del tipo de notificación */
+.tipo-etiqueta {
+    background: rgba(33, 183, 194, 0.2); /* Fondo turquesa sutil */
+    color: #21b7c2; /* Texto turquesa */
+    border: 1px solid #21b7c2; /* Borde turquesa */
+    padding: 4px 12px; /* Padding */
+    border-radius: 12px; /* Bordes muy redondeados */
+    font-size: 0.75em; /* Tamaño pequeño */
+    font-weight: 600; /* Negrita */
+    text-transform: uppercase; /* Mayúsculas */
+}
+
+/* Fecha de la notificación */
+.fecha-notificacion {
+    color: #999; /* Color gris */
+    font-size: 0.85em; /* Tamaño pequeño */
+    margin-left: auto; /* Empujar a la derecha */
+}
+
+/* Mensaje de la notificación */
+.mensaje-notificacion {
+    color: #ccc; /* Color gris claro para el texto */
+    line-height: 1.6; /* Interlineado cómodo */
+    background: rgba(33,183,194,0.08); /* Fondo turquesa muy sutil */
+    border-left: 3px solid #21b7c2; /* Línea izquierda turquesa */
+    border-radius: 0 8px 8px 0; /* Redondeado solo en la derecha */
+    padding: 8px 12px; /* Espaciado interno */
+}
+
+/* Párrafo dentro del mensaje */
+.mensaje-notificacion p {
+    margin: 0; /* Sin márgenes */
+}
+
+/* Acciones de la notificación */
+.acciones-notificacion {
+    display: flex; /* Flexbox para alinear botones */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 12px; /* Espacio arriba */
+    justify-content: flex-end; /* Alineado a la derecha */
+    flex-wrap: wrap; /* Permitir envolver en pantallas pequeñas */
+}
+
+/* Botones de acción en la notificación */
+.acciones-notificacion button {
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin borde por defecto */
+    border-radius: 7px; /* Esquinas redondeadas */
+    padding: 7px 18px; /* Espaciado interno */
+    cursor: pointer; /* Cursor de manita para indicar que es clickeable */
+    font-size: 1em; /* Tamaño normal */
+    font-weight: 600; /* Semi-negrita */
+    box-shadow: 0 2px 8px rgba(33,183,194,0.15); /* Sombra sutil */
+    display: flex; /* Estructura flexible */
+    align-items: center; /* Centrado vertical */
+    gap: 8px; /* Espacio entre icono y texto */
+}
+
+/* Botón de marcar como leída */
+.boton-marcar-leida {
+    background: linear-gradient(90deg, #21b7c2 0%, #26d1de 100%); /* Gradiente turquesa */
+}
+
+.boton-marcar-leida:hover {
+    background: linear-gradient(90deg, #26d1de 0%, #21b7c2 100%); /* Gradiente invertido */
+    transform: translateY(-1px); /* Elevación sutil */
+    box-shadow: 0 4px 12px rgba(33,183,194,0.3); /* Sombra turquesa */
+}
+
+/* Botón de eliminar */
+.boton-eliminar {
+    background: linear-gradient(135deg, #dc3545, #e4606d); /* Gradiente rojo */
+}
+
+.boton-eliminar:hover {
+    background: linear-gradient(135deg, #e4606d, #dc3545); /* Gradiente invertido */
+    transform: translateY(-1px); /* Elevación sutil */
+    box-shadow: 0 4px 16px rgba(220,53,69,0.25); /* Sombra roja */
+}
+
+/* RESPONSIVIDAD - Adaptación a diferentes tamaños de pantalla */
+
+/* Tablets grandes (1024px) */
+@media (max-width: 1024px) {
+    .contenedor-notificaciones {
+        max-width: 850px; /* Ancho ligeramente reducido */
+        padding: 0 15px; /* Padding intermedio */
+        gap: 25px; /* Espacio intermedio entre tarjetas */
+    }
+    
+    .notificacion {
+        padding: 20px 15px 14px 15px; /* Espaciado intermedio */
+        border-radius: 14px; /* Bordes ligeramente menos redondeados */
+    }
+}
+
+/* Tablets (768px o menos) */
+@media (max-width: 768px) {
+    main {
+        padding-top: 70px; /* Menos padding superior */
+    }
+
+    h1 {
+        font-size: 1.6em; /* Tamaño reducido */
+        margin: 15px 0; /* Márgenes compactos */
+    }
+
+    main hr {
+        width: 90%; /* Más ancha en pantallas pequeñas */
+        margin: 8px auto 20px auto; /* Espacios ajustados */
+    }
+
+    .controles-globales {
+        gap: 10px; /* Menos espacio entre botones */
+        margin-bottom: 25px; /* Menos espacio inferior */
+    }
+
+    .boton-accion-global {
+        padding: 8px 16px; /* Padding reducido */
+        font-size: 0.95em; /* Tamaño de fuente ligeramente menor */
+    }
+
+    .contenedor-notificaciones {
+        max-width: 98vw; /* Casi todo el ancho */
+        padding: 0 8px; /* Padding más pequeño */
+        gap: 18px; /* Espacio reducido */
+    }
+
+    .notificacion {
+        padding: 15px 8px 12px 8px; /* Espaciado más compacto */
+        border-radius: 12px; /* Bordes menos redondeados */
+    }
+
+    .mensaje-notificacion {
+        font-size: 0.95em; /* Texto más pequeño */
+    }
+
+    .acciones-notificacion {
+        justify-content: center; /* Centrar botones */
+    }
+}
+
+/* Móviles (480px o menos) */
+@media (max-width: 480px) {
+    main {
+        margin-top: 15px; /* Margen mínimo */
+        padding-top: 60px; /* Padding mínimo */
+    }
+
+    h1 {
+        font-size: 1.4em; /* Tamaño móvil */
+        margin: 12px 0; /* Márgenes mínimos */
+    }
+
+    main hr {
+        width: 95%; /* Casi todo el ancho */
+        margin: 6px auto 15px auto; /* Espacios compactos */
+    }
+
+    .controles-globales {
+        flex-direction: column; /* Apilar verticalmente */
+        gap: 10px; /* Espacio entre botones */
+        margin-bottom: 20px; /* Menos espacio inferior */
+    }
+
+    .boton-accion-global {
+        width: 100%; /* Ancho completo */
+        justify-content: center; /* Centrar contenido */
+        padding: 10px 15px; /* Padding ajustado */
+        font-size: 0.9em; /* Fuente más pequeña */
+    }
+
+    .contenedor-notificaciones {
+        gap: 12px; /* Espacio muy reducido */
+    }
+
+    .notificacion {
+        padding: 10px 4px 8px 4px; /* Espaciado muy compacto */
+        border-radius: 8px; /* Bordes poco redondeados */
+    }
+
+    .encabezado-notificacion {
+        flex-direction: column; /* Apilar verticalmente */
+        align-items: flex-start; /* Alinear a la izquierda */
+        gap: 8px; /* Espacio entre elementos */
+    }
+
+    .fecha-notificacion {
+        margin-left: 0; /* Sin margen izquierdo */
+    }
+
+    .mensaje-notificacion {
+        font-size: 0.9em; /* Texto más pequeño */
+        padding: 6px 10px; /* Padding reducido */
+    }
+
+    .acciones-notificacion {
+        gap: 8px; /* Espacio reducido */
+    }
+
+    .acciones-notificacion button {
+        padding: 8px; /* Padding uniforme para mejor toque */
+    }
+
+    .sin-notificaciones {
+        padding: 40px 15px; /* Padding reducido */
+        margin: 25px auto; /* Margen reducido */
+        max-width: 400px; /* Ancho reducido */
+        min-height: 160px; /* Altura reducida */
+        border-radius: 15px; /* Bordes menos redondeados */
+    }
+
+    .sin-notificaciones h2 {
+        font-size: 1.3em; /* Título más pequeño */
+    }
+}
+
+/* Móviles muy pequeños (360px o menos) */
+@media (max-width: 360px) {
+    h1 {
+        font-size: 1.2em; /* Muy pequeño */
+        margin: 10px 0; /* Márgenes extremadamente reducidos */
+    }
+
+    .boton-accion-global {
+        padding: 8px 12px; /* Padding muy reducido */
+        font-size: 0.85em; /* Fuente muy pequeña */
+    }
+
+    .boton-accion-global img {
+        width: 16px; /* Icono más pequeño */
+        height: 16px; /* Icono más pequeño */
+    }
+
+    .contenedor-notificaciones {
+        gap: 10px; /* Espacio extremadamente reducido */
+        padding: 0 3px; /* Padding extremadamente reducido */
+    }
+
+    .notificacion {
+        padding: 8px 3px 6px 3px; /* Espaciado extremadamente compacto */
+        border-radius: 6px; /* Bordes muy poco redondeados */
+    }
+
+    .tipo-etiqueta {
+        font-size: 0.7em; /* Fuente muy pequeña */
+        padding: 3px 8px; /* Padding reducido */
+    }
+
+    .mensaje-notificacion {
+        font-size: 0.85em; /* Texto muy pequeño */
+        padding: 5px 8px; /* Padding muy reducido */
+    }
+
+    .acciones-notificacion button img {
+        width: 18px; /* Icono más pequeño */
+        height: 18px; /* Icono más pequeño */
+    }
+
+    .sin-notificaciones {
+        padding: 25px 8px; /* Padding extremadamente reducido */
+        margin: 15px 5px; /* Margen extremadamente reducido */
+        min-height: 120px; /* Altura extremadamente reducida */
+        border-radius: 10px; /* Bordes muy poco redondeados */
+    }
+
+    .sin-notificaciones h2 {
+        font-size: 1.1em; /* Título extremadamente compacto */
+    }
+}

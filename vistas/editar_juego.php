@@ -91,7 +91,7 @@
                     <p class="informacion-adicional"> <!-- Información adicional -->
                         <strong>Slug (URL Amigable):</strong> <?php echo htmlspecialchars($juego['slug']); ?><br> <!-- Slug del juego -->
                         <strong>Precio:</strong> <?php if($juego['precio'] !== '0.00') echo str_replace('.', ',', htmlspecialchars($juego['precio'])) . " €"; else echo "Gratis"; ?><br> <!-- Precio del juego -->
-                        <strong>Tipo:</strong> <?php echo htmlspecialchars($juego['tipo'] === 'interno' ? 'Interno (jugable aquí)' : 'Externo (no jugable aquí)'); ?> <!-- Tipo del juego -->
+                        <strong>Tipo:</strong> <?php echo htmlspecialchars($juego['tipo'] === 'interno' ? 'Juego de la casa' : 'Juego de terceros'); ?> <!-- Tipo del juego -->
                     </p>
                 </div>
                 <button class="boton-tarjeta" onclick="abrirModalInfoBasica()">Editar</button> <!-- Botón para abrir el modal de edición -->

@@ -5,6 +5,12 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') { /* Verifico que la petición sea POST */
 
+        // Limpiar búsqueda si existen los datos
+        if(isset($_SESSION['texto_busqueda']) && isset($_SESSION['datos_busqueda'])) {
+            unset($_SESSION['texto_busqueda']); /* Elimino el texto de búsqueda */
+            unset($_SESSION['datos_busqueda']); /* Limpio datos de búsqueda previos si existen */
+        }
+
         if (isset($_SESSION['modo_edicion']) && $_SESSION['modo_edicion'] === 'usuarios') { /* Si son filtros de usuarios */
             // Procesar filtros de usuarios
             $filtro_rol = isset($_POST['filtro_rol']) ? $_POST['filtro_rol'] : 'null'; /* Recojo el rol */
@@ -35,6 +41,39 @@
                 'fecha_acceso_desde' => $filtro_fecha_acceso_desde, /* Guardo fecha de último acceso desde */
                 'fecha_acceso_hasta' => $filtro_fecha_acceso_hasta /* Guardo fecha de último acceso hasta */
             ]; /* Creo un array con todos los filtros de usuarios elegidos */
+
+        } elseif (isset($_SESSION['modo_edicion']) && $_SESSION['modo_edicion'] === 'pedidos') { /* Si son filtros de pedidos */
+            // Procesar filtros de pedidos
+            $filtro_tipo = isset($_POST['filtro_pedido_tipo']) ? $_POST['filtro_pedido_tipo'] : 'null'; /* Recojo el tipo elegido */
+            $filtro_estado = isset($_POST['filtro_pedido_estado']) ? $_POST['filtro_pedido_estado'] : 'null'; /* Recojo el estado del pedido */
+            $filtro_estado_detalle = isset($_POST['filtro_pedido_estado_detalle']) ? $_POST['filtro_pedido_estado_detalle'] : 'null'; /* Recojo el estado del detalle */
+            $filtro_acronimo = isset($_POST['filtro_pedido_acronimo']) ? $_POST['filtro_pedido_acronimo'] : 'null'; /* Recojo el acrónimo */
+            $filtro_nombre = isset($_POST['filtro_pedido_nombre']) ? $_POST['filtro_pedido_nombre'] : 'null'; /* Recojo el nombre */
+            $filtro_apellidos = isset($_POST['filtro_pedido_apellidos']) ? $_POST['filtro_pedido_apellidos'] : 'null'; /* Recojo los apellidos */
+            $filtro_metodo_pago = isset($_POST['filtro_pedido_metodo_pago']) ? $_POST['filtro_pedido_metodo_pago'] : 'null'; /* Recojo el método de pago */
+            $filtro_total_min = isset($_POST['filtro_pedido_total_min']) ? (float)$_POST['filtro_pedido_total_min'] : 0; /* Recojo total mínimo o pongo 0 por defecto */
+            $filtro_total_max = isset($_POST['filtro_pedido_total_max']) ? (float)$_POST['filtro_pedido_total_max'] : 100; /* Recojo total máximo o pongo 100 por defecto */
+            $filtro_creado_desde = isset($_POST['filtro_pedido_creado_desde']) && $_POST['filtro_pedido_creado_desde'] !== '' ? $_POST['filtro_pedido_creado_desde'] : null; /* Recojo fecha de creación desde */
+            $filtro_creado_hasta = isset($_POST['filtro_pedido_creado_hasta']) && $_POST['filtro_pedido_creado_hasta'] !== '' ? $_POST['filtro_pedido_creado_hasta'] : null; /* Recojo fecha de creación hasta */
+            $filtro_actualizado_desde = isset($_POST['filtro_pedido_actualizado_desde']) && $_POST['filtro_pedido_actualizado_desde'] !== '' ? $_POST['filtro_pedido_actualizado_desde'] : null; /* Recojo fecha de actualización desde */
+            $filtro_actualizado_hasta = isset($_POST['filtro_pedido_actualizado_hasta']) && $_POST['filtro_pedido_actualizado_hasta'] !== '' ? $_POST['filtro_pedido_actualizado_hasta'] : null; /* Recojo fecha de actualización hasta */
+
+            // Guardar los filtros de pedidos en la sesión
+            $_SESSION['filtros_pedidos'] = [
+                'tipo' => $filtro_tipo, /* Guardo el tipo elegido */
+                'estado' => $filtro_estado, /* Guardo el estado elegido */
+                'estado_detalle' => $filtro_estado_detalle, /* Guardo el estado del detalle elegido */
+                'acronimo' => $filtro_acronimo, /* Guardo el acrónimo elegido */
+                'nombre' => $filtro_nombre, /* Guardo el nombre elegido */
+                'apellidos' => $filtro_apellidos, /* Guardo los apellidos elegidos */
+                'metodo_pago' => $filtro_metodo_pago, /* Guardo el método de pago elegido */
+                'total_min' => $filtro_total_min, /* Guardo el total mínimo */
+                'total_max' => $filtro_total_max, /* Guardo el total máximo */
+                'creado_desde' => $filtro_creado_desde, /* Guardo fecha de creación desde */
+                'creado_hasta' => $filtro_creado_hasta, /* Guardo fecha de creación hasta */
+                'actualizado_desde' => $filtro_actualizado_desde, /* Guardo fecha de actualización desde */
+                'actualizado_hasta' => $filtro_actualizado_hasta /* Guardo fecha de actualización hasta */
+            ]; /* Creo un array con todos los filtros de pedidos elegidos */
 
         } else { /* Si son filtros de juegos */
             // Procesar filtros de juegos
@@ -74,7 +113,7 @@
             } elseif ($origen === 'panel_administrador') { /* Si venía del panel de administrador */
                 $pagina_destino = '../vistas/panel_administrador.php'; /* Redirijo al panel de administrador */
             }
-            // Si no coincide con ninguna página conocida, mantiene el index por defecto
+            // Si no coincide con ninguna página conocida, mantengo el index por defecto
         }
         
         header('Location: ' . $pagina_destino); /* Redirijo a la página apropiada con los filtros aplicados */
