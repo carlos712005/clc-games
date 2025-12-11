@@ -48,7 +48,7 @@
                     <img src="../recursos/imagenes/boton_whatsapp.png" alt="Botón de Whatsapp" title="Contactar a través de Whatsapp"> <!-- Imagen del botón de WhatsApp con alt y título -->
                 </a>
             </p> <!-- Fin del párrafo de WhatsApp -->
-            <p><strong>Email:</strong> <span data-translate="email">carlosenerols75@gmail.com</span></p> <!-- Párrafo con el email de contacto en negrita -->
+            <p><strong>Email:</strong> <span data-translate="email">clcgamesoficial@gmail.com</span></p> <!-- Párrafo con el email de contacto en negrita -->
         </div> <!-- Fin del contenedor de contacto -->
         
         <!-- Separador horizontal -->

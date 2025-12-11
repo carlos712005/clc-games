@@ -1,0 +1,516 @@
+/* Estilos para la página de restablecimiento de contraseña */
+
+* {
+    margin: 0; /* Elimino márgenes por defecto del navegador */
+    padding: 0; /* Elimino padding por defecto del navegador */
+    box-sizing: border-box; /* Incluyo padding y border en el tamaño total */
+}
+
+/* Contenedor principal */
+body.pagina-restablecer {
+    background: #111; /* Fondo muy oscuro que combina con todo el sitio */
+    color: #fff; /* Texto blanco por defecto */
+    font-family: Arial, sans-serif; /* Fuente consistente con todo el sitio */
+    min-height: 100vh; /* Altura mínima completa de la ventana */
+    display: flex; /* Estructura flexible para centrar todo */
+    flex-direction: column; /* Organización vertical de elementos */
+    align-items: center; /* Centrado horizontal perfecto */
+    justify-content: center; /* Centrado vertical */
+    padding: 20px; /* Espaciado interno para que no toque los bordes */
+    line-height: 1.6; /* Espaciado entre líneas cómodo para leer */
+}
+
+/* Título principal de la página */
+body.pagina-restablecer h1 {
+    font-size: 2.5em; /* Tamaño grande y llamativo */
+    font-weight: bold; /* Texto en negrita para que destaque */
+    color: #21b7c2; /* Color turquesa que uso en todo el sitio */
+    margin: 20px 0 30px 0; /* Espaciado superior e inferior generoso */
+    text-align: center; /* Centrado del texto */
+    text-shadow: 0 2px 4px rgba(33, 183, 194, 0.3); /* Sombra turquesa sutil */
+}
+
+/* Tarjeta de restablecimiento */
+.tarjeta-restablecer {
+    background: #222; /* Fondo gris oscuro que combina con el encabezado */
+    padding: 40px; /* Espaciado interno generoso para comodidad */
+    border-radius: 12px; /* Esquinas redondeadas suaves */
+    box-shadow: 0 8px 24px rgba(33, 183, 194, 0.2); /* Sombra turquesa sutil */
+    width: 100%; /* Ancho completo disponible */
+    max-width: 500px; /* Ancho máximo mayor que el login */
+    border: 2px solid #333; /* Borde gris oscuro */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Efecto hover en la tarjeta - sombra más intensa */
+.tarjeta-restablecer:hover {
+    box-shadow: 0 12px 32px rgba(33, 183, 194, 0.3); /* Sombra más intensa al hover */
+    border-color: #21b7c2; /* Borde turquesa al hacer hover */
+}
+
+/* Título de la tarjeta */
+.tarjeta-restablecer h1 {
+    margin: 0 0 25px 0; /* Margen inferior generoso */
+    color: #21b7c2; /* Color turquesa del tema */
+    font-size: 1.8em; /* Tamaño de fuente más destacado */
+    text-align: center; /* Centrado del título */
+    font-weight: bold; /* Texto en negrita */
+}
+
+/* Párrafos dentro de la tarjeta */
+.tarjeta-restablecer p {
+    color: #ccc; /* Texto gris claro */
+    line-height: 1.6; /* Espaciado entre líneas cómodo */
+    font-size: 1em; /* Tamaño de fuente estándar */
+    margin-bottom: 15px; /* Espacio inferior entre párrafos */
+}
+
+/* Mensaje de error */
+.mensaje-error {
+    background: rgba(184, 24, 0, 0.1); /* Fondo rojo semitransparente */
+    color: #ff6b6b; /* Texto rojo claro */
+    padding: 15px 20px; /* Espaciado interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    border-left: 4px solid #b81800; /* Borde izquierdo rojo */
+    margin-bottom: 25px; /* Espacio inferior */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrado del texto */
+    max-width: 100%; /* Ancho completo disponible */
+    width: 100%; /* Ancho completo disponible */
+    box-sizing: border-box; /* Incluir padding en el ancho */
+    animation: slideDown 0.3s ease-out; /* Animación suave de entrada */
+}
+
+/* Mensaje de éxito */
+.mensaje-exito {
+    background: rgba(40, 167, 69, 0.1); /* Fondo verde semitransparente */
+    color: #28a745; /* Texto verde */
+    padding: 15px 20px; /* Espaciado interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    border-left: 4px solid #28a745; /* Borde izquierdo verde */
+    margin-bottom: 25px; /* Espacio inferior */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrado del texto */
+    max-width: 100%; /* Ancho completo disponible */
+    width: 100%; /* Ancho completo disponible */
+    box-sizing: border-box; /* Incluir padding en el ancho */
+    animation: slideDown 0.3s ease-out; /* Animación suave de entrada */
+}
+
+/* Formulario de restablecimiento */
+.formulario-restablecer {
+    display: flex; /* Flexbox para layout */
+    flex-direction: column; /* Dirección vertical */
+    gap: 0; /* Sin separación predeterminada, manejada por labels */
+    margin-top: 0; /* Sin margen superior adicional */
+}
+
+/* Etiquetas del formulario */
+.formulario-restablecer label {
+    display: block; /* Cada etiqueta ocupa toda la línea */
+    margin-bottom: 8px; /* Espacio inferior para separar del campo */
+    margin-top: 15px; /* Espacio superior para separar campos */
+    font-weight: bold; /* Texto en negrita para que destaque */
+    color: #fff; /* Texto blanco estándar */
+    font-size: 1em; /* Tamaño de fuente estándar */
+}
+
+/* Primera etiqueta sin margen superior */
+.formulario-restablecer label:first-of-type {
+    margin-top: 0; /* Sin margen superior para la primera etiqueta */
+}
+
+/* Campos de entrada de contraseña */
+.formulario-restablecer input[type="password"],
+.formulario-restablecer input[type="text"] {
+    width: 100%; /* Ancho completo del contenedor */
+    padding: 12px 16px; /* Espaciado interno generoso para comodidad */
+    margin-bottom: 15px; /* Espacio inferior entre campos */
+    border: 2px solid transparent; /* Borde transparente inicial */
+    border-radius: 25px; /* Bordes muy redondeados */
+    background: #333; /* Fondo gris que uso en el buscador */
+    color: #fff; /* Texto blanco */
+    font-size: 1em; /* Tamaño de fuente normal */
+    transition: all 0.3s ease; /* Transición suave para efectos */
+    outline: none; /* Sin borde predeterminado del navegador */
+}
+
+/* Texto de ayuda en los campos vacíos */
+.formulario-restablecer input::placeholder {
+    color: #ccc; /* Color gris claro como el buscador */
+    font-style: italic; /* Texto en cursiva para diferenciación */
+}
+
+/* Efectos cuando el usuario hace clic en los campos */
+.formulario-restablecer input:focus {
+    border-color: #21b7c2; /* Borde turquesa activo */
+    box-shadow: 0 0 10px rgba(33, 183, 194, 0.3); /* Sombra turquesa suave */
+    background: #3a3a3a; /* Fondo ligeramente más claro */
+    transform: scale(1.02); /* Ligero aumento de tamaño */
+}
+
+/* Efectos hover en los campos de entrada */
+.formulario-restablecer input:hover {
+    background: #3a3a3a; /* Fondo más claro al pasar el cursor */
+    border-color: rgba(33, 183, 194, 0.5); /* Borde turquesa semitransparente */
+}
+
+/* Botón de guardar */
+.boton-guardar {
+    width: 100%; /* Ancho completo del contenedor */
+    background: #21b7c2; /* Fondo turquesa que uso en todo el sitio */
+    color: #fff; /* Texto blanco */
+    padding: 15px 20px; /* Espaciado interno generoso */
+    border: none; /* Sin borde por defecto */
+    border-radius: 25px; /* Bordes muy redondeados */
+    font-size: 1.2em; /* Tamaño de fuente mayor para importancia */
+    font-weight: bold; /* Texto en negrita */
+    cursor: pointer; /* Cursor de manita */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+    margin-top: 20px; /* Espacio superior generoso */
+    min-height: 52px; /* Altura mínima para mejor usabilidad */
+    text-transform: uppercase; /* Texto en mayúsculas para énfasis */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+/* Efecto hover en el botón */
+.boton-guardar:hover {
+    background: #1a9bb8; /* Turquesa más oscuro como en otros botones */
+    transform: translateY(-3px); /* Elevación más pronunciada */
+    box-shadow: 0 6px 16px rgba(33, 183, 194, 0.4); /* Sombra turquesa intensa */
+}
+
+/* Efecto activo al hacer clic en el botón */
+.boton-guardar:active {
+    transform: translateY(0); /* Vuelve a la posición original */
+    box-shadow: 0 2px 6px rgba(33, 183, 194, 0.3); /* Sombra reducida */
+}
+
+/* Efectos de enfoque para mejor accesibilidad */
+.boton-guardar:focus {
+    box-shadow: 0 0 0 3px rgba(33, 183, 194, 0.3); /* Ring de enfoque */
+    outline: 2px solid #21b7c2; /* Outline visible */
+    outline-offset: 2px; /* Separación del outline */
+}
+
+/* Nota de aviso */
+.nota-aviso {
+    font-size: 0.9em; /* Tamaño de fuente pequeño pero legible */
+    color: #aaa; /* Texto gris claro */
+    text-align: center; /* Centrado del texto */
+    margin-top: 20px; /* Espacio superior generoso */
+    line-height: 1.5; /* Espaciado cómodo */
+}
+
+/* Botón para ir al login después de éxito */
+.boton-ir-login {
+    display: inline-block; /* Mostrar como bloque en línea para ancho máximo */
+    width: 100%; /* Ancho completo del contenedor */
+    background: #21b7c2; /* Fondo turquesa que uso en todo el sitio */
+    color: #fff; /* Texto blanco */
+    padding: 15px 20px; /* Espaciado interno generoso */
+    border: none; /* Sin borde */
+    border-radius: 25px; /* Bordes muy redondeados */
+    font-size: 1.2em; /* Tamaño de fuente mayor para importancia */
+    font-weight: bold; /* Texto en negrita */
+    cursor: pointer; /* Cursor de manita */
+    transition: all 0.3s ease; /* Transición suave para efectos hover */
+    margin-top: 20px; /* Espacio superior generoso */
+    min-height: 52px; /* Altura mínima para mejor usabilidad */
+    text-transform: uppercase; /* Texto en mayúsculas para énfasis */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    text-align: center; /* Centrado del texto */
+    text-decoration: none; /* Sin subrayado */
+    max-width: 500px; /* Ancho máximo igual al formulario */
+}
+
+/* Estados del botón */
+.boton-ir-login.visible {
+    opacity: 1; /* Completamente visible */
+    pointer-events: auto; /* Acepta clics */
+}
+
+.boton-ir-login.oculto {
+    opacity: 0; /* Invisible */
+    pointer-events: none; /* No acepta clics */
+    height: 0; /* Sin altura */
+    padding: 0; /* Sin padding */
+    margin: 0; /* Sin margen */
+    min-height: 0; /* Sin altura mínima */
+    display: none; /* No mostrar en el DOM */
+}
+
+/* Efecto hover en el botón */
+.boton-ir-login:hover {
+    background: #1a9bb8; /* Turquesa más oscuro como en otros botones */
+    transform: translateY(-3px); /* Elevación más pronunciada */
+    box-shadow: 0 6px 16px rgba(33, 183, 194, 0.4); /* Sombra turquesa intensa */
+    color: #fff !important; /* Mantener texto blanco en hover */
+    text-decoration: none !important; /* Sin subrayado en hover */
+}
+
+/* Efecto activo al hacer clic en el botón */
+.boton-ir-login:active {
+    transform: translateY(0); /* Vuelve a la posición original */
+    box-shadow: 0 2px 6px rgba(33, 183, 194, 0.3); /* Sombra reducida */
+}
+
+/* Efectos de enfoque para mejor accesibilidad */
+.boton-ir-login:focus {
+    box-shadow: 0 0 0 3px rgba(33, 183, 194, 0.3); /* Ring de enfoque */
+    outline: 2px solid #21b7c2; /* Outline visible */
+    outline-offset: 2px; /* Separación del outline */
+}
+
+/* Animación de entrada suave */
+@keyframes slideDown {
+    from {
+        opacity: 0; /* Comienza invisible */
+        transform: translateY(-10px); /* Comienza arriba */
+    }
+    to {
+        opacity: 1; /* Termina visible */
+        transform: translateY(0); /* Termina en posición */
+    }
+}
+
+/* RESPONSIVE - MEDIA QUERIES */
+
+/* Tablets grandes */
+@media (max-width: 1024px) {
+    body.pagina-restablecer {
+        padding: 18px; /* Espaciado intermedio */
+    }
+
+    body.pagina-restablecer h1 {
+        font-size: 2.3em; /* Título ligeramente más pequeño */
+        margin: 18px 0 28px 0; /* Espaciado intermedio */
+    }
+
+    .tarjeta-restablecer {
+        padding: 38px 35px; /* Espaciado intermedio */
+        max-width: 480px; /* Ancho intermedio */
+    }
+
+    .tarjeta-restablecer h1 {
+        font-size: 1.6em; /* Subtítulo intermedio */
+        margin: 0 0 22px 0; /* Espaciado intermedio */
+    }
+
+    .tarjeta-restablecer p {
+        font-size: 0.98em; /* Fuente ligeramente reducida */
+    }
+
+    .formulario-restablecer input[type="password"],
+    .formulario-restablecer input[type="text"] {
+        padding: 11px 15px; /* Espaciado intermedio */
+        font-size: 0.98em; /* Fuente ligeramente reducida */
+        margin-bottom: 14px; /* Espacio intermedio */
+    }
+
+    .formulario-restablecer label {
+        margin-top: 13px; /* Espacio intermedio */
+        font-size: 0.98em; /* Fuente ligeramente reducida */
+    }
+
+    .boton-guardar {
+        padding: 14px 18px; /* Espaciado intermedio */
+        font-size: 1.15em; /* Fuente intermedia */
+        min-height: 50px; /* Altura intermedia */
+        margin-top: 18px; /* Espacio superior intermedio */
+    }
+
+    .boton-ir-login {
+        padding: 14px 18px; /* Espaciado intermedio */
+        font-size: 1.15em; /* Fuente intermedia */
+        min-height: 50px; /* Altura intermedia */
+        margin-top: 18px; /* Espacio superior intermedio */
+    }
+
+    .nota-aviso {
+        font-size: 0.85em; /* Nota más pequeña */
+        margin-top: 18px; /* Espacio intermedio */
+    }
+}
+
+/* Pantallas medianas (tablets) */
+@media (max-width: 768px) {
+    body.pagina-restablecer {
+        padding: 15px; /* Reducir espaciado en pantallas pequeñas */
+    }
+
+    body.pagina-restablecer h1 {
+        font-size: 2.2em; /* Título ligeramente más pequeño */
+        margin: 15px 0 25px 0; /* Menos espacio */
+    }
+
+    .tarjeta-restablecer {
+        padding: 30px 25px; /* Reducir espaciado interno */
+        max-width: 450px; /* Ancho máximo reducido */
+    }
+
+    .tarjeta-restablecer h1 {
+        font-size: 1.5em; /* Subtítulo más pequeño */
+        margin: 0 0 20px 0; /* Menos espaciado */
+    }
+
+    .tarjeta-restablecer p {
+        font-size: 0.95em; /* Fuente más pequeña */
+    }
+
+    .formulario-restablecer input[type="password"],
+    .formulario-restablecer input[type="text"] {
+        padding: 10px 14px; /* Padding reducido */
+        font-size: 0.95em; /* Fuente más pequeña */
+        margin-bottom: 12px; /* Espacio reducido */
+    }
+
+    .formulario-restablecer label {
+        margin-top: 10px; /* Espacio reducido */
+        font-size: 0.95em; /* Fuente más pequeña */
+    }
+
+    .boton-guardar {
+        min-height: 48px; /* Altura mínima reducida */
+        font-size: 1.1em; /* Fuente ligeramente menor */
+        padding: 13px 16px; /* Padding reducido */
+        margin-top: 15px; /* Espacio reducido */
+    }
+
+    .boton-ir-login {
+        min-height: 48px; /* Altura mínima reducida */
+        font-size: 1.1em; /* Fuente ligeramente menor */
+        padding: 13px 16px; /* Padding reducido */
+        margin-top: 15px; /* Espacio reducido */
+    }
+
+    .nota-aviso {
+        font-size: 0.8em; /* Nota más pequeña */
+        margin-top: 15px; /* Espacio reducido */
+    }
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+    body.pagina-restablecer {
+        padding: 10px; /* Espaciado mínimo */
+    }
+
+    body.pagina-restablecer h1 {
+        font-size: 1.9em; /* Título más pequeño */
+        margin: 10px 0 20px 0; /* Menos espacio */
+    }
+
+    .tarjeta-restablecer {
+        padding: 25px 20px; /* Espaciado interno mínimo */
+        max-width: 100%; /* Ancho completo en móviles */
+        margin: 0 5px 15px 5px; /* Margen lateral mínimo */
+    }
+
+    .tarjeta-restablecer h1 {
+        font-size: 1.3em; /* Subtítulo más pequeño */
+        margin: 0 0 18px 0; /* Espaciado reducido */
+    }
+
+    .tarjeta-restablecer p {
+        font-size: 0.92em; /* Texto más pequeño */
+    }
+
+    .formulario-restablecer input[type="password"],
+    .formulario-restablecer input[type="text"] {
+        padding: 10px 14px; /* Espaciado interno reducido */
+        font-size: 0.95em; /* Fuente ligeramente más pequeña */
+        margin-bottom: 12px; /* Menos espacio entre campos */
+    }
+
+    .formulario-restablecer label {
+        margin-top: 10px; /* Menos espacio superior entre etiquetas */
+        font-size: 0.95em; /* Fuente ligeramente más pequeña */
+    }
+
+    .boton-guardar {
+        padding: 12px 16px; /* Espaciado interno reducido */
+        font-size: 1em; /* Fuente normal */
+        min-height: 46px; /* Altura mínima reducida */
+        margin-top: 15px; /* Menos espacio superior */
+    }
+
+    .boton-ir-login {
+        padding: 12px 16px; /* Espaciado interno reducido */
+        font-size: 1em; /* Fuente normal */
+        min-height: 46px; /* Altura mínima reducida */
+        margin-top: 15px; /* Menos espacio superior */
+    }
+
+    .nota-aviso {
+        margin-top: 10px; /* Menos espacio superior */
+        padding: 8px 12px; /* Padding reducido */
+        font-size: 0.85em; /* Fuente más pequeña */
+    }
+}
+
+/* Móviles muy pequeños (menos de 360px) */
+@media (max-width: 360px) {
+    body.pagina-restablecer {
+        padding: 8px; /* Espaciado extremadamente reducido */
+    }
+
+    body.pagina-restablecer h1 {
+        font-size: 1.7em; /* Título muy compacto */
+        margin: 8px 0 18px 0; /* Espaciado muy reducido */
+    }
+
+    .tarjeta-restablecer {
+        padding: 20px 15px; /* Espaciado extremadamente reducido */
+        max-width: 100%; /* Ancho completo */
+        margin: 0 2px 12px 2px; /* Margen extremadamente reducido */
+        border-radius: 10px; /* Bordes menos redondeados */
+    }
+
+    .tarjeta-restablecer h1 {
+        font-size: 1.2em; /* Subtítulo muy pequeño */
+        margin: 0 0 16px 0; /* Espaciado muy reducido */
+    }
+
+    .tarjeta-restablecer p {
+        font-size: 0.9em; /* Fuente pequeña */
+    }
+
+    .formulario-restablecer input[type="password"],
+    .formulario-restablecer input[type="text"] {
+        padding: 8px 12px; /* Espaciado muy reducido */
+        font-size: 0.9em; /* Fuente pequeña */
+        margin-bottom: 10px; /* Espacio muy reducido */
+        border-radius: 20px; /* Bordes menos redondeados */
+    }
+
+    .formulario-restablecer label {
+        margin-top: 8px; /* Espacio muy reducido */
+        font-size: 0.9em; /* Fuente más pequeña */
+        margin-bottom: 6px; /* Menos espacio inferior */
+    }
+
+    .boton-guardar {
+        padding: 10px 14px; /* Espaciado muy reducido */
+        font-size: 0.95em; /* Fuente reducida */
+        min-height: 42px; /* Altura muy reducida */
+        margin-top: 12px; /* Espacio muy reducido */
+        border-radius: 20px; /* Bordes menos redondeados */
+        letter-spacing: 0.5px; /* Menos espaciado entre letras */
+    }
+
+    .boton-ir-login {
+        padding: 10px 14px; /* Espaciado muy reducido */
+        font-size: 0.95em; /* Fuente reducida */
+        min-height: 42px; /* Altura muy reducida */
+        margin-top: 12px; /* Espacio muy reducido */
+        border-radius: 20px; /* Bordes menos redondeados */
+        letter-spacing: 0.5px; /* Menos espaciado entre letras */
+    }
+
+    .nota-aviso {
+        margin: 8px 0; /* Espaciado muy reducido */
+        font-size: 0.8em; /* Fuente muy pequeña */
+    }
+}

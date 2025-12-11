@@ -812,6 +812,32 @@ body {
         font-size: 0.9em; /* Texto más pequeño */
     }
     
+    /* Mejorar el contenedor interno del botón menú y carrito */
+    .boton-menu > span:first-child,
+    .boton-carrito > span:first-child {
+        display: inline-flex; /* Usar inline-flex para mejor control */
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center; /* Centrar horizontalmente */
+        position: relative; /* Para posicionar el contador de forma absoluta */
+        gap: 0; /* Sin espacio extra */
+    }
+    
+    /* Ajustar posicionamiento de contadores en tablets */
+    .cantidad-carrito, .cantidad-notificaciones {
+        position: absolute; /* Posicionar de forma absoluta respecto al contenedor */
+        top: -8px; /* Elevar un poco */
+        right: -10px; /* Mover a la derecha */
+        font-size: 0.75em; /* Tamaño más pequeño */
+        padding: 2px 5px; /* Padding reducido */
+        min-width: 18px; /* Ancho mínimo */
+        height: 18px; /* Altura mínima */
+        display: flex; /* Usar flexbox para centrar el texto */
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center; /* Centrar horizontalmente */
+        line-height: 1; /* Línea base normal */
+        margin-left: 0; /* Quitar margen izquierdo */
+    }
+    
     #cuadro-busqueda {
         padding: 10px 14px; /* Campo de búsqueda más compacto */
         font-size: 0.9em; /* Texto más pequeño */
@@ -872,6 +898,32 @@ body {
         height: 32px; /* Altura mínima */
         font-size: 0.85em; /* Texto más pequeño */
         gap: 4px; /* Menos espacio entre icono y texto */
+    }
+    
+    /* Mejorar el contenedor interno del botón menú y carrito */
+    .boton-menu > span:first-child,
+    .boton-carrito > span:first-child {
+        display: inline-flex; /* Usar inline-flex para mejor control */
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center; /* Centrar horizontalmente */
+        position: relative; /* Para posicionar el contador de forma absoluta */
+        gap: 0; /* Sin espacio extra */
+    }
+    
+    /* Ajustar posicionamiento de contadores en móviles grandes */
+    .cantidad-carrito, .cantidad-notificaciones {
+        position: absolute; /* Posicionar de forma absoluta respecto al contenedor */
+        top: -7px; /* Elevar un poco */
+        right: -9px; /* Mover a la derecha */
+        font-size: 0.7em; /* Tamaño más pequeño */
+        padding: 2px 4px; /* Padding reducido */
+        min-width: 17px; /* Ancho mínimo */
+        height: 17px; /* Altura mínima */
+        display: flex; /* Usar flexbox para centrar el texto */
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center; /* Centrar horizontalmente */
+        line-height: 1; /* Línea base normal */
+        margin-left: 0; /* Quitar margen izquierdo */
     }
     
     /* Iconos más pequeños en móviles */
@@ -936,6 +988,14 @@ body {
         width: 25px; /* Imágenes del menú más pequeñas */
         height: 25px;
     }
+    
+    /* Botón modo visión pegado al final sin absolute en móviles */
+    .enlace-modo-vision {
+        position: sticky;               /* Se queda pegado al scroll */
+        bottom: 0;                      /* Al final del contenedor */
+        left: auto;                     /* Anular left de la versión desktop */
+        z-index: 100;                   /* Reducir z-index para que no se superponga */
+    }
 }
 
 /* Móviles pequeños */
@@ -976,6 +1036,32 @@ body {
         height: 28px; /* Altura muy reducida */
         font-size: 0.8em; /* Texto muy pequeño */
         gap: 3px; /* Espacio mínimo entre icono y texto */
+    }
+    
+    /* Mejorar el contenedor interno del botón menú y carrito para centrar mejor el contenido */
+    .boton-menu > span:first-child,
+    .boton-carrito > span:first-child {
+        display: inline-flex; /* Usar inline-flex para mejor control */
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center; /* Centrar horizontalmente */
+        position: relative; /* Para posicionar el contador de forma absoluta */
+        gap: 0; /* Sin espacio extra */
+    }
+    
+    /* Ajustar posicionamiento de contadores en móviles */
+    .cantidad-carrito, .cantidad-notificaciones {
+        position: absolute; /* Posicionar de forma absoluta respecto al contenedor */
+        top: -6px; /* Elevar un poco */
+        right: -8px; /* Mover a la derecha */
+        font-size: 0.65em; /* Tamaño muy pequeño pero legible */
+        padding: 2px 4px; /* Padding mínimo */
+        min-width: 16px; /* Ancho mínimo para mantener forma circular */
+        height: 16px; /* Altura fija */
+        display: flex; /* Usar flex para centrar el número */
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center; /* Centrar horizontalmente */
+        line-height: 1; /* Línea de altura ajustada */
+        margin-left: 0; /* Eliminar margen izquierdo */
     }
     
     /* Ocultar texto en algunos botones para ahorrar espacio */
@@ -1067,6 +1153,14 @@ body {
         height: 22px;
     }
     
+    /* Botón modo visión pegado al final sin absolute en móviles */
+    .enlace-modo-vision {
+        position: sticky;               /* Se queda pegado al scroll */
+        bottom: 0;                      /* Al final del contenedor */
+        left: auto;                     /* Anular left de la versión desktop */
+        z-index: 100;                   /* Reducir z-index para que no se superponga */
+    }
+    
     /* Filtros más compactos */
     .categoria-filtro {
         margin-bottom: 12px; /* Menos espacio entre filtros */
@@ -1134,8 +1228,37 @@ body {
         width: 200px; /* Menú muy estrecho */
     }
     
+    /* Botón modo visión pegado al final sin absolute en móviles muy pequeños */
+    .enlace-modo-vision {
+        position: sticky;               /* Se queda pegado al scroll */
+        bottom: 0;                      /* Al final del contenedor */
+        left: auto;                     /* Anular left de la versión desktop */
+        z-index: 100;                   /* Reducir z-index para que no se superponga */
+    }
+    
+    /* Mejorar el contenedor interno del botón menú y carrito */
+    .boton-menu > span:first-child,
+    .boton-carrito > span:first-child {
+        display: inline-flex; /* Usar inline-flex para mejor control */
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center; /* Centrar horizontalmente */
+        position: relative; /* Para posicionar el contador de forma absoluta */
+        gap: 0; /* Sin espacio extra */
+    }
+    
+    /* Ajustes adicionales para contadores en pantallas muy pequeñas */
     .cantidad-carrito, .cantidad-notificaciones {
-        font-size: 0.7em; /* Número del carrito muy pequeño */
-        padding: 1px 4px; /* Padding mínimo */
+        position: absolute; /* Mantener posicionamiento absoluto */
+        top: -5px; /* Ajustar posición vertical */
+        right: -6px; /* Ajustar posición horizontal */
+        font-size: 0.6em; /* Número muy pequeño */
+        padding: 1px 3px; /* Padding muy mínimo */
+        min-width: 14px; /* Ancho mínimo reducido */
+        height: 14px; /* Altura reducida */
+        display: flex; /* Mantener flex */
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center; /* Centrar horizontalmente */
+        line-height: 1; /* Línea de altura ajustada */
+        margin-left: 0; /* Sin margen */
     }
 }

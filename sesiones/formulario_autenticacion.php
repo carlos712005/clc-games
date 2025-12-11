@@ -18,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport responsive -->
     <title>CLC Games</title> <!-- Título de la página -->
     <link rel="icon" type="image/x-icon" href="../recursos/imagenes/favicon.ico"> <!-- Favicon del sitio -->
+    <link rel="stylesheet" href="../recursos/css/estilos_modal.css"> <!-- Estilos generales de modales -->
     <link rel="stylesheet" href="../recursos/css/estilos_login.css"> <!-- Estilos específicos del login -->
 </head>
 
@@ -52,16 +53,20 @@
         </div> <!-- Fin del contenedor de contraseña -->
 
         <button type="submit" tabindex="3">Iniciar sesión</button> <!-- Botón para enviar el formulario, tercero en orden -->
+        
+        <a href="#" onclick="mostrarModalRecuperacion(event);" class="enlace-recuperar" tabindex="4">¿Olvidaste tu contraseña?</a> <!-- Enlace para recuperar contraseña -->
 
         <h2>¿Eres nuevo cliente?</h2> <!-- Subtítulo para la sección de registro -->
-        <button type="button" onclick="window.location.href='registro.php'" tabindex="4">Crear cuenta</button> <!-- Botón que redirije al registro, cuarto en orden -->
+        <button type="button" onclick="window.location.href='registro.php'" tabindex="5">Crear cuenta</button> <!-- Botón que redirije al registro, quinto en orden -->
         <br><br> <!-- Espacios adicionales -->
 
     </form> <!-- Fin del formulario -->
 
     <br> <!-- Espacio adicional -->
-    <a href="../publico/index.php" tabindex="5">Volver al inicio</a> <!-- Enlace de vuelta al index, quinto en orden de navegación -->
+    <a href="../publico/index.php" tabindex="6">Volver al inicio</a> <!-- Enlace de vuelta al index, sexto en orden de navegación -->
 
+    <script src="../recursos/js/modal.js" defer></script> <!-- Script para funcionalidad de modales -->
+    <script src="../recursos/js/recuperar_contrasena.js" defer></script> <!-- Script para recuperación de contraseña -->
     <script src="../recursos/js/mostrar_ocultar_contrasena.js" defer></script> <!-- Script para funcionalidad de mostrar/ocultar contraseña -->
 
 </body>

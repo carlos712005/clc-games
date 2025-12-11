@@ -456,7 +456,7 @@
                         </thead>
                         <tbody> <!-- Cuerpo de la tabla -->
                             <?php 
-                            $max_tabla = max($valores_ventas) > 0 ? max($valores_ventas) : 1; /* Valor máximo para calcular el porcentaje de la barra */
+                            $max_tabla = !empty($valores_ventas) && max($valores_ventas) > 0 ? max($valores_ventas) : 1; /* Valor máximo para calcular el porcentaje de la barra, o 1 si el array está vacío */
                             
                             foreach ($anios as $index => $anio) { /* Recorro los años */
                                 $mes = $meses[$index]; /* Obtengo el mes correspondiente */

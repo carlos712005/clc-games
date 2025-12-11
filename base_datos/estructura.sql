@@ -241,7 +241,7 @@ CREATE TABLE filtros (
   clave VARCHAR(60) NOT NULL,                                -- Clave única para uso en código (slug)
   orden INT UNSIGNED NOT NULL DEFAULT 0,                     -- Orden para mostrar en la interfaz
   UNIQUE KEY u_tipo_clave (tipo_filtro, clave)              -- Evita duplicados de clave dentro del mismo tipo
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- FILTROS TIPO: Diferencia entre juegos internos (jugables) y externos (solo venta)
 INSERT INTO filtros (id_fijo, nombre, tipo_filtro, clave, orden) VALUES
@@ -303,7 +303,7 @@ CREATE TABLE juegos_filtros (
   PRIMARY KEY (id_juego, id_filtro),                         -- Clave primaria compuesta
   FOREIGN KEY (id_juego) REFERENCES juegos(id) ON DELETE CASCADE,     -- Eliminar relaciones si se borra el juego
   FOREIGN KEY (id_filtro) REFERENCES filtros(id_fijo)       -- Referencia al ID fijo estable
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Asignación de filtros a cada juego
 -- Se asignan múltiples categorías para permitir filtrado preciso
@@ -430,7 +430,7 @@ CREATE TABLE roles (
   id TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,   -- ID autoincremental interno
   id_rol TINYINT UNSIGNED NOT NULL UNIQUE,          -- ID fijo para referencia en otras tablas
   nombre VARCHAR(50) NOT NULL UNIQUE                -- Nombre único del rol
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Roles básicos del sistema de usuarios (con IDs fijos)
 INSERT INTO roles (id_rol, nombre) VALUES
@@ -484,7 +484,7 @@ CREATE TABLE preferencias_usuario (
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,    -- Eliminar si se borra el usuario
   FOREIGN KEY (id_filtro) REFERENCES filtros(id_fijo) ON DELETE CASCADE, -- Eliminar si se borra el filtro
   UNIQUE KEY u_usuario_filtro (id_usuario, id_filtro)        -- Un usuario no puede tener el mismo filtro duplicado
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Tabla del carrito de compras
 -- Almacena los juegos que el usuario ha añadido pero aún no ha comprado
@@ -497,7 +497,7 @@ CREATE TABLE carrito (
   UNIQUE KEY u_usuario_juego (id_usuario, id_juego),         -- Evita duplicados: un usuario no puede tener el mismo juego repetido en su carrito
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,    -- Eliminar carrito si se borra el usuario
   FOREIGN KEY (id_juego)   REFERENCES juegos(id)   ON DELETE RESTRICT    -- No permitir borrar juegos que están en carritos activos
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Tabla de la biblioteca personal de cada usuario
 -- Contiene los juegos que el usuario ha comprado y posee
@@ -512,7 +512,7 @@ CREATE TABLE biblioteca (
 
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,    -- Eliminar biblioteca si se borra el usuario
   FOREIGN KEY (id_juego)   REFERENCES juegos(id)   ON DELETE RESTRICT    -- Mantener registro histórico aunque se retire el juego de la tienda
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Tabla de historial de transacciones
 -- Registra todos los eventos relacionados con compras, cancelaciones y devoluciones
@@ -564,7 +564,7 @@ CREATE TABLE favoritos (
 
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,    -- Eliminar favoritos si se borra el usuario
   FOREIGN KEY (id_juego)   REFERENCES juegos(id)   ON DELETE CASCADE     -- Eliminar de favoritos si se retira el juego de la tienda
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Tabla de comentarios de usuarios sobre juegos
 -- Permite a los usuarios dejar reseñas y opiniones sobre los juegos que poseen
@@ -579,7 +579,7 @@ CREATE TABLE comentarios (
 
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,     -- Eliminar comentarios si se borra el usuario
     FOREIGN KEY (id_juego) REFERENCES juegos(id) ON DELETE CASCADE          -- Eliminar comentarios si se retira el juego
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Tabla de valoraciones de usuarios sobre juegos
 -- Permite a los usuarios puntuar los juegos con una calificación numérica
@@ -595,7 +595,7 @@ CREATE TABLE valoraciones (
 
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,      -- Eliminar valoraciones si se borra el usuario
     FOREIGN KEY (id_juego) REFERENCES juegos(id) ON DELETE CASCADE           -- Eliminar valoraciones si se retira el juego
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Tabla de notificaciones para usuarios
 -- Almacena mensajes del sistema dirigidos a usuarios específicos
@@ -611,4 +611,16 @@ CREATE TABLE notificaciones (
 
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,   -- Eliminar notificaciones si se borra el usuario
   FOREIGN KEY (id_juego) REFERENCES juegos(id) ON DELETE SET NULL       -- Mantener notificación aunque se retire el juego
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabla para claves de restablecimiento de contraseña
+-- Almacena claves temporales para permitir a los usuarios recuperar el acceso a su cuenta
+CREATE TABLE claves (
+    id INT AUTO_INCREMENT PRIMARY KEY,                           -- ID único de la clave
+    email VARCHAR(255) NOT NULL,                                 -- Email del usuario asociado
+    clave VARCHAR(64) NOT NULL UNIQUE,                           -- Clave única generada
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,               -- Cuándo se creó la clave
+    expira_en TIMESTAMP NOT NULL,                                -- Cuándo expira la clave
+    usado TINYINT(1) DEFAULT 0 NOT NULL                          -- 0 = no usado, 1 = usado
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
