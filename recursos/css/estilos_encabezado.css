@@ -335,9 +335,12 @@ body {
   color: #fff;                  /* Texto blanco */
   transform: translateX(-100%); /* Oculto fuera de pantalla a la izquierda */
   transition: transform 0.3s;   /* Animación suave de 0.3 segundos */
-  padding: 20px;                /* Espacio interno */
+  padding: 20px 20px 0 20px;    /* Espacio interno sin padding inferior */
   box-sizing: border-box;       /* Incluye padding en el ancho total */
   overflow-y: auto;             /* Scroll vertical si el contenido es largo */
+  overflow-x: hidden;           /* Evita scroll horizontal al encoger la ventana */
+  display: flex;                /* Flexbox para organizar contenido */
+  flex-direction: column;       /* Elementos en columna */
 }
 
 /* Mostrar el menú lateral cuando el checkbox está marcado */
@@ -373,6 +376,7 @@ body {
   list-style: none;            /* Sin viñetas */
   padding: 0;                  /* Sin espacio interno */
   margin: 0;                   /* Sin márgenes externos */
+  flex: 1;                     /* Ocupa el espacio disponible */
 }
 
 /* Cada elemento de la lista del menú */
@@ -408,9 +412,31 @@ body {
   flex: 1;                     /* El texto ocupa el espacio restante */
 }
 
+/* Asegurar que el contenedor de icono+contador no se expanda */
+.enlace-notificaciones > span:first-child {
+  flex: none !important;                     /* No expandir el contenedor del icono */
+  position: relative !important;             /* Posiciono el contador absolutamente dentro */
+  display: inline-flex !important;           /* Alineo icono y contador */
+    align-items: center;                     /* Centro icono y evitar estirar */
+}
+
 /* Asegurar que las imágenes del menú lateral mantengan su tamaño en submenús */
-.enlace-notificaciones span{
-  flex: none;                     /* Quito el crecimiento flexible */
+.enlace-notificaciones > span:last-child {
+    flex: 1;                        /* Solo el texto ocupa el espacio restante */
+}
+
+/* Estilos para el contador de notificaciones del botón de notificaciones */
+.enlace-notificaciones .cantidad-notificaciones {
+    position: absolute;             /* Lo posiciono absolutamente dentro del contenedor */
+    top: 0;                         /* Anclado al vértice superior */
+    right: 0;                       /* Anclado al vértice derecho */
+    transform: translate(40%, -40%);/* Sacar ligeramente fuera sin solapar */
+    min-width: 18px;                /* Tamaño mínimo consistente */
+    height: 18px;                   /* Altura mínima */
+    padding: 0 4px;                 /* Espacio interno sutil */
+    display: inline-flex;           /* Mantener visible */
+    align-items: center;            /* Centrar verticalmente el número */
+    justify-content: center;        /* Centrar horizontalmente */
 }
 
 /* Efecto al pasar el cursor por encima de enlaces y botones del menú */
@@ -636,26 +662,42 @@ body {
     transform: translateY(-1px); /* Se eleva menos al hacer clic */
 }
 
+/* Botón especial para el modo visión */
 .enlace-modo-vision {
-  display: flex;                      /* que ocupe toda la anchura disponible */
-  width: 100%;                         /* ancho completo del contenedor (menu-lateral) */
-  background: #ffffff;                 /* fondo blanco solicitado */
-  color: #111;                         /* texto oscuro para contraste sobre blanco */
-  padding: 12px 21px;                  /* padding cómodo para área de click */
-  border-radius: 0;                    /* sin radios para que toque los bordes */
-  text-decoration: none;               /* sin subrayado */
-  font-weight: bold;                   /* destacarlo como opción importante */
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.12); /* sombra sutil por encima para separarlo */
-  position: absolute;                  /* fijo respecto al contenedor .menu-lateral */
-  left: 0;                             /* alinear al borde izquierdo */
-  bottom: 0;                           /* fijarlo en la parte inferior */
-  box-sizing: border-box;              /* incluir padding en el ancho */
-  border-top: 1px solid rgba(0,0,0,0.06); /* separación sutil con el contenido */
-  text-align: center;                  /* centrar el texto */
-  z-index: 1200;                       /* sobre otros elementos dentro del menú */
-  align-items: center;               /* centrar verticalmente */
-  gap: 4px;                             /* espacio entre icono y texto */
-  transition: all 0.3s ease;          /* transición suave para efectos hover */
+  display: flex;                      /* Disposición flexible para alinear imagen y texto */
+  width: calc(100% + 40px);           /* Ancho completo compensando padding del menú */
+  align-items: center;                /* Centrar verticalmente imagen y texto */
+  gap: 12px;                          /* Espacio entre imagen y texto */
+  padding: 12px 20px;                 /* Espacio interno igual que enlace-menu */
+  margin-top: auto;                   /* Empujar el botón hacia el fondo del contenedor flex */
+  margin-left: -20px;                 /* Compensar padding izquierdo del menú */
+  margin-right: -20px;                /* Compensar padding derecho del menú */
+  background: #ffffff;                /* Fondo blanco */
+  color: #111;                        /* Texto oscuro para contraste sobre blanco */
+  border-radius: 0;                   /* Sin radios para que toque los bordes */
+  text-decoration: none;              /* Sin subrayado */
+  font-weight: bold;                  /* Negrita */
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.12); /* Sombra sutil por encima para separarlo */
+  position: sticky;                   /* Sticky para que se quede pegado al hacer scroll */
+  bottom: 0;                          /* Pegado al fondo visible */
+  box-sizing: border-box;             /* Incluir padding en el ancho */
+  border-top: 1px solid rgba(0,0,0,0.06); /* Separación sutil con el contenido */
+  z-index: 1200;                      /* Sobre otros elementos dentro del menú */
+  transition: all 0.3s ease;          /* Transición suave para efectos hover */
+  cursor: pointer;                    /* Cursor de manita */
+  min-height: 44px;                   /* Altura mínima para mejor área de click */
+}
+
+/* Imagen dentro del botón modo visión */
+.enlace-modo-vision img {
+  width: 30px;                        /* Ancho fijo igual que enlace-menu */
+  height: 30px;                       /* Alto fijo igual que enlace-menu */
+  flex-shrink: 0;                     /* Evita que la imagen se reduzca */
+}
+
+/* Texto dentro del botón modo visión */
+.enlace-modo-vision span {
+  flex: 1;                            /* El texto ocupa el espacio restante */
 }
 
 /* Hover / focus states para accesibilidad y retroalimentación */
@@ -910,6 +952,11 @@ body {
         gap: 0; /* Sin espacio extra */
     }
     
+    /* Contenedor del contador de notificaciones en el botón menú */
+    #menu-con-notificaciones > span:first-child {
+        position: relative; /* Asegurar que el contenedor tiene posición relativa */
+    }
+    
     /* Ajustar posicionamiento de contadores en móviles grandes */
     .cantidad-carrito, .cantidad-notificaciones {
         position: absolute; /* Posicionar de forma absoluta respecto al contenedor */
@@ -924,6 +971,23 @@ body {
         justify-content: center; /* Centrar horizontalmente */
         line-height: 1; /* Línea base normal */
         margin-left: 0; /* Quitar margen izquierdo */
+    }
+    
+    /* Contador de notificaciones en menú lateral - móviles grandes */
+    .enlace-notificaciones .cantidad-notificaciones {
+        position: absolute !important; /* Posicionamiento absoluto dentro del span padre */
+        top: 2px !important; /* Dentro del contenedor */
+        right: 2px !important; /* Dentro del contenedor */
+        display: inline-flex !important; /* Mostrar siempre */
+        transform: translate(25%, -25%) !important; /* Sacar ligeramente para no tapar */
+    }
+    
+    /* Contenedor del contador en menú lateral */
+    .enlace-notificaciones > span:first-child {
+        position: relative !important; /* Para que el contador se posicione dentro */
+        display: inline-flex !important; /* Para que contenga correctamente imagen y contador */
+        align-items: center !important; /* Centrar verticalmente */
+        flex: none !important; /* No expandir */
     }
     
     /* Iconos más pequeños en móviles */
@@ -988,14 +1052,6 @@ body {
         width: 25px; /* Imágenes del menú más pequeñas */
         height: 25px;
     }
-    
-    /* Botón modo visión pegado al final sin absolute en móviles */
-    .enlace-modo-vision {
-        position: sticky;               /* Se queda pegado al scroll */
-        bottom: 0;                      /* Al final del contenedor */
-        left: auto;                     /* Anular left de la versión desktop */
-        z-index: 100;                   /* Reducir z-index para que no se superponga */
-    }
 }
 
 /* Móviles pequeños */
@@ -1048,6 +1104,11 @@ body {
         gap: 0; /* Sin espacio extra */
     }
     
+    /* Contenedor del contador de notificaciones en el botón menú */
+    #menu-con-notificaciones > span:first-child {
+        position: relative; /* Asegurar que el contenedor tiene posición relativa */
+    }
+    
     /* Ajustar posicionamiento de contadores en móviles */
     .cantidad-carrito, .cantidad-notificaciones {
         position: absolute; /* Posicionar de forma absoluta respecto al contenedor */
@@ -1062,6 +1123,23 @@ body {
         justify-content: center; /* Centrar horizontalmente */
         line-height: 1; /* Línea de altura ajustada */
         margin-left: 0; /* Eliminar margen izquierdo */
+    }
+    
+    /* Contador de notificaciones en menú lateral - móviles pequeños */
+    .enlace-notificaciones .cantidad-notificaciones {
+        position: absolute !important; /* Posicionamiento absoluto dentro del span padre */
+        top: 1px !important; /* Dentro del contenedor */
+        right: 1px !important; /* Dentro del contenedor */
+        display: inline-flex !important; /* Mostrar siempre */
+        transform: translate(22%, -22%) !important; /* Evitar solapamiento */
+    }
+    
+    /* Contenedor del contador en menú lateral */
+    .enlace-notificaciones > span:first-child {
+        position: relative !important; /* Para que el contador se posicione dentro */
+        display: inline-flex !important; /* Para que contenga correctamente imagen y contador */
+        align-items: center !important; /* Centrar verticalmente */
+        flex: none !important; /* No expandir */
     }
     
     /* Ocultar texto en algunos botones para ahorrar espacio */
@@ -1153,14 +1231,6 @@ body {
         height: 22px;
     }
     
-    /* Botón modo visión pegado al final sin absolute en móviles */
-    .enlace-modo-vision {
-        position: sticky;               /* Se queda pegado al scroll */
-        bottom: 0;                      /* Al final del contenedor */
-        left: auto;                     /* Anular left de la versión desktop */
-        z-index: 100;                   /* Reducir z-index para que no se superponga */
-    }
-    
     /* Filtros más compactos */
     .categoria-filtro {
         margin-bottom: 12px; /* Menos espacio entre filtros */
@@ -1228,14 +1298,6 @@ body {
         width: 200px; /* Menú muy estrecho */
     }
     
-    /* Botón modo visión pegado al final sin absolute en móviles muy pequeños */
-    .enlace-modo-vision {
-        position: sticky;               /* Se queda pegado al scroll */
-        bottom: 0;                      /* Al final del contenedor */
-        left: auto;                     /* Anular left de la versión desktop */
-        z-index: 100;                   /* Reducir z-index para que no se superponga */
-    }
-    
     /* Mejorar el contenedor interno del botón menú y carrito */
     .boton-menu > span:first-child,
     .boton-carrito > span:first-child {
@@ -1246,6 +1308,11 @@ body {
         gap: 0; /* Sin espacio extra */
     }
     
+    /* Contenedor del contador de notificaciones en el botón menú */
+    #menu-con-notificaciones > span:first-child {
+        position: relative; /* Asegurar que el contenedor tiene posición relativa */
+    }
+
     /* Ajustes adicionales para contadores en pantallas muy pequeñas */
     .cantidad-carrito, .cantidad-notificaciones {
         position: absolute; /* Mantener posicionamiento absoluto */
@@ -1260,5 +1327,22 @@ body {
         justify-content: center; /* Centrar horizontalmente */
         line-height: 1; /* Línea de altura ajustada */
         margin-left: 0; /* Sin margen */
+    }
+    
+    /* Contador de notificaciones en menú lateral - móviles muy pequeños */
+    .enlace-notificaciones .cantidad-notificaciones {
+        position: absolute !important; /* Posicionamiento absoluto dentro del span padre */
+        top: 0px !important; /* Dentro del contenedor */
+        right: 0px !important; /* Dentro del contenedor */
+        display: inline-flex !important; /* Mostrar siempre */
+        transform: translate(20%, -20%) !important; /* No tapar el icono */
+    }
+    
+    /* Contenedor del contador en menú lateral */
+    .enlace-notificaciones > span:first-child {
+        position: relative !important; /* Para que el contador se posicione dentro */
+        display: inline-flex !important; /* Para que contenga correctamente imagen y contador */
+        align-items: center !important; /* Centrar verticalmente */
+        flex: none !important; /* No expandir */
     }
 }

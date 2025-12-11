@@ -361,15 +361,15 @@
                         </a>
                     </li>
                 <?php } ?> <!-- Fin del condicional de página de panel de administrador -->
-                <?php if(isset($_SESSION['id_rol']) && $_SESSION['id_rol'] == 1){ /* Si el usuario es un administrador (rol 1) */ ?>
-                    <li> <!-- Elemento de lista para Modo de Visión -->
-                        <a href="../acciones/acciones_vision.php?modo=salir&administrando=<?php echo basename($_SERVER['PHP_SELF']) === 'panel_administrador.php' ? 1 : 0; ?>" class="enlace-menu enlace-modo-vision"> <!-- Enlace al modo de visión -->
-                            <img src="../recursos/imagenes/vision.png" alt="Modo de Visión" id="icono-modo-vision"> <!-- Icono del modo de visión -->
-                            <span>Cambiar modo de Visión</span> <!-- Texto del enlace -->
-                        </a>
-                    </li>
-                <?php } ?> <!-- Fin del condicional de rol de administrador -->
             </ul> <!-- Fin de la lista del menú principal -->
+
+            <!-- Botón Cambiar Modo Visión -->
+            <?php if(isset($_SESSION['id_rol']) && $_SESSION['id_rol'] == 1){ /* Si el usuario es un administrador (rol 1) */ ?>
+                <a href="../acciones/acciones_vision.php?modo=salir&administrando=<?php echo basename($_SERVER['PHP_SELF']) === 'panel_administrador.php' ? 1 : 0; ?>" class="enlace-modo-vision"> <!-- Enlace al modo de visión -->
+                    <img src="../recursos/imagenes/vision.png" alt="Modo de Visión" id="icono-modo-vision"> <!-- Icono del modo de visión -->
+                    <span>Cambiar modo de Visión</span> <!-- Texto del enlace -->
+                </a>
+            <?php } ?> <!-- Fin del condicional de rol de administrador -->
 
             <!-- MENÚ DE FILTROS (oculto inicialmente) -->
             <ul class="lista-menu lista-filtros" id="menu-filtros" style="display: none;"> <!-- Lista del menú de filtros, oculta por defecto -->
