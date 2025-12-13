@@ -25,7 +25,7 @@
 
             $usuario = $consulta->fetch(PDO::FETCH_ASSOC); /* Obtengo los datos del usuario */
 
-            return $usuario ? $usuario['nombre_usuario'] : null; /* Retorno el nombre del usuario o null si no existe */
+            return $usuario ? $usuario['acronimo'] : null; /* Retorno el nombre del usuario o null si no existe */
         } catch (PDOException $e) { /* Si hay error al obtener el nombre del usuario */
             echo json_encode(["error" => "Error de base de datos: " . $e->getMessage()]); /* Retorno el error en formato JSON */
             return null; /* Retorno null */
