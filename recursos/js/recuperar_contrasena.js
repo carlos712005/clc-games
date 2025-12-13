@@ -70,7 +70,7 @@ function procesarRecuperacion() {
 
     // Validar email
     if (!email || !email.includes('@')) {
-        alert('Por favor, introduce un correo electrónico válido.'); /* Mensaje de validación */
+        modal('modal-error-email', '<h1>Error de validación</h1><p>Por favor, introduce un correo electrónico válido.</p>', false); /* Mensaje de error */
         return; /* Salir de la función */
     }
 
