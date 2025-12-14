@@ -23,6 +23,17 @@
         // Desactivar la emulación de prepared statements para mejor rendimiento
         $conexion->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); /* Para usar prepared statements reales */
         
+        // Forzar timezone de MySQL para esta conexión (sesión) a UTC
+        $zona = new DateTimeZone('Europe/Madrid'); /* Zona horaria deseada */
+        $ahora = new DateTimeImmutable('now', $zona); /* Momento actual en esa zona */
+        $offset = $zona->getOffset($ahora); /* Offset (la diferencia horaria) en segundos respecto a UTC */
+
+        $signo = ($offset >= 0) ? '+' : '-'; /* Signo del offset (la diferencia horaria) */
+        $offset = abs($offset); /* Valor absoluto del offset (la diferencia horaria) */
+        $horas = str_pad((string) intdiv($offset, 3600), 2, '0', STR_PAD_LEFT); /* Horas del offset (la diferencia horaria) */
+        $mins  = str_pad((string) intdiv($offset % 3600, 60), 2, '0', STR_PAD_LEFT); /* Minutos del offset (la diferencia horaria) */
+
+        $conexion->exec("SET time_zone = '{$signo}{$horas}:{$mins}'"); /* Fijo la zona horaria de MySQL para esta conexión */
     } catch (PDOException $e) {
         // Manejo de errores de conexión
         die("Error de conexión a la base de datos: " . $e->getMessage()); /* Si hay error, muestro mensaje y termino */
