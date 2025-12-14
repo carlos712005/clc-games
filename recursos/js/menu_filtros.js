@@ -5,6 +5,7 @@ function mostrarMenuFiltros() {
     const menuFiltros = document.getElementById('menu-filtros'); /* Obtengo referencia al menú de filtros */
     const tituloMenu = document.getElementById('titulo-menu'); /* Obtengo referencia al título del menú */
     const botonCerrar = document.getElementById('boton-cerrar'); /* Obtengo referencia al botón de cerrar */
+    const enlaceModoVision = document.querySelector('.enlace-modo-vision'); /* Obtengo referencia al botón de modo visión */
 
     // Ocultar menú principal
     if (menuPrincipal) { /* Si existe el menú principal */
@@ -14,6 +15,11 @@ function mostrarMenuFiltros() {
     // Mostrar menú de filtros
     if (menuFiltros) { /* Si existe el menú de filtros */
         menuFiltros.style.display = 'block'; /* Lo muestro */
+    }
+    
+    // Ocultar botón de modo visión
+    if (enlaceModoVision) { /* Si existe el botón de modo visión */
+        enlaceModoVision.style.display = 'none'; /* Lo oculto */
     }
     
     // Cambiar título
@@ -87,6 +93,7 @@ function mostrarMenuPrincipal() {
     const menuFiltros = document.getElementById('menu-filtros'); /* Obtengo referencia al menú de filtros */
     const tituloMenu = document.getElementById('titulo-menu'); /* Obtengo referencia al título del menú */
     const botonCerrar = document.getElementById('boton-cerrar'); /* Obtengo referencia al botón de cerrar */
+    const enlaceModoVision = document.querySelector('.enlace-modo-vision'); /* Obtengo referencia al botón de modo visión */
 
     // Mostrar menú principal
     if (menuPrincipal) { /* Si existe el menú principal */
@@ -96,6 +103,11 @@ function mostrarMenuPrincipal() {
     // Ocultar menú de filtros
     if (menuFiltros) { /* Si existe el menú de filtros */
         menuFiltros.style.display = 'none'; /* Lo oculto */
+    }
+    
+    // Mostrar botón de modo visión si el usuario es administrador
+    if (enlaceModoVision) { /* Si existe el botón de modo visión */
+        enlaceModoVision.style.display = 'flex'; /* Lo muestro */
     }
     
     // Restaurar título
