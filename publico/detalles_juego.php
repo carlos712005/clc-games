@@ -462,7 +462,12 @@
                         </a>
                     <?php }
                 } ?>
-            <?php } else {  /* Si el juego ya está en la biblioteca */
+            <?php } else {  /* Si el juego ya está en la biblioteca */ ?>
+                <a href="#" onclick="opcionNoDisponible()" class="boton-jugar"> <!-- Enlace para jugar al juego -->
+                    <img src="../recursos/imagenes/jugar.png" alt="Icono de Jugar" id="icono-jugar"> <!-- Icono de jugar -->
+                    <span>Jugar</span> <!-- Texto del botón -->
+                </a>
+                <?php
                 $datos_devolucion = []; /* Inicializo el array de devolución */
                 $datos_devolucion[] = [ /* Agrego los datos del juego al array de devolución */
                     'id' => $juego['id'], /* ID del juego */
@@ -494,10 +499,6 @@
                         </a>
                     <?php }
                 } ?>
-                <a href="#" onclick="opcionNoDisponible()" class="boton-jugar"> <!-- Enlace para jugar al juego -->
-                    <img src="../recursos/imagenes/jugar.png" alt="Icono de Jugar" id="icono-jugar"> <!-- Icono de jugar -->
-                    <span>Jugar</span> <!-- Texto del botón -->
-                </a>
             <?php } ?>
         <?php } else { ?> <!-- Si está en modo admin -->
             <a href="../vistas/editar_juego.php?id=<?php echo $juego['id']; ?>" class="boton-editar-juego"> <!-- Enlace a editar del juego -->
