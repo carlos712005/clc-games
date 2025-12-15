@@ -21,6 +21,17 @@ function limpiarCompraUnica() {
     }
 }
 
+// Función para limpiar datos del flujo de devolución
+function limpiarDatosDevolucion() {
+    try { /*Inicio bloque try para captuar excepciones*/
+        sessionStorage.removeItem('devolucion'); // borro marcador de devolución
+        sessionStorage.removeItem('id_juego_reembolso'); // borro id del juego
+        sessionStorage.removeItem('total_reembolso'); // borro total a reembolsar
+    } catch (error) { /* si hay error */
+        console.error('Error limpiando datos de devolución:', error); // muestro error
+    }
+}
+
 // Función para contar juegos en carrito del servidor
 function contarJuegosEnCarrito() {
     try { /*Inicio bloque try para captuar excepciones*/
@@ -144,6 +155,7 @@ async function procesarReembolsoPayPal() {
     
     // Verifico que tengo todos los datos
     if (!idJuego || importeTotal === null) {
+        limpiarDatosDevolucion(); // limpio datos inconsistentes
         modal('modal1', '<h1>Error</h1><p>Faltan datos de la devolución. Vuelve a iniciar el proceso.</p>', false); // muestro error
         return; // salgo
     }
@@ -175,6 +187,7 @@ async function procesarReembolsoPayPal() {
         // Verifico si el reembolso fue exitoso
         if (!datosRespuesta || datosRespuesta.ok !== true) {
             console.error('Error en reembolso:', datosRespuesta); // muestro error en consola
+            limpiarDatosDevolucion(); // limpio datos tras error
             modal('modal1', '<h1>Error</h1><p>No se pudo completar el reembolso.<br>' + (datosRespuesta?.error || 'Error desconocido.') + '</p>', false); // muestro modal
             return; // salgo
         }
@@ -208,9 +221,7 @@ async function procesarReembolsoPayPal() {
         }, 0);
 
         // Limpio datos del sessionStorage
-        sessionStorage.removeItem('devolucion'); // borro marcador
-        sessionStorage.removeItem('id_juego_reembolso'); // borro id
-        sessionStorage.removeItem('total_reembolso'); // borro total
+        limpiarDatosDevolucion(); // borro datos del flujo de devolución
 
         // Redirijo al index después de 2 segundos
         setTimeout(() => {
@@ -224,6 +235,7 @@ async function procesarReembolsoPayPal() {
 
         console.error(error); // muestro error en consola
         modal('modal1', '<h1>Error de conexión</h1><p>No se pudo conectar con el servidor.</p>', false); // muestro modal
+        limpiarDatosDevolucion(); // limpio datos tras fallo de conexión
     } finally { /* si hay error o no */
         // Restauro botón
         const botonPayPal = document.querySelector('#boton-paypal button'); // obtengo botón
