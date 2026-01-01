@@ -27,8 +27,8 @@
       "alt": "Collage de minijuegos jugables en la plataforma",
       "boton1_texto": "Ver juegos",
       "boton1_url": "#",
-      "boton2_texto": "Cómo funciona",
-      "boton2_url": "/ayuda/juegos-internos",
+      "boton2_texto": "Ver Pong",
+      "boton2_url": "detalles_juego.php?id=25",
       "datos_filtro1": {"id_fijo": "1", "clave": "interno", "tipo_filtro": "tipos"}
     },
     {
