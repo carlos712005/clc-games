@@ -91,6 +91,9 @@
 
 		$_SESSION['texto_busqueda'] = $texto; /* Guardo el texto de búsqueda en sesión */
 		$_SESSION['datos_busqueda'] = []; /* Guardo datos de búsqueda como un array vacío por defecto */
+		$_SESSION['datos_busqueda']['juegos_encontrados'] = []; /* Inicializo array de juegos encontrados */
+		$_SESSION['datos_busqueda']['usuarios_encontrados'] = []; /* Inicializo array de usuarios encontrados */
+		$_SESSION['datos_busqueda']['historiales_encontrados'] = []; /* Inicializo array de historiales encontrados */
 
 		$es_filtro = false; /* Variable para indicar si se encontró un filtro */
 		$sugerencias = []; /* Array para guardar sugerencias de autocompletado */
@@ -203,6 +206,11 @@
 						}
 						if($filtro_encontrado) break; /* Salgo del bucle de filtros si se encontró */
 					}
+				}
+
+				// Si es búsqueda real y no se encontraron juegos, asigno [-1] para evitar que se muestren todos
+				if($_POST['accion'] === 'realizar_busqueda' && empty($_SESSION['datos_busqueda']['juegos_encontrados'])) {
+					$_SESSION['datos_busqueda']['juegos_encontrados'] = [-1]; /* Asigno -1 para que no devuelva resultados */
 				}
 
 			// Buscar en historial si el usuario está logueado y la página actual es historial.php
@@ -367,7 +375,10 @@
 						'actualizado_hasta' => $filtros_actuales['actualizado_hasta'] /* Preservo filtro de actualizado hasta */
 					];
 				}
-
+			// Si es búsqueda real y no se encontraron historiales, asigno [-1] para evitar que se muestren todos
+			if($_POST['accion'] === 'realizar_busqueda' && empty($_SESSION['datos_busqueda']['historiales_encontrados'])) {
+				$_SESSION['datos_busqueda']['historiales_encontrados'] = [-1]; /* Asigno -1 para que no devuelva resultados */
+			}
 			// Buscar en usuarios si estamos en el panel de administrador en modo edición de usuarios
 			} else if($pagina_actual === 'panel_administrador.php' && isset($_SESSION['modo_edicion']) && $_SESSION['modo_edicion'] === 'usuarios') {
 				$consulta = $conexion->query("
@@ -473,6 +484,11 @@
 						'fecha_acceso_desde' => $filtros_actuales['fecha_acceso_desde'], /* Preservo fecha acceso desde */
 						'fecha_acceso_hasta' => $filtros_actuales['fecha_acceso_hasta'] /* Preservo fecha acceso hasta */
 					];
+				}
+
+				// Si es búsqueda real y no se encontraron usuarios, asigno [-1] para evitar que se muestren todos
+				if($_POST['accion'] === 'realizar_busqueda' && empty($_SESSION['datos_busqueda']['usuarios_encontrados'])) {
+					$_SESSION['datos_busqueda']['usuarios_encontrados'] = [-1]; /* Asigno -1 para que no devuelva resultados */
 				}
 			}
 			
