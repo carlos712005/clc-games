@@ -26,5 +26,5 @@ Instalación:
 
 Usuario administrador de prueba:
 
-usuario: admin
-contraseña: Admin2025@
+- usuario: admin
+- contraseña: Admin2025@
