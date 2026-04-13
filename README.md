@@ -23,8 +23,3 @@ Instalación:
 1. Importar la base de datos desde el archivo estructura.sql
 2. Configurar la conexión a la base de datos
 3. Ejecutar el proyecto en un entorno Apache (XAMPP o LAMP)
-
-Usuario administrador de prueba:
-
-- usuario: admin
-- contraseña: Admin2025@
